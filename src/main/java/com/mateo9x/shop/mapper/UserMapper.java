@@ -5,10 +5,19 @@ import com.mateo9x.shop.dto.UserDTO;
 
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring", uses= {})
 public interface UserMapper {
 
-    User toUser(UserDTO userDTO);
+    default User fromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        User user = new User();
+        user.setId(id);
+        return user;
+    }
+
+    User toEntity(UserDTO userDTO);
 
     UserDTO toDTO(User user);
 
