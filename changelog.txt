@@ -1,2 +1,5 @@
+0.0.2
+    - Utworzono klasy (user, cart, order, orderhistory) wraz z mapperami, kontrolerami, serwisami
+    - Dodano swaggera
 0.0.1
-    - Utworzono tabele mysql (User, Cart, Order, OrderHistory)
+    - Utworzono tabele mysql (Users, Carts, Orders, OrdersHistory)
