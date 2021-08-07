@@ -20,7 +20,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "name")
-    private String username;
+    private String name;
     @Column(name = "date")
     private Date date;
     @JoinColumn(name = "user_id")
@@ -34,12 +34,12 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getDate() {
