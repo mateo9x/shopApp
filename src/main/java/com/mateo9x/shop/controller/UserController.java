@@ -31,13 +31,13 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public UserDTO createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
+    public UserDTO createUser(@Valid @RequestBody UserDTO userDTO) {
         log.debug("REST request to save User: {}", userDTO);
         return userService.save(userDTO);
     }
 
     @PutMapping("/users")
-    public UserDTO updateUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
+    public UserDTO updateUser(@Valid @RequestBody UserDTO userDTO) {
         log.debug("REST request to update User: {}", userDTO);
         return userService.save(userDTO);
     }
