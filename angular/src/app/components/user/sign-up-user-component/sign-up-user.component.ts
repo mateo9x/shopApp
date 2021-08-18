@@ -10,14 +10,26 @@ import { UserService } from 'src/app/components/user/user.service';
 })
 export class SignUpUserComponent implements OnInit {
 
-  users: Observable<User[]>;
+  user: User = new User();
   cols: any[];
   loading: boolean;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.users = this.userService.findAllUsers();
+  }
+
+
+
+  register() {
+    if (this.user.id === null || this.user.id === undefined) {
+      this.userService.saveUser(this.user).subscribe((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+      this.user = new User();
+    }
   }
 
 }

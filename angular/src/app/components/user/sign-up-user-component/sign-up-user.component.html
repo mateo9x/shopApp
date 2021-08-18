@@ -1,28 +1,19 @@
-<div class="panel panel-primary">
-    <div class="panel-heading">
-      <h2>Car List</h2>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>Brand</th>
-          <th>Model</th>
-          <th>Fuel Type</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of users | async">
-          <td>{{user.username}}</td>
-          <td>{{user.firstName}}</td>
-          <td>{{user.lastName}}</td>
-          <!-- <td><button (click)="deleteCar(car.id)" class="btn btn-danger">Delete</button>
-            <button (click)="carDetails(car.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
-            <button (click)="carUpdate(car.id)" class="btn btn-outline-info" style="margin-left: 10px">Update</button>
-          </td> -->
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div id="login-box">
+  <form class="form">
+    <h1 class="input-data" style="margin-bottom:5%">Rejestracja</h1>
+    
+    <input type="hidden" name="id" class="input-data" [(ngModel)]="user.id" placeholder="ID" />
+    <input type="text" name="username" class="input-data" [(ngModel)]="user.username" placeholder="Użytkownik" />
+    <input type="text" name="firstName" class="input-data" [(ngModel)]="user.firstName" placeholder="Imię" />
+    <input type="text" name="lastName" class="input-data" [(ngModel)]="user.lastName" placeholder="Nazwisko" />
+    <input type="text" name="email" class="input-data" [(ngModel)]="user.mail" placeholder="E-mail" />
+    <input type="password" name="password" class="input-data" [(ngModel)]="user.password" placeholder="Hasło" />
+    <input type="password" name="password2" class="input-data" [(ngModel)]="user.password2" placeholder="Potwierdź hasło" />
+    <input type="text" name="street" class="input-data" [(ngModel)]="user.street" placeholder="Ulica" />
+    <input type="text" name="streetNumber" class="input-data" [(ngModel)]="user.streetNumber" placeholder="Nr domu" />
+    <input type="text" name="city" class="input-data" [(ngModel)]="user.city" placeholder="Miasto" />
+    
+    <input type="submit" name="signup_submit" class="input-data" style="margin-right:10%" value="Wyczyść" />
+    <input type="submit" name="clear_submit" class="input-data" (click)="register()" [disabled]="user.password != user.password2" value="Zarejestruj" />
+  </form>
+</div>

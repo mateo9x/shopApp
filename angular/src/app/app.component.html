@@ -1,12 +1,18 @@
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <!-- Links -->
-  <div class="navbar-nav" style="text-align:center;width:45%;margin:auto">
-    <div >
-      <button routerLink=""  routerLinkActive="active"><i class="fas fa-home">Strona Główna</i></button>
-    </div>
-    <div >
-      <button routerLink="sign-in-user"  routerLinkActive="active"><i class="fas fa-sign-in-alt">Zaloguj się</i></button>
-    </div>
+  <div class="collapse navbar-collapse" >
+    <ul class="navbar-nav"  style="text-align: center">
+      <li class="nav-item" >
+        <a class="nav-link" routerLink=""  routerLinkActive="active"><i class="fas fa-home">Strona Główna</i></a>
+      </li>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="search-input mr-sm-2" type="search" placeholder="Czego szukasz?" aria-label="Search">
+          <button class="submit-button" type="submit">Wyszukaj</button>
+        </form>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="sign-in-user"  routerLinkActive="active"><i class="fas fa-home">Zaloguj się</i></a>
+      </li>
+    </ul>
   </div>
 </nav>
 <div class="container">

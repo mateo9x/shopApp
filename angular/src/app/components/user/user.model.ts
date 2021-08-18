@@ -5,7 +5,9 @@ export class User{
     lastName?: string;
     mail: string;
     password: string;
+    password2: string;
     street?: string;
     streetNumber?: number;
     city?: string;
+
 }
