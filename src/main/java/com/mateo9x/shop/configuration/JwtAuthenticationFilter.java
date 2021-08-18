@@ -1,50 +1,61 @@
 package com.mateo9x.shop.configuration;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.http.MediaType;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.impl.DefaultClaims;
+public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
-public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
-    private AuthenticationManager authenticationManager;
-
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.setAuthenticationManager(authenticationManager);
+    private static final String TOKEN_HEADER = "Authorization";
+    private static final String TOKEN_PREFIX = "Bearer ";
+    private final UserDetailsService userDetailsService;
+    private final String secret;
+  
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, 
+                                  UserDetailsService userDetailsService,
+                                  String secret) {
+      super(authenticationManager);
+      this.userDetailsService = userDetailsService;
+      this.secret = secret;
     }
 
+  
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-            Authentication authResult) throws IOException, ServletException {
-
-        Claims claims = new DefaultClaims();
-        HashMap<String, Object> responseBody = new HashMap<>();
-
-        String username = authResult.getPrincipal().toString();
-
-        List<String> authorities = authResult.getAuthorities().stream().map(role -> role.getAuthority())
-                .collect(Collectors.toList());
-        claims.put("authorities", authorities);
-
-        String token = JwtTokenService.generateToken(username, claims);
-
-        responseBody.put("token", token);
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        new ObjectMapper().writeValue(response.getWriter(), responseBody);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                    FilterChain filterChain) throws IOException, ServletException {
+      UsernamePasswordAuthenticationToken authentication = getAuthentication(request); // 1
+      if (authentication == null) { 
+        filterChain.doFilter(request, response);
+        return;
+      }
+      SecurityContextHolder.getContext().setAuthentication(authentication); // 2
+      filterChain.doFilter(request, response);
     }
-}
+  
+    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+      String token = request.getHeader(TOKEN_HEADER); // 3
+      if (token != null && token.startsWith(TOKEN_PREFIX)) {
+        String userName = JWT.require(Algorithm.HMAC256(secret)) // 4
+          .build()
+          .verify(token.replace(TOKEN_PREFIX, "")) // 5
+          .getSubject(); // 6
+        if (userName != null) {
+          UserDetails userDetails = userDetailsService.loadUserByUsername(userName); // 7
+          return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities()); // 8
+        }
+      }
+      return null;
+    }
+  }
