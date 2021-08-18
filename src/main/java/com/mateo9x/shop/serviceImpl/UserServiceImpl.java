@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityExistsException;
+
 import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.dto.UserDTO;
 import com.mateo9x.shop.mapper.UserMapper;
@@ -12,6 +14,9 @@ import com.mateo9x.shop.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -53,6 +58,8 @@ public class UserServiceImpl implements UserService{
         user = userRepository.save(user);
         return userMapper.toDTO(user);
     }
+
+    
 
     
     

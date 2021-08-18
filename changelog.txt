@@ -1,3 +1,6 @@
+0.0.3
+    - Dodano zakładkę logowania i rejestracji użytkownika
+    - Wstępna konfiguracja JWT Tokena
 0.0.2
     - Utworzono klasy (user, cart, order, orderhistory) wraz z mapperami, kontrolerami, serwisami
     - Dodano swaggera
