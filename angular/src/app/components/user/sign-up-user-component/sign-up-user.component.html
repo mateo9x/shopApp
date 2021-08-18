@@ -13,7 +13,7 @@
     <input type="text" name="streetNumber" class="input-data" [(ngModel)]="user.streetNumber" placeholder="Nr domu" />
     <input type="text" name="city" class="input-data" [(ngModel)]="user.city" placeholder="Miasto" />
     
-    <input type="submit" name="signup_submit" class="input-data" style="margin-right:10%" value="Wyczyść" />
+    <input type="submit" name="signup_submit" class="input-data" (click)="clear()" style="margin-right:10%" value="Wyczyść" />
     <input type="submit" name="clear_submit" class="input-data" (click)="register()" [disabled]="user.password != user.password2" value="Zarejestruj" />
   </form>
 </div>

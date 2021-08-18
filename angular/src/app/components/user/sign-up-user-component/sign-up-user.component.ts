@@ -20,6 +20,17 @@ export class SignUpUserComponent implements OnInit {
   }
 
 
+  clear() {
+    this.user.username = '';
+    this.user.firstName = '';
+    this.user.lastName = '';
+    this.user.password = '';
+    this.user.password2 = '';
+    this.user.mail = '';
+    this.user.street = '';
+    this.user.streetNumber = undefined;
+    this.user.city = '';
+  }
 
   register() {
     if (this.user.id === null || this.user.id === undefined) {
@@ -28,7 +39,6 @@ export class SignUpUserComponent implements OnInit {
       }, (error) => {
         console.log(error);
       });
-      this.user = new User();
     }
   }
 
