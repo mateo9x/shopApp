@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/components/user/user.model';
 import { UserService } from 'src/app/components/user/user.service';
@@ -13,12 +15,15 @@ export class SignUpUserComponent implements OnInit {
   user: User = new User();
   cols: any[];
   loading: boolean;
+  users: User[];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
+    this.userService.findAllUsers().subscribe((response) => {
+      this.users = response;
+    });
   }
-
 
   clear() {
     this.user.username = '';
@@ -32,13 +37,21 @@ export class SignUpUserComponent implements OnInit {
     this.user.city = '';
   }
 
+  onClose(){
+    this.router.navigate(['']);
+  }
+
   register() {
-    if (this.user.id === null || this.user.id === undefined) {
+    if (this.users.find(e => e.mail === this.user.mail)) {
+      this.messageService.add({ severity: 'error', summary: 'Użytkownik z podanym adresem e-mail istnieje!'});
+    }
+    else {
       this.userService.saveUser(this.user).subscribe((response) => {
-        console.log(response);
-        this.clear();
+        this.messageService.add({key:'success', severity: 'success', summary: 'Utworzono użytkownika pomyślnie'});
+     
+        
       }, (error) => {
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: 'Użytkownik nie został utworzony'});
       });
     }
   }

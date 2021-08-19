@@ -1,7 +1,9 @@
 package com.mateo9x.shop.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
@@ -20,7 +22,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
@@ -41,7 +43,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserDTO> findAll() {
         log.info("Request to find all Users: ");
-        return userRepository.findAll().stream().map(userMapper::toDTO).collect(Collectors.toCollection(LinkedList::new));
+        return userRepository.findAll().stream().map(userMapper::toDTO)
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
@@ -53,14 +56,16 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO save(UserDTO userDTO) {
-        log.info("Request to save User: {}", userDTO);
-        User user = userMapper.toEntity(userDTO);
-        user = userRepository.save(user);
-        return userMapper.toDTO(user);
+        Optional<User> userOptional = userRepository.findByMail(userDTO.getMail());
+        if (userOptional.isPresent()) {
+            log.error("User with that email already exists :", userDTO.getMail());
+            return userDTO;
+        } else {
+            log.info("Request to save User: {}", userDTO);
+            User user = userMapper.toEntity(userDTO);
+            user = userRepository.save(user);
+            return userMapper.toDTO(user);
+        }
     }
 
-    
-
-    
-    
 }

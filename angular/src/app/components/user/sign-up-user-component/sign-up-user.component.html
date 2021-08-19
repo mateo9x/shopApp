@@ -1,3 +1,5 @@
+<p-toast class="toast-success" position="top-right" key="success" (onClose)="onClose()"></p-toast>
+<p-toast class="toast-error" position="top-right" ></p-toast>
 <div id="login-box">
   <form class="form" #form="ngForm" novalidate>
     <h1 class="input-data" style="margin-bottom:5%">Rejestracja</h1>
@@ -12,7 +14,7 @@
     <small class="required-field-alert" *ngIf="mail.errors?.required">To pole jest wymagane</small>
     <input type="password" name="password" class="input-data" [(ngModel)]="user.password" placeholder="Hasło" #password="ngModel" min="5" required/>
     <small class="required-field-alert" *ngIf="password.errors?.required">To pole jest wymagane<br></small>
-    <small class="required-field-alert" *ngIf="user.password.length < 5">Wymagane minimum 5 znaków<br></small>
+    <!-- <small class="required-field-alert" *ngIf="user.password.length < 5">Wymagane minimum 5 znaków<br></small> -->
     <small class="required-field-alert" *ngIf="password.errors?.required">To pole jest wymagane</small>
     <input type="password" name="password2" class="input-data" [(ngModel)]="user.password2" placeholder="Potwierdź hasło" />
     <small class="required-field-alert" *ngIf="user.password !== user.password2">Hasła nie pasują do siebie</small>
@@ -24,9 +26,3 @@
     <button type="submit" name="clear_submit" class="submit-button" (click)="register()" [disabled]="form.invalid || user.password != user.password2" >Zarejestruj</button>
   </form>
 </div>
- 
- 
- 
- 
- 
- b

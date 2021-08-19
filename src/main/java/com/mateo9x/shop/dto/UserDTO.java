@@ -11,7 +11,7 @@ public class UserDTO implements Serializable {
     private String mail;
     private String password;
     private String street;
-    private Integer streetNumber;
+    private String streetNumber;
     private String city;
 
     public Long getId() {
@@ -70,11 +70,11 @@ public class UserDTO implements Serializable {
         this.street = street;
     }
 
-    public Integer getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
-    public void setStreetNumber(Integer streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 

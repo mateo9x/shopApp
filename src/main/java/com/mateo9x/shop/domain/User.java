@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @Column(name = "street")
     private String street;
     @Column(name = "streetnumber")
-    private Integer streetNumber;
+    private String streetNumber;
     @Column(name = "city")
     private String city;
     @JoinColumn(name = "role_id")
@@ -105,11 +105,11 @@ public class User implements UserDetails {
         this.street = street;
     }
 
-    public Integer getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
-    public void setStreetNumber(Integer streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 
