@@ -36,6 +36,7 @@ export class SignUpUserComponent implements OnInit {
     if (this.user.id === null || this.user.id === undefined) {
       this.userService.saveUser(this.user).subscribe((response) => {
         console.log(response);
+        this.clear();
       }, (error) => {
         console.log(error);
       });
