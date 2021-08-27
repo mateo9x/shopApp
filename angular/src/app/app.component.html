@@ -9,8 +9,11 @@
           <input class="search-input mr-sm-2" type="search" placeholder="Czego szukasz?" aria-label="Search">
           <button class="submit-button" type="submit">Wyszukaj</button>
         </form>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="sign-in-user"  routerLinkActive="active"><i class="fa fa-home">Zaloguj się</i></a>
+      <li class="nav-item" *ngIf="isUserLogged === false">
+        <button class="submit-button" type="submit" routerLink="sign-in-user"  routerLinkActive="active"><i class="fa fa-home">Zaloguj się</i></button>
+      </li>
+      <li class="nav-item" *ngIf="isUserLogged === true">
+        <button class="submit-button" type="submit" (click)="logOut()"><i class="fa fa-home">Wyloguj się</i></button>
       </li>
     </ul>
   </div>

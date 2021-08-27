@@ -11,14 +11,27 @@ import { UserService } from 'src/app/components/user/user.service';
 })
 export class SignInUserComponent implements OnInit {
 
-  users: Observable<User[]>;
+  users: User[];
   cols: any[];
   loading: boolean;
+  username: string;
+  password: string;
 
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.users = this.userService.findAllUsers();
+
+  }
+
+  onSignInButton() {
+      const userObj = {
+        username: this.username,
+        password: this.password
+      }
+      console.log(userObj);
+      this.userService.signinUser(userObj).subscribe((response) => {
+        this.router.navigate(['']);
+      });
   }
 
   signUp(){

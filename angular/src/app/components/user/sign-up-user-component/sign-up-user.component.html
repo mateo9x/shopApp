@@ -15,7 +15,6 @@
     <input type="password" name="password" class="input-data" [(ngModel)]="user.password" placeholder="Hasło" #password="ngModel" min="5" required/>
     <small class="required-field-alert" *ngIf="password.errors?.required">To pole jest wymagane<br></small>
     <!-- <small class="required-field-alert" *ngIf="user.password.length < 5">Wymagane minimum 5 znaków<br></small> -->
-    <small class="required-field-alert" *ngIf="password.errors?.required">To pole jest wymagane</small>
     <input type="password" name="password2" class="input-data" [(ngModel)]="user.password2" placeholder="Potwierdź hasło" />
     <small class="required-field-alert" *ngIf="user.password !== user.password2">Hasła nie pasują do siebie</small>
     <input type="text" name="street" class="input-data" [(ngModel)]="user.street" placeholder="Ulica" />

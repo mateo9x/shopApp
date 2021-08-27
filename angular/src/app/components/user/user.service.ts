@@ -9,6 +9,7 @@ import { User } from './user.model';
 export class UserService {
 
   private baseUrl = 'http://localhost:8080/api/users';
+  private authenthicationUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
 
@@ -30,5 +31,15 @@ export class UserService {
 
   public updateUser(user: User) {
     return this.http.put<User>(`${this.baseUrl}`, user);
+  }
+
+  public signinUser(user: any) {
+    return this.http.post<User>(`${this.authenthicationUrl}/login`, user);
+  }
+  public logoutUser(user: any) {
+    return this.http.get<any>(`${this.authenthicationUrl}/logout`, user);
+  }
+  public isUserLogged() {
+    return this.http.get<boolean>(`${this.authenthicationUrl}/is-user-logged`);
   }
 }

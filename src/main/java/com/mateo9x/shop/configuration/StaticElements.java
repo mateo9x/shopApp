@@ -17,15 +17,8 @@ public class StaticElements implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowedOrigins("*")
-                .allowedHeaders("*")
-                .allowedMethods("*")
-                .maxAge(-1)
+        registry.addMapping("/**").allowedOrigins("*").allowedHeaders("*").allowedMethods("*").maxAge(3600)
                 .allowCredentials(false);
     }
-
-   
-
 
 }

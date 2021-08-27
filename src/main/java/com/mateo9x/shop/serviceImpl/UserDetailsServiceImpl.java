@@ -1,27 +1,26 @@
 package com.mateo9x.shop.serviceImpl;
 
-import javax.persistence.EntityExistsException;
-
+import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.repository.UserRepository;
-import com.mateo9x.shop.service.UserDetailsService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
 
+    @Autowired
     private UserRepository userRepository;
-
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new EntityExistsException("User " + username + " doesn't exist"));
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            return user;
+        }
+        throw new UsernameNotFoundException("User not found" + username);
     }
 
 }
