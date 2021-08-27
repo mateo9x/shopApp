@@ -10,12 +10,16 @@ import { SignUpUserComponent } from './components/user/sign-up-user-component/si
 import { SignInUserComponent } from './components/user/sign-in-user-component/sign-in-user.component';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClockComponent } from './widget/clockwidget/clock.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInUserComponent,
-    SignUpUserComponent
+    SignUpUserComponent,
+    ClockComponent
     
   ],
   imports: [
@@ -26,7 +30,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     TableModule,
     ToastModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    TooltipModule
 
   ],
   providers: [MessageService],

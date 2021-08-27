@@ -6,8 +6,8 @@
 
 
 #login-box {
-  margin: 2.5% auto;
-  width: 60%;
+  width: 100%;
+  height: 100%;
   background: #FFF;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -62,7 +62,6 @@ button.social-signin {
 }
 
 .required-field-alert{
-  margin-bottom:50%;
   color:red;
 }
 
@@ -72,7 +71,7 @@ button:disabled,button[disabled=disabled]{
 }
 
 .submit-button {
-  background-color: #5fbae9;
+  background-color: #4cd2db;
   border: none;
   color: white;
   padding: 15px 32px;
