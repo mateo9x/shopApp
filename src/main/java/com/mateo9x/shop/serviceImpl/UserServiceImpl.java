@@ -2,9 +2,8 @@ package com.mateo9x.shop.serviceImpl;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
-import javax.persistence.EntityExistsException;
 
 import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.dto.UserDTO;
@@ -14,14 +13,16 @@ import com.mateo9x.shop.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -41,7 +42,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserDTO> findAll() {
         log.info("Request to find all Users: ");
-        return userRepository.findAll().stream().map(userMapper::toDTO).collect(Collectors.toCollection(LinkedList::new));
+        return userRepository.findAll().stream().map(userMapper::toDTO)
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
@@ -53,14 +55,17 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO save(UserDTO userDTO) {
-        log.info("Request to save User: {}", userDTO);
-        User user = userMapper.toEntity(userDTO);
-        user = userRepository.save(user);
-        return userMapper.toDTO(user);
+        Optional<User> userOptional = userRepository.findByMail(userDTO.getMail());
+        if (userOptional.isPresent()) {
+            log.error("User with that email already exists :", userDTO.getMail());
+            return userDTO;
+        } else {
+            log.info("Request to save User: {}", userDTO);
+            User user = userMapper.toEntity(userDTO);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user = userRepository.save(user);
+            return userMapper.toDTO(user);
+        }
     }
 
-    
-
-    
-    
 }

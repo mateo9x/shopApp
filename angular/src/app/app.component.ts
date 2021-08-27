@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from './components/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular';
+  
+  isUserLogged = false;
+  isCartEmpty = true;
+  login: string;
+  
+  constructor(private userService: UserService, private router: Router) { }
+
+  ngOnInit(){
+    this.login = 'Zaloguj się';
+    this.userService.isUserLogged().subscribe((response) => {
+      if (response !== false) {
+      this.isUserLogged = true;
+      }
+    });
+  }
+
+  logOut(){
+    const userObj = {
+      username: 'username'
+    }
+    this.userService.logoutUser(userObj).subscribe((response) => {
+      console.log(response);
+    });
+    this.isUserLogged = false;
+  }
+  
 }

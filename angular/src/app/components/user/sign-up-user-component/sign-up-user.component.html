@@ -1,19 +1,27 @@
+<p-toast class="toast-success" position="top-right" key="success" (onClose)="onClose()"></p-toast>
+<p-toast class="toast-error" position="top-right" ></p-toast>
 <div id="login-box">
-  <form class="form">
+  <form class="form" #form="ngForm" novalidate>
     <h1 class="input-data" style="margin-bottom:5%">Rejestracja</h1>
     
-    <input type="hidden" name="id" class="input-data" [(ngModel)]="user.id" placeholder="ID" />
-    <input type="text" name="username" class="input-data" [(ngModel)]="user.username" placeholder="Użytkownik" />
+    <input type="text" name="username" class="input-data" [(ngModel)]="user.username" pattern="^[a-z0-9_\-]+$" #username="ngModel" placeholder="Użytkownik" required/>
+    <small class="required-field-alert" *ngIf="username.invalid && username.dirty">Użytkownik nie może zawierać dużych liter<br></small>
+    <small class="required-field-alert" *ngIf="username.errors?.required">To pole jest wymagane</small>
     <input type="text" name="firstName" class="input-data" [(ngModel)]="user.firstName" placeholder="Imię" />
     <input type="text" name="lastName" class="input-data" [(ngModel)]="user.lastName" placeholder="Nazwisko" />
-    <input type="text" name="email" class="input-data" [(ngModel)]="user.mail" placeholder="E-mail" />
-    <input type="password" name="password" class="input-data" [(ngModel)]="user.password" placeholder="Hasło" />
+    <input type="text" name="email" class="input-data" [(ngModel)]="user.mail" placeholder="E-mail" #mail="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+    <small class="required-field-alert" *ngIf="mail.invalid && mail.dirty">Niepoprawny format adresu email<br></small>
+    <small class="required-field-alert" *ngIf="mail.errors?.required">To pole jest wymagane</small>
+    <input type="password" name="password" class="input-data" [(ngModel)]="user.password" placeholder="Hasło" #password="ngModel" min="5" required/>
+    <small class="required-field-alert" *ngIf="password.errors?.required">To pole jest wymagane<br></small>
+    <!-- <small class="required-field-alert" *ngIf="user.password.length < 5">Wymagane minimum 5 znaków<br></small> -->
     <input type="password" name="password2" class="input-data" [(ngModel)]="user.password2" placeholder="Potwierdź hasło" />
+    <small class="required-field-alert" *ngIf="user.password !== user.password2">Hasła nie pasują do siebie</small>
     <input type="text" name="street" class="input-data" [(ngModel)]="user.street" placeholder="Ulica" />
     <input type="text" name="streetNumber" class="input-data" [(ngModel)]="user.streetNumber" placeholder="Nr domu" />
     <input type="text" name="city" class="input-data" [(ngModel)]="user.city" placeholder="Miasto" />
     
-    <input type="submit" name="signup_submit" class="input-data" style="margin-right:10%" value="Wyczyść" />
-    <input type="submit" name="clear_submit" class="input-data" (click)="register()" [disabled]="user.password != user.password2" value="Zarejestruj" />
+    <button type="submit" name="signup_submit" class="submit-button" (click)="clear()" style="margin-right:10%" >Wyczyść</button>
+    <button type="submit" name="clear_submit" class="submit-button" (click)="register()" [disabled]="form.invalid || user.password != user.password2" >Zarejestruj</button>
   </form>
 </div>

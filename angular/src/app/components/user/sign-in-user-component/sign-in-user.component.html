@@ -4,11 +4,11 @@
 
     <!-- Login Form -->
     <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="użytkownik">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="hasło">
-      <input type="submit" class="fadeIn fourth" value="Zaloguj się">
+      <input type="text" id="login" class="fadeIn second" name="login" [(ngModel)]="username" placeholder="użytkownik">
+      <input type="text" id="password" class="fadeIn third" name="login" [(ngModel)]="password" placeholder="hasło">
+      <button (click)="onSignInButton()" class="fadeIn fourth submit-button" style="margin-bottom:5%">Zaloguj się</button>
     </form>
-
+    
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <button (click)="signUp()" class="fadeIn fourth submit-button">Zarejestruj się</button><br>
