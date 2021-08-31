@@ -1,3 +1,6 @@
+0.0.6
+    - Poprawki w formularzu rejestracji.
+    - Dodano przy tworzeniu użytkownika wysłanie powitalnego maila na pocztę zarejestrowanego użytkownika.
 0.0.5
     - Poprawki w frontowym wyglądzie aplikacji.
 0.0.4

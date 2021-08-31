@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
             log.info("Request to save User: {}", userDTO);
             User user = userMapper.toEntity(userDTO);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setUsername(user.getUsername().toLowerCase());
             user = userRepository.save(user);
             return userMapper.toDTO(user);
         }

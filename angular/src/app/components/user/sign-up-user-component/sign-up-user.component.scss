@@ -14,16 +14,16 @@
 }
 
 .form {
-  margin:auto;
-  text-align:center;
   box-sizing: border-box;
   padding: 40px;
   width:100%;
+  margin:auto;
 }
 
 .input-data{
-  margin:auto;
-  text-align:center;
+  text-align:left;
+  margin-left:43%;
+  width:30%;
 }
 
 h1 {
@@ -34,11 +34,9 @@ h1 {
 
 input[type="text"],
 input[type="password"] {
-  display: block;
-  box-sizing: border-box;
   margin-bottom: 20px;
   padding: 4px;
-  width: 220px;
+  width: auto;
   height: 32px;
   border: none;
   border-bottom: 1px solid #AAA;
@@ -46,6 +44,7 @@ input[type="password"] {
   font-weight: 400;
   font-size: 15px;
   transition: 0.2s ease;
+  text-align:left;
 }
 
 button.social-signin {
@@ -85,9 +84,16 @@ button:disabled,button[disabled=disabled]{
 
 .toast-success{
   color:green;
+  background-color:grey;
 }
 .toast-error{
   color:red;
+  background-color:grey;
 }
 
-
+.buttons {
+  text-align:center;
+  width:100%;
+  margin:0 auto;
+  display:inline-block;
+}

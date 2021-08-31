@@ -10,8 +10,9 @@ export class UserService {
 
   private baseUrl = 'http://localhost:8080/api/users';
   private authenthicationUrl = 'http://localhost:8080';
+  private mailSenderUrl = 'http://localhost:8080/api/mail';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public findAllUsers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}`);
@@ -36,10 +37,17 @@ export class UserService {
   public signinUser(user: any) {
     return this.http.post<User>(`${this.authenthicationUrl}/login`, user);
   }
+
   public logoutUser(user: any) {
     return this.http.get<any>(`${this.authenthicationUrl}/logout`, user);
   }
+
   public isUserLogged() {
     return this.http.get<boolean>(`${this.authenthicationUrl}/is-user-logged`);
   }
+
+  public newUserWelcomeMail(user: User) {
+    return this.http.post<User>(`${this.mailSenderUrl}/new-user-welcome-email`, user);
+  }
+  
 }
