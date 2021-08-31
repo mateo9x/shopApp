@@ -23,7 +23,8 @@ public class MailServiceImpl implements MailService {
         message.setFrom("noreply@onlineshop.com");
         message.setTo(dto.getMail());
         message.setSubject("Online Shop - Konto");
-        message.setText("Witaj " + dto.getUsername() + "!\nTwoje konto zostało pomyślnie utworzone w serwisie Online Shop.\n Dziękujemy i zapraszamy do korzystania z aplikacji!");
+        message.setText("Witaj " + dto.getUsername() + "!\n\nTwoje konto zostało pomyślnie utworzone w serwisie Online Shop.\n\nDziękujemy i zapraszamy do korzystania z aplikacji!"
+        +"\n\nOnline Shop\nul. Programistów 3\n40-400 Warszawa\nKRS: XXXXXXXXXX");
         javaMailSender.send(message);
     }
 
