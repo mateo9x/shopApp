@@ -1,6 +1,12 @@
 
 @import "~font-awesome/css/font-awesome.css";
 
-body {
-  font-size:1.5rem;
+.p-tooltip {
+  div:nth-child(2) {
+  position:absolute;
+  z-index:1;
+  padding:4px;
+  background: rgb(43, 38, 38) ;
+  color: white ;
+  }
 }
