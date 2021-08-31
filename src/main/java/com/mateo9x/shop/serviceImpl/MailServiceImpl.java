@@ -19,12 +19,19 @@ public class MailServiceImpl implements MailService {
     @Override
     public void newUserEmailMessage(UserDTO dto) {
 
+        String user = "";
+        if (dto.getFirstName() != null && dto.getLastName() != null) {
+            user = dto.getFirstName() + " " + dto.getLastName() + " (" + dto.getUsername() + ")";
+        } else {
+            user = dto.getUsername();
+        }
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@onlineshop.com");
         message.setTo(dto.getMail());
         message.setSubject("Online Shop - Konto");
-        message.setText("Witaj " + dto.getUsername() + "!\n\nTwoje konto zostało pomyślnie utworzone w serwisie Online Shop.\n\nDziękujemy i zapraszamy do korzystania z aplikacji!"
-        +"\n\nOnline Shop\nul. Programistów 3\n40-400 Warszawa\nKRS: XXXXXXXXXX");
+        message.setText("Witaj " + user
+                + "!\n\nTwoje konto zostało pomyślnie utworzone w serwisie Online Shop.\n\nDziękujemy i zapraszamy do korzystania z aplikacji!"
+                + "\n\nOnline Shop\nul. Programistów 3\n40-400 Warszawa\nKRS: XXXXXXXXXX");
         javaMailSender.send(message);
     }
 
