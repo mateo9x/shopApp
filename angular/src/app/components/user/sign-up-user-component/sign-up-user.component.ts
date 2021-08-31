@@ -49,6 +49,9 @@ export class SignUpUserComponent implements OnInit {
     else {
       this.userService.saveUser(this.user).subscribe((response) => {
         this.messageService.add({key:'success', severity: 'success', summary: 'Utworzono użytkownika pomyślnie'});
+        this.userService.newUserWelcomeMail(this.user).subscribe((response) => {
+          console.log(response);
+        })
      
         
       }, (error) => {
