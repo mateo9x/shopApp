@@ -10,10 +10,16 @@ export class ClockComponent {
   minutes: string;
   seconds: string;
   private timerId: any;
+  monthNames: any[];
+  month: string;
+  monthSelect: any;
 
   ngOnInit() {
+    this.monthNames = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec",
+    "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
     this.setCurrentTime();
     this.timerId = this.updateTime();
+
   }
 
   ngOnDestroy() {
@@ -25,6 +31,8 @@ export class ClockComponent {
     this.hours = this.leftPadZero(time.getHours());
     this.minutes = this.leftPadZero(time.getMinutes());
     this.seconds = this.leftPadZero(time.getSeconds());
+    this.monthSelect = time.getMonth();
+    this.month = time.getDay() + ' ' + this.leftPadZero(this.monthNames[this.monthSelect]) + ' ' + time.getFullYear();
   }
 
   private updateTime() {
@@ -36,4 +44,6 @@ export class ClockComponent {
   private leftPadZero(value: number) {
     return value < 10 ? `0${value}` : value.toString();
   }
+
+
 }
