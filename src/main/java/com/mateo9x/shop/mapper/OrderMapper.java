@@ -6,7 +6,7 @@ import com.mateo9x.shop.dto.OrderDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring", uses= {})
 public interface OrderMapper {
 
     // @Mapping(source="userId", target = "user")

@@ -10,14 +10,12 @@ import { UserService } from './components/user/user.service';
 })
 export class AppComponent {
   
-  isUserLogged = false;
-  isCartEmpty = true;
-  login: string;
+  isUserLogged = true;
+  isCartEmpty = false;
   
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(){
-    this.login = 'Zaloguj się';
     this.userService.isUserLogged().subscribe((response) => {
       if (response !== false) {
       this.isUserLogged = true;

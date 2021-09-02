@@ -8,6 +8,8 @@ public class CartDTO implements Serializable {
     private String item;
     private Long userId;
     private String username;
+    private Long itemId;
+    private String itemName;
 
     public Long getId() {
         return id;
@@ -41,9 +43,20 @@ public class CartDTO implements Serializable {
         this.username = username;
     }
 
-    @Override
-    public String toString() {
-        return "CartDTO [id=" + id + ", item=" + item + ", userId=" + userId + ", username=" + username + "]";
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
 }
