@@ -10,45 +10,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "carts")
-public class Cart implements Serializable {
+@Table(name = "items_category")
+public class ItemCategory implements Serializable {
 
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "price")
-    private String price;
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "name")
+    private String name;
     @JoinColumn(name = "item_id")
-    private Item item;
-    
+    private ItemCategory itemCategoryParent;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
-    public String getPrice() {
-        return price;
-    }
-    public void setPrice(String price) {
-        this.price = price;
-    }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
-    public Item getItem() {
-        return item;
-    }
-    public void setItem(Item item) {
-        this.item = item;
+
+    public String getName() {
+        return name;
     }
 
-    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ItemCategory getItemCategoryParent() {
+        return itemCategoryParent;
+    }
+
+    public void setItemCategoryParent(ItemCategory itemCategoryParent) {
+        this.itemCategoryParent = itemCategoryParent;
+    }
 
 }
