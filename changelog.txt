@@ -1,3 +1,8 @@
+0.0.7
+    - Poprawka daty na frontendzie.
+    - Poprawka strony głównej aplikacji.
+    - Dodanie na bazie tabel items, items_category.
+    - Wstępna implementacja na backendzie nowo dodanych tabel do DB.
 0.0.6
     - Poprawki w formularzu rejestracji.
     - Dodano przy tworzeniu użytkownika wysłanie powitalnego maila na pocztę zarejestrowanego użytkownika.
