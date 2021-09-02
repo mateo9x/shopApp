@@ -22,7 +22,7 @@
           <li class="nav-item" *ngIf="isCartEmpty === false">
             <a type="submit" routerLink="cart" routerLinkActive="active"><i
                 class="fa fa-cart-plus"> Koszyk</i></a>
-          </li>
+
           <li class="nav-item" *ngIf="isCartEmpty === true">
             <a type="submit" routerLink="cart" routerLinkActive="active"><i
                 class="fa fa-shopping-cart"> Koszyk</i></a>
@@ -31,7 +31,7 @@
             <a routerLink="sign-in-user" routerLinkActive="active" ><i class="fa fa-users"> Zaloguj się</i></a>
           </li>
           <li class="nav-item" *ngIf="isUserLogged === true">
-            <a (click)="logOut()" [pTooltip]="login" ><i class="fa fa-power-off"> Wyloguj się</i></a>
+            <a routerLink="logout-user" routerLinkActive="active" (click)="logOut()" ><i class="fa fa-power-off"> Wyloguj się</i></a>
           </li>
         </ul>
       </nav>
