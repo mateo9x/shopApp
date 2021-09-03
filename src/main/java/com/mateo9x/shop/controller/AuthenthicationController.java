@@ -31,7 +31,7 @@ public class AuthenthicationController {
         return authenthicationService.logIn(model);
     }
 
-    @GetMapping("logout")
+    @RequestMapping("logout")
     public void logOut(HttpServletRequest request, HttpServletResponse response) {
         log.debug("REST request to logout User: {}");
         authenthicationService.logOut(request, response);

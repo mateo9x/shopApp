@@ -35,7 +35,7 @@ export class UserService {
   }
 
   public signinUser(user: any) {
-    return this.http.post<User>(`${this.authenthicationUrl}/login`, user);
+    return this.http.post<any>(`${this.authenthicationUrl}/login`, user);
   }
 
   public logoutUser() {

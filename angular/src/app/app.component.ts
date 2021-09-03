@@ -10,7 +10,7 @@ import { UserService } from './components/user/user.service';
 })
 export class AppComponent {
   
-  isUserLogged = true;
+  isUserLogged = false;
   isCartEmpty = false;
   
   constructor(private userService: UserService, private router: Router) { }
@@ -26,8 +26,8 @@ export class AppComponent {
   logOut(){
     this.userService.logoutUser().subscribe((response) => {
       console.log(response);
-    });
     this.isUserLogged = false;
+    });
   }
   
 }

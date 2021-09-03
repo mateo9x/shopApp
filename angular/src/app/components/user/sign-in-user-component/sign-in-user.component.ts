@@ -28,9 +28,13 @@ export class SignInUserComponent implements OnInit {
         username: this.username,
         password: this.password
       }
-      console.log(userObj);
+
       this.userService.signinUser(userObj).subscribe((response) => {
-        this.router.navigate(['']);
+      if(response.token !== null){
+        
+      }
+      console.log('logowanie', response);
+        
       });
   }
 
