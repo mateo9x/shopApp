@@ -9,7 +9,8 @@ public class CartDTO implements Serializable {
     private Long userId;
     private String username;
     private Long itemId;
-    private String itemName;
+    private String itemBrand;
+    private String itemModel;
 
     public Long getId() {
         return id;
@@ -51,12 +52,20 @@ public class CartDTO implements Serializable {
         this.itemId = itemId;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getItemBrand() {
+        return itemBrand;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setItemBrand(String itemBrand) {
+        this.itemBrand = itemBrand;
+    }
+
+    public String getItemModel() {
+        return itemModel;
+    }
+
+    public void setItemModel(String itemModel) {
+        this.itemModel = itemModel;
     }
 
 }

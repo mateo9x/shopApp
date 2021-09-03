@@ -24,10 +24,7 @@ export class AppComponent {
   }
 
   logOut(){
-    const userObj = {
-      username: 'username'
-    }
-    this.userService.logoutUser(userObj).subscribe((response) => {
+    this.userService.logoutUser().subscribe((response) => {
       console.log(response);
     });
     this.isUserLogged = false;

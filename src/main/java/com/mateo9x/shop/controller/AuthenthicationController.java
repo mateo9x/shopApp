@@ -1,4 +1,6 @@
 package com.mateo9x.shop.controller;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.mateo9x.shop.configuration.LoginCredentials;
@@ -30,9 +32,9 @@ public class AuthenthicationController {
     }
 
     @GetMapping("logout")
-    public Boolean logOut(@Valid @RequestBody LoginCredentials model) {
-        log.debug("REST request to logout User: {}", model.getUsername());
-        return authenthicationService.logOut(model);
+    public void logOut(HttpServletRequest request, HttpServletResponse response) {
+        log.debug("REST request to logout User: {}");
+        authenthicationService.logOut(request, response);
     }
 
     @GetMapping("is-user-logged")

@@ -9,7 +9,7 @@ public class OrderDTO implements Serializable {
     private String name;
     private Date date;
     private Long userId;
-    private String userame;
+    private String username;
 
     public Long getId() {
         return id;
@@ -43,18 +43,18 @@ public class OrderDTO implements Serializable {
         this.userId = userId;
     }
 
-    public String getUserame() {
-        return userame;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserame(String userame) {
-        this.userame = userame;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public String toString() {
         return "OrderDTO [date=" + date + ", id=" + id + ", name=" + name + ", userId=" + userId + ", userame="
-                + userame + "]";
+                + username + "]";
     }
 
 }
