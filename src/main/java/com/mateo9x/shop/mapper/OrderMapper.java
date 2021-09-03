@@ -6,15 +6,14 @@ import com.mateo9x.shop.dto.OrderDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses= {})
+@Mapper(componentModel = "spring", uses= {UserMapper.class})
 public interface OrderMapper {
 
-    // @Mapping(source="userId", target = "user")
-    // @Mapping(source="username", target = "user")
+    @Mapping(source="userId", target = "user")
     Order toEntity(OrderDTO orderDTO);
 
-    // @Mapping(source="user.id", target = "userId")
-    // @Mapping(source="user.username", target = "username")
+    @Mapping(source="user.id", target = "userId")
+    @Mapping(source="user.username", target = "username")
     OrderDTO toDTO(Order order);
 
     default Order fromId(Long id) {

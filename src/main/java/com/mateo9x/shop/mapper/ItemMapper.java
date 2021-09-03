@@ -4,9 +4,17 @@ import com.mateo9x.shop.domain.Item;
 import com.mateo9x.shop.dto.ItemDTO;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {ItemCategoryMapper.class})
 public interface ItemMapper {
+
+    @Mapping(source = "itemCategoryId", target = "itemCategory")
+    Item toEntity(ItemDTO itemDTO);
+
+    @Mapping(source = "itemCategory.id", target = "itemCategoryId")
+    @Mapping(source = "itemCategory.name", target = "itemCategoryName")
+    ItemDTO toDTO(Item item);
 
     default Item fromId(Long id) {
         if (id == null) {
@@ -16,9 +24,5 @@ public interface ItemMapper {
         item.setId(id);
         return item;
     }
-
-    Item toEntity(ItemDTO itemDTO);
-
-    ItemDTO toDTO(Item item);
 
 }
