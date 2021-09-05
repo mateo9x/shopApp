@@ -29,31 +29,31 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @PostMapping("/items")
+    @PostMapping("/item")
     public ItemDTO createItem(@Valid @RequestBody ItemDTO itemDTO) {
         log.debug("REST request to save Item: {}", itemDTO);
         return itemService.save(itemDTO);
     }
 
-    @PutMapping("/items")
+    @PutMapping("/item")
     public ItemDTO updateItem(@Valid @RequestBody ItemDTO userDTO) {
         log.debug("REST request to update Item: {}", userDTO);
         return itemService.save(userDTO);
     }
 
-    @GetMapping("/items")
+    @GetMapping("/item")
     public List<ItemDTO> getAllItems() {
         log.debug("REST request to get all Item");
         return itemService.findAll();
     }
 
-    @GetMapping("/items/{id}")
+    @GetMapping("/item/{id}")
     public ItemDTO getItem(@PathVariable Long id) {
         log.debug("REST request to get Item: {}", id);
         return itemService.findById(id);
     }
 
-    @DeleteMapping("/items/{id}")
+    @DeleteMapping("/item/{id}")
     public void deleteItem(@PathVariable Long id) {
         log.debug("REST request do delete Item: {}", id);
         itemService.deleteItem(id);

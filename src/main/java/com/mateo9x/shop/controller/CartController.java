@@ -29,31 +29,31 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/carts")
+    @PostMapping("/cart")
     public CartDTO createCart(@Valid @RequestBody CartDTO cartDTO) {
         log.debug("REST request to save Cart: {}", cartDTO);
         return cartService.save(cartDTO);
     }
 
-    @PutMapping("/carts")
+    @PutMapping("/cart")
     public CartDTO updateCart(@Valid @RequestBody CartDTO cartDTO) {
         log.debug("REST request to update Cart: {}", cartDTO);
         return cartService.save(cartDTO);
     }
 
-    @GetMapping("/carts")
+    @GetMapping("/cart")
     public List<CartDTO> getAllCarts() {
         log.debug("REST request to get all Carts");
         return cartService.findAll();
     }
 
-    @GetMapping("/carts/{id}")
+    @GetMapping("/cart/{id}")
     public CartDTO getCart(@PathVariable Long id) {
         log.debug("REST request to get Cart: {}", id);
         return cartService.findById(id);
     }
 
-    @DeleteMapping("/carts/{id}")
+    @DeleteMapping("/cart/{id}")
     public void deleteCart(@PathVariable Long id) {
         log.debug("REST request do delete Cart: {}", id);
         cartService.deleteCart(id);

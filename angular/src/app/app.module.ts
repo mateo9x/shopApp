@@ -14,6 +14,7 @@ import { ClockComponent } from './widget/clockwidget/clock.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TooltipModule } from 'primeng/tooltip';
 import { CartComponent } from './components/cart/cart.component';
+import { ItemCategoryComponent } from './components/item-category/item-category.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CartComponent } from './components/cart/cart.component';
     SignInUserComponent,
     SignUpUserComponent,
     CartComponent,
-    ClockComponent
+    ClockComponent,
+    ItemCategoryComponent
     
   ],
   imports: [

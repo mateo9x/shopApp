@@ -5,9 +5,12 @@ import com.mateo9x.shop.dto.ItemDTO;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {ItemCategoryMapper.class})
+@Mapper(componentModel = "spring", uses= {UserMapper.class})
 public interface ItemMapper {
+
+    ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
 
     @Mapping(source = "itemCategoryId", target = "itemCategory")
     Item toEntity(ItemDTO itemDTO);
