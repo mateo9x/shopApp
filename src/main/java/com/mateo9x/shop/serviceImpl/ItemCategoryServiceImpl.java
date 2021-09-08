@@ -1,9 +1,9 @@
 package com.mateo9x.shop.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.mateo9x.shop.domain.ItemCategory;
 import com.mateo9x.shop.dto.ItemCategoryDTO;
 import com.mateo9x.shop.mapper.ItemCategoryMapper;
@@ -16,13 +16,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ItemCategoryServiceImpl implements ItemCategoryService {
-    
-    private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    private Logger log = LoggerFactory.getLogger(ItemCategoryServiceImpl.class);
 
     private final ItemCategoryRepository itemCategoryRepository;
     private final ItemCategoryMapper itemCategoryMapper;
-
-    
 
     public ItemCategoryServiceImpl(ItemCategoryRepository itemCategoryRepository,
             ItemCategoryMapper itemCategoryMapper) {
@@ -58,5 +56,5 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
         item = itemCategoryRepository.save(item);
         return itemCategoryMapper.toDTO(item);
     }
-    
+
 }

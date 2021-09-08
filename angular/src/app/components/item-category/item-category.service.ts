@@ -12,8 +12,8 @@ export class ItemCategoryService {
 
   constructor(private http: HttpClient) { }
 
-  public findAllItemCategories(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.itemCategoryUrl}`);
+  public findAllItemCategories(): Observable<ItemCategory[]> {
+    return this.http.get<ItemCategory[]>(`${this.itemCategoryUrl}`);
   }
 
   public findItemCategory(id: any) {

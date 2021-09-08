@@ -37,23 +37,26 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartDTO> findAll() {
         log.info("Request to find all Carts: ");
-        return cartRepository.findAll().stream().map(cartMapper::toDTO)
-                .collect(Collectors.toCollection(LinkedList::new));
+        // return cartRepository.findAll().stream().map(cartMapper::toDTO)
+        //         .collect(Collectors.toCollection(LinkedList::new));
+        return null;
     }
 
     @Override
     public CartDTO findById(Long id) {
         log.info("Request to find Cart: {}", id);
         Cart cart = cartRepository.getById(id);
-        return cartMapper.toDTO(cart);
+        // return cartMapper.toDTO(cart);
+        return null;
     }
 
     @Override
     public CartDTO save(CartDTO cartDTO) {
         log.info("Request to save Cart: {}", cartDTO);
-        Cart cart = cartMapper.toEntity(cartDTO);
-        cart = cartRepository.save(cart);
-        return cartMapper.toDTO(cart);
+        // Cart cart = cartMapper.toEntity(cartDTO);
+        // cart = cartRepository.save(cart);
+        // return cartMapper.toDTO(cart);
+        return null;
     }
 
 }

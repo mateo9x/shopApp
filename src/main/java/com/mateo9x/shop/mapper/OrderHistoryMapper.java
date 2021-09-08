@@ -12,12 +12,12 @@ public interface OrderHistoryMapper {
 
     OrderHistoryMapper INSTANCE = Mappers.getMapper(OrderHistoryMapper.class);
 
-    @Mapping(source = "orderId", target = "order")
+    // @Mapping(source = "orderId", target = "order")
     OrderHistory toEntity(OrderHistoryDTO orderHistoryDTO);
 
-    @Mapping(source = "order.id", target = "orderId")
-    @Mapping(source = "order.name", target = "orderName")
-    OrderHistory toDTO(OrderHistory order);
+    // @Mapping(source = "order.id", target = "orderId")
+    // @Mapping(source = "order.name", target = "orderName")
+    OrderHistoryDTO toDTO(OrderHistory order);
 
     default OrderHistory fromId(Long id) {
         if (id == null) {

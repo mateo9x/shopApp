@@ -13,13 +13,30 @@ export class ItemCategoryComponent implements OnInit {
 
   cols: any[];
   loading: boolean;
-  items: ItemCategory[];
+  items: ItemCategory[] = [];
+  childItems: ItemCategory[] = [];
+  itemParent: ItemCategory;
+
   constructor(private itemService: ItemCategoryService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.itemService.findAllItemCategories().subscribe((response) => {
-      console.log(this.items = response);
+              this.items = response;
     });
+
+  }
+
+  showChilds(parent: ItemCategory) {
+    this.childItems = [];
+    this.items.forEach((child) => {
+      if (child.itemCategoryParentId === parent.id) {
+        this.childItems.push(child);
+      }
+    });
+  }
+
+  openCategoryComponent(child: ItemCategory) {
+    console.log(child);
   }
 
 }

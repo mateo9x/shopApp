@@ -1,16 +1,29 @@
-<div>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Brand</th>
-      <th>Model</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of items ">
-      <td>{{item.name}}</td>
-      <td>{{item.itemCategoryParentName}}</td>
-    </tr>
-    </tbody>
-  </table>
-</div>>
+<p-table [value]="items" dataKey="name" responsiveLayout="scroll" rowExpandMode="single" >
+  <ng-template pTemplate="body" let-parent let-expanded="expanded">
+      <tr style="background-color:rgb(229, 226, 226);font-weight:bolder;" *ngIf="parent.itemCategoryParentId === null">
+          <td (click)="showChilds(parent)" pButton pRipple [pRowToggler]="parent"  style="padding:10px">
+                <i class="fa fa-plus" style="margin-right:5px"></i>
+         {{parent.name}}</td>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-items>
+      <tr>
+          <td colspan="7">
+              <div class="p-p-3">
+                  <p-table [value]="childItems" dataKey="id">
+                      <ng-template pTemplate="body" let-child>
+                          <tr #child style="background-color:rgb(214, 208, 208)">
+                              <td (click)="openCategoryComponent(child)" style="padding:8px">{{child.name}}</td>
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                          <tr style="background-color:rgb(214, 208, 208)">
+                              <td colspan="6">Brak podkategorii</td>
+                          </tr>
+                      </ng-template>
+                  </p-table>
+              </div>
+          </td>
+      </tr>
+  </ng-template>
+</p-table>

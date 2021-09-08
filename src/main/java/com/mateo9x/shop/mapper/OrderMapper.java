@@ -12,11 +12,11 @@ public interface OrderMapper {
 
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-    @Mapping(source="userId", target = "user")
+    // @Mapping(source="userId", target = "user")
     Order toEntity(OrderDTO orderDTO);
 
-    @Mapping(source="user.id", target = "userId")
-    @Mapping(source="user.username", target = "username")
+    // @Mapping(source="user.id", target = "userId")
+    // @Mapping(source="user.username", target = "username")
     OrderDTO toDTO(Order order);
 
     default Order fromId(Long id) {

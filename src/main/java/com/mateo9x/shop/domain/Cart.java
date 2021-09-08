@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name = "carts")
 public class Cart implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,32 +25,42 @@ public class Cart implements Serializable {
     private User user;
     @JoinColumn(name = "item_id")
     private Item item;
-    
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getPrice() {
         return price;
     }
+
     public void setPrice(String price) {
         this.price = price;
     }
+
     public User getUser() {
         return user;
     }
+
     public void setUser(User user) {
         this.user = user;
     }
+
     public Item getItem() {
         return item;
     }
+
     public void setItem(Item item) {
         this.item = item;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Cart [id=" + id + ", item=" + item + ", price=" + price + ", user=" + user + "]";
+    }
 
 }
