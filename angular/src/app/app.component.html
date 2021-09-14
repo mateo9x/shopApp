@@ -20,7 +20,11 @@
           </li>
           <li class="nav-item">
             <input class="input-search" type="search" placeholder="Czego szukasz?" aria-label="Search">
+    
+            <p-dropdown placeholder="Kategorie" [options]="itemCategories" [(ngModel)]="selectedItemCategory" optionLabel="name" appendTo="body" > </p-dropdown>
+           
             <button class="submit-button" type="submit">Wyszukaj</button>
+           
           </li>
           <li class="nav-item" *ngIf="isCartEmpty === false">
             <a type="submit" routerLink="cart" routerLinkActive="active"><i

@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TooltipModule } from 'primeng/tooltip';
 import { CartComponent } from './components/cart/cart.component';
 import { ItemCategoryComponent } from './components/item-category/item-category.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ItemCategoryComponent } from './components/item-category/item-category.
     ToastModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    TooltipModule
+    TooltipModule,
+    DropdownModule
 
   ],
   providers: [MessageService],
