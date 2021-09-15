@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CartComponent } from './components/cart/cart.component';
 import { ItemCategoryComponent } from './components/item-category/item-category.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { LocalStorageService } from './components/authenthication/local-storage.service';
+import { AppInterceptor } from './components/authenthication/app-interceptor';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,7 @@ import { DropdownModule } from 'primeng/dropdown';
     DropdownModule
 
   ],
-  providers: [MessageService],
+  providers: [MessageService, LocalStorageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

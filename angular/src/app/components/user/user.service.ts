@@ -38,8 +38,8 @@ export class UserService {
     return this.http.post<any>(`${this.authenthicationUrl}/login`, user);
   }
 
-  public logoutUser() {
-    return this.http.get<any>(`${this.authenthicationUrl}/logout`);
+  public logoutUser(request: any, response: any) {
+    return this.http.request<any>(`${this.authenthicationUrl}/logout`, request, response);
   }
 
   public isUserLogged() {

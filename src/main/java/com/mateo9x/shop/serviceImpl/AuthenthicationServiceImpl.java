@@ -55,6 +55,7 @@ public class AuthenthicationServiceImpl implements AuthenthicationService {
     @Override
     public Boolean isUserLogged() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         if (auth.isAuthenticated() && auth.getPrincipal() != "anonymousUser") {
             return true;
         } else {
