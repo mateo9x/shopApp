@@ -46,6 +46,11 @@ export class UserService {
     return this.http.get<boolean>(`${this.authenthicationUrl}/is-user-logged`);
   }
 
+  public getUserLogged(): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/logged`);
+  }
+
+
   public newUserWelcomeMail(user: User) {
     return this.http.post<User>(`${this.mailSenderUrl}/new-user-welcome-email`, user);
   }

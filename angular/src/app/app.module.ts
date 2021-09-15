@@ -18,6 +18,8 @@ import { ItemCategoryComponent } from './components/item-category/item-category.
 import { DropdownModule } from 'primeng/dropdown';
 import { LocalStorageService } from './components/authenthication/local-storage.service';
 import { AppInterceptor } from './components/authenthication/app-interceptor';
+import { ProfileComponent } from './components/user/profile-component/profile.component';
+import { LoginGuard } from './components/authenthication/login-guard';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { AppInterceptor } from './components/authenthication/app-interceptor';
     SignUpUserComponent,
     CartComponent,
     ClockComponent,
-    ItemCategoryComponent
+    ItemCategoryComponent,
+    ProfileComponent
     
   ],
   imports: [
@@ -43,7 +46,7 @@ import { AppInterceptor } from './components/authenthication/app-interceptor';
     DropdownModule
 
   ],
-  providers: [MessageService, LocalStorageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }],
+  providers: [MessageService, LocalStorageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

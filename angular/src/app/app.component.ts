@@ -38,7 +38,7 @@ export class AppComponent {
       this.isUserLogged = false;
     }
   }
-
+  
   logOut() {
     this.localStorageService.remove('id_token');
     this.isUserLogged = false;

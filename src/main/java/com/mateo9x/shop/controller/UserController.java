@@ -58,4 +58,11 @@ public class UserController {
         userService.deleteUser(id);
     }
 
+    
+    @GetMapping("/users/logged")
+    public UserDTO getUserLoggedUsername() {
+        log.debug("REST request to get User logged username");
+        return userService.getUsernameLogged();
+    }
+
 }
