@@ -1,0 +1,49 @@
+<div id="login-box" #loginbox>
+
+  <div >
+    <div class="input-data">
+    <label for="username">Użytkownik</label>
+    <input type="text" name="username" [(ngModel)]="user.username" [disabled]="user !== null" />
+  </div>
+  <div class="input-data">
+    <label for="username">Imię</label>
+    <input type="text" name="firstName" [(ngModel)]="user.firstName" [disabled]="user !== null" />
+  </div>
+  <div class="input-data">
+    <label for="username">Nazwisko</label>
+    <input type="text" name="lastName" [(ngModel)]="user.lastName" [disabled]="user !== null" />
+  </div>
+  <div class="input-data">
+    <label for="username">Adres e-mail</label>
+    <input type="text" name="email" [(ngModel)]="user.mail" [disabled]="user !== null">
+  </div>
+  <div class="input-data" *ngIf="changePswdForm !== true">
+    <label for="username">Hasło</label>
+    <input type="password" name="password" placeholder="ukryte" [disabled]="user !== null" />
+  </div>
+  <div class="input-data" >
+    <button class="submit-button" (click)="changePassword()">Zmień hasło</button>
+    <div *ngIf="changePswdForm === true">
+    <label for="username">Nowe hasło</label>
+    <input type="password" name="password" [(ngModel)]="user.password" placeholder="Nowe hasło"/><br>
+    <input type="password" name="password" [(ngModel)]="user.password2" placeholder="Potwierdź hasło"/>
+  </div>
+  </div>
+  <!-- <label for="username">Użytkownik</label>
+      <input type="password" name="password2"  [(ngModel)]="user.password2" [disabled]="user !== null"  /> --> 
+
+  <div class="input-data">
+    <label for="username">Ulica</label>
+    <input type="text" name="street" [(ngModel)]="user.street" [disabled]="user !== null" />
+  </div>
+  <div class="input-data">
+    <label for="username">Nr domu</label>
+    <input type="text" name="streetNumber" [(ngModel)]="user.streetNumber" [disabled]="user !== null" />
+  </div>
+  <div class="input-data">
+    <label for="username">Miasto</label>
+    <input type="text" name="city" [(ngModel)]="user.city" [disabled]="user !== null" />
+  </div>
+</div>
+
+</div>

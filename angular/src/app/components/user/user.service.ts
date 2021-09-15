@@ -35,16 +35,21 @@ export class UserService {
   }
 
   public signinUser(user: any) {
-    return this.http.post<User>(`${this.authenthicationUrl}/login`, user);
+    return this.http.post<any>(`${this.authenthicationUrl}/login`, user);
   }
 
-  public logoutUser(user: any) {
-    return this.http.get<any>(`${this.authenthicationUrl}/logout`, user);
+  public logoutUser(request: any, response: any) {
+    return this.http.request<any>(`${this.authenthicationUrl}/logout`, request, response);
   }
 
   public isUserLogged() {
     return this.http.get<boolean>(`${this.authenthicationUrl}/is-user-logged`);
   }
+
+  public getUserLogged(): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/logged`);
+  }
+
 
   public newUserWelcomeMail(user: User) {
     return this.http.post<User>(`${this.mailSenderUrl}/new-user-welcome-email`, user);

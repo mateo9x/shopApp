@@ -32,7 +32,7 @@ export class ClockComponent {
     this.minutes = this.leftPadZero(time.getMinutes());
     this.seconds = this.leftPadZero(time.getSeconds());
     this.monthSelect = time.getMonth();
-    this.month = time.getDay() + ' ' + this.leftPadZero(this.monthNames[this.monthSelect]) + ' ' + time.getFullYear();
+    this.month = time.getDate() + ' ' + this.leftPadZero(this.monthNames[this.monthSelect]) + ' ' + time.getFullYear();
   }
 
   private updateTime() {

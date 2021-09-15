@@ -1,3 +1,7 @@
+<div style="background-color:grey;">
+  <p-toast styleClass="custom-toast" position="top-right" key="success" ></p-toast>
+  <p-toast styleClass="custom-toast" position="top-right" key="error" ></p-toast>
+</div>
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <h2 class="active"> Zaloguj się </h2>
@@ -5,13 +9,13 @@
     <!-- Login Form -->
     <form>
       <input type="text" id="login" class="fadeIn second" name="login" [(ngModel)]="username" placeholder="użytkownik">
-      <input type="text" id="password" class="fadeIn third" name="login" [(ngModel)]="password" placeholder="hasło">
+      <input type="password" id="password" class="fadeIn third" name="login" [(ngModel)]="password" placeholder="hasło">
       <button (click)="onSignInButton()" class="fadeIn fourth submit-button" style="margin-bottom:5%">Zaloguj się</button>
     </form>
     
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <button (click)="signUp()" class="fadeIn fourth submit-button">Zarejestruj się</button><br>
+      <button (click)="signUp()" class="fadeIn fourth submit-button" [disabled]="username === null && password === null">Zarejestruj się</button><br>
       <a class="fadeIn fourth underlineHover" href="#">Nie pamiętasz hasła?</a> 
      
     </div>

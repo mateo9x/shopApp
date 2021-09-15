@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,13 +13,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClockComponent } from './widget/clockwidget/clock.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TooltipModule } from 'primeng/tooltip';
+import { CartComponent } from './components/cart/cart.component';
+import { ItemCategoryComponent } from './components/item-category/item-category.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { LocalStorageService } from './components/authenthication/local-storage.service';
+import { AppInterceptor } from './components/authenthication/app-interceptor';
+import { ProfileComponent } from './components/user/profile-component/profile.component';
+import { LoginGuard } from './components/authenthication/login-guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInUserComponent,
     SignUpUserComponent,
-    ClockComponent
+    CartComponent,
+    ClockComponent,
+    ItemCategoryComponent,
+    ProfileComponent
     
   ],
   imports: [
@@ -32,10 +42,12 @@ import { TooltipModule } from 'primeng/tooltip';
     ToastModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    TooltipModule
+    TooltipModule,
+    DropdownModule
 
   ],
-  providers: [MessageService],
-  bootstrap: [AppComponent]
+  providers: [MessageService, LocalStorageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard],
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

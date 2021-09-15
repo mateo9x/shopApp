@@ -19,11 +19,7 @@ export class SignUpUserComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
 
-  ngOnInit() {
-    this.userService.findAllUsers().subscribe((response) => {
-      this.users = response;
-    });
-  }
+  ngOnInit() { }
 
   clear() {
     this.user.username = '';
@@ -42,21 +38,20 @@ export class SignUpUserComponent implements OnInit {
   }
 
   register() {
-    if (this.users.find(e => e.mail === this.user.mail)) {
-      this.messageService.add({ severity: 'error', summary: 'Użytkownik z podanym adresem e-mail istnieje!'});
-    }
-    else {
       this.userService.saveUser(this.user).subscribe((response) => {
+        if (response !== null) {
         this.messageService.add({key:'success', severity: 'success', summary: 'Utworzono użytkownika pomyślnie'});
         this.userService.newUserWelcomeMail(this.user).subscribe((response) => {
           console.log(response);
-        })
+        });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Użytkownik z podanym adresem e-mail istnieje!'});
+      }
      
         
       }, (error) => {
         this.messageService.add({ severity: 'error', summary: 'Użytkownik nie został utworzony'});
       });
-    }
   }
 
 }

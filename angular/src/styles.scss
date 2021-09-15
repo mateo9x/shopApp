@@ -11,3 +11,8 @@
   opacity:80%;
   }
 }
+
+:host ::ng-deep .custom-toast .ui-toast-message {
+  display: flex;
+  width: 500px; // whatever width you need
+}

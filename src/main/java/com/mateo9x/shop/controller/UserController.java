@@ -8,7 +8,6 @@ import com.mateo9x.shop.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,6 +56,13 @@ public class UserController {
     public void deleteUser(@PathVariable Long id) {
         log.debug("REST request do delete User: {}", id);
         userService.deleteUser(id);
+    }
+
+    
+    @GetMapping("/users/logged")
+    public UserDTO getUserLoggedUsername() {
+        log.debug("REST request to get User logged username");
+        return userService.getUsernameLogged();
     }
 
 }

@@ -14,6 +14,7 @@ import com.mateo9x.shop.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findByMail(userDTO.getMail());
         if (userOptional.isPresent()) {
             log.error("User with that email already exists :", userDTO.getMail());
-            return userDTO;
+            return null;
         } else {
             log.info("Request to save User: {}", userDTO);
             User user = userMapper.toEntity(userDTO);
@@ -68,5 +69,18 @@ public class UserServiceImpl implements UserService {
             return userMapper.toDTO(user);
         }
     }
+
+    @Override
+    public UserDTO getUsernameLogged() {
+        Object username = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByUsername(username.toString());
+        if (user != null) {
+            return userMapper.toDTO(user);
+        } else {
+            log.info("User not found: {}");
+            return null;
+        }
+    }
+
 
 }
