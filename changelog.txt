@@ -1,3 +1,6 @@
+0.0.8
+    - Obsługa JWT na frontendzie.
+    - Dodano kolejne elementy do aplikacji (np wstępna impl zakladki Profilu uzytkownika).
 0.0.7
     - Poprawka daty na frontendzie.
     - Poprawka strony głównej aplikacji.
