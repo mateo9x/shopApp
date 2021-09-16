@@ -16,6 +16,6 @@ on his email address application sends email with welcome message.
 From main directory of project:
 
 Angular:  
-> npm start --prefix angular/  
+> npm start --prefix angular/ <  
 Spring:  
-> ./mvnw spring-boot:run
+> ./mvnw spring-boot:run <
