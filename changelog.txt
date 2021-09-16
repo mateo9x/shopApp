@@ -1,3 +1,7 @@
+0.0.9
+    - Dodano możliwość zmiany hasła w zakładce Profilu.
+    - Poprawki w stylach i komunikatach toastów na froncie.
+    - Zmiana obsługi JWT na frontendzie z localStorage na sessionStorage.
 0.0.8
     - Obsługa JWT na frontendzie.
     - Dodano kolejne elementy do aplikacji (np wstępna impl zakladki Profilu uzytkownika).
