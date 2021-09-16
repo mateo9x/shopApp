@@ -1,18 +1,29 @@
 
 @import "~font-awesome/css/font-awesome.css";
+@import '../node_modules/primeng/resources/primeng.min.css';
 
 .p-tooltip {
   div:nth-child(2) {
   position:absolute;
   z-index:1;
   padding:4px;
-  background: rgb(43, 38, 38) ;
   color: white ;
   opacity:80%;
+  background-color: #383736 ;
   }
 }
 
-:host ::ng-deep .custom-toast .ui-toast-message {
-  display: flex;
-  width: 500px; // whatever width you need
+.custom-toast .ui-toast {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: #FFD07B !important;
+}
+
+// adjusts font, color and other elements of the toast window if needed
+.custom-toast .ui-toast-message-content {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #FFD07B !important;
 }

@@ -30,9 +30,10 @@ export class SignInUserComponent implements OnInit {
       }
 
       if (sessionStorage.getItem('id_token') !== null) {
-        this.messageService.add({ key: 'error', severity: 'error', summary: 'Jesteś już zalogowany!' });
-      } else {
+       this.messageService.add({ key: 'error', severity: 'error', summary: 'Jesteś już zalogowany!' });
+      } else { 
         this.userService.signinUser(userObj).subscribe((response) => {
+          this.messageService.add({ key: 'success', severity: 'success', summary: 'Zalogowano pomyślnie'});
           this.appComponent.isUserLogged = true;
           sessionStorage.setItem('id_token', response.token);
           this.router.navigate(['']);

@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
       this.messageService.add({ key: 'success', severity: 'success', summary: 'Hasło zaaktualizowane pomyślnie' });
       this.router.navigate(['']);
       } else {
-        this.messageService.add({ severity: 'error', summary: 'Hasło nie może być takie same jak poprzednie' });
+        this.messageService.add({ key: 'error', severity: 'error', summary: 'Hasło nie może być takie same jak poprzednie' });
       }
     });
   }
