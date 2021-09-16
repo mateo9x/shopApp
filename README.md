@@ -7,6 +7,7 @@ Displaying items by categories, adding items to cart, checking cart's elements a
 ## Technologies
 * Java 11
 * Spring Boot
+* Angular
 * MySQL
 * MongoDB
 * JWT Authorization
