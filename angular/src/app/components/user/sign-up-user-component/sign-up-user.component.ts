@@ -42,7 +42,7 @@ export class SignUpUserComponent implements OnInit {
         if (response !== null) {
         this.messageService.add({key:'success', severity: 'success', summary: 'Utworzono użytkownika pomyślnie'});
         this.userService.newUserWelcomeMail(this.user).subscribe((response) => {
-          console.log(response);
+          console.log('Wyslano maila', response);
         });
       } else {
         this.messageService.add({ severity: 'error', summary: 'Użytkownik z podanym adresem e-mail istnieje!'});
