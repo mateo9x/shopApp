@@ -21,17 +21,25 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUserLogged().subscribe((response) => {
-      this.user =response;
+      this.user = response;
     });
 
   }
-
-  changePassword() {
+  
+  newPassword() {
     this.user.password = '';
     this.changePswdForm = true;
   }
-  onClose(){
-    this.router.navigate(['']);
+
+  changePassword() {
+    this.userService.updateUserPassword(this.user).subscribe((response) => {
+      if (response === true) {
+      this.messageService.add({ key: 'success', severity: 'success', summary: 'Hasło zaaktualizowane pomyślnie' });
+      this.router.navigate(['']);
+      } else {
+        this.messageService.add({ key: 'error', severity: 'error', summary: 'Hasło nie może być takie same jak poprzednie' });
+      }
+    });
   }
 
   

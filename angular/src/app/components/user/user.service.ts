@@ -34,6 +34,10 @@ export class UserService {
     return this.http.put<User>(`${this.baseUrl}`, user);
   }
 
+  public updateUserPassword(user: User) {
+    return this.http.put<boolean>(`${this.baseUrl}/password`, user);
+  }
+
   public signinUser(user: any) {
     return this.http.post<any>(`${this.authenthicationUrl}/login`, user);
   }

@@ -33,24 +33,21 @@ export class SignUpUserComponent implements OnInit {
     this.user.city = '';
   }
 
-  onClose(){
-    this.router.navigate(['']);
-  }
-
   register() {
       this.userService.saveUser(this.user).subscribe((response) => {
         if (response !== null) {
-        this.messageService.add({key:'success', severity: 'success', summary: 'Utworzono użytkownika pomyślnie'});
+        this.messageService.add({ key: 'success', severity: 'success', summary: 'Utworzono użytkownika pomyślnie'});
         this.userService.newUserWelcomeMail(this.user).subscribe((response) => {
-          console.log(response);
+          console.log('Wyslano maila', response);
         });
+        this.router.navigate(['']);
       } else {
-        this.messageService.add({ severity: 'error', summary: 'Użytkownik z podanym adresem e-mail istnieje!'});
+        this.messageService.add({ key: 'error', severity: 'error', summary: 'Użytkownik z podanym adresem e-mail istnieje!'});
       }
      
         
       }, (error) => {
-        this.messageService.add({ severity: 'error', summary: 'Użytkownik nie został utworzony'});
+        this.messageService.add({ key: 'error', severity: 'error', summary: 'Użytkownik nie został utworzony'});
       });
   }
 

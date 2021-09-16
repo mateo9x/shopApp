@@ -8,6 +8,7 @@ import com.mateo9x.shop.dto.UserDTO;
 public interface UserService {
 
     UserDTO save(UserDTO userDTO);
+    Boolean updateUserPassword(UserDTO userDTO);
     List<UserDTO> findAll();
     UserDTO findById(Long id);
     void deleteUser(Long id);

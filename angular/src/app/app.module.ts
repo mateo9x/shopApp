@@ -16,7 +16,6 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CartComponent } from './components/cart/cart.component';
 import { ItemCategoryComponent } from './components/item-category/item-category.component';
 import { DropdownModule } from 'primeng/dropdown';
-import { LocalStorageService } from './components/authenthication/local-storage.service';
 import { AppInterceptor } from './components/authenthication/app-interceptor';
 import { ProfileComponent } from './components/user/profile-component/profile.component';
 import { LoginGuard } from './components/authenthication/login-guard';
@@ -46,7 +45,7 @@ import { LoginGuard } from './components/authenthication/login-guard';
     DropdownModule
 
   ],
-  providers: [MessageService, LocalStorageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard],
+  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
