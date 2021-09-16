@@ -40,6 +40,12 @@ public class UserController {
         return userService.save(userDTO);
     }
 
+    @PutMapping("/users/password")
+    public Boolean updatePassword(@Valid @RequestBody UserDTO userDTO) {
+        log.debug("REST request to update User password: {}", userDTO);
+        return userService.updateUserPassword(userDTO);
+    }
+
     @GetMapping("/users")
     public List<UserDTO> getAllUsers() {
         log.debug("REST request to get all Users");

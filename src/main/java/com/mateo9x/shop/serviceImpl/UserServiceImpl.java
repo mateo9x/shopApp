@@ -71,6 +71,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean updateUserPassword(UserDTO userDTO) {
+        Optional<User> userOptional = userRepository.findByMail(userDTO.getMail());
+        if (userOptional.isPresent()) {
+            if (!passwordEncoder.matches(userDTO.getPassword(), userOptional.get().getPassword())) {
+                log.info("Request to update User password: {}:", userDTO.getUsername());
+                userOptional.get().setPassword(passwordEncoder.encode(userDTO.getPassword()));
+                userRepository.save(userOptional.get());
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public UserDTO getUsernameLogged() {
         Object username = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByUsername(username.toString());
@@ -81,6 +98,5 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
-
 
 }
