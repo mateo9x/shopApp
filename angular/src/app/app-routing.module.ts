@@ -1,3 +1,4 @@
+import { ItemsComponent } from './components/items/items/items.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './components/authenthication/login-guard';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'sign-in-user', component: SignInUserComponent },
   { path: 'sign-up-user', component: SignUpUserComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'items', component: ItemsComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard] }
 ];
 

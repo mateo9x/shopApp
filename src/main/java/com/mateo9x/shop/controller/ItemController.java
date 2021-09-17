@@ -47,6 +47,12 @@ public class ItemController {
         return itemService.findAll();
     }
 
+    @PostMapping("/item/category/{id}")
+    public List<ItemDTO> getAllItemsFromCategory(@Valid @RequestBody Long id) {
+        log.debug("REST request to get all Item for category: {}", id);
+        return itemService.findAllFromCategory(id);
+    }
+
     @GetMapping("/item/{id}")
     public ItemDTO getItem(@PathVariable Long id) {
         log.debug("REST request to get Item: {}", id);

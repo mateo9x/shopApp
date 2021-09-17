@@ -3,10 +3,12 @@ package com.mateo9x.shop.domain;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +27,11 @@ public class Item implements Serializable {
     private String model;
     @JoinColumn(name = "price")
     private Double price;
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "items_category_id")
     private ItemCategory itemCategory;
+    @Column(name = "sold")
+    private Integer sold;
 
     public Long getId() {
         return id;
@@ -67,5 +72,15 @@ public class Item implements Serializable {
     public void setItemCategory(ItemCategory itemCategory) {
         this.itemCategory = itemCategory;
     }
+
+    public Integer isSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
+    }
+
+    
 
 }

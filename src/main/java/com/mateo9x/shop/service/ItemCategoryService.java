@@ -9,7 +9,7 @@ public interface ItemCategoryService {
     ItemCategoryDTO save(ItemCategoryDTO itemCategoryDTO);
 
     List<ItemCategoryDTO> findAll();
-
+    
     ItemCategoryDTO findById(Long id);
 
     void deleteItemCategory(Long id);

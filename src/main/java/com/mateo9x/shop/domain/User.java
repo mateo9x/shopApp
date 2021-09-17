@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,7 +45,7 @@ public class User implements UserDetails {
     private String streetNumber;
     @Column(name = "city")
     private String city;
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "roles_id")
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Role> roles;
 

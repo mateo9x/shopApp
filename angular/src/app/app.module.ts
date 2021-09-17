@@ -1,3 +1,4 @@
+import { ItemCompsService } from './components/items/item-comps-service';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -14,11 +15,12 @@ import { ClockComponent } from './widget/clockwidget/clock.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TooltipModule } from 'primeng/tooltip';
 import { CartComponent } from './components/cart/cart.component';
-import { ItemCategoryComponent } from './components/item-category/item-category.component';
+import { ItemCategoryComponent } from './components/items/item-category/item-category.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { AppInterceptor } from './components/authenthication/app-interceptor';
 import { ProfileComponent } from './components/user/profile-component/profile.component';
 import { LoginGuard } from './components/authenthication/login-guard';
+import { ItemsComponent } from './components/items/items/items.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +30,9 @@ import { LoginGuard } from './components/authenthication/login-guard';
     CartComponent,
     ClockComponent,
     ItemCategoryComponent,
-    ProfileComponent
-    
+    ProfileComponent,
+    ItemsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,7 @@ import { LoginGuard } from './components/authenthication/login-guard';
     DropdownModule
 
   ],
-  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard],
+  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, ItemCompsService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

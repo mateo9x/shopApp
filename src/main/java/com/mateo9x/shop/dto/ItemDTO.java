@@ -10,6 +10,7 @@ public class ItemDTO implements Serializable {
     private Double price;
     private Long itemCategoryId;
     private String itemCategoryName;
+    private Integer sold;
 
     public Long getId() {
         return id;
@@ -57,6 +58,14 @@ public class ItemDTO implements Serializable {
 
     public void setItemCategoryName(String itemCategoryName) {
         this.itemCategoryName = itemCategoryName;
+    }
+
+    public Integer isSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
     }
 
 }

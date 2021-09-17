@@ -3,10 +3,12 @@ package com.mateo9x.shop.domain;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +21,7 @@ public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "price")
-    private String price;
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
     @JoinColumn(name = "item_id")
@@ -32,14 +33,6 @@ public class Cart implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public User getUser() {
@@ -60,7 +53,7 @@ public class Cart implements Serializable {
 
     @Override
     public String toString() {
-        return "Cart [id=" + id + ", item=" + item + ", price=" + price + ", user=" + user + "]";
+        return "Cart [id=" + id + ", item=" + item + ", user=" + user + "]";
     }
 
 }
