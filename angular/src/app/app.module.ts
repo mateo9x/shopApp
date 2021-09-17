@@ -19,6 +19,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AppInterceptor } from './components/authenthication/app-interceptor';
 import { ProfileComponent } from './components/user/profile-component/profile.component';
 import { LoginGuard } from './components/authenthication/login-guard';
+import { ItemsListComponent } from './components/items/items-list/items-list.component';
+import { ItemsList } from './components/items/items-list/items-list.service.ts/items-list.service.ts.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { LoginGuard } from './components/authenthication/login-guard';
     CartComponent,
     ClockComponent,
     ItemCategoryComponent,
-    ProfileComponent
+    ProfileComponent,
+    ItemsListComponent,
+    ItemsList.Service.TsComponent
     
   ],
   imports: [

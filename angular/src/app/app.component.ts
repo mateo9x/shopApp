@@ -1,8 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { ItemCategory } from './components/item-category/item-category.model';
-import { ItemCategoryService } from './components/item-category/item-category.service';
+import { ItemCategory } from './components/items/item-category/item-category.model';
+import { ItemCategoryService } from './components/items/item-category/item-category.service';
 import { UserService } from './components/user/user.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class AppComponent {
   isCartEmpty = false;
   selectedItemCategory: ItemCategory;
   itemCategories: ItemCategory[] = [];
-  
+
   constructor(private userService: UserService, private router: Router, private itemCategoryService: ItemCategoryService, private messageService: MessageService) { }
 
   ngOnInit() {
@@ -34,11 +34,11 @@ export class AppComponent {
       this.isUserLogged = false;
     }
   }
-  
+
   logOut() {
     sessionStorage.removeItem('id_token');
     this.isUserLogged = false;
     this.messageService.add({ key: 'success', severity: 'success', summary: 'Wylogowano pomyślnie!' });
   }
-  
+
 }
