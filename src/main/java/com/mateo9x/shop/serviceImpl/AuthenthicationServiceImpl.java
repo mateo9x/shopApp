@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mateo9x.shop.configuration.LoginCredentials;
-import com.mateo9x.shop.repository.UserRepository;
 import com.mateo9x.shop.service.AuthenthicationService;
 
 import org.slf4j.Logger;
@@ -24,11 +23,9 @@ public class AuthenthicationServiceImpl implements AuthenthicationService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    private UserRepository userRepository;
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
-    public AuthenthicationServiceImpl(UserRepository userRepository, UserDetailsServiceImpl userDetailsServiceImpl) {
-        this.userRepository = userRepository;
+    public AuthenthicationServiceImpl(UserDetailsServiceImpl userDetailsServiceImpl) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
