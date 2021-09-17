@@ -10,7 +10,7 @@ User authenthicated has access to secured endpoints.
 - Log out
 - Change password
 - Register new user (if user register is success on his email application sends welcome email)
-- 
+
 ### Coming soon:
 - Adding items to cart
 - Checking cart's elements 
