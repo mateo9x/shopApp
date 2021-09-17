@@ -12,11 +12,11 @@ public interface ItemMapper {
 
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
 
-    // @Mapping(source = "itemCategoryId", target = "itemCategory")
+    @Mapping(source = "itemCategoryId", target = "itemCategory")
     Item toEntity(ItemDTO itemDTO);
 
-    // @Mapping(source = "itemCategory.id", target = "itemCategoryId")
-    // @Mapping(source = "itemCategory.name", target = "itemCategoryName")
+    @Mapping(source = "itemCategory.id", target = "itemCategoryId")
+    @Mapping(source = "itemCategory.name", target = "itemCategoryName")
     ItemDTO toDTO(Item item);
 
     default Item fromId(Long id) {

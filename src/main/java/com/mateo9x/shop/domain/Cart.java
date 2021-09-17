@@ -3,10 +3,13 @@ package com.mateo9x.shop.domain;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,7 @@ public class Cart implements Serializable {
     private Long id;
     @Column(name = "price")
     private String price;
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
     @JoinColumn(name = "item_id")
