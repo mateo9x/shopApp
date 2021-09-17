@@ -1,8 +1,19 @@
 # shopApp
-Mini version of online shop like Allegro. Application uses JWT Token with sessionStorage. User authenthicated has access to secured endpoints. For now user can log into application, log out, change his own password, register new user. If user register is success on his email application sends welcome email.
+Mini version of online shop like Allegro. Application made for my personal skills development.  Application uses JWT Token with sessionStorage.  User authenthicated has access to secured endpoints.
 
+### Features on:
+- User can log into application
+- Displaying items by categories
+- Log out
+- Change password
+- Register new user (if user register is success on his email application sends welcome email)
+- 
 ### Coming soon:
-Displaying items by categories, adding items to cart, checking cart's elements and final ordering selected items from cart and on the end better design of application :)
+- Adding items to cart
+- Checking cart's elements 
+- Ordering selected items from cart
+- Better design of application
+- And... more !
 
 ## Technologies
 * Java 11
