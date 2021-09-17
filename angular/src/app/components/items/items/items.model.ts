@@ -5,5 +5,6 @@ export class Item{
   price: number;
   itemCategoryId: number;
   itemCategoryName: string;
+  status: number;
 
 }

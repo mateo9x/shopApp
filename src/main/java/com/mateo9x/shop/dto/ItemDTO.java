@@ -60,7 +60,7 @@ public class ItemDTO implements Serializable {
         this.itemCategoryName = itemCategoryName;
     }
 
-    public Integer getSold() {
+    public Integer isSold() {
         return sold;
     }
 

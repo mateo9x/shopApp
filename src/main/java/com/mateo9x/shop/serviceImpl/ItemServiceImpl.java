@@ -44,7 +44,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> findAllFromCategory(Long id) {
         log.info("Request to find all Items by category{}: ", id);
-        return itemRepository.findAllByItemCategoryId(id).stream().map(itemMapper::toDTO)
+        return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> dto.isSold() == 0).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
