@@ -30,6 +30,8 @@ public class Item implements Serializable {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "items_category_id")
     private ItemCategory itemCategory;
+    @Column(name = "sold")
+    private Integer sold;
 
     public Long getId() {
         return id;
@@ -70,5 +72,15 @@ public class Item implements Serializable {
     public void setItemCategory(ItemCategory itemCategory) {
         this.itemCategory = itemCategory;
     }
+
+    public Integer isSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
+    }
+
+    
 
 }

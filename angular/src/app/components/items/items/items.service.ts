@@ -8,28 +8,34 @@ import { Item } from './items.model';
 })
 export class ItemsService {
 
-  private itemsUrl = 'http://localhost:8080/api/items-category';
+  private itemsUrl = 'http://localhost:8080/api/item';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+   }
 
-  public findAllItemCategories(): Observable<Item[]> {
+  public findAllItems(): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.itemsUrl}`);
   }
 
-  public findItemCategory(id: any) {
-    return this.http.get<Item>(`${this.itemsUrl}/`, id);
+  public findItem(id: any) {
+    return this.http.get<Item>(`${this.itemsUrl}/${id}`, id);
   }
 
-  public deleteItemCategory(id: any) {
+  public deleteItem(id: any) {
     return this.http.delete<Item>(`${this.itemsUrl}/`, id);
   }
 
-  public saveItemCategory(item: Item) {
+  public saveItem(item: Item) {
     return this.http.post<Item>(`${this.itemsUrl}`, item);
   }
 
-  public updateItemCategory(item: Item) {
+  public updateItem(item: Item) {
     return this.http.put<Item>(`${this.itemsUrl}`, item);
+
+  }
+
+  public findAllItemsByCategory(id: any): Observable<Item[]> {
+    return this.http.post<Item[]>(`${this.itemsUrl}/category/${id}`, id);
 
   }
 

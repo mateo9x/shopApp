@@ -1,8 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { ItemCategory } from './components/items/item-category/item-category.model';
-import { ItemCategoryService } from './components/items/item-category/item-category.service';
 import { UserService } from './components/user/user.service';
 
 @Component({
@@ -11,23 +9,14 @@ import { UserService } from './components/user/user.service';
   styleUrls: ['./app.component.scss']
 })
 @HostListener('mouseover', ['$event'])
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   isUserLogged: boolean;
   isCartEmpty = false;
-  selectedItemCategory: ItemCategory;
-  itemCategories: ItemCategory[] = [];
 
-  constructor(private userService: UserService, private router: Router, private itemCategoryService: ItemCategoryService, private messageService: MessageService) { }
+  constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.itemCategoryService.findAllItemCategories().subscribe((response) => {
-      response.forEach((element) => {
-        if (element.itemCategoryParentId !== null) {
-          this.itemCategories.push(element);
-        }
-      });
-    });
     if ( sessionStorage.getItem("id_token") !== null) {
       this.isUserLogged = true;
     } else {

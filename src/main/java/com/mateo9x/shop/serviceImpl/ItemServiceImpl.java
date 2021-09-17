@@ -42,6 +42,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<ItemDTO> findAllFromCategory(Long id) {
+        log.info("Request to find all Items by category{}: ", id);
+        return itemRepository.findAllByItemCategoryId(id).stream().map(itemMapper::toDTO)
+                .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
     public ItemDTO findById(Long id) {
         log.info("Request to find Item: {}", id);
         Item item = itemRepository.getById(id);
