@@ -1,5 +1,8 @@
 # shopApp
-Mini version of online shop like Allegro. Application made for my personal skills development.  Application uses JWT Token with sessionStorage.  User authenthicated has access to secured endpoints.
+Mini version of online shop like Allegro.  
+Application made for my personal skills development.  
+Application uses JWT Token with sessionStorage.  
+User authenthicated has access to secured endpoints.
 
 ### Features on:
 - User can log into application
