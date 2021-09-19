@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 *
-.categories {
-
+.ui-datatable .ui-datatable-thead > tr > th {
+  background: red;
 }
 
 td:hover {

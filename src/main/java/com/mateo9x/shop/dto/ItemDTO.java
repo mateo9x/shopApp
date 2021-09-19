@@ -1,6 +1,7 @@
 package com.mateo9x.shop.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ItemDTO implements Serializable {
 
@@ -11,6 +12,9 @@ public class ItemDTO implements Serializable {
     private Long itemCategoryId;
     private String itemCategoryName;
     private Integer sold;
+    private Date createDate;
+    private Long sellerId;
+    private String sellerName;
 
     public Long getId() {
         return id;
@@ -67,5 +71,31 @@ public class ItemDTO implements Serializable {
     public void setSold(Integer sold) {
         this.sold = sold;
     }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Long getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    
 
 }

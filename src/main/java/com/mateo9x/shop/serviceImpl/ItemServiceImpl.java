@@ -1,5 +1,4 @@
 package com.mateo9x.shop.serviceImpl;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,6 +45,7 @@ public class ItemServiceImpl implements ItemService {
         log.info("Request to find all Items by category{}: ", id);
         return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> dto.isSold() == 0).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
+        
     }
 
     @Override

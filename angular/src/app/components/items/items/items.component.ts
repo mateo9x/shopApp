@@ -4,6 +4,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemsService } from './items.service';
 import { ItemCompsService } from '../item-comps-service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'items',
@@ -24,11 +25,16 @@ export class ItemsComponent implements OnInit {
       { field: 'brand', header: 'Marka' },
       { field: 'model', header: 'Nazwa' },
       { field: 'price', header: 'Cena' },
+      { field: 'createDate', header: 'Data wystawienia' },
+      { field: 'sellerName', header: 'Sprzedawca' },
       { field: 'cartAdd', header: '' }
     ];
     this.itemCompsService.getNavChangeEmitter().subscribe((response) => {
       this.itemService.findAllItemsByCategory(response).subscribe((respond) => {
         if(respond.length > 0) {
+          respond.forEach((element) => {
+            element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
+          });
         this.items = respond;
         this.noData = false;
         } else {
