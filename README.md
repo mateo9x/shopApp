@@ -5,16 +5,17 @@ Application uses JWT Token with sessionStorage.
 User authenthicated has access to secured endpoints.
 
 ### Features on:
+- Register new user (if user register is success on his email application sends welcome email)
 - User can log into application
-- Displaying items by categories
 - Log out
 - Change password
-- Register new user (if user register is success on his email application sends welcome email)
+- Reset password for registered User
+- Displaying items by categories
+- Adding items to Cart by user logged and also anonymous user to Session storage
 
 ### Coming soon:
-- Adding items to cart
-- Checking cart's elements 
-- Ordering selected items from cart
+- Ordering selected items from cart or directly from items list
+- Checking the user's purchase history
 - Better design of application
 - And... more !
 
