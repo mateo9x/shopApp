@@ -34,6 +34,12 @@ public class UserController {
         return userService.save(userDTO);
     }
 
+    @PostMapping("/users/resetPassword")
+    public void resetPassword(@Valid @RequestBody UserDTO userDTO) {
+        log.debug("REST request to reset password for User: {}", userDTO.getMail());
+        userService.resetPswd(userDTO.getMail());
+    }
+
     @PutMapping("/users")
     public UserDTO updateUser(@Valid @RequestBody UserDTO userDTO) {
         log.debug("REST request to update User: {}", userDTO);
@@ -46,6 +52,12 @@ public class UserController {
         return userService.updateUserPassword(userDTO);
     }
 
+    @PutMapping("/users/password/token")
+    public Boolean updatePasswordByToken(@Valid @RequestBody UserDTO userDTO) {
+        log.debug("REST request to update User password from token: {}", userDTO);
+        return userService.updateUserPasswordFromToken(userDTO);
+    }
+
     @GetMapping("/users")
     public List<UserDTO> getAllUsers() {
         log.debug("REST request to get all Users");
@@ -56,6 +68,12 @@ public class UserController {
     public UserDTO getUser(@PathVariable Long id) {
         log.debug("REST request to get User: {}", id);
         return userService.findById(id);
+    }
+
+    @PostMapping("/users/token-user")
+    public UserDTO getUserByToken(@RequestBody @Valid UserDTO userDTO) {
+        log.debug("REST request to get User by token: {}");
+        return userService.findByResetToken(userDTO);
     }
 
     @DeleteMapping("/users/{id}")

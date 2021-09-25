@@ -31,7 +31,7 @@ export class SignInUserComponent implements OnInit {
 
       if (sessionStorage.getItem('id_token') !== null) {
        this.messageService.add({ key: 'error', severity: 'error', summary: 'Jesteś już zalogowany!' });
-      } else { 
+      } else {
         this.userService.signinUser(userObj).subscribe((response) => {
           this.messageService.add({ key: 'success', severity: 'success', summary: 'Zalogowano pomyślnie'});
           this.appComponent.isUserLogged = true;
@@ -46,6 +46,10 @@ export class SignInUserComponent implements OnInit {
 
   signUp() {
     this.router.navigate(['sign-up-user']);
+  }
+
+  resetPassword() {
+    this.router.navigate(['reset-password']);
   }
 
 }

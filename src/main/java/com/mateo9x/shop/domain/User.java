@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
@@ -48,6 +47,8 @@ public class User implements UserDetails {
     @JoinColumn(name = "roles_id")
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Role> roles;
+    @Column(name = "reset_password")
+    private String resetToken;
 
     public Long getId() {
         return id;
@@ -155,6 +156,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
     }
 
 }

@@ -3,12 +3,14 @@ package com.mateo9x.shop.serviceImpl;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.dto.UserDTO;
 import com.mateo9x.shop.mapper.UserMapper;
 import com.mateo9x.shop.repository.UserRepository;
+import com.mateo9x.shop.service.MailService;
 import com.mateo9x.shop.service.UserService;
 
 import org.slf4j.Logger;
@@ -27,10 +29,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final MailService mailService;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, MailService mailService) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.mailService = mailService;
     }
 
     @Override
@@ -52,6 +56,17 @@ public class UserServiceImpl implements UserService {
         log.info("Request to find User: {}", id);
         User user = userRepository.getById(id);
         return userMapper.toDTO(user);
+    }
+
+    @Override
+    public UserDTO findByResetToken(UserDTO userDTO) {
+        log.info("Request to find User by Reset Token: {}");
+        Optional<User> user = userRepository.findByResetToken(userDTO.getResetToken());
+        if (user.isPresent()) {
+            return userMapper.toDTO(user.get());
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -96,6 +111,36 @@ public class UserServiceImpl implements UserService {
         } else {
             log.info("User not found: {}");
             return null;
+        }
+    }
+
+    @Override
+    public void resetPswd(String mail) {
+        UUID uuid = UUID.randomUUID();
+        Optional<User> user = userRepository.findByMail(mail);
+        if (user.isPresent()) {
+            user.get().setResetToken(uuid.toString());
+            userRepository.save(user.get());
+            UserDTO dto = userMapper.toDTO(user.get());
+            mailService.sendResetPasswordToken(dto);
+        }
+    }
+
+    @Override
+    public Boolean updateUserPasswordFromToken(UserDTO userDTO) {
+        Optional<User> user = userRepository.findByResetToken(userDTO.getResetToken());
+        if (user.isPresent()) {
+            if (!passwordEncoder.matches(userDTO.getPassword(), user.get().getPassword())) {
+                log.info("Request to update User password: {}:", userDTO.getUsername());
+                user.get().setPassword(passwordEncoder.encode(userDTO.getPassword()));
+                user.get().setResetToken(null);
+                userRepository.save(user.get());
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 

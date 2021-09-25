@@ -9,12 +9,12 @@
       <input type="password" id="password" class="fadeIn third" name="login" [(ngModel)]="password" placeholder="hasło">
       <button (click)="onSignInButton()" class="fadeIn fourth submit-button" style="margin-bottom:5%">Zaloguj się</button>
     </form>
-    
+
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <button (click)="signUp()" class="fadeIn fourth submit-button" [disabled]="username === null && password === null">Zarejestruj się</button><br>
-      <a class="fadeIn fourth underlineHover" href="#">Nie pamiętasz hasła?</a> 
-     
+      <a (click)="resetPassword()" class="fadeIn fourth underlineHover" >Nie pamiętasz hasła?</a>
+
     </div>
 
   </div>

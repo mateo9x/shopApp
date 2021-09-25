@@ -38,6 +38,10 @@ export class UserService {
     return this.http.put<boolean>(`${this.baseUrl}/password`, user);
   }
 
+  public updateUserPasswordByToken(user: User) {
+    return this.http.put<boolean>(`${this.baseUrl}/password/token`, user);
+  }
+
   public signinUser(user: any) {
     return this.http.post<any>(`${this.authenthicationUrl}/login`, user);
   }
@@ -54,9 +58,17 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/logged`);
   }
 
-
   public newUserWelcomeMail(user: User) {
     return this.http.post<User>(`${this.mailSenderUrl}/new-user-welcome-email`, user);
+  }
+
+  public resetPassword(user: User) {
+    return this.http.post<User>(`${this.baseUrl}/resetPassword`, user);
+  }
+
+
+  public getByUserToken(user: User) {
+    return this.http.post<User>(`${this.baseUrl}/token-user`, user);
   }
 
 }

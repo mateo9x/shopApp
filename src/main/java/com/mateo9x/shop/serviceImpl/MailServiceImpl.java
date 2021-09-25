@@ -35,4 +35,22 @@ public class MailServiceImpl implements MailService {
         javaMailSender.send(message);
     }
 
+    @Override
+    public void sendResetPasswordToken(UserDTO dto) {
+
+        String user = "";
+        String url = "http://localhost:4200/#/new-password?" + dto.getResetToken();
+        if (dto.getFirstName() != null && dto.getLastName() != null) {
+            user = dto.getFirstName() + " " + dto.getLastName() + " (" + dto.getUsername() + ")";
+        } else {
+            user = dto.getUsername();
+        }
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("noreply@onlineshop.com");
+        message.setTo(dto.getMail());
+        message.setSubject("Online Shop - Konto");
+        message.setText("Witaj " + user + "!\n\nPoniżej znajduje się link do zresetowania hasła:\n\n" + url);
+        javaMailSender.send(message);
+    }
+
 }

@@ -13,6 +13,7 @@ public class UserDTO implements Serializable {
     private String street;
     private String streetNumber;
     private String city;
+    private String resetToken;
 
     public Long getId() {
         return id;
@@ -86,11 +87,19 @@ public class UserDTO implements Serializable {
         this.city = city;
     }
 
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
     @Override
     public String toString() {
         return "UserDTO [city=" + city + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
-                + ", mail=" + mail + ", password=" + password + ", street=" + street + ", streetNumber=" + streetNumber
-                + ", username=" + username + "]";
+                + ", mail=" + mail + ", password=" + password + ", resetToken=" + resetToken + ", street=" + street
+                + ", streetNumber=" + streetNumber + ", username=" + username + "]";
     }
 
 }
