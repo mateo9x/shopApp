@@ -1,9 +1,15 @@
 package com.mateo9x.shop.serviceImpl;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mateo9x.shop.configuration.LoginCredentials;
+import com.mateo9x.shop.domain.User;
+import com.mateo9x.shop.dto.UserDTO;
+import com.mateo9x.shop.mapper.UserMapper;
+import com.mateo9x.shop.repository.UserRepository;
 import com.mateo9x.shop.service.AuthenthicationService;
 
 import org.slf4j.Logger;
@@ -24,9 +30,14 @@ public class AuthenthicationServiceImpl implements AuthenthicationService {
     PasswordEncoder passwordEncoder;
 
     private UserDetailsServiceImpl userDetailsServiceImpl;
+    private UserRepository userRepository;
+    private UserMapper userMapper;
 
-    public AuthenthicationServiceImpl(UserDetailsServiceImpl userDetailsServiceImpl) {
+    public AuthenthicationServiceImpl(UserDetailsServiceImpl userDetailsServiceImpl, UserRepository userRepository,
+            UserMapper userMapper) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -50,13 +61,17 @@ public class AuthenthicationServiceImpl implements AuthenthicationService {
     }
 
     @Override
-    public Boolean isUserLogged() {
+    public UserDTO isUserLogged() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
+        Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (auth.isAuthenticated() && auth.getPrincipal() != "anonymousUser") {
-            return true;
+            UserDTO userDTO = userMapper.toDTO(user.get());
+            return userDTO;
         } else {
-            return false;
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUsername(auth.getPrincipal().toString());
+            userDTO.setId(9999L);
+            return userDTO;
         }
     }
 

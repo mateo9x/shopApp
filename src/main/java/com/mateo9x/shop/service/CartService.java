@@ -8,9 +8,11 @@ public interface CartService {
 
     CartDTO save(CartDTO cartDTO);
 
+    CartDTO addItemToCart(Long id);
+
     List<CartDTO> findAll();
 
-    CartDTO findById(Long id);
+    List<CartDTO> findByUserId(Long id);
 
     void deleteCart(Long id);
 

@@ -1,1 +1,38 @@
-<div></div>
+<div>
+  <p-table [columns]="cols" [value]="cartItems" responsiveLayout="scroll" styleClass="p-datatable-striped"
+    selectionMode="single" [(selection)]="selectedCartItem">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-columns="columns">
+
+      <tr >
+
+        <td *ngFor="let col of columns">
+          <div *ngIf="col.field === 'cartAdd'">
+            <button pTooltip="Dodaj do koszyka" > <i
+                class="fa fa-cart-arrow-down"></i></button>
+          </div>
+          <div *ngIf="col.field === 'price'">
+            {{item[col.field]}} zł
+          </div>
+          <div *ngIf="col.field !== 'cartAdd' && col.field !== 'price'">
+            {{item[col.field]}}
+          </div>
+
+
+        </td>
+
+      </tr>
+
+    </ng-template>
+
+  </p-table>
+  <div *ngIf="noData === true" style="font-weight:bold;text-align:center;margin-top:1%">
+    BRAK PRODUKTÓW W KOSZYKU
+  </div>
+</div>

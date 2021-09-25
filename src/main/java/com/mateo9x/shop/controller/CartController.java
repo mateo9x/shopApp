@@ -29,6 +29,12 @@ public class CartController {
         this.cartService = cartService;
     }
 
+    @PostMapping("/cart/item-add/{id}")
+    public CartDTO addItemToCart(@PathVariable Long id) {
+        log.debug("REST request to add Item to User cart: {}", id);
+        return cartService.addItemToCart(id);
+    }
+
     @PostMapping("/cart")
     public CartDTO createCart(@Valid @RequestBody CartDTO cartDTO) {
         log.debug("REST request to save Cart: {}", cartDTO);
@@ -47,10 +53,10 @@ public class CartController {
         return cartService.findAll();
     }
 
-    @GetMapping("/cart/{id}")
-    public CartDTO getCart(@PathVariable Long id) {
-        log.debug("REST request to get Cart: {}", id);
-        return cartService.findById(id);
+    @GetMapping("/cart/user/{id}")
+    public List<CartDTO> getCartForUser(@PathVariable Long id) {
+        log.debug("REST request to get Cart for User: {}", id);
+        return cartService.findByUserId(id);
     }
 
     @DeleteMapping("/cart/{id}")

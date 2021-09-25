@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.mateo9x.shop.configuration.LoginCredentials;
+import com.mateo9x.shop.dto.UserDTO;
 import com.mateo9x.shop.service.AuthenthicationService;
 
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class AuthenthicationController {
     }
 
     @GetMapping("is-user-logged")
-    public Boolean isUserLogged() {
+    public UserDTO isUserLogged() {
         log.debug("REST request to check if User is logged");
         return authenthicationService.isUserLogged();
     }

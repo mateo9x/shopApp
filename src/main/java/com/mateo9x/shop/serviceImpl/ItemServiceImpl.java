@@ -1,5 +1,4 @@
 package com.mateo9x.shop.serviceImpl;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private Logger log = LoggerFactory.getLogger(ItemServiceImpl.class);
 
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
@@ -43,9 +42,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDTO> findAllFromCategory(Long id) {
-        log.info("Request to find all Items by category{}: ", id);
+        log.info("Request to find all Items by category {}: ", id);
         return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> dto.isSold() == 0).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
+        
     }
 
     @Override

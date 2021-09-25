@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
 
   isUserLogged: boolean;
   isCartEmpty = false;
+  tabWasClosed = false;
 
   constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
 
@@ -28,6 +29,20 @@ export class AppComponent implements OnInit {
     sessionStorage.removeItem('id_token');
     this.isUserLogged = false;
     this.messageService.add({ key: 'success', severity: 'success', summary: 'Wylogowano pomyślnie!' });
+  }
+
+  doBeforeUnload() {
+    if (document.visibilityState === 'hidden') {
+      this.tabWasClosed = true;
+    }
+
+    return false;
+  }
+
+  doUnload() {
+    if (this.tabWasClosed) {
+      console.log('dupa zamykam')
+    }
   }
 
 }

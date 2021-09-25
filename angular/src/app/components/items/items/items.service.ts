@@ -34,6 +34,8 @@ export class ItemsService {
 
   }
 
+
+
   public findAllItemsByCategory(id: any): Observable<Item[]> {
     return this.http.post<Item[]>(`${this.itemsUrl}/category/${id}`, id);
 

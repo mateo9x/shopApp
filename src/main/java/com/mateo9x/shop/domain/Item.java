@@ -1,6 +1,8 @@
 package com.mateo9x.shop.domain;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,11 +29,16 @@ public class Item implements Serializable {
     private String model;
     @JoinColumn(name = "price")
     private Double price;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "items_category_id")
     private ItemCategory itemCategory;
     @Column(name = "sold")
     private Integer sold;
+    @Column(name = "create_date")
+    private Date createDate;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
 
     public Long getId() {
         return id;
@@ -81,6 +88,20 @@ public class Item implements Serializable {
         this.sold = sold;
     }
 
-    
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
 }

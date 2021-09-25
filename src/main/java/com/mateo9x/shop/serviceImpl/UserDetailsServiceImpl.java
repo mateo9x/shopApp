@@ -1,5 +1,7 @@
 package com.mateo9x.shop.serviceImpl;
 
+import java.util.Optional;
+
 import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.repository.UserRepository;
 
@@ -16,9 +18,9 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user != null) {
-            return user;
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return user.get();
         }
         throw new UsernameNotFoundException("User not found" + username);
     }

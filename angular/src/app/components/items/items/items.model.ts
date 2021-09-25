@@ -5,6 +5,9 @@ export class Item{
   price: number;
   itemCategoryId: number;
   itemCategoryName: string;
-  status: number;
+  sold: number;
+  sellerId: number;
+  sellerName: string;
+  createDate: string;
 
 }

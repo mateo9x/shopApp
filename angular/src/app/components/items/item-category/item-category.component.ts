@@ -18,6 +18,7 @@ export class ItemCategoryComponent implements OnInit {
   items: ItemCategory[] = [];
   childItems: ItemCategory[] = [];
   itemParent: ItemCategory;
+  itemChild: ItemCategory;
   id: number;
 
   constructor(private itemService: ItemCategoryService, private router: Router, private messageService: MessageService, private itemCompsService: ItemCompsService) { }
