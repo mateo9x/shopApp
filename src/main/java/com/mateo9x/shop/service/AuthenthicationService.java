@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mateo9x.shop.configuration.LoginCredentials;
+import com.mateo9x.shop.dto.UserDTO;
 
 public interface AuthenthicationService {
 
@@ -11,6 +12,6 @@ public interface AuthenthicationService {
 
     void logOut(HttpServletRequest request, HttpServletResponse response);
 
-    Boolean isUserLogged();
+    UserDTO isUserLogged();
     
 }

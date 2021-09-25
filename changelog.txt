@@ -1,5 +1,8 @@
 0.1.0
     - Dodano mozliwosc wyswietlania przedmiotó dostępnych dla wybranej kategorii.
+    - Dodano model sprzedawcy, podpięto pod produkty datę utworzenia (wraz z przesunięciem timezoneów) oraz, jaki sprzedawca wystawia przedmiot.
+    - Dodano testowe połączenie pod docelową bazę Postgresową.
+    - Dodano mozliwosc dodawania produktów do koszyka i wyświetlania elementów w koszyku dla użytkownika zalogowanego.
 0.0.9
     - Dodano możliwość zmiany hasła w zakładce Profilu.
     - Poprawki w stylach i komunikatach toastów na froncie.

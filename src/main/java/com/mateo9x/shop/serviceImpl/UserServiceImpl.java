@@ -90,9 +90,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getUsernameLogged() {
         Object username = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findByUsername(username.toString());
-        if (user != null) {
-            return userMapper.toDTO(user);
+        Optional<User> user = userRepository.findByUsername(username.toString());
+        if (user.isPresent()) {
+            return userMapper.toDTO(user.get());
         } else {
             log.info("User not found: {}");
             return null;

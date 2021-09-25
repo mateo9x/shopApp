@@ -1,5 +1,5 @@
-<p-table [value]="items" dataKey="name" responsiveLayout="scroll" rowExpandMode="single" >
-  <ng-template pTemplate="body" let-parent let-expanded="expanded" selectionMode="single"  styleClass="p-datatable-striped" >
+<p-table [value]="items" dataKey="name" responsiveLayout="scroll" rowExpandMode="single" selectionMode="single" [(selection)]="itemParent">
+  <ng-template pTemplate="body" let-parent let-expanded="expanded"   styleClass="p-datatable-striped" >
       <tr [pSelectableRow]="parent" *ngIf="parent.itemCategoryParentId === null">
           <td (click)="showChilds(parent)" pButton pRipple [pRowToggler]="parent"  style="padding:10px">
                 <i class="fa fa-plus" style="margin-right:5px"></i>
@@ -10,7 +10,7 @@
       <tr>
           <td colspan="7">
               <div class="p-p-3">
-                  <p-table [value]="childItems" dataKey="id">
+                  <p-table [value]="childItems" dataKey="id" selectionMode="single"  [(selection)]="itemChild">
                       <ng-template pTemplate="body" let-child>
                           <tr #child [pSelectableRow]="child">
                               <td (click)="openCategoryComponent(child)" style="padding:8px">{{child.name}}</td>

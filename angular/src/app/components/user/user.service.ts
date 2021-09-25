@@ -47,7 +47,7 @@ export class UserService {
   }
 
   public isUserLogged() {
-    return this.http.get<boolean>(`${this.authenthicationUrl}/is-user-logged`);
+    return this.http.get<User>(`${this.authenthicationUrl}/is-user-logged`);
   }
 
   public getUserLogged(): Observable<User> {
@@ -58,5 +58,5 @@ export class UserService {
   public newUserWelcomeMail(user: User) {
     return this.http.post<User>(`${this.mailSenderUrl}/new-user-welcome-email`, user);
   }
-  
+
 }
