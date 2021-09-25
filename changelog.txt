@@ -1,3 +1,7 @@
+0.1.2
+    - Dodano funkcjonalność resetowania hasła poprzez generowanie linku na mail zarejestrowanego użytkownika
+    - Zabezpieczono endpointy na frontendzie dla użytkowników nieuprawnionych.
+    
 0.1.1
     - Dodano obsługę dodawania do koszyka dla użytkownika zalogowanego i dla niezalogowanego.
 0.1.0
