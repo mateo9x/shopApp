@@ -18,6 +18,7 @@ export class ItemsComponent implements OnInit {
   cols: any[];
   noData = false;
   selectedItem: Item;
+  cartForAnonymousUser: Item[] = [];
 
   constructor(private itemService: ItemsService, private router: Router, private itemCompsService: ItemCompsService, private cartService: CartService,
     private messageService: MessageService) { }
@@ -33,12 +34,12 @@ export class ItemsComponent implements OnInit {
     ];
     this.itemCompsService.getNavChangeEmitter().subscribe((response) => {
       this.itemService.findAllItemsByCategory(response).subscribe((respond) => {
-        if(respond.length > 0) {
+        if (respond.length > 0) {
           respond.forEach((element) => {
             element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
           });
-        this.items = respond;
-        this.noData = false;
+          this.items = respond;
+          this.noData = false;
         } else {
           this.items = [];
           this.noData = true;
@@ -49,13 +50,25 @@ export class ItemsComponent implements OnInit {
   }
 
   addToCart(item: Item) {
-    this.cartService.addItemToCartForUser(item.id).subscribe((response) => {
-      if (response !== null) {
-        this.messageService.add({ key: 'success', severity: 'success', summary: 'Dodano produkt do koszyka'});
-      } else {
+    if (sessionStorage.getItem('id_token') !== null) {
+      this.cartService.addItemToCartForUser(item.id).subscribe((response) => {
+        if (response !== null) {
+          this.messageService.add({ key: 'success', severity: 'success', summary: 'Dodano produkt do koszyka' });
+        } else {
+          this.messageService.add({ key: 'error', severity: 'error', summary: 'Produkt znajduje się już obecnie w Twoim koszyku' });
+        }
+      });
+    } else {
+
+      this.cartForAnonymousUser = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
+      if (this.cartForAnonymousUser.find((element) => element.id === item.id)) {
         this.messageService.add({ key: 'error', severity: 'error', summary: 'Produkt znajduje się już obecnie w Twoim koszyku' });
+      } else {
+        this.cartForAnonymousUser.push(item);
+        sessionStorage.setItem('cart', JSON.stringify(this.cartForAnonymousUser));
+        this.messageService.add({ key: 'success', severity: 'success', summary: 'Dodano produkt do koszyka' });
       }
-    });
+    }
   }
 
   openItemDetail(item: any) {

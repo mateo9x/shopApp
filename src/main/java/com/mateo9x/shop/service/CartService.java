@@ -12,8 +12,8 @@ public interface CartService {
 
     List<CartDTO> findAll();
 
-    List<CartDTO> findByUserId(Long id);
+    CartDTO findById(Long id);
 
-    void deleteCart(Long id);
+    void deleteItemFromCart(Long id);
 
 }

@@ -11,7 +11,7 @@ export class ItemsService {
   private itemsUrl = 'http://localhost:8080/api/item';
 
   constructor(private http: HttpClient) {
-   }
+  }
 
   public findAllItems(): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.itemsUrl}`);
@@ -34,7 +34,9 @@ export class ItemsService {
 
   }
 
-
+  public findCartForUser(id: number): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.itemsUrl}/cart`);
+  }
 
   public findAllItemsByCategory(id: any): Observable<Item[]> {
     return this.http.post<Item[]>(`${this.itemsUrl}/category/${id}`, id);

@@ -11,8 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Entity
 @Table(name = "carts")
+@Transactional
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = 1L;
