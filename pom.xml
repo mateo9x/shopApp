@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.mateo9x</groupId>
     <artifactId>shop</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <name>shop</name>
     <description>Mini Online Shop</description>
     <properties>
