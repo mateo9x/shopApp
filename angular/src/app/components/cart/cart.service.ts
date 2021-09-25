@@ -13,9 +13,6 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  public findCartForUser(id: number): Observable<Cart[]> {
-    return this.http.get<Cart[]>(`${this.cartUrl}/user/${id}`);
-  }
   public addItemToCartForUser(id: any) {
     return this.http.post<Item>(`${this.cartUrl}/item-add/${id}`, id);
   }
@@ -25,17 +22,8 @@ export class CartService {
 
   }
 
-//   public findUser(id: any) {
-//     return this.http.get<User>(`${this.baseUrl}/`, id);
-//   }
-
-//   public deleteUser(id: any) {
-//     return this.http.delete<User>(`${this.baseUrl}/`, id);
-//   }
-
-//   public saveUser(user: User) {
-//     return this.http.post<User>(`${this.baseUrl}`, user);
-//   }
-
+  public deleteItemFromCart(id: any) {
+    return this.http.delete<Item>(`${this.cartUrl}/${id}`, id);
+  }
 
 }

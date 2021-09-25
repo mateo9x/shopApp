@@ -16,4 +16,6 @@ public interface ItemService {
 
     void deleteItem(Long id);
 
+    List<ItemDTO> findCartByUserId();
+
 }

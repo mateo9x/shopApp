@@ -1,16 +1,21 @@
 package com.mateo9x.shop.serviceImpl;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.mateo9x.shop.domain.Item;
+import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.dto.ItemDTO;
 import com.mateo9x.shop.mapper.ItemMapper;
 import com.mateo9x.shop.repository.ItemRepository;
+import com.mateo9x.shop.repository.UserRepository;
 import com.mateo9x.shop.service.ItemService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,10 +25,12 @@ public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
+    private final UserRepository userRepository;
 
-    public ItemServiceImpl(ItemRepository itemRepository, ItemMapper itemMapper) {
+    public ItemServiceImpl(ItemRepository itemRepository, ItemMapper itemMapper, UserRepository userRepository) {
         this.itemRepository = itemRepository;
         this.itemMapper = itemMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -54,6 +61,19 @@ public class ItemServiceImpl implements ItemService {
         Item item = itemRepository.getById(id);
         return itemMapper.toDTO(item);
     }
+
+    @Override
+  public List<ItemDTO> findCartByUserId() {
+    log.info("Request to find Cart for User: {}");
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
+    if (user.isPresent()) {
+      return itemRepository.findByUserId(user.get().getId()).stream().map(itemMapper::toDTO)
+          .collect(Collectors.toCollection(LinkedList::new));
+    } else {
+        return null;
+    }
+  }
 
     @Override
     public ItemDTO save(ItemDTO itemDTO) {

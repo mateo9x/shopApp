@@ -10,17 +10,17 @@
     </ng-template>
     <ng-template pTemplate="body" let-item let-columns="columns">
 
-      <tr >
+      <tr [pSelectableRow]="item" >
 
         <td *ngFor="let col of columns">
-          <div *ngIf="col.field === 'cartAdd'">
-            <button pTooltip="Dodaj do koszyka" > <i
-                class="fa fa-cart-arrow-down"></i></button>
+          <div *ngIf="col.field === 'deleteFromCart'">
+            <button pTooltip="Usuń z koszyka" > <i
+                class="fa fa-trash" (click)="deleteFromCart(item)"></i></button>
           </div>
           <div *ngIf="col.field === 'price'">
             {{item[col.field]}} zł
           </div>
-          <div *ngIf="col.field !== 'cartAdd' && col.field !== 'price'">
+          <div *ngIf="col.field !== 'deleteFromCart' && col.field !== 'price'">
             {{item[col.field]}}
           </div>
 

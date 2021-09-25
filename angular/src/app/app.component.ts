@@ -31,18 +31,18 @@ export class AppComponent implements OnInit {
     this.messageService.add({ key: 'success', severity: 'success', summary: 'Wylogowano pomyślnie!' });
   }
 
-  doBeforeUnload() {
-    if (document.visibilityState === 'hidden') {
-      this.tabWasClosed = true;
-    }
+  // doBeforeUnload() {
+  //   if (document.visibilityState === 'hidden') {
+  //     this.tabWasClosed = true;
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
-  doUnload() {
-    if (this.tabWasClosed) {
-      console.log('dupa zamykam')
-    }
-  }
+  // doUnload() {
+  //   if (this.tabWasClosed) {
+  //     console.log('dupa zamykam')
+  //   }
+  // }
 
 }

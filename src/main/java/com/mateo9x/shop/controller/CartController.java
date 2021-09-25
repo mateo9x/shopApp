@@ -54,15 +54,15 @@ public class CartController {
     }
 
     @GetMapping("/cart/user/{id}")
-    public List<CartDTO> getCartForUser(@PathVariable Long id) {
-        log.debug("REST request to get Cart for User: {}", id);
-        return cartService.findByUserId(id);
+    public CartDTO getCartForUser(@PathVariable Long id) {
+        log.debug("REST request to get Cart: {}", id);
+        return cartService.findById(id);
     }
 
     @DeleteMapping("/cart/{id}")
     public void deleteCart(@PathVariable Long id) {
         log.debug("REST request do delete Cart: {}", id);
-        cartService.deleteCart(id);
+        cartService.deleteItemFromCart(id);
     }
 
 }
