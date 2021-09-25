@@ -9,5 +9,6 @@ export class User{
     street?: string;
     streetNumber?: number;
     city?: string;
+    resetToken?: string;
 
 }

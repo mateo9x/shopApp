@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
     });
 
   }
-  
+
   newPassword() {
     this.user.password = '';
     this.changePswdForm = true;
@@ -42,6 +42,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  
+
 
 }

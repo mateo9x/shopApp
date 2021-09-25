@@ -59,10 +59,15 @@ export class ItemsComponent implements OnInit {
         }
       });
     } else {
-
-      this.cartForAnonymousUser = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
-      if (this.cartForAnonymousUser.find((element) => element.id === item.id)) {
-        this.messageService.add({ key: 'error', severity: 'error', summary: 'Produkt znajduje się już obecnie w Twoim koszyku' });
+      if (sessionStorage.getItem('cart') !== null) {
+        this.cartForAnonymousUser = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
+        if (this.cartForAnonymousUser.find((element) => element.id === item.id)) {
+          this.messageService.add({ key: 'error', severity: 'error', summary: 'Produkt znajduje się już obecnie w Twoim koszyku' });
+        } else {
+          this.cartForAnonymousUser.push(item);
+          sessionStorage.setItem('cart', JSON.stringify(this.cartForAnonymousUser));
+          this.messageService.add({ key: 'success', severity: 'success', summary: 'Dodano produkt do koszyka' });
+        }
       } else {
         this.cartForAnonymousUser.push(item);
         sessionStorage.setItem('cart', JSON.stringify(this.cartForAnonymousUser));

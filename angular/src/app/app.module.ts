@@ -1,3 +1,5 @@
+import { AnonymousUserGuard } from './components/authenthication/anonymous-user-guard';
+import { ResetPasswordComponent } from './components/user/reset-component/reset.component';
 import { ItemCompsService } from './components/items/item-comps-service';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +23,7 @@ import { AppInterceptor } from './components/authenthication/app-interceptor';
 import { ProfileComponent } from './components/user/profile-component/profile.component';
 import { LoginGuard } from './components/authenthication/login-guard';
 import { ItemsComponent } from './components/items/items/items.component';
+import { NewPasswordComponent } from './components/user/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { ItemsComponent } from './components/items/items/items.component';
     ClockComponent,
     ItemCategoryComponent,
     ProfileComponent,
-    ItemsComponent
+    ItemsComponent,
+    ResetPasswordComponent,
+    NewPasswordComponent
 
   ],
   imports: [
@@ -39,16 +44,16 @@ import { ItemsComponent } from './components/items/items/items.component';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule,
     TableModule,
     ToastModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
     TooltipModule,
-    DropdownModule
+    DropdownModule,
+    FormsModule
 
   ],
-  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, ItemCompsService],
+  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, AnonymousUserGuard, ItemCompsService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

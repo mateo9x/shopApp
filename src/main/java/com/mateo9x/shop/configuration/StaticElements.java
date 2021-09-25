@@ -4,7 +4,12 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -21,6 +26,13 @@ public class StaticElements implements WebMvcConfigurer {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> containerCustomizer() {
+        return container -> {
+            container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/urlNotFound"));
+        };
+    }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("*").allowedHeaders("*").allowedMethods("*").maxAge(3600)
@@ -32,8 +44,7 @@ public class StaticElements implements WebMvcConfigurer {
         for (HttpMessageConverter<?> converter : converters) {
             if (converter instanceof AbstractJackson2HttpMessageConverter) {
                 AbstractJackson2HttpMessageConverter jacksonconverter = (AbstractJackson2HttpMessageConverter) converter;
-                jacksonconverter.getObjectMapper()
-                        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+                jacksonconverter.getObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             }
         }
     }
