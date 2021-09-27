@@ -15,6 +15,7 @@ public class ItemDTO implements Serializable {
     private Date createDate;
     private Long sellerId;
     private String sellerName;
+    private String description;
 
     public Long getId() {
         return id;
@@ -96,6 +97,12 @@ public class ItemDTO implements Serializable {
         this.sellerName = sellerName;
     }
 
-    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 }

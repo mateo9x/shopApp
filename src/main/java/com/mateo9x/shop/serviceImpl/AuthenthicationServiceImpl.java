@@ -68,10 +68,7 @@ public class AuthenthicationServiceImpl implements AuthenthicationService {
             UserDTO userDTO = userMapper.toDTO(user.get());
             return userDTO;
         } else {
-            UserDTO userDTO = new UserDTO();
-            userDTO.setUsername(auth.getPrincipal().toString());
-            userDTO.setId(9999L);
-            return userDTO;
+            return null;
         }
     }
 

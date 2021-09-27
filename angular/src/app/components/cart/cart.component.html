@@ -10,7 +10,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-item let-columns="columns">
 
-      <tr [pSelectableRow]="item" >
+      <tr [pSelectableRow]="item" (dblclick)="openItemDetail(item)">
 
         <td *ngFor="let col of columns">
           <div *ngIf="col.field === 'deleteFromCart'">

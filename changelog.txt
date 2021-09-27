@@ -1,3 +1,5 @@
+0.1.3
+    - Dodano wstępną implementacje wyświetlania produktu poprzez dblClick na liście produktów
 0.1.2
     - Dodano funkcjonalność resetowania hasła poprzez generowanie linku na mail zarejestrowanego użytkownika
     - Zabezpieczono endpointy na frontendzie dla użytkowników nieuprawnionych.

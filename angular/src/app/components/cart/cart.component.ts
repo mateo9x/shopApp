@@ -1,10 +1,9 @@
 import { ItemsService } from './../items/items/items.service';
-import { Item } from './../items/items/items.model';
+import { Item } from '../items/items.model';
 import { UserService } from './../user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Cart } from './cart.model';
 import { CartService } from './cart.service';
 import * as moment from 'moment';
 
@@ -82,6 +81,10 @@ export class CartComponent implements OnInit {
       this.messageService.add({ key: 'success', severity: 'success', summary: 'Produkt usunięty z koszyka' });
       this.ngOnInit();
     }
+  }
+
+  openItemDetail(item: Item) {
+    this.router.navigate(['items-details', item.id]);
   }
 
 }

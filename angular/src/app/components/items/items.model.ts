@@ -9,5 +9,6 @@ export class Item{
   sellerId: number;
   sellerName: string;
   createDate: string;
+  description?: string;
 
 }
