@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -18,7 +19,8 @@ export class SignInUserComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private userService: UserService, private router: Router, private messageService: MessageService, @Inject(AppComponent) private appComponent: AppComponent) { }
+  constructor(private userService: UserService, private router: Router, private messageService: MessageService, @Inject(AppComponent) private appComponent: AppComponent,
+  private location: Location) { }
 
   ngOnInit() { }
 
@@ -36,7 +38,7 @@ export class SignInUserComponent implements OnInit {
           this.messageService.add({ key: 'success', severity: 'success', summary: 'Zalogowano pomyślnie'});
           this.appComponent.isUserLogged = true;
           sessionStorage.setItem('id_token', response.token);
-          this.router.navigate(['']);
+          this.location.back();
         }, (error) => {
           this.messageService.add({ key: 'error', severity: 'error', summary: 'Nie poprawne dane logowania!' });
         });

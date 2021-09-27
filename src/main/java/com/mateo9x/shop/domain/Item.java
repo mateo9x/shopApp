@@ -39,6 +39,8 @@ public class Item implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seller_id")
     private Seller seller;
+    @Column(name = "description")
+    private String description;
 
     public Long getId() {
         return id;
@@ -102,6 +104,14 @@ public class Item implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

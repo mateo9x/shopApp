@@ -1,12 +1,12 @@
+import { DialogService } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { CartService } from './../../cart/cart.service';
-import { Item } from './items.model';
+import { Item } from '../items.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemsService } from './items.service';
 import { ItemCompsService } from '../item-comps-service';
 import * as moment from 'moment';
-
 @Component({
   selector: 'items',
   templateUrl: './items.component.html',
@@ -21,7 +21,7 @@ export class ItemsComponent implements OnInit {
   cartForAnonymousUser: Item[] = [];
 
   constructor(private itemService: ItemsService, private router: Router, private itemCompsService: ItemCompsService, private cartService: CartService,
-    private messageService: MessageService) { }
+    private messageService: MessageService, private dialogService: DialogService) { }
 
   ngOnInit() {
     this.cols = [
@@ -76,9 +76,8 @@ export class ItemsComponent implements OnInit {
     }
   }
 
-  openItemDetail(item: any) {
-    // console.log('przejdz do detailsow', item);
-    // this.router.navigate(['item-details']);
+  openItemDetail(item: Item) {
+    this.router.navigate(['items-details', item.id]);
   }
 
 }

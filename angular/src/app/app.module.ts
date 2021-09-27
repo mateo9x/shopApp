@@ -11,7 +11,7 @@ import { TableModule } from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import { SignUpUserComponent } from './components/user/sign-up-user-component/sign-up-user.component';
 import { SignInUserComponent } from './components/user/sign-in-user-component/sign-in-user.component';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClockComponent } from './widget/clockwidget/clock.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -24,6 +24,9 @@ import { ProfileComponent } from './components/user/profile-component/profile.co
 import { LoginGuard } from './components/authenthication/login-guard';
 import { ItemsComponent } from './components/items/items/items.component';
 import { NewPasswordComponent } from './components/user/new-password/new-password.component';
+import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
+import { ItemsDetailsComponent } from './components/items/items-details/items-details.component';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { NewPasswordComponent } from './components/user/new-password/new-passwor
     ItemCategoryComponent,
     ProfileComponent,
     ItemsComponent,
+    ItemsDetailsComponent,
     ResetPasswordComponent,
     NewPasswordComponent
 
@@ -50,10 +54,12 @@ import { NewPasswordComponent } from './components/user/new-password/new-passwor
     FontAwesomeModule,
     TooltipModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    DynamicDialogModule,
+    ConfirmDialogModule
 
   ],
-  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, AnonymousUserGuard, ItemCompsService],
+  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, AnonymousUserGuard, ItemCompsService, DialogService, ConfirmationService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
