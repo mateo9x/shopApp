@@ -1,3 +1,8 @@
+0.1.14
+    - Poprawki w wyświetlaniu produktu.
+    - Poprawki w widoku tabeli kategorii i jej funkcjonowania.
+    - Dodano możliwość wyświetlania produktów dla wybranego sprzedawcy.
+    - Wstępnie zaimplementowano proces zakupu produktu.
 0.1.3
     - Dodano wstępną implementacje wyświetlania produktu poprzez dblClick na liście produktów
 0.1.2
