@@ -32,12 +32,12 @@ button:hover {
 }
 
 .left-column {
-  width: 65%;
+  width: 60%;
   position: relative;
 }
 
 .right-column {
-  width: 35%;
+  width: 40%;
   margin-top: 60px;
 }
 
@@ -48,7 +48,7 @@ button:hover {
   margin-bottom: 20px;
 }
 .product-description span {
-  font-size: 12px;
+  font-size: 16px;
   color: #358ED7;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -69,6 +69,7 @@ button:hover {
 
 
 .product-price {
+  margin-top: 4%;
   display: flex;
   align-items: center;
 }
@@ -92,4 +93,18 @@ button:hover {
 }
 .cart-btn:hover {
   background-color: #64af3d;
+}
+
+a:hover, a:active{
+  cursor: pointer;
+}
+
+.sellerItems,.sellerItems:active{
+  color: black;
+  text-decoration: none;
+}
+
+.sellerItems:hover{
+  color:#4cd2db !important;
+  text-decoration: underline !important;
 }

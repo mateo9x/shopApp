@@ -1,13 +1,11 @@
 import { UserService } from 'src/app/components/user/user.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { CartService } from '../../cart/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ItemCompsService } from '../item-comps-service';
-import * as moment from 'moment';
-import { DialogService } from 'primeng/dynamicdialog';
-import { ItemsService } from '../items/items.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ItemsService } from '../items.service';
 import { Item } from '../items.model';
+import { OrderService } from '../../order/order.service';
+import { Order } from '../../order/order.model';
 
 @Component({
   selector: 'items-details',
@@ -16,17 +14,20 @@ import { Item } from '../items.model';
 })
 export class ItemsDetailsComponent implements OnInit {
 
-  item: Item;
+  item: Item = new Item();
   cols: any[];
   noData = false;
-  itemId: number;
+  itemId: any;
   isUserLogged = false;
+  order: Order = new Order();
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
-    private messageService: MessageService, private confirmationService: ConfirmationService) { }
+    private messageService: MessageService, private confirmationService: ConfirmationService, private route: ActivatedRoute, private orderService: OrderService) { }
 
   ngOnInit() {
-    this.itemId = this.router.routerState.snapshot.url.substring(15, this.router.routerState.snapshot.url.length) as unknown as number;
+    this.route.params.subscribe(paramsId => {
+      this.itemId = paramsId.id;
+    });
     this.itemService.findItem(this.itemId).subscribe((response) => {
       if (response.description === null || response.description === undefined) {
         response.description = 'Brak opisu';
@@ -50,8 +51,19 @@ export class ItemsDetailsComponent implements OnInit {
   }
 
   buyProduct() {
+    this.order.date = new Date();
+    this.order.itemId = this.item.id;
+    this.orderService.createOrder(this.order).subscribe((response) => {
+      if (response !== null) {
+        this.messageService.add({ key: 'success', severity: 'success', summary: 'Produkt został zakupiony' });
+      } else {
+        this.messageService.add({ key: 'error', severity: 'error', summary: 'Musisz być zalogowany, żeby kupować produkty' });
+      }
+    });
+  }
 
-    console.log('kupujemy');
+  showSellerItems() {
+    this.router.navigate(['items/seller', this.item.sellerId]);
   }
 
   openItemDetail(item: Item) {

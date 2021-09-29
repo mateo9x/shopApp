@@ -1,4 +1,4 @@
-import { ItemsService } from './../items/items/items.service';
+import { ItemsService } from '../items/items.service';
 import { Item } from '../items/items.model';
 import { UserService } from './../user/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -24,7 +24,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.userService.isUserLogged().subscribe((response) => {
-      if (response.username !== 'anonymousUser') {
+      if (response !== null) {
         this.userLogged = true;
         this.userId = response.id;
       }

@@ -1,4 +1,5 @@
 package com.mateo9x.shop.serviceImpl;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -50,9 +51,17 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> findAllFromCategory(Long id) {
         log.info("Request to find all Items by category {}: ", id);
-        return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> dto.isSold() == 0).map(itemMapper::toDTO)
+        return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> dto.isSold() == 0)
+                .map(itemMapper::toDTO).collect(Collectors.toCollection(LinkedList::new));
+
+    }
+
+    @Override
+    public List<ItemDTO> findAllBySellerId(Long id) {
+        log.info("Request to find all Items by seller {}: ", id);
+        return itemRepository.findBySellerId(id).stream().filter(dto -> dto.isSold() == 0).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
-        
+
     }
 
     @Override
@@ -63,17 +72,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-  public List<ItemDTO> findCartByUserId() {
-    log.info("Request to find Cart for User: {}");
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
-    if (user.isPresent()) {
-      return itemRepository.findByUserId(user.get().getId()).stream().map(itemMapper::toDTO)
-          .collect(Collectors.toCollection(LinkedList::new));
-    } else {
-        return null;
+    public List<ItemDTO> findCartByUserId() {
+        log.info("Request to find Cart for User: {}");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
+        if (user.isPresent()) {
+            return itemRepository.findByUserId(user.get().getId()).stream().map(itemMapper::toDTO)
+                    .collect(Collectors.toCollection(LinkedList::new));
+        } else {
+            return null;
+        }
     }
-  }
 
     @Override
     public ItemDTO save(ItemDTO itemDTO) {

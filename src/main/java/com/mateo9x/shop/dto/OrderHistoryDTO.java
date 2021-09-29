@@ -1,11 +1,14 @@
 package com.mateo9x.shop.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class OrderHistoryDTO implements Serializable {
     private Long id;
     private Long orderId;
-    private String orderName;
+    private Date orderDate;
+    private Long userId;
+    private String username;
 
     public Long getId() {
         return id;
@@ -23,12 +26,28 @@ public class OrderHistoryDTO implements Serializable {
         this.orderId = orderId;
     }
 
-    public String getOrderName() {
-        return orderName;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 }

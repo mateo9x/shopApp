@@ -1,10 +1,21 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 *
-.ui-datatable .ui-datatable-thead > tr > th {
-  background: red;
+
+.parent {
+  background-color: #27c9d4;
+  width:100%;
+  padding:10px;
+}
+.parent:hover {
+  background-color:#2fb2bb;
+  color:black;
 }
 
-td:hover {
-    cursor: pointer;
-    background-color:white;
+.child{
+  color:white;
+  background-color:#27c9d4;
+}
+.child:hover{
+  background-color:#2fb2bb;
+  color:black;
 }

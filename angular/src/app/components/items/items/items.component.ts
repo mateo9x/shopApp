@@ -3,9 +3,8 @@ import { MessageService } from 'primeng/api';
 import { CartService } from './../../cart/cart.service';
 import { Item } from '../items.model';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ItemsService } from './items.service';
-import { ItemCompsService } from '../item-comps-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ItemsService } from '../items.service';
 import * as moment from 'moment';
 @Component({
   selector: 'items',
@@ -19,11 +18,23 @@ export class ItemsComponent implements OnInit {
   noData = false;
   selectedItem: Item;
   cartForAnonymousUser: Item[] = [];
+  itemCategoryId: any;
+  findByItemCategory = false;
 
-  constructor(private itemService: ItemsService, private router: Router, private itemCompsService: ItemCompsService, private cartService: CartService,
-    private messageService: MessageService, private dialogService: DialogService) { }
+  constructor(private itemService: ItemsService, private router: Router, private cartService: CartService,
+    private messageService: MessageService, private dialogService: DialogService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      if (params['id'] !== undefined) {
+        this.findByItemCategory = true;
+        this.itemCategoryId = params['id'];
+      } else {
+        this.findByItemCategory = false;
+        this.itemCategoryId = params['sellerId'];
+      }
+      this.loadData();
+    });
     this.cols = [
       { field: 'brand', header: 'Marka' },
       { field: 'model', header: 'Nazwa' },
@@ -32,8 +43,11 @@ export class ItemsComponent implements OnInit {
       { field: 'sellerName', header: 'Sprzedawca' },
       { field: 'cartAdd', header: '' }
     ];
-    this.itemCompsService.getNavChangeEmitter().subscribe((response) => {
-      this.itemService.findAllItemsByCategory(response).subscribe((respond) => {
+  }
+
+  loadData() {
+    if (this.findByItemCategory === true) {
+      this.itemService.findAllItemsByCategory(this.itemCategoryId).subscribe((respond) => {
         if (respond.length > 0) {
           respond.forEach((element) => {
             element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
@@ -45,8 +59,20 @@ export class ItemsComponent implements OnInit {
           this.noData = true;
         }
       });
-    });
-
+    } else {
+      this.itemService.findAllItemsBySellerId(this.itemCategoryId).subscribe((respond) => {
+        if (respond.length > 0) {
+          respond.forEach((element) => {
+            element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
+          });
+          this.items = respond;
+          this.noData = false;
+        } else {
+          this.items = [];
+          this.noData = true;
+        }
+      });
+    }
   }
 
   addToCart(item: Item) {
