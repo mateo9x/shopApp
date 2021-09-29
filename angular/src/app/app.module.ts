@@ -1,6 +1,5 @@
 import { AnonymousUserGuard } from './components/authenthication/anonymous-user-guard';
 import { ResetPasswordComponent } from './components/user/reset-component/reset.component';
-import { ItemCompsService } from './components/items/item-comps-service';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -59,7 +58,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ConfirmDialogModule
 
   ],
-  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, AnonymousUserGuard, ItemCompsService, DialogService, ConfirmationService],
+  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, AnonymousUserGuard, DialogService, ConfirmationService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

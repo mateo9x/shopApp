@@ -1,11 +1,7 @@
 import { UserService } from 'src/app/components/user/user.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { CartService } from '../../cart/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ItemCompsService } from '../item-comps-service';
-import * as moment from 'moment';
-import { DialogService } from 'primeng/dynamicdialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemsService } from '../items/items.service';
 import { Item } from '../items.model';
 
@@ -16,22 +12,25 @@ import { Item } from '../items.model';
 })
 export class ItemsDetailsComponent implements OnInit {
 
-  item: Item;
+  item: Item = new Item();
   cols: any[];
   noData = false;
-  itemId: number;
+  itemId: any;
   isUserLogged = false;
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
-    private messageService: MessageService, private confirmationService: ConfirmationService) { }
+    private messageService: MessageService, private confirmationService: ConfirmationService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.itemId = this.router.routerState.snapshot.url.substring(15, this.router.routerState.snapshot.url.length) as unknown as number;
+    this.route.params.subscribe(paramsId => {
+      this.itemId = paramsId.id;
+    });
     this.itemService.findItem(this.itemId).subscribe((response) => {
       if (response.description === null || response.description === undefined) {
         response.description = 'Brak opisu';
       }
       this.item = response;
+      console.log(response);
     });
     this.userService.isUserLogged().subscribe((response) => {
       if (response !== null) {
@@ -52,6 +51,10 @@ export class ItemsDetailsComponent implements OnInit {
   buyProduct() {
 
     console.log('kupujemy');
+  }
+
+  showSellerItems() {
+    this.router.navigate(['items/seller', this.item.sellerId]);
   }
 
   openItemDetail(item: Item) {

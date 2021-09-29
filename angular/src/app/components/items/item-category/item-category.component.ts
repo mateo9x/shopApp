@@ -1,10 +1,8 @@
-import { ItemsComponent } from './../items/items.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ItemCategory } from './item-category.model';
 import { ItemCategoryService } from './item-category.service';
-import { ItemCompsService } from '../item-comps-service';
 
 @Component({
   selector: 'item-category',
@@ -21,7 +19,7 @@ export class ItemCategoryComponent implements OnInit {
   itemChild: ItemCategory;
   id: number;
 
-  constructor(private itemService: ItemCategoryService, private router: Router, private messageService: MessageService, private itemCompsService: ItemCompsService) { }
+  constructor(private itemService: ItemCategoryService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.itemService.findAllItemCategories().subscribe((response) => {
@@ -40,9 +38,7 @@ export class ItemCategoryComponent implements OnInit {
   }
 
   openCategoryComponent(child: ItemCategory) {
-    this.itemCompsService.emitNavChangeEvent(child.id);
-    this.router.navigate(['items']);
-
+    this.router.navigate(['items', child.id]);
   }
 
 }

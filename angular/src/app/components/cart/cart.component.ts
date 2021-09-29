@@ -24,7 +24,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.userService.isUserLogged().subscribe((response) => {
-      if (response.username !== 'anonymousUser') {
+      if (response !== null) {
         this.userLogged = true;
         this.userId = response.id;
       }

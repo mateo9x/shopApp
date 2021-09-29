@@ -39,7 +39,12 @@ export class ItemsService {
   }
 
   public findAllItemsByCategory(id: any): Observable<Item[]> {
-    return this.http.post<Item[]>(`${this.itemsUrl}/category/${id}`, id);
+    return this.http.get<Item[]>(`${this.itemsUrl}/category/${id}`);
+
+  }
+
+  public findAllItemsBySellerId(id: any): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.itemsUrl}/seller/${id}`);
 
   }
 

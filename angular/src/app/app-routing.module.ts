@@ -1,5 +1,4 @@
 import { ItemsDetailsComponent } from './components/items/items-details/items-details.component';
-
 import { ResetPasswordComponent } from './components/user/reset-component/reset.component';
 import { ItemsComponent } from './components/items/items/items.component';
 import { NgModule } from '@angular/core';
@@ -17,10 +16,11 @@ const routes: Routes = [
   { path: 'sign-in-user', component: SignInUserComponent, canActivate: [AnonymousUserGuard] },
   { path: 'sign-up-user', component: SignUpUserComponent, canActivate: [AnonymousUserGuard] },
   { path: 'cart', component: CartComponent },
-  { path: 'items', component: ItemsComponent },
+  { path: 'items/:id', component: ItemsComponent },
+  { path: 'items/seller/:sellerId', component: ItemsComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'new-password',  component: NewPasswordComponent },
-  { path: 'items-details/:id}',  component: ItemsDetailsComponent },
+  { path: 'items-details/:id',  component: ItemsDetailsComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard] }
 ];
 
