@@ -4,7 +4,7 @@ import { CartService } from './../../cart/cart.service';
 import { Item } from '../items.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ItemsService } from './items.service';
+import { ItemsService } from '../items.service';
 import * as moment from 'moment';
 @Component({
   selector: 'items',

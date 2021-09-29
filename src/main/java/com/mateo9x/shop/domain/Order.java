@@ -23,11 +23,12 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "name")
-    private String name;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "item_id")
+    private Item item;
     @Column(name = "date")
     private Date date;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -39,12 +40,12 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Item getItem() {
+        return item;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Date getDate() {

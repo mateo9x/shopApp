@@ -2,8 +2,10 @@ import { UserService } from 'src/app/components/user/user.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ItemsService } from '../items/items.service';
+import { ItemsService } from '../items.service';
 import { Item } from '../items.model';
+import { OrderService } from '../../order/order.service';
+import { Order } from '../../order/order.model';
 
 @Component({
   selector: 'items-details',
@@ -17,9 +19,10 @@ export class ItemsDetailsComponent implements OnInit {
   noData = false;
   itemId: any;
   isUserLogged = false;
+  order: Order = new Order();
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
-    private messageService: MessageService, private confirmationService: ConfirmationService, private route: ActivatedRoute) { }
+    private messageService: MessageService, private confirmationService: ConfirmationService, private route: ActivatedRoute, private orderService: OrderService) { }
 
   ngOnInit() {
     this.route.params.subscribe(paramsId => {
@@ -30,7 +33,6 @@ export class ItemsDetailsComponent implements OnInit {
         response.description = 'Brak opisu';
       }
       this.item = response;
-      console.log(response);
     });
     this.userService.isUserLogged().subscribe((response) => {
       if (response !== null) {
@@ -49,8 +51,15 @@ export class ItemsDetailsComponent implements OnInit {
   }
 
   buyProduct() {
-
-    console.log('kupujemy');
+    this.order.date = new Date();
+    this.order.itemId = this.item.id;
+    this.orderService.createOrder(this.order).subscribe((response) => {
+      if (response !== null) {
+        this.messageService.add({ key: 'success', severity: 'success', summary: 'Produkt został zakupiony' });
+      } else {
+        this.messageService.add({ key: 'error', severity: 'error', summary: 'Musisz być zalogowany, żeby kupować produkty' });
+      }
+    });
   }
 
   showSellerItems() {
