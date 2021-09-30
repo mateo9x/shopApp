@@ -1,3 +1,5 @@
+0.1.15
+    - Wstępna implementacja dalszego procesu pozakupowego - dodano sposób płatności i adres do wysyłki.
 0.1.14
     - Poprawki w wyświetlaniu produktu.
     - Poprawki w widoku tabeli kategorii i jej funkcjonowania.
