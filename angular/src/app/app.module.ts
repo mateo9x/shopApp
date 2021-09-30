@@ -1,3 +1,4 @@
+import { ProfileOrdersComponent } from './components/user/profile-orders-component/profile-orders.component';
 import { AnonymousUserGuard } from './components/authenthication/anonymous-user-guard';
 import { ResetPasswordComponent } from './components/user/reset-component/reset.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -26,6 +27,7 @@ import { NewPasswordComponent } from './components/user/new-password/new-passwor
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { ItemsDetailsComponent } from './components/items/items-details/items-details.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { OrderProcessComponent } from './components/order/order-process/order-process.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ItemsComponent,
     ItemsDetailsComponent,
     ResetPasswordComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    OrderProcessComponent,
+    ProfileOrdersComponent
 
   ],
   imports: [

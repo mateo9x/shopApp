@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CartServiceImpl implements CartService {
 
-  private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+  private Logger log = LoggerFactory.getLogger(CartServiceImpl.class);
 
   private final CartRepository cartRepository;
   private final CartMapper cartMapper;

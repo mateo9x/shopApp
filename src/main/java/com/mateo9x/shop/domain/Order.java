@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +24,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
     private Item item;
     @Column(name = "date")
@@ -31,6 +32,12 @@ public class Order implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_address_id")
+    private OrderAddress orderAddress;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_payment_id")
+    private OrderPayment orderPayment;
 
     public Long getId() {
         return id;
@@ -62,6 +69,22 @@ public class Order implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public OrderAddress getOrderAddress() {
+        return orderAddress;
+    }
+
+    public void setOrderAddress(OrderAddress orderAddress) {
+        this.orderAddress = orderAddress;
+    }
+
+    public OrderPayment getOrderPayment() {
+        return orderPayment;
+    }
+
+    public void setOrderPayment(OrderPayment orderPayment) {
+        this.orderPayment = orderPayment;
     }
 
 }

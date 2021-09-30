@@ -13,6 +13,9 @@ public class OrderDTO implements Serializable {
     private Date date;
     private Long userId;
     private String username;
+    private Long orderAddressId;
+    private Long orderPaymentId;
+    private String orderPaymentType;
 
     public Long getId() {
         return id;
@@ -76,6 +79,30 @@ public class OrderDTO implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Long getOrderAddressId() {
+        return orderAddressId;
+    }
+
+    public void setOrderAddressId(Long orderAddressId) {
+        this.orderAddressId = orderAddressId;
+    }
+
+    public String getOrderPaymentType() {
+        return orderPaymentType;
+    }
+
+    public void setOrderPaymentType(String orderPaymentType) {
+        this.orderPaymentType = orderPaymentType;
+    }
+
+    public Long getOrderPaymentId() {
+        return orderPaymentId;
+    }
+
+    public void setOrderPaymentId(Long orderPaymentId) {
+        this.orderPaymentId = orderPaymentId;
     }
 
     @Override
