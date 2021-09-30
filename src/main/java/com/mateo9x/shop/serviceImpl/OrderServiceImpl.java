@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.mateo9x.shop.domain.Item;
 import com.mateo9x.shop.domain.Order;
 import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.dto.OrderDTO;
 import com.mateo9x.shop.mapper.OrderMapper;
+import com.mateo9x.shop.repository.ItemRepository;
 import com.mateo9x.shop.repository.OrderRepository;
 import com.mateo9x.shop.repository.UserRepository;
 
@@ -23,16 +25,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private Logger log = LoggerFactory.getLogger(ItemServiceImpl.class);
+    private Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final UserRepository userRepository;
+    private final ItemRepository itemRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository,
+            ItemRepository itemRepository) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
         this.userRepository = userRepository;
+        this.itemRepository = itemRepository;
     }
 
     @Override
@@ -41,6 +46,9 @@ public class OrderServiceImpl implements OrderService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (user.isPresent()) {
+            Item item = itemRepository.findById(orderDTO.getItemId()).get();
+            item.setSold(1);
+            itemRepository.save(item);
             orderDTO.setUserId(user.get().getId());
             Order order = orderMapper.toEntity(orderDTO);
             order = orderRepository.save(order);

@@ -1,3 +1,5 @@
+import { OrderAddress } from './order.address.model';
+import { OrderPayment } from './order.payment.model';
 import { Order } from './order.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -9,12 +11,20 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   private ordersUrl = 'http://localhost:8080/api/orders';
+  private ordersAddressUrl = 'http://localhost:8080/api/orders-address';
+  private ordersPaymentUrl = 'http://localhost:8080/api/orders-payment';
+
 
   constructor(private http: HttpClient) {
   }
 
   public findAllOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.ordersUrl}`);
+  }
+
+
+  public findAllOrderPayments(): Observable<OrderPayment[]> {
+    return this.http.get<OrderPayment[]>(`${this.ordersPaymentUrl}`);
   }
 
   public findOrder(id: any): Observable<any> {
@@ -40,6 +50,15 @@ export class OrderService {
 
   public findOrderById(id: any): Observable<Order> {
     return this.http.get<Order>(`${this.ordersUrl}/${id}`);
+  }
+
+  public saveOrderAddress(orderAdd: OrderAddress) {
+    return this.http.post<OrderAddress>(`${this.ordersAddressUrl}`, orderAdd);
+  }
+
+  public updateOrderAddress(orderAdd: OrderAddress) {
+    return this.http.put<OrderAddress>(`${this.ordersAddressUrl}`, orderAdd);
+
   }
 
 }

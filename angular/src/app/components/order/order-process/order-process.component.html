@@ -1,0 +1,47 @@
+<main class="container">
+
+  <div class="left-column">
+    <span>Podaj dane do wysyłki</span>
+    <div class="input-data" >
+      <label for="firstname">Imię</label>
+      <input type="text" name="firstname"  [(ngModel)]="orderAddress.firstname"required />
+    </div>
+    <div class="input-data" >
+      <label for="lastname">Nazwisko</label>
+      <input type="text" name="lastname"  [(ngModel)]="orderAddress.lastname"required />
+    </div>
+    <div class="input-data" >
+      <label for="mail">Mail</label>
+      <input type="text" name="mail"  [(ngModel)]="orderAddress.mail"required />
+    </div>
+    <div class="input-data" >
+      <label for="street">Ulica</label>
+      <input type="text" name="street"  [(ngModel)]="orderAddress.street"required />
+    </div>
+    <div class="input-data" >
+      <label for="streetNumber">Nr domu</label>
+      <input type="text" name="streetNumber"  [(ngModel)]="orderAddress.streetNumber"required />
+    </div>
+    <div class="input-data" >
+      <label for="city">Miasto</label>
+      <input type="text" name="city"  [(ngModel)]="orderAddress.city"required />
+    </div>
+    <div class="input-data" >
+      <label for="phoneNumber">Telefon</label>
+      <input type="text" name="phoneNumber"  [(ngModel)]="orderAddress.phoneNumber"required />
+    </div>
+  </div>
+
+  <div class="right-column">
+
+    <div class="input-data" >
+      <p-dropdown [options]="orderPayments" [(ngModel)]="selectedOrderPayment" placeholder="Wybierz sposób płatności" optionLabel="type" appendTo="body" > </p-dropdown>
+    </div>
+  </div>
+  <div class="modal-submit">
+    <button (click)="submitFormConfirm()" class="fadeIn fourth submit-button" style="margin-bottom:5%">Potwierdź</button>
+  </div>
+</main>
+
+<p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '20vw'}" acceptLabel="Tak"
+  rejectLabel="Nie" header="Potwierdź adres wysyłki" icon="pi pi-exclamation-triangle"></p-confirmDialog>

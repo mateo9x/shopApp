@@ -56,6 +56,7 @@ export class ItemsDetailsComponent implements OnInit {
     this.orderService.createOrder(this.order).subscribe((response) => {
       if (response !== null) {
         this.messageService.add({ key: 'success', severity: 'success', summary: 'Produkt został zakupiony' });
+        this.router.navigate(['order-process', response.id]);
       } else {
         this.messageService.add({ key: 'error', severity: 'error', summary: 'Musisz być zalogowany, żeby kupować produkty' });
       }
