@@ -6,5 +6,5 @@ export class OrderAddress {
   street: string;
   streetNumber: string;
   city: string;
-  phoneNumber: string;
+  phoneNumber: number;
 }
