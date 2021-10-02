@@ -48,4 +48,9 @@ export class ItemsService {
 
   }
 
+  public findAllBySearchQuery(query: any): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.itemsUrl}/query/${query}`);
+
+  }
+
 }
