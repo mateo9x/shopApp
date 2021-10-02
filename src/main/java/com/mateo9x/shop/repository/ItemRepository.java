@@ -18,6 +18,9 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByUserId(@Param("userId") Long userId);
 
     @Query(value = "select * from items where seller_id = :sellerId", nativeQuery = true)
-    List<Item> findBySellerId(@Param("sellerId") Long usesellerIdrId);
+    List<Item> findBySellerId(@Param("sellerId") Long sellerId);
+
+    @Query(value = "select * from items where brand like %:query% or model like %:query%", nativeQuery = true)
+    List<Item> findByBrandLikeOrModelLike(@Param("query") String query);
 
 }

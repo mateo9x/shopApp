@@ -18,8 +18,6 @@ export class ItemsComponent implements OnInit {
   noData = false;
   selectedItem: Item;
   cartForAnonymousUser: Item[] = [];
-  itemCategoryId: any;
-  findByItemCategory = false;
 
   constructor(private itemService: ItemsService, private router: Router, private cartService: CartService,
     private messageService: MessageService, private dialogService: DialogService, private route: ActivatedRoute) { }
@@ -27,13 +25,12 @@ export class ItemsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       if (params['id'] !== undefined) {
-        this.findByItemCategory = true;
-        this.itemCategoryId = params['id'];
-      } else {
-        this.findByItemCategory = false;
-        this.itemCategoryId = params['sellerId'];
+        this.loadData(1, params['id']);
+      } else if (params['sellerId'] !== undefined) {
+        this.loadData(2, params['sellerId']);
+      } else if (params['query'] !== undefined) {
+        this.loadData(3, params['query']);
       }
-      this.loadData();
     });
     this.cols = [
       { field: 'brand', header: 'Marka' },
@@ -45,9 +42,9 @@ export class ItemsComponent implements OnInit {
     ];
   }
 
-  loadData() {
-    if (this.findByItemCategory === true) {
-      this.itemService.findAllItemsByCategory(this.itemCategoryId).subscribe((respond) => {
+  loadData(option: number, param: any) {
+    if (option === 1) {
+      this.itemService.findAllItemsByCategory(param).subscribe((respond) => {
         if (respond.length > 0) {
           respond.forEach((element) => {
             element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
@@ -59,8 +56,21 @@ export class ItemsComponent implements OnInit {
           this.noData = true;
         }
       });
-    } else {
-      this.itemService.findAllItemsBySellerId(this.itemCategoryId).subscribe((respond) => {
+    } else if (option === 2) {
+      this.itemService.findAllItemsBySellerId(param).subscribe((respond) => {
+        if (respond.length > 0) {
+          respond.forEach((element) => {
+            element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
+          });
+          this.items = respond;
+          this.noData = false;
+        } else {
+          this.items = [];
+          this.noData = true;
+        }
+      });
+    } else if (option === 3) {
+      this.itemService.findAllBySearchQuery(param).subscribe((respond) => {
         if (respond.length > 0) {
           respond.forEach((element) => {
             element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');

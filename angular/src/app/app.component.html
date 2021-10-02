@@ -18,11 +18,11 @@
             <a class="nav-link" routerLink="" routerLinkActive="active"><i class="fa fa-home"> Strona Główna</i></a>
           </li>
           <li class="nav-item">
-            <input class="input-search" type="search" placeholder="Czego szukasz?" aria-label="Search">
+            <input class="input-search" type="search" placeholder="Czego szukasz?" [(ngModel)]="searchQuery" aria-label="Search" (keydown.enter)="searchItem()">
 
             <!-- <p-dropdown [options]="itemCategories" [(ngModel)]="selectedItemCategory" optionLabel="name" appendTo="body" > </p-dropdown> -->
 
-            <button class="submit-button" type="submit">Wyszukaj</button>
+            <button class="submit-button" type="submit" (click)="searchItem()">Wyszukaj</button>
 
           </li>
           <li class="nav-item" *ngIf="isCartEmpty === false">

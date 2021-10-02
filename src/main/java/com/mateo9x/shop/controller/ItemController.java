@@ -59,6 +59,12 @@ public class ItemController {
         return itemService.findAllBySellerId(id);
     }
 
+    @GetMapping("/item/query/{query}")
+    public List<ItemDTO> getAllItemsByQuery(@PathVariable String query) {
+        log.debug("REST request to get all Item by query: {}", query);
+        return itemService.findAllByQuery(query);
+    }
+
     @GetMapping("/item/{id}")
     public ItemDTO getItem(@PathVariable Long id) {
         log.debug("REST request to get Item: {}", id);

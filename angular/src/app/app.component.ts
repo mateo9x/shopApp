@@ -14,15 +14,20 @@ export class AppComponent implements OnInit {
   isUserLogged: boolean;
   isCartEmpty = false;
   tabWasClosed = false;
+  searchQuery: any;
 
   constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-    if ( sessionStorage.getItem("id_token") !== null) {
+    if (sessionStorage.getItem("id_token") !== null) {
       this.isUserLogged = true;
     } else {
       this.isUserLogged = false;
     }
+  }
+
+  searchItem() {
+    this.router.navigate(['items/query', this.searchQuery]);
   }
 
   logOut() {

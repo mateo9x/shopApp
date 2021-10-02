@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'sign-up-user', component: SignUpUserComponent, canActivate: [AnonymousUserGuard] },
   { path: 'cart', component: CartComponent },
   { path: 'items/:id', component: ItemsComponent },
+  { path: 'items/query/:query', component: ItemsComponent },
   { path: 'items/seller/:sellerId', component: ItemsComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'new-password',  component: NewPasswordComponent },

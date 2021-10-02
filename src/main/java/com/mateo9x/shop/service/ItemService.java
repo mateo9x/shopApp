@@ -14,6 +14,8 @@ public interface ItemService {
 
     List<ItemDTO> findAllBySellerId(Long id);
 
+    List<ItemDTO> findAllByQuery(String query);
+
     ItemDTO findById(Long id);
 
     void deleteItem(Long id);
