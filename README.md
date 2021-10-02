@@ -12,9 +12,11 @@ User authenthicated has access to secured endpoints.
 - Reset password for registered User
 - Displaying items by categories
 - Adding items to Cart by user logged and also anonymous user to Session storage
+- Displaying item details
+- Buying items (logged user only) and selecting order address and payment method
+- Searching items by Seller name or by using searcher on main bar
 
 ### Coming soon:
-- Ordering selected items from cart or directly from items list
 - Checking the user's purchase history
 - Better design of application
 - And... more !
