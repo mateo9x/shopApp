@@ -14,4 +14,5 @@ export class Order {
   paymentSelected: boolean;
   returnMaxDate: any;
   sellerName: string;
+  photoUrl: string;
 }

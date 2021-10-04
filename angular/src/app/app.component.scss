@@ -54,6 +54,7 @@ a:hover{
     cursor: pointer;
     border-radius:5px;
     height:50%;
+    transition: all .5s;
 }
 
 .submit-button:hover {
@@ -70,6 +71,9 @@ li {
   height:100px;
   margin-top:1%;
   width:100%;
+}
+.app-logo:hover{
+  cursor: pointer;
 }
 
 img{

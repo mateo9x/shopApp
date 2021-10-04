@@ -26,4 +26,9 @@ export class CartService {
     return this.http.delete<Item>(`${this.cartUrl}/${id}`, id);
   }
 
+  public deleteItemFromAllCarts(id: any) {
+    return this.http.delete<Item>(`${this.cartUrl}/all/${id}`, id);
+  }
+
+
 }

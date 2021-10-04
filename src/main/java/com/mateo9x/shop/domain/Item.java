@@ -41,6 +41,8 @@ public class Item implements Serializable {
     private Seller seller;
     @Column(name = "description")
     private String description;
+    @Column(name = "photo")
+    private String photoUrl;
 
     public Long getId() {
         return id;
@@ -112,6 +114,14 @@ public class Item implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
 }

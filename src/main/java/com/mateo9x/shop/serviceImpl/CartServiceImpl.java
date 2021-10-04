@@ -39,11 +39,17 @@ public class CartServiceImpl implements CartService {
     log.info("Request to delete Item from Cart: {}");
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
-    if(user.isPresent()){
+    if (user.isPresent()) {
       cartRepository.deleteItemFromUserCart(user.get().getId(), id);
     } else {
       log.error("Can't delete item from Cart");
     }
+  }
+
+  @Override
+  public void deleteItemFromAllCarts(Long id) {
+    log.info("Request to delete Item from all Carts: {}");
+    cartRepository.deleteItemFromAllCarts(id);
   }
 
   @Override

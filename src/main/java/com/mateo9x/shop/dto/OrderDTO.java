@@ -17,6 +17,7 @@ public class OrderDTO implements Serializable {
     private Long orderPaymentId;
     private String orderPaymentType;
     private String sellerName;
+    private String photoUrl;
 
     public Long getId() {
         return id;
@@ -112,6 +113,14 @@ public class OrderDTO implements Serializable {
 
     public void setSellerName(String sellerName) {
         this.sellerName = sellerName;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     @Override

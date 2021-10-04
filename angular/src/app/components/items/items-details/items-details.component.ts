@@ -1,3 +1,4 @@
+import { CartService } from './../../cart/cart.service';
 import { UserService } from 'src/app/components/user/user.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
@@ -20,9 +21,11 @@ export class ItemsDetailsComponent implements OnInit {
   itemId: any;
   isUserLogged = false;
   order: Order = new Order();
+  cartItems: Item[] = [];
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
-    private messageService: MessageService, private confirmationService: ConfirmationService, private route: ActivatedRoute, private orderService: OrderService) { }
+    private messageService: MessageService, private confirmationService: ConfirmationService, private route: ActivatedRoute,
+    private orderService: OrderService, private cartService: CartService) { }
 
   ngOnInit() {
     this.route.params.subscribe(paramsId => {
@@ -55,6 +58,18 @@ export class ItemsDetailsComponent implements OnInit {
     this.order.itemId = this.item.id;
     this.orderService.createOrder(this.order).subscribe((response) => {
       if (response !== null) {
+        this.cartService.deleteItemFromAllCarts(this.itemId).subscribe((response) => {
+
+        });
+        if (sessionStorage.getItem('cart') !== null) {
+          this.cartItems = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
+          this.cartItems.forEach((element, index) => {
+            if (element.id === this.item.id) {
+              delete this.cartItems[index];
+            }
+          });
+          sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
+        }
         this.messageService.add({ key: 'success', severity: 'success', summary: 'Produkt został zakupiony' });
         this.router.navigate(['order-process', response.id]);
       } else {

@@ -3,6 +3,8 @@
     - Implementacja wyświetlania zakupionych produktów użytkownika.
     - Dodano możliwość dokończenia procesu pozakupowego z poziomu zakładki zakupionych produktów w Profilu.
     - Dodano możliwość zwrotu produktu.
+    - Dodano automatyczne usuwanie z koszyków użytkowników jak i z anonimowego użytkownika elementu w przypadku, gdy ktoś produkt zakupił.
+    - Wstępna implementacja dodawania nowych produktów.
 0.1.16
     - Dodano implementację mechanizmu wyszukiwarki produktów. 
 0.1.15

@@ -1,0 +1,31 @@
+.input{
+  width:50%;
+  margin:auto;
+
+}
+.cart-btn {
+  display: inline-block;
+  background-color: #2fb2bb;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: all .5s;
+}
+.cart-btn:hover {
+  background-color: #339ca3;
+}
+.submit{
+  text-align:center;
+  margin:3% 0;
+}
+.input-data{
+  display:grid;
+  grid-template-columns: 35% 41%;
+  margin-bottom:10px;
+}
+input{
+  text-align:right;
+  padding:1%;
+}

@@ -16,6 +16,7 @@ public class ItemDTO implements Serializable {
     private Long sellerId;
     private String sellerName;
     private String description;
+    private String photoUrl;
 
     public Long getId() {
         return id;
@@ -103,6 +104,14 @@ public class ItemDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
 }
