@@ -10,8 +10,6 @@ import { SignUpUserComponent } from './components/user/sign-up-user-component/si
 import { AnonymousUserGuard } from './components/authenthication/anonymous-user-guard';
 import { NewPasswordComponent } from './components/user/new-password/new-password.component';
 import { OrderProcessComponent } from './components/order/order-process/order-process.component';
-import { ProfileDataComponent } from './components/user/profile/profile-data-component/profile-data.component';
-import { ProfileOrdersComponent } from './components/user/profile/profile-orders-component/profile-orders.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 
 const routes: Routes = [

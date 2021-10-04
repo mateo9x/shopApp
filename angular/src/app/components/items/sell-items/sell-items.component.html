@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="input">
+    <div class="input-data" style="padding-top:1%">
+      <label for="brand">Marka</label>
+      <input type="text" name="brand" [(ngModel)]="item.brand" />
+    </div>
+    <div class="input-data" >
+      <label for="model">Model</label>
+      <input type="text" name="model" [(ngModel)]="item.model" />
+    </div>
+    <div class="input-data" >
+      <label for="selectedCategoryParent">Kategoria nadrzędna</label>
+      <p-dropdown [options]="parentCategories" placeholder="Wybierz kategorię nadrzędną" optionLabel="name"
+        appendTo="body" [(ngModel)]="selectedCategoryParent" (onChange)="findChildCategory(selectedCategoryParent)">
+      </p-dropdown>
+    </div>
+    <div class="input-data" >
+      <label for="selectedCategoryChild">Kategoria podrzędną</label>
+      <p-dropdown [options]="childCategories" placeholder="Wybierz kategorię podrzędną" optionLabel="name"
+        appendTo="body" [(ngModel)]="selectedCategoryChild" [disabled]="selectedCategoryParent === undefined">
+      </p-dropdown>
+    </div>
+
+    <div class="input-data" >
+      <label for="price">Cena</label>
+      <input type="text" name="price" placeholder="zł" [(ngModel)]="item.price" />
+    </div>
+    <div class="input-data" >
+      <label for="description">Opis</label>
+      <input type="text" name="description" [(ngModel)]="item.description" />
+    </div>
+
+  </div>
+  <div class="submit">
+    <button (click)="addProductConfirm()" class="cart-btn">Wystaw Przedmiot</button>
+  </div>
+</div>
+
+<p-confirmDialog acceptLabel="Tak" rejectLabel="Nie" header="Wystawienie przedmiotu" icon="pi pi-exclamation-triangle">
+</p-confirmDialog>

@@ -1,3 +1,4 @@
+import { SellItemsComponent } from './components/items/sell-items/sell-items.component';
 import { ProfileRoutingModule } from './components/user/profile/profile-routing.module';
 import { ProfileOrdersComponent } from './components/user/profile/profile-orders-component/profile-orders.component';
 import { AnonymousUserGuard } from './components/authenthication/anonymous-user-guard';
@@ -46,7 +47,8 @@ import { ProfileComponent } from './components/user/profile/profile.component';
     NewPasswordComponent,
     OrderProcessComponent,
     ProfileOrdersComponent,
-    ProfileComponent
+    ProfileComponent,
+    SellItemsComponent
 
   ],
   imports: [
