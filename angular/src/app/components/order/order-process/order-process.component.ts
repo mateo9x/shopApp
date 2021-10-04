@@ -50,7 +50,9 @@ export class OrderProcessComponent implements OnInit {
       this.order.orderAddressId = response.id;
       this.orderService.updateOrder(this.order).subscribe((response) => {
         this.messageService.add({ key: 'success', severity: 'success', summary: 'Sposób dostawy został wybrany' });
-        this.router.navigate(['profile-orders']);
+        this.router.navigate(['profile/orders']);
+      }, (error) => {
+        this.messageService.add({ key: 'error', severity: 'error', summary: 'Nie udało się wybrać dostawy' });
       });
     });
   }

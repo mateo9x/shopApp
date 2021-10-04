@@ -16,6 +16,7 @@ public class OrderDTO implements Serializable {
     private Long orderAddressId;
     private Long orderPaymentId;
     private String orderPaymentType;
+    private String sellerName;
 
     public Long getId() {
         return id;
@@ -103,6 +104,14 @@ public class OrderDTO implements Serializable {
 
     public void setOrderPaymentId(Long orderPaymentId) {
         this.orderPaymentId = orderPaymentId;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
     @Override

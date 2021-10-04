@@ -1,7 +1,7 @@
 <main class="container">
-
+<form #form novalidate>
   <div class="left-column">
-    <span>Podaj dane do wysyłki</span>
+    <h5>Podaj dane do wysyłki</h5>
     <div class="input-data" >
       <label for="firstname">Imię</label>
       <input type="text" name="firstname"  [(ngModel)]="orderAddress.firstname"required />
@@ -28,20 +28,18 @@
     </div>
     <div class="input-data" >
       <label for="phoneNumber">Telefon</label>
-      <input type="text" name="phoneNumber"  [(ngModel)]="orderAddress.phoneNumber"required />
+      <input type="number" pattern="[0-9]" name="phoneNumber"  [(ngModel)]="orderAddress.phoneNumber"required />
     </div>
   </div>
-
+</form>
   <div class="right-column">
-
-    <div class="input-data" >
+    <h5>Sposób płatności</h5>
       <p-dropdown [options]="orderPayments" [(ngModel)]="selectedOrderPayment" placeholder="Wybierz sposób płatności" optionLabel="type" appendTo="body" > </p-dropdown>
-    </div>
-  </div>
-  <div class="modal-submit">
-    <button (click)="submitFormConfirm()" class="fadeIn fourth submit-button" style="margin-bottom:5%">Potwierdź</button>
   </div>
 </main>
+<div class="submit">
+  <button (click)="submitFormConfirm()" class="fadeIn fourth submit-button" style="margin-bottom:5%" [disabled]="!form.valid && selectedOrderPayment === undefined">Potwierdź</button>
+</div>
 
 <p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '20vw'}" acceptLabel="Tak"
   rejectLabel="Nie" header="Potwierdź adres wysyłki" icon="pi pi-exclamation-triangle"></p-confirmDialog>

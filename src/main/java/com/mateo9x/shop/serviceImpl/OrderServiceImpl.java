@@ -86,4 +86,14 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.toDTO(order);
     }
 
+    @Override
+    public void deleteOrder(Long id) {
+        log.info("Request to delete Order: {}", id);
+        Order order = orderRepository.getById(id);
+        Item item = itemRepository.getById(order.getItem().getId());
+        item.setSold(0);
+        itemRepository.save(item);
+        orderRepository.delete(order);
+    }
+
 }

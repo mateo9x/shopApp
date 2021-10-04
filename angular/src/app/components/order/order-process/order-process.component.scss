@@ -1,3 +1,7 @@
+.submit{
+  margin:2% auto;
+  text-align:center;
+}
 button {
   background-color: #4cd2db;
   border: none;
@@ -14,23 +18,19 @@ button {
 button:hover {
   background-color: #41ccd6;
 }
+button:disabled {
+  background-color: #666969;
+}
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 15px;
-  display: flex;
+  margin-top:2% ;
+  display:grid;
+  grid-template-columns: auto auto;
+  text-align:center;
 }
 
-
-.left-column {
-  width: 60%;
-  position: relative;
-}
-
-.right-column {
-  width: 40%;
-  margin-top: 60px;
+h5{
+  margin-bottom:25px;
 }
 
 .submit-button {
@@ -44,5 +44,10 @@ button:hover {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
 
+.input-data{
+  display:grid;
+  grid-template-columns: 30% 40%;
+  margin-bottom:1%;
 }
