@@ -58,7 +58,7 @@ export class ItemsDetailsComponent implements OnInit {
     this.order.itemId = this.item.id;
     this.orderService.createOrder(this.order).subscribe((response) => {
       if (response !== null) {
-        this.cartService.deleteItemFromCart(this.itemId).subscribe((response) => {
+        this.cartService.deleteItemFromAllCarts(this.itemId).subscribe((response) => {
 
         });
         if (sessionStorage.getItem('cart') !== null) {

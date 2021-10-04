@@ -65,4 +65,10 @@ public class CartController {
         cartService.deleteItemFromCart(id);
     }
 
+    @DeleteMapping("/cart/all/{id}")
+    public void deleteItemFromAllCarts(@PathVariable Long id) {
+        log.debug("REST request do delete Item from all Carts: {}", id);
+        cartService.deleteItemFromAllCarts(id);
+    }
+
 }
