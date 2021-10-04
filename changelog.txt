@@ -1,3 +1,8 @@
+0.1.17
+    - Poprawki w procesie pozakupowym.
+    - Implementacja wyświetlania zakupionych produktów użytkownika.
+    - Dodano możliwość dokończenia procesu pozakupowego z poziomu zakładki zakupionych produktów w Profilu.
+    - Dodano możliwość zwrotu produktu.
 0.1.16
     - Dodano implementację mechanizmu wyszukiwarki produktów. 
 0.1.15

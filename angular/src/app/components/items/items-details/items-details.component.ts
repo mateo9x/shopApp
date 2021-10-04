@@ -67,12 +67,5 @@ export class ItemsDetailsComponent implements OnInit {
     this.router.navigate(['items/seller', this.item.sellerId]);
   }
 
-  openItemDetail(item: Item) {
-    // const ref = this.dialogService.open(ItemsDialogComponent, {
-    //   header: 'Szczegóły produktu ' + item.brand + ' ' + item.model,
-    //   data: { item: Object.assign({}, item) },
-    //   width: '50%'
-    // });
-  }
 
 }

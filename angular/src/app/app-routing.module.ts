@@ -1,4 +1,3 @@
-import { ProfileOrdersComponent } from './components/user/profile-orders-component/profile-orders.component';
 import { ItemsDetailsComponent } from './components/items/items-details/items-details.component';
 import { ResetPasswordComponent } from './components/user/reset-component/reset.component';
 import { ItemsComponent } from './components/items/items/items.component';
@@ -6,12 +5,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './components/authenthication/login-guard';
 import { CartComponent } from './components/cart/cart.component';
-import { ProfileComponent } from './components/user/profile-component/profile.component';
 import { SignInUserComponent } from './components/user/sign-in-user-component/sign-in-user.component';
 import { SignUpUserComponent } from './components/user/sign-up-user-component/sign-up-user.component';
 import { AnonymousUserGuard } from './components/authenthication/anonymous-user-guard';
 import { NewPasswordComponent } from './components/user/new-password/new-password.component';
 import { OrderProcessComponent } from './components/order/order-process/order-process.component';
+import { ProfileDataComponent } from './components/user/profile/profile-data-component/profile-data.component';
+import { ProfileOrdersComponent } from './components/user/profile/profile-orders-component/profile-orders.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -25,8 +26,7 @@ const routes: Routes = [
   { path: 'new-password',  component: NewPasswordComponent },
   { path: 'items-details/:id',  component: ItemsDetailsComponent },
   { path: 'order-process/:id',  component: OrderProcessComponent, canActivate: [LoginGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard] },
-  { path: 'profile-orders', component: ProfileOrdersComponent, canActivate: [LoginGuard] }
+  { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard], loadChildren: () => import('./components/user/profile/profile-routing.module').then(m => m.ProfileRoutingModule)},
 ];
 
 @NgModule({

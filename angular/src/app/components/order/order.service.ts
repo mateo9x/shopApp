@@ -32,7 +32,7 @@ export class OrderService {
   }
 
   public deleteOrder(id: any) {
-    return this.http.delete<Order>(`${this.ordersUrl}/`, id);
+    return this.http.delete<Order>(`${this.ordersUrl}/${id}`, id);
   }
 
   public createOrder(order: Order) {

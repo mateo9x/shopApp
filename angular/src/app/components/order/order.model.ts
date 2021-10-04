@@ -1,4 +1,4 @@
-import { OrderAddress } from './order.address.model';
+
 export class Order {
   id: number;
   itemId: number;
@@ -11,4 +11,7 @@ export class Order {
   orderAddressId: number;
   orderPaymentId: number;
   orderPaymentType: string;
+  paymentSelected: boolean;
+  returnMaxDate: any;
+  sellerName: string;
 }

@@ -1,0 +1,37 @@
+
+.item{
+  border:1px solid grey;
+  width:100%;
+  height:20%;
+  margin-bottom:1px;
+}
+.content{
+  display:grid;
+  grid-template-columns: 25% 50% 25%;
+}
+
+button {
+  background-color: #4cd2db;
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #339ca3;
+}
+i{
+  font-size:2rem;
+}
+.price{
+  margin-right:5%;
+  text-align:right;
+}
+.return{
+  margin-top:2%;
+}

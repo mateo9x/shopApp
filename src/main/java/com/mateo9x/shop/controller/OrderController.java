@@ -8,6 +8,7 @@ import com.mateo9x.shop.service.OrderService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,10 +58,10 @@ public class OrderController {
         return orderService.findById(id);
     }
 
-    // @DeleteMapping("/orders/{id}")
-    // public void deleteOrder(@PathVariable Long id) {
-    // log.debug("REST request do delete Order: {}", id);
-    // orderService.deleteOrder(id);
-    // }
+    @DeleteMapping("/orders/{id}")
+    public void deleteOrder(@PathVariable Long id) {
+    log.debug("REST request do delete Order: {}", id);
+    orderService.deleteOrder(id);
+    }
 
 }
