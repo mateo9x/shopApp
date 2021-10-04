@@ -29,7 +29,6 @@ export class ProfileOrdersComponent implements OnInit {
         response.forEach((res) => {
           const endDate = new Date(res.date);
           res.returnMaxDate = endDate.setDate(endDate.getDate() + 7);
-          console.log(endDate)
           if (res.orderPaymentType === null || res.orderPaymentType === undefined) {
             res.paymentSelected = false;
           } else {
@@ -46,13 +45,19 @@ export class ProfileOrdersComponent implements OnInit {
     this.router.navigate(['order-process', id]);
   }
 
-  returnProductConfirm(id: number) {
-    this.confirmationService.confirm({
-      message: 'Czy na pewno chcesz zwrócić ten produkt?',
-      accept: () => {
-        this.returnProduct(id);
-      }
-    });
+  returnProductConfirm(order: Order) {
+    const orderMaxExp = new Date(order.date);
+    orderMaxExp.setDate(orderMaxExp.getDate() + 7);
+    if (new Date() > orderMaxExp) {
+      this.messageService.add({ key: 'error', severity: 'error', summary: 'Termin zwrotu produktu minął' });
+    } else {
+      this.confirmationService.confirm({
+        message: 'Czy na pewno chcesz zwrócić ten produkt?',
+        accept: () => {
+          this.returnProduct(order.id);
+        }
+      });
+    }
   }
 
   returnProduct(id: number) {
