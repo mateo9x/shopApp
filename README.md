@@ -15,9 +15,11 @@ User authenthicated has access to secured endpoints.
 - Displaying item details
 - Buying items (logged user only) and selecting order address and payment method
 - Searching items by Seller name or by using searcher on main bar
+- Returning items for 7 days since product buy
+- Finalizing item buy in profile component
+- Adding new items on auction
 
 ### Coming soon:
-- Checking the user's purchase history
 - Better design of application
 - And... more !
 
