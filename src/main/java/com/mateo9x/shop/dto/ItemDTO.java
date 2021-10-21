@@ -11,7 +11,7 @@ public class ItemDTO implements Serializable {
     private Double price;
     private Long itemCategoryId;
     private String itemCategoryName;
-    private Integer sold;
+    private Boolean sold;
     private Date createDate;
     private Long sellerId;
     private String sellerName;
@@ -66,11 +66,11 @@ public class ItemDTO implements Serializable {
         this.itemCategoryName = itemCategoryName;
     }
 
-    public Integer isSold() {
+    public Boolean isSold() {
         return sold;
     }
 
-    public void setSold(Integer sold) {
+    public void setSold(Boolean sold) {
         this.sold = sold;
     }
 
