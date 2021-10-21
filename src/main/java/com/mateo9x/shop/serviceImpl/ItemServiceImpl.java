@@ -51,7 +51,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> findAllFromCategory(Long id) {
         log.info("Request to find all Items by category {}: ", id);
-        return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> dto.isSold() == 0)
+        return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> dto.isSold() == false)
                 .map(itemMapper::toDTO).collect(Collectors.toCollection(LinkedList::new));
 
     }
@@ -59,7 +59,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> findAllBySellerId(Long id) {
         log.info("Request to find all Items by seller {}: ", id);
-        return itemRepository.findBySellerId(id).stream().filter(dto -> dto.isSold() == 0).map(itemMapper::toDTO)
+        return itemRepository.findBySellerId(id).stream().filter(dto -> dto.isSold() == false).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
 
     }
@@ -67,7 +67,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> findAllByQuery(String query) {
         log.info("Request to find all Items by query {}: ", query);
-        return itemRepository.findByBrandLikeOrModelLike(query).stream().filter(dto -> dto.isSold() == 0).map(itemMapper::toDTO)
+        return itemRepository.findByBrandLikeOrModelLike(query).stream().filter(dto -> dto.isSold() == false).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
 
     }
