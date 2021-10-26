@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     
-    @Query(value = "select * from orders where user_id = :userId", nativeQuery = true)
+    @Query(value = "select * from db.orders where user_id = :userId", nativeQuery = true)
     List<Order> findByUserId(@Param("userId") Long userId);
 
 }

@@ -95,6 +95,9 @@ img{
 .cart-btn:hover {
   background-color: #64af3d;
 }
+.cart-btn:disabled {
+  background-color: grey;
+}
 
 a:hover, a:active{
   cursor: pointer;
@@ -108,4 +111,9 @@ a:hover, a:active{
 .sellerItems:hover{
   color:#4cd2db !important;
   text-decoration: underline !important;
+}
+
+.sold {
+  color:red;
+  font-style: oblique;
 }
