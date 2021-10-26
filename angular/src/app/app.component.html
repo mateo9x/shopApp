@@ -1,7 +1,7 @@
 <div class="app-component">
   <div class="left-menu">
     <div class="app-logo">
-      <img routerLink="" routerLinkActive="active" src="https://i.imgur.com/v2IVDxD.png">
+      <img (dblclick)="showSqlVersion()" src="https://i.imgur.com/v2IVDxD.png">
     </div>
     <div class="item-categories">
       <item-category></item-category>
@@ -47,6 +47,7 @@
     <div class="main-container">
       <p-toast class="custom-toast" key="success"></p-toast>
       <p-toast class="toast-error" key="error"></p-toast>
+      <p-toast class="toast-error" key="warn"></p-toast>
       <router-outlet></router-outlet>
       <!-- <div (window:beforeunload)="doBeforeUnload()" (window:unload)="doUnload()">
       </div> -->

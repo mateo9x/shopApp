@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
         Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (user.isPresent()) {
             Item item = itemRepository.findById(orderDTO.getItemId()).get();
-            item.setSold(1);
+            item.setSold(true);
             itemRepository.save(item);
             orderDTO.setUserId(user.get().getId());
             Order order = orderMapper.toEntity(orderDTO);
@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
         log.info("Request to delete Order: {}", id);
         Order order = orderRepository.getById(id);
         Item item = itemRepository.getById(order.getItem().getId());
-        item.setSold(0);
+        item.setSold(false);
         itemRepository.save(item);
         orderRepository.delete(order);
     }

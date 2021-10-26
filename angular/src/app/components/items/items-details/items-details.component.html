@@ -18,8 +18,9 @@
 
     <div class="product-price">
       <span>{{item.price}} zł</span>
-      <a (click)="buyConfirm()" class="cart-btn">Kup Teraz</a>
+      <button (click)="buyConfirm()" class="cart-btn" [disabled]="productSold">Kup Teraz</button>
     </div>
+    <div *ngIf="productSold" class="sold">Produkt jest już niedostępny</div>
   </div>
 </main>
 

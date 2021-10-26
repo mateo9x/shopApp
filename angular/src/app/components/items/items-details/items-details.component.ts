@@ -22,6 +22,7 @@ export class ItemsDetailsComponent implements OnInit {
   isUserLogged = false;
   order: Order = new Order();
   cartItems: Item[] = [];
+  productSold = false;
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
     private messageService: MessageService, private confirmationService: ConfirmationService, private route: ActivatedRoute,
@@ -34,6 +35,9 @@ export class ItemsDetailsComponent implements OnInit {
     this.itemService.findItem(this.itemId).subscribe((response) => {
       if (response.description === null || response.description === undefined) {
         response.description = 'Brak opisu';
+      }
+      if(response.sold) {
+        this.productSold = true;
       }
       this.item = response;
     });
@@ -63,11 +67,11 @@ export class ItemsDetailsComponent implements OnInit {
         });
         if (sessionStorage.getItem('cart') !== null) {
           this.cartItems = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
-          this.cartItems.forEach((element, index) => {
-            if (element.id === this.item.id) {
-              delete this.cartItems[index];
-            }
-          });
+            this.cartItems.forEach((element, index) => {
+              if (element.id === this.item.id) {
+                delete this.cartItems[index];
+              }
+            });
           sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
         }
         this.messageService.add({ key: 'success', severity: 'success', summary: 'Produkt został zakupiony' });

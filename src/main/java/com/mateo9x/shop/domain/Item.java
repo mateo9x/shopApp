@@ -33,7 +33,7 @@ public class Item implements Serializable {
     @JoinColumn(name = "items_category_id")
     private ItemCategory itemCategory;
     @Column(name = "sold")
-    private Integer sold;
+    private Boolean sold;
     @Column(name = "create_date")
     private Date createDate;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -84,11 +84,11 @@ public class Item implements Serializable {
         this.itemCategory = itemCategory;
     }
 
-    public Integer isSold() {
+    public Boolean isSold() {
         return sold;
     }
 
-    public void setSold(Integer sold) {
+    public void setSold(Boolean sold) {
         this.sold = sold;
     }
 

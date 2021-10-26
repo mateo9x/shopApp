@@ -32,6 +32,7 @@ User authenthicated has access to secured endpoints.
 * JWT Authorization
 * Spring Security
 * Hibernate
+* Liquibase
 * Primeng
 * FontAwesome
 

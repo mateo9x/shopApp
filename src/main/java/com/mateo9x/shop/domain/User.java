@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "street")
     private String street;
-    @Column(name = "streetnumber")
+    @Column(name = "street_number")
     private String streetNumber;
     @Column(name = "city")
     private String city;

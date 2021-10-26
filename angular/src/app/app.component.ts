@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { UserService } from './components/user/user.service';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   tabWasClosed = false;
   searchQuery: any;
 
-  constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
+  constructor(private router: Router, private messageService: MessageService, private appService: AppService) { }
 
   ngOnInit() {
     if (sessionStorage.getItem("id_token") !== null) {
@@ -34,6 +34,17 @@ export class AppComponent implements OnInit {
     sessionStorage.removeItem('id_token');
     this.isUserLogged = false;
     this.messageService.add({ key: 'success', severity: 'success', summary: 'Wylogowano pomyślnie!' });
+  }
+
+  showSqlVersion() {
+    this.appService.getSqlVersion().subscribe((response) => {
+      if (response !== null) {
+        this.messageService.add({ key: 'warn', severity: 'warn', summary: 'Aktualna wersja bazy danych: ' + response.version });
+      } else {
+        this.messageService.add({ key: 'warn', severity: 'warn', summary: 'Brak wersji bazy danych' });
+      }
+    });
+
   }
 
   // doBeforeUnload() {
