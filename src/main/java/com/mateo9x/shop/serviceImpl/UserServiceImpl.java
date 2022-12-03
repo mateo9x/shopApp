@@ -13,29 +13,21 @@ import com.mateo9x.shop.repository.UserRepository;
 import com.mateo9x.shop.service.MailService;
 import com.mateo9x.shop.service.UserService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
-    private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final MailService mailService;
-
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, MailService mailService) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-        this.mailService = mailService;
-    }
 
     @Override
     public void deleteUser(Long id) {
@@ -60,20 +52,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findByResetToken(UserDTO userDTO) {
-        log.info("Request to find User by Reset Token: {}");
+        log.info("Request to find User by Reset Token");
         Optional<User> user = userRepository.findByResetToken(userDTO.getResetToken());
-        if (user.isPresent()) {
-            return userMapper.toDTO(user.get());
-        } else {
-            return null;
-        }
+        return user.map(userMapper::toDTO).orElse(null);
     }
 
     @Override
     public UserDTO save(UserDTO userDTO) {
         Optional<User> userOptional = userRepository.findByMail(userDTO.getMail());
         if (userOptional.isPresent()) {
-            log.error("User with that email already exists :", userDTO.getMail());
+            log.error("User with that email already exists: {}", userDTO.getMail());
             return null;
         } else {
             log.info("Request to save User: {}", userDTO);
@@ -87,19 +75,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean updateUserPassword(UserDTO userDTO) {
-        Optional<User> userOptional = userRepository.findByMail(userDTO.getMail());
-        if (userOptional.isPresent()) {
-            if (!passwordEncoder.matches(userDTO.getPassword(), userOptional.get().getPassword())) {
+        Optional<User> userSavedOnBaseOptional = userRepository.findByMail(userDTO.getMail());
+        if (userSavedOnBaseOptional.isPresent()) {
+            if (doesBothPasswordMatches(userDTO, userSavedOnBaseOptional.get())) {
                 log.info("Request to update User password: {}:", userDTO.getUsername());
-                userOptional.get().setPassword(passwordEncoder.encode(userDTO.getPassword()));
-                userRepository.save(userOptional.get());
+                userSavedOnBaseOptional.get().setPassword(passwordEncoder.encode(userDTO.getPassword()));
+                userRepository.save(userSavedOnBaseOptional.get());
                 return true;
-            } else {
-                return false;
             }
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -108,14 +93,13 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findByUsername(username.toString());
         if (user.isPresent()) {
             return userMapper.toDTO(user.get());
-        } else {
-            log.info("User not found: {}");
-            return null;
         }
+        log.info("User not found!");
+        return null;
     }
 
     @Override
-    public void resetPswd(String mail) {
+    public void resetPassword(String mail) {
         UUID uuid = UUID.randomUUID();
         Optional<User> user = userRepository.findByMail(mail);
         if (user.isPresent()) {
@@ -128,20 +112,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean updateUserPasswordFromToken(UserDTO userDTO) {
-        Optional<User> user = userRepository.findByResetToken(userDTO.getResetToken());
-        if (user.isPresent()) {
-            if (!passwordEncoder.matches(userDTO.getPassword(), user.get().getPassword())) {
+        Optional<User> userSavedOnBaseOptional = userRepository.findByResetToken(userDTO.getResetToken());
+        if (userSavedOnBaseOptional.isPresent()) {
+            User userSavedOnBase = userSavedOnBaseOptional.get();
+            if (doesBothPasswordMatches(userDTO, userSavedOnBase)) {
                 log.info("Request to update User password: {}:", userDTO.getUsername());
-                user.get().setPassword(passwordEncoder.encode(userDTO.getPassword()));
-                user.get().setResetToken(null);
-                userRepository.save(user.get());
+                userSavedOnBase.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+                userSavedOnBase.setResetToken(null);
+                userRepository.save(userSavedOnBase);
                 return true;
-            } else {
-                return false;
             }
-        } else {
-            return false;
         }
+        return false;
     }
 
+    private boolean doesBothPasswordMatches(UserDTO userDTO, User userSavedOnBase) {
+        return !passwordEncoder.matches(userDTO.getPassword(), userSavedOnBase.getPassword());
+    }
 }
