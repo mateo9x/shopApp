@@ -44,11 +44,17 @@ export class SignUpUserComponent implements OnInit {
       } else {
         this.messageService.add({ key: 'error', severity: 'error', summary: 'Użytkownik z podanym adresem e-mail istnieje!'});
       }
-     
-        
+
+
       }, (error) => {
         this.messageService.add({ key: 'error', severity: 'error', summary: 'Użytkownik nie został utworzony'});
       });
+  }
+
+   lowerCaseLogin(user: User) {
+    if (user && user.username) {
+      user.username = user.username.toLowerCase();
+    }
   }
 
 }
