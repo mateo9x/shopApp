@@ -42,7 +42,7 @@ export class SignUpUserComponent implements OnInit {
         });
         this.router.navigate(['']);
       } else {
-        this.messageService.add({ key: 'error', severity: 'error', summary: 'Użytkownik z podanym adresem e-mail istnieje!'});
+        this.messageService.add({ key: 'error', severity: 'error', summary: 'Użytkownik o takim loginie/e-mail-u już istnieje!'});
       }
 
 
