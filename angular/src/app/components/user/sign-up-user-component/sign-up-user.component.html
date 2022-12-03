@@ -6,7 +6,7 @@
 
     <div class="input-data" #username>
       <input type="text" name="username" style="display:inline-block" [(ngModel)]="user.username"
-        pattern="^[a-Z0-9_\-]+$" placeholder="Użytkownik *" required />
+        pattern="^[a-Z0-9_\-]+$" placeholder="Użytkownik *" required (change)="lowerCaseLogin(user)" />
       <i class="fa fa-info-circle" tooltipPosition="top" pTooltip="Login nie może zawierać polskich znaków i symboli" [appendTo]="username"></i>
     </div>
     <div class="input-data">
@@ -26,7 +26,7 @@
       <i class="fa fa-info-circle" pTooltip="Hasło musi mieć min 5 znaków" [appendTo]="password"></i>
     </div>
     <div class="input-data" #password2>
-      <input type="password" name="password2" 
+      <input type="password" name="password2"
         [(ngModel)]="user.password2" placeholder="Potwierdź hasło *" />
       <i class="fa fa-info-circle" pTooltip="Hasło muszą do siebie pasować" [appendTo]="password2"></i>
     </div>

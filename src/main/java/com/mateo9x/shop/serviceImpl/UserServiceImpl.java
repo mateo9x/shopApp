@@ -59,9 +59,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO save(UserDTO userDTO) {
-        Optional<User> userOptional = userRepository.findByMail(userDTO.getMail());
-        if (userOptional.isPresent()) {
+        Optional<User> userByEmailOptional = userRepository.findByMail(userDTO.getMail());
+        if (userByEmailOptional.isPresent()) {
             log.error("User with that email already exists: {}", userDTO.getMail());
+            return null;
+        }
+        Optional<User> userByUsernameOptional = userRepository.findByUsername(userDTO.getUsername().toLowerCase());
+        if (userByUsernameOptional.isPresent()) {
+            log.error("User with that username already exists: {}", userDTO.getUsername().toLowerCase());
             return null;
         } else {
             log.info("Request to save User: {}", userDTO);
