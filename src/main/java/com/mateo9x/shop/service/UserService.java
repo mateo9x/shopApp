@@ -8,7 +8,7 @@ public interface UserService {
 
     UserDTO save(UserDTO userDTO);
 
-    void resetPswd(String mail);
+    void resetPassword(String mail);
 
     Boolean updateUserPassword(UserDTO userDTO);
 

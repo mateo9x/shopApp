@@ -36,7 +36,7 @@ public class MailServiceImpl implements MailService {
         try {
             javaMailSender.send(message);
         } catch (Exception e) {
-            log.error("Nie udało się wysłać maila powitalnego");
+            log.error("Nie udało się wysłać maila powitalnego: {}", e.getMessage());
         }
     }
 
@@ -64,5 +64,4 @@ public class MailServiceImpl implements MailService {
     private boolean isFirstNameAndLastNameNotNull(UserDTO userDTO) {
         return userDTO.getFirstName() != null && userDTO.getLastName() != null;
     }
-
 }

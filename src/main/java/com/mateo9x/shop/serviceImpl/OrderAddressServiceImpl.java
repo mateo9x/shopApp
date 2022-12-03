@@ -3,29 +3,26 @@ package com.mateo9x.shop.serviceImpl;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import com.mateo9x.shop.domain.OrderAddress;
 import com.mateo9x.shop.dto.OrderAddressDTO;
 import com.mateo9x.shop.mapper.OrderAddressMapper;
 import com.mateo9x.shop.repository.OrderAddressRepository;
 import com.mateo9x.shop.service.OrderAddressService;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class OrderAddressServiceImpl implements OrderAddressService {
-
-    private Logger log = LoggerFactory.getLogger(OrderAddressServiceImpl.class);
 
     private final OrderAddressRepository orderAddressRepository;
     private final OrderAddressMapper orderAddressMapper;
-
-    public OrderAddressServiceImpl(OrderAddressRepository orderAddressRepository,
-            OrderAddressMapper orderAddressMapper) {
-        this.orderAddressRepository = orderAddressRepository;
-        this.orderAddressMapper = orderAddressMapper;
-    }
 
     @Override
     public OrderAddressDTO save(OrderAddressDTO orderDTO) {
@@ -55,5 +52,4 @@ public class OrderAddressServiceImpl implements OrderAddressService {
         OrderAddress order = orderAddressRepository.getById(id);
         orderAddressRepository.delete(order);
     }
-
 }

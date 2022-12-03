@@ -37,7 +37,7 @@ public class UserController {
     @PostMapping("/users/resetPassword")
     public void resetPassword(@Valid @RequestBody UserDTO userDTO) {
         log.debug("REST request to reset password for User: {}", userDTO.getMail());
-        userService.resetPswd(userDTO.getMail());
+        userService.resetPassword(userDTO.getMail());
     }
 
     @PutMapping("/users")

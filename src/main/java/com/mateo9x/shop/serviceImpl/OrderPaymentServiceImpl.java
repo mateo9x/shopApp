@@ -9,23 +9,17 @@ import com.mateo9x.shop.mapper.OrderPaymentMapper;
 import com.mateo9x.shop.repository.OrderPaymentRepository;
 import com.mateo9x.shop.service.OrderPaymentService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class OrderPaymentServiceImpl implements OrderPaymentService {
-
-    private Logger log = LoggerFactory.getLogger(OrderPaymentServiceImpl.class);
 
     private final OrderPaymentRepository orderPaymentRepository;
     private final OrderPaymentMapper orderPaymentMapper;
-
-    public OrderPaymentServiceImpl(OrderPaymentRepository orderPaymentRepository,
-            OrderPaymentMapper orderPaymentMapper) {
-        this.orderPaymentRepository = orderPaymentRepository;
-        this.orderPaymentMapper = orderPaymentMapper;
-    }
 
     @Override
     public OrderPaymentDTO save(OrderPaymentDTO orderDTO) {
@@ -55,5 +49,4 @@ public class OrderPaymentServiceImpl implements OrderPaymentService {
         OrderPayment order = orderPaymentRepository.getById(id);
         orderPaymentRepository.delete(order);
     }
-
 }
