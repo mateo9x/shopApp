@@ -48,8 +48,8 @@ create table items (
     FOREIGN KEY (seller_id) REFERENCES sellers (id)
 );
 
-GRANT all on items to pfkeglmarhcrbh;
-GRANT all on users to pfkeglmarhcrbh;
-GRANT all on items_category to pfkeglmarhcrbh;
-GRANT all on sellers to pfkeglmarhcrbh;
+GRANT all on items to postgres;
+GRANT all on users to postgres;
+GRANT all on items_category to postgres;
+GRANT all on sellers to postgres;
 update sqlversion set version = '2021_10_11';
