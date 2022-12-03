@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
     public Boolean updateUserPassword(UserDTO userDTO) {
         Optional<User> userSavedOnBaseOptional = userRepository.findByMail(userDTO.getMail());
         if (userSavedOnBaseOptional.isPresent()) {
-            if (doesBothPasswordMatches(userDTO, userSavedOnBaseOptional.get())) {
+            if (!doesBothPasswordMatches(userDTO, userSavedOnBaseOptional.get())) {
                 log.info("Request to update User password: {}:", userDTO.getUsername());
                 userSavedOnBaseOptional.get().setPassword(passwordEncoder.encode(userDTO.getPassword()));
                 userRepository.save(userSavedOnBaseOptional.get());
@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userSavedOnBaseOptional = userRepository.findByResetToken(userDTO.getResetToken());
         if (userSavedOnBaseOptional.isPresent()) {
             User userSavedOnBase = userSavedOnBaseOptional.get();
-            if (doesBothPasswordMatches(userDTO, userSavedOnBase)) {
+            if (!doesBothPasswordMatches(userDTO, userSavedOnBase)) {
                 log.info("Request to update User password: {}:", userDTO.getUsername());
                 userSavedOnBase.setPassword(passwordEncoder.encode(userDTO.getPassword()));
                 userSavedOnBase.setResetToken(null);
@@ -127,6 +127,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private boolean doesBothPasswordMatches(UserDTO userDTO, User userSavedOnBase) {
-        return !passwordEncoder.matches(userDTO.getPassword(), userSavedOnBase.getPassword());
+        return passwordEncoder.matches(userDTO.getPassword(), userSavedOnBase.getPassword());
     }
 }
