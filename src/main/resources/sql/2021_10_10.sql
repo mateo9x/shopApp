@@ -19,8 +19,8 @@ create table sqlversion (
     CONSTRAINT sqlversion_pk PRIMARY KEY(id)
 );
 
-GRANT all on users_roles to pfkeglmarhcrbh;
-GRANT all on roles to pfkeglmarhcrbh;
-GRANT all on sqlversion to pfkeglmarhcrbh;
+GRANT all on users_roles to postgres;
+GRANT all on roles to postgres;
+GRANT all on sqlversion to postgres;
 
 insert into sqlversion values (1, '2021_10_10');

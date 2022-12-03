@@ -14,16 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
-    @Query(value="select * from db.carts where item_id = :itemId", nativeQuery = true)
+    @Query(value="select * from carts where item_id = :itemId", nativeQuery = true)
     Optional<Cart> findByItemId(@Param("itemId") Long itemId);
 
     @Modifying
     @Transactional
-    @Query(value="delete from db.carts where user_id = :userId and item_id = :itemId", nativeQuery = true)
+    @Query(value="delete from carts where user_id = :userId and item_id = :itemId", nativeQuery = true)
     void deleteItemFromUserCart(@Param("userId") Long userId, @Param("itemId") Long itemId);
     
     @Modifying
     @Transactional
-    @Query(value="delete from db.carts where item_id = :itemId", nativeQuery = true)
+    @Query(value="delete from carts where item_id = :itemId", nativeQuery = true)
     void deleteItemFromAllCarts( @Param("itemId") Long itemId);
 }

@@ -1,4 +1,4 @@
-ALTER TABLE db.items ALTER COLUMN price TYPE double precision USING price::double precision;
+ALTER TABLE items ALTER COLUMN price TYPE double precision USING price::double precision;
 
 insert into items (brand, model, price, items_category_id, sold, create_date, seller_id, description) values 
 ('Apple', 'Iphone X', '1500.99', 5, false, '2021-10-24 14:54', 1, 'Precyzja wykonania'),

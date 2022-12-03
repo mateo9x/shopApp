@@ -39,8 +39,8 @@ create table orders (
     FOREIGN KEY (order_payment_id) REFERENCES orders_payment (id)
 );
 
-GRANT all on carts to pfkeglmarhcrbh;
-GRANT all on orders_address to pfkeglmarhcrbh;
-GRANT all on orders_payment to pfkeglmarhcrbh;
-GRANT all on orders to pfkeglmarhcrbh;
+GRANT all on carts to postgres;
+GRANT all on orders_address to postgres;
+GRANT all on orders_payment to postgres;
+GRANT all on orders to postgres;
 update sqlversion set version = '2021_10_12';
