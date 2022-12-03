@@ -13,26 +13,20 @@ import com.mateo9x.shop.repository.ItemRepository;
 import com.mateo9x.shop.repository.UserRepository;
 import com.mateo9x.shop.service.ItemService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
+@AllArgsConstructor
 public class ItemServiceImpl implements ItemService {
-
-    private Logger log = LoggerFactory.getLogger(ItemServiceImpl.class);
 
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
     private final UserRepository userRepository;
-
-    public ItemServiceImpl(ItemRepository itemRepository, ItemMapper itemMapper, UserRepository userRepository) {
-        this.itemRepository = itemRepository;
-        this.itemMapper = itemMapper;
-        this.userRepository = userRepository;
-    }
 
     @Override
     public void deleteItem(Long id) {
@@ -51,7 +45,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> findAllFromCategory(Long id) {
         log.info("Request to find all Items by category {}: ", id);
-        return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> dto.isSold() == false)
+        return itemRepository.findAllByItemCategoryId(id).stream().filter(dto -> !dto.isSold())
                 .map(itemMapper::toDTO).collect(Collectors.toCollection(LinkedList::new));
 
     }
@@ -59,7 +53,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> findAllBySellerId(Long id) {
         log.info("Request to find all Items by seller {}: ", id);
-        return itemRepository.findBySellerId(id).stream().filter(dto -> dto.isSold() == false).map(itemMapper::toDTO)
+        return itemRepository.findBySellerId(id).stream().filter(dto -> !dto.isSold()).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
 
     }
@@ -67,7 +61,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> findAllByQuery(String query) {
         log.info("Request to find all Items by query {}: ", query);
-        return itemRepository.findByBrandLikeOrModelLike(query).stream().filter(dto -> dto.isSold() == false).map(itemMapper::toDTO)
+        return itemRepository.findByBrandLikeOrModelLike(query).stream().filter(dto -> !dto.isSold()).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
 
     }
@@ -81,15 +75,14 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDTO> findCartByUserId() {
-        log.info("Request to find Cart for User: {}");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (user.isPresent()) {
+            log.info("Request to find Cart for User: {}", user.get().getId());
             return itemRepository.findByUserId(user.get().getId()).stream().map(itemMapper::toDTO)
                     .collect(Collectors.toCollection(LinkedList::new));
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -99,5 +92,4 @@ public class ItemServiceImpl implements ItemService {
         item = itemRepository.save(item);
         return itemMapper.toDTO(item);
     }
-
 }

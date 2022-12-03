@@ -12,33 +12,21 @@ import com.mateo9x.shop.mapper.UserMapper;
 import com.mateo9x.shop.repository.UserRepository;
 import com.mateo9x.shop.service.AuthenthicationService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class AuthenthicationServiceImpl implements AuthenthicationService {
 
-    private final Logger log = LoggerFactory.getLogger(AuthenthicationServiceImpl.class);
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    private UserDetailsServiceImpl userDetailsServiceImpl;
-    private UserRepository userRepository;
-    private UserMapper userMapper;
-
-    public AuthenthicationServiceImpl(UserDetailsServiceImpl userDetailsServiceImpl, UserRepository userRepository,
-            UserMapper userMapper) {
-        this.userDetailsServiceImpl = userDetailsServiceImpl;
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-    }
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public void logOut(HttpServletRequest request, HttpServletResponse response) {
@@ -52,12 +40,7 @@ public class AuthenthicationServiceImpl implements AuthenthicationService {
 
     @Override
     public Boolean logIn(LoginCredentials model) {
-
-        if (userDetailsServiceImpl.loadUserByUsername(model.getUsername()) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return userDetailsServiceImpl.loadUserByUsername(model.getUsername()) != null;
     }
 
     @Override
@@ -65,11 +48,8 @@ public class AuthenthicationServiceImpl implements AuthenthicationService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (auth.isAuthenticated() && auth.getPrincipal() != "anonymousUser") {
-            UserDTO userDTO = userMapper.toDTO(user.get());
-            return userDTO;
-        } else {
-            return null;
+            return userMapper.toDTO(user.get());
         }
+        return null;
     }
-
 }

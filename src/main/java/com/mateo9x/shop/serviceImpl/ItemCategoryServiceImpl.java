@@ -9,23 +9,17 @@ import com.mateo9x.shop.mapper.ItemCategoryMapper;
 import com.mateo9x.shop.repository.ItemCategoryRepository;
 import com.mateo9x.shop.service.ItemCategoryService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
+@AllArgsConstructor
 public class ItemCategoryServiceImpl implements ItemCategoryService {
-
-    private Logger log = LoggerFactory.getLogger(ItemCategoryServiceImpl.class);
 
     private final ItemCategoryRepository itemCategoryRepository;
     private final ItemCategoryMapper itemCategoryMapper;
-
-    public ItemCategoryServiceImpl(ItemCategoryRepository itemCategoryRepository,
-            ItemCategoryMapper itemCategoryMapper) {
-        this.itemCategoryRepository = itemCategoryRepository;
-        this.itemCategoryMapper = itemCategoryMapper;
-    }
 
     @Override
     public void deleteItemCategory(Long id) {
@@ -55,5 +49,4 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
         item = itemCategoryRepository.save(item);
         return itemCategoryMapper.toDTO(item);
     }
-
 }

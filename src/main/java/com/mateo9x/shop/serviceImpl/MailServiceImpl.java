@@ -64,5 +64,4 @@ public class MailServiceImpl implements MailService {
     private boolean isFirstNameAndLastNameNotNull(UserDTO userDTO) {
         return userDTO.getFirstName() != null && userDTO.getLastName() != null;
     }
-
 }

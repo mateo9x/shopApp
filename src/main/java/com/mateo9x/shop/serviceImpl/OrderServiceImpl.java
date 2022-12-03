@@ -16,29 +16,21 @@ import com.mateo9x.shop.repository.ItemRepository;
 import com.mateo9x.shop.repository.OrderRepository;
 import com.mateo9x.shop.repository.UserRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
+@AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
-
-    private Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
-
-    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository,
-            ItemRepository itemRepository) {
-        this.orderRepository = orderRepository;
-        this.orderMapper = orderMapper;
-        this.userRepository = userRepository;
-        this.itemRepository = itemRepository;
-    }
 
     @Override
     public OrderDTO save(OrderDTO orderDTO) {
@@ -53,10 +45,8 @@ public class OrderServiceImpl implements OrderService {
             Order order = orderMapper.toEntity(orderDTO);
             order = orderRepository.save(order);
             return orderMapper.toDTO(order);
-        } else {
-            return null;
         }
-
+        return null;
     }
 
     @Override
@@ -68,20 +58,19 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDTO> findAllByUserId() {
-        log.info("Request to find all Orders by user {}: ");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (user.isPresent()) {
+            log.info("Request to find all Orders by user: {} ", user.get().getId());
             return orderRepository.findByUserId(user.get().getId()).stream().map(orderMapper::toDTO)
                     .collect(Collectors.toCollection(LinkedList::new));
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
     public OrderDTO findById(Long id) {
-        log.info("Request to find Order: {}", id);
+        log.info("Request to find Order by id: {}", id);
         Order order = orderRepository.getById(id);
         return orderMapper.toDTO(order);
     }
@@ -95,5 +84,4 @@ public class OrderServiceImpl implements OrderService {
         itemRepository.save(item);
         orderRepository.delete(order);
     }
-
 }
