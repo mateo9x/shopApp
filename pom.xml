@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.4</version>
+        <version>2.6.6</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mateo9x</groupId>
@@ -26,10 +26,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
@@ -81,7 +77,6 @@
             <artifactId>mapstruct</artifactId>
             <version>1.5.0.Beta1</version>
         </dependency>
-
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -146,10 +141,10 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.4.1</version>
-                <configuration>                  
+                <configuration>
                     <propertyFile>src/main/resources/liquibase.properties</propertyFile>
-                </configuration>                
-            </plugin> 
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

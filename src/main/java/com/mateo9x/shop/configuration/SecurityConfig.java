@@ -2,7 +2,6 @@ package com.mateo9x.shop.configuration;
 
 import com.mateo9x.shop.serviceImpl.UserDetailsServiceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${jwt.secret}")
     private String secret;
 
-    private RestAuthenticationSuccessHandler authenticationSuccessHandler;
-    private RestAuthenticationFailureHandler authenticationFailureHandler;
+    private final RestAuthenticationSuccessHandler authenticationSuccessHandler;
+    private final RestAuthenticationFailureHandler authenticationFailureHandler;
 
     public SecurityConfig(RestAuthenticationSuccessHandler authenticationSuccessHandler,
             RestAuthenticationFailureHandler authenticationFailureHandler) {
@@ -34,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.authenticationFailureHandler = authenticationFailureHandler;
     }
 
-    @Autowired
+    @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
