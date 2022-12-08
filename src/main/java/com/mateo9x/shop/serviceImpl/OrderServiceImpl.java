@@ -22,9 +22,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 @Slf4j
 @AllArgsConstructor
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -39,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
         Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (user.isPresent()) {
             Item item = itemRepository.findById(orderDTO.getItemId()).get();
-            item.setSold(true);
+            item.setAmountAvailable(item.getAmountAvailable() - orderDTO.getAmountBought());
             itemRepository.save(item);
             orderDTO.setUserId(user.get().getId());
             Order order = orderMapper.toEntity(orderDTO);
@@ -76,11 +79,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(Long id) {
-        log.info("Request to delete Order: {}", id);
-        Order order = orderRepository.getById(id);
+    public void returnProduct(Long orderId, Integer amountOfProductsToReturn) {
+        log.info("Request to return Product: {}", orderId);
+        Order order = orderRepository.getById(orderId);
         Item item = itemRepository.getById(order.getItem().getId());
-        item.setSold(false);
+        item.setAmountAvailable(item.getAmountAvailable() + amountOfProductsToReturn);
         itemRepository.save(item);
         orderRepository.delete(order);
     }

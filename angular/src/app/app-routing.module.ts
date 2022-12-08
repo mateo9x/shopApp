@@ -11,9 +11,10 @@ import { AnonymousUserGuard } from './components/authenthication/anonymous-user-
 import { NewPasswordComponent } from './components/user/new-password/new-password.component';
 import { OrderProcessComponent } from './components/order/order-process/order-process.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
+import {InfoComponent} from "./components/info/info.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', component: InfoComponent },
   { path: 'sign-in-user', component: SignInUserComponent, canActivate: [AnonymousUserGuard] },
   { path: 'sign-up-user', component: SignUpUserComponent, canActivate: [AnonymousUserGuard] },
   { path: 'cart', component: CartComponent },

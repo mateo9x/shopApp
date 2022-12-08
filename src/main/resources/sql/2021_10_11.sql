@@ -38,7 +38,7 @@ create table items (
     model varchar(100) not null,
     price bigint null,
     items_category_id int null,
-    sold BOOLEAN null,
+    amount_available integer null,
     create_date timestamp null,
     seller_id int null,
     description varchar null,

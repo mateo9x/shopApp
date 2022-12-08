@@ -19,6 +19,8 @@ public class OrderDTO implements Serializable {
     private String sellerName;
     private String photoUrl;
 
+    private Integer amountBought;
+
     public Long getId() {
         return id;
     }
@@ -121,6 +123,14 @@ public class OrderDTO implements Serializable {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public Integer getAmountBought() {
+        return amountBought;
+    }
+
+    public void setAmountBought(Integer amountBought) {
+        this.amountBought = amountBought;
     }
 
     @Override

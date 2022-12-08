@@ -31,6 +31,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { OrderProcessComponent } from './components/order/order-process/order-process.component';
 import { ProfileDataComponent } from './components/user/profile/profile-data-component/profile-data.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
+import {InfoComponent} from "./components/info/info.component";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ProfileComponent } from './components/user/profile/profile.component';
     OrderProcessComponent,
     ProfileOrdersComponent,
     ProfileComponent,
-    SellItemsComponent
+    SellItemsComponent,
+    InfoComponent
 
   ],
   imports: [
