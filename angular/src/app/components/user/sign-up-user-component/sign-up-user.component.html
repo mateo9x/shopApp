@@ -6,8 +6,7 @@
 
     <div class="input-data" #username>
       <input type="text" name="username" style="display:inline-block" [(ngModel)]="user.username"
-        pattern="^[a-Z0-9_\-]+$" placeholder="Użytkownik *" required (change)="lowerCaseLogin(user)" />
-      <i class="fa fa-info-circle" tooltipPosition="top" pTooltip="Login nie może zawierać polskich znaków i symboli" [appendTo]="username"></i>
+        placeholder="Użytkownik *" required (change)="lowerCaseLogin(user)" />
     </div>
     <div class="input-data">
       <input type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="Imię" />
@@ -18,17 +17,17 @@
     <div class="input-data" #mail>
       <input type="text" name="email" style="display:inline-block" [(ngModel)]="user.mail"
         placeholder="E-mail *" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
-      <i class="fa fa-info-circle" pTooltip="Poprawny format adresu e-mail np: mail@mail.com" [appendTo]="mail"></i>
+      <i class="fa fa-info-circle" pTooltip="Poprawny format adresu e-mail np: mail@mail.com" appendTo="body"></i>
     </div>
     <div class="input-data" #password>
       <input type="password" name="password" style="display:inline-block" [(ngModel)]="user.password"
         placeholder="Hasło *" min="5" required />
-      <i class="fa fa-info-circle" pTooltip="Hasło musi mieć min 5 znaków" [appendTo]="password"></i>
+      <i class="fa fa-info-circle" pTooltip="Hasło musi mieć min 5 znaków" appendTo="body"></i>
     </div>
     <div class="input-data" #password2>
       <input type="password" name="password2"
         [(ngModel)]="user.password2" placeholder="Potwierdź hasło *" />
-      <i class="fa fa-info-circle" pTooltip="Hasło muszą do siebie pasować" [appendTo]="password2"></i>
+      <i class="fa fa-info-circle" pTooltip="Hasło muszą do siebie pasować" appendTo="body"></i>
     </div>
     <div class="input-data">
       <input type="text" name="street"  [(ngModel)]="user.street" placeholder="Ulica" />
