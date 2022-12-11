@@ -1,15 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
-/* BASIC */
-
-
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
 
 a {
-  color: #4cd2db;
+  color: #f26522;
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
@@ -21,7 +18,7 @@ h2 {
   font-weight: 600;
   text-transform: uppercase;
   display:inline-block;
-  margin: 40px 8px 10px 8px; 
+  margin: 40px 8px 10px 8px;
   color: #cccccc;
 }
 
@@ -32,7 +29,7 @@ h2 {
 .wrapper {
   display: flex;
   align-items: center;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   min-height: 100%;
@@ -80,7 +77,7 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-  background-color: #4cd2db;
+  background-color: #f26522;
   border: none;
   color: white;
   padding: 15px 80px;
@@ -102,7 +99,7 @@ input[type=button], input[type=submit], input[type=reset]  {
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-  background-color: #39ace7;
+  background-color: #f26522;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -136,7 +133,7 @@ input[type=text],[type=password] {
 
 input[type=text],[type=password]:focus {
   background-color: #fff;
-  border-bottom: 2px solid #5fbae9;
+  border-bottom: 2px solid #f26522;
 }
 
 input[type=text],[type=password]:placeholder {
@@ -235,7 +232,7 @@ input[type=text],[type=password]:placeholder {
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #41ccd6;
+  background-color: #f26522;
   content: "";
   transition: width 0.2s;
 }
@@ -254,7 +251,7 @@ input[type=text],[type=password]:placeholder {
 
 *:focus {
     outline: none;
-} 
+}
 
 #icon {
   width:60%;
@@ -265,7 +262,7 @@ input[type=text],[type=password]:placeholder {
 }
 
 .submit-button {
-  background-color: #4cd2db;
+  background-color: #f26522;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -275,8 +272,8 @@ input[type=text],[type=password]:placeholder {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  
+
 }
 .submit-button:hover {
-  background-color: #41ccd6;
+  background-color: #a63a06;
 }

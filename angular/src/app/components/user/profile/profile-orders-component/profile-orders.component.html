@@ -36,5 +36,9 @@
 
 </div>
 
+<h5 *ngIf="orders.length === 0" style="text-align: center">
+  Brak jakichkolwiek zakupionych produktów
+</h5>
+
 <p-confirmDialog acceptLabel="Tak" rejectLabel="Nie" header="Potwierdź zwrot produktu"
   icon="pi pi-exclamation-triangle"></p-confirmDialog>
