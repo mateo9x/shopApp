@@ -54,14 +54,14 @@ export class ProfileOrdersComponent implements OnInit {
       this.confirmationService.confirm({
         message: 'Czy na pewno chcesz zwrócić ten produkt?',
         accept: () => {
-          this.returnProduct(order.id);
+          this.returnProduct(order.id, 1);
         }
       });
     }
   }
 
-  returnProduct(id: number) {
-    this.orderService.deleteOrder(id).subscribe((response) => {
+  returnProduct(id: number, amountOfProductsToReturn: number) {
+    this.orderService.returnProduct(id, amountOfProductsToReturn).subscribe((response) => {
       this.messageService.add({ key: 'success', severity: 'success', summary: 'Produkt został zwrócony' });
       this.ngOnInit();
     });

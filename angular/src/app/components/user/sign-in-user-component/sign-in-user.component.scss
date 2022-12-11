@@ -9,7 +9,7 @@ body {
 }
 
 a {
-  color: #4cd2db;
+  color: #f26522;
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
@@ -80,7 +80,7 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-  background-color: #4cd2db;
+  background-color: #f26522;
   border: none;
   color: white;
   padding: 15px 80px;
@@ -136,7 +136,7 @@ input[type=text],[type=password] {
 
 input[type=text],[type=password]:focus {
   background-color: #fff;
-  border-bottom: 2px solid #5fbae9;
+  border-bottom: 2px solid #f26522;
 }
 
 input[type=text],[type=password]:placeholder {
@@ -235,7 +235,7 @@ input[type=text],[type=password]:placeholder {
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #41ccd6;
+  background-color: #a63a06;
   content: "";
   transition: width 0.2s;
 }
@@ -265,7 +265,7 @@ input[type=text],[type=password]:placeholder {
 }
 
 .submit-button {
-  background-color: #4cd2db;
+  background-color: #f26522;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -278,7 +278,7 @@ input[type=text],[type=password]:placeholder {
 
 }
 .submit-button:hover {
-  background-color: #41ccd6;
+  background-color: #a63a06;
 }
 
 a:hover {

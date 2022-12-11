@@ -32,8 +32,8 @@ public class Item implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "items_category_id")
     private ItemCategory itemCategory;
-    @Column(name = "sold")
-    private Boolean sold;
+    @Column(name = "amount_available")
+    private Integer amountAvailable;
     @Column(name = "create_date")
     private Date createDate;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -84,12 +84,12 @@ public class Item implements Serializable {
         this.itemCategory = itemCategory;
     }
 
-    public Boolean isSold() {
-        return sold;
+    public Integer getAmountAvailable() {
+        return amountAvailable;
     }
 
-    public void setSold(Boolean sold) {
-        this.sold = sold;
+    public void setAmountAvailable(Integer amountAvailable) {
+        this.amountAvailable = amountAvailable;
     }
 
     public Seller getSeller() {

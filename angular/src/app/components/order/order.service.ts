@@ -31,8 +31,8 @@ export class OrderService {
     return this.http.get<Order>(`${this.ordersUrl}/${id}`, id);
   }
 
-  public deleteOrder(id: any) {
-    return this.http.delete<Order>(`${this.ordersUrl}/${id}`, id);
+  public returnProduct(id: number, amountOfProductsToReturn: number) {
+    return this.http.post<Order>(`${this.ordersUrl}/${id}?amountOfProductsToReturn=${amountOfProductsToReturn}`, id);
   }
 
   public createOrder(order: Order) {

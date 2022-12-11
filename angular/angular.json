@@ -33,12 +33,34 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/font-awesome/css/font-awesome.min.css",	
+              "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/primeicons/primeicons.css",
               "./node_modules/primeng/resources/themes/nova/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "src/css/style.css",
+              "src/css/bootstrap.min.css",
+              "src/css/responsive.css",
+              "src/css/jquery.mCustomScrollbar.min.css",
+              "src/css/owl.carousel.min.css",
+              "src/css/animate.min.css",
+              "src/css/normalize.css",
+              "src/css/icomoon.css",
+              "src/css/font-awesome.min.css",
+              "src/css/meanmenu.css",
+              "src/css/slick.css",
+              "src/css/jquery.fancybox.min.css",
+              "src/css/jquery-ui.css",
+              "src/css/nice-select.css"
     ],
-            "scripts": []
+            "scripts": [
+              "src/js/jquery.min.js",
+              "src/js/popper.min.js",
+              "src/js/bootstrap.bundle.min.js",
+              "src/js/jquery-3.0.0.min.js",
+              "src/js/plugin.js",
+              "src/js/jquery.mCustomScrollbar.concat.min.js",
+              "src/js/custom.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -111,9 +133,31 @@
               "src/styles.scss",
               "./node_modules/primeicons/primeicons.css",
               "./node_modules/primeng/resources/themes/nova/theme.css",
-              "./node_modules/primeng/resources/primeng.min.css"
+              "./node_modules/primeng/resources/primeng.min.css",
+              "src/css/style.css",
+              "src/css/bootstrap.min.css",
+              "src/css/responsive.css",
+              "src/css/jquery.mCustomScrollbar.min.css",
+              "src/css/owl.carousel.min.css",
+              "src/css/animate.min.css",
+              "src/css/normalize.css",
+              "src/css/icomoon.css",
+              "src/css/font-awesome.min.css",
+              "src/css/meanmenu.css",
+              "src/css/slick.css",
+              "src/css/jquery.fancybox.min.css",
+              "src/css/jquery-ui.css",
+              "src/css/nice-select.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/js/jquery.min.js",
+              "src/js/popper.min.js",
+              "src/js/bootstrap.bundle.min.js",
+              "src/js/jquery-3.0.0.min.js",
+              "src/js/plugin.js",
+              "src/js/jquery.mCustomScrollbar.concat.min.js",
+              "src/js/custom.js"
+            ]
           }
         }
       }

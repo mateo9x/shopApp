@@ -3,19 +3,13 @@ package com.mateo9x.shop.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+
 import com.mateo9x.shop.dto.OrderDTO;
 import com.mateo9x.shop.service.OrderService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -47,8 +41,8 @@ public class OrderController {
     }
 
     @GetMapping("/orders/user/{id}")
-    public List<OrderDTO> getAllOrdersForUser() {
-        log.debug("REST request to get all Orders for user: {}");
+    public List<OrderDTO> getAllOrdersForUser(@PathVariable Long id) {
+        log.debug("REST request to get all Orders for user: {}", id);
         return orderService.findAllByUserId();
     }
 
@@ -58,10 +52,10 @@ public class OrderController {
         return orderService.findById(id);
     }
 
-    @DeleteMapping("/orders/{id}")
-    public void deleteOrder(@PathVariable Long id) {
-    log.debug("REST request do delete Order: {}", id);
-    orderService.deleteOrder(id);
+    @DeleteMapping("/orders/return/{id}")
+    public void returnOrder(@PathVariable Long id, @RequestParam Integer amountOfProductsToReturn) {
+        log.debug("REST request do delete Order: {}", id);
+        orderService.returnProduct(id, amountOfProductsToReturn);
     }
 
 }

@@ -14,6 +14,6 @@ public interface OrderService {
 
     OrderDTO findById(Long id);
 
-    void deleteOrder(Long id);
+    void returnProduct(Long orderId, Integer amountOfProductsToReturn);
 
 }

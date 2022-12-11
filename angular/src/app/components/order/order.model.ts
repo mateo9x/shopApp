@@ -15,4 +15,5 @@ export class Order {
   returnMaxDate: any;
   sellerName: string;
   photoUrl: string;
+  amountBought: number;
 }
