@@ -131,6 +131,11 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public Boolean doesUserWithEmailExists(String email) {
+        return userRepository.findByMail(email).isPresent();
+    }
+
     private boolean doesBothPasswordMatches(UserDTO userDTO, User userSavedOnBase) {
         return passwordEncoder.matches(userDTO.getPassword(), userSavedOnBase.getPassword());
     }
