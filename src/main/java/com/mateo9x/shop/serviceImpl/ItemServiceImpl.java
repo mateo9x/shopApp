@@ -60,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDTO> findAllByQuery(String query) {
-        log.info("Request to find all Items by query {}: ", query);
+        log.info("Request to find all Items by query: {}", query);
         return itemRepository.findByBrandLikeOrModelLike(query).stream().filter(dto -> dto.getAmountAvailable() > 0).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
 
