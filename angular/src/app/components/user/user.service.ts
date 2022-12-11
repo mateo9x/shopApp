@@ -62,13 +62,16 @@ export class UserService {
     return this.http.post<User>(`${this.mailSenderUrl}/new-user-welcome-email`, user);
   }
 
-  public resetPassword(user: User) {
-    return this.http.post<User>(`${this.baseUrl}/resetPassword`, user);
+  public resetPassword(mail: String) {
+    return this.http.get<any>(`${this.baseUrl}/resetPassword/${mail}`);
   }
-
 
   public getByUserToken(user: User) {
     return this.http.post<User>(`${this.baseUrl}/token-user`, user);
+  }
+
+  public doesUserWithEmailExists(email: String): Observable<boolean> {
+    return this.http.get<any>(`${this.baseUrl}/mail/${email}`);
   }
 
 }

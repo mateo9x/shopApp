@@ -16,7 +16,6 @@ export class ProfileOrdersComponent implements OnInit {
   user: User = new User();
   cols: any[];
   loading: boolean;
-  changePswdForm = false;
   orders: Order[] = [];
 
   constructor(private userService: UserService, private router: Router, private messageService: MessageService,

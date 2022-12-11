@@ -26,6 +26,10 @@
       <input type="text" name="price" placeholder="zł" [(ngModel)]="item.price" />
     </div>
     <div class="input-data" >
+      <label for="amount">Ilość</label>
+      <input type="number" name="amount" placeholder="szt" [(ngModel)]="item.amountAvailable" />
+    </div>
+    <div class="input-data" >
       <label for="description">Opis</label>
       <input type="text" name="description" [(ngModel)]="item.description" />
     </div>

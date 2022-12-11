@@ -24,4 +24,6 @@ public interface UserService {
 
     UserDTO getUsernameLogged();
 
+    Boolean doesUserWithEmailExists(String email);
+
 }
