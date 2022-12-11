@@ -15,7 +15,6 @@ import { SignUpUserComponent } from './components/user/sign-up-user-component/si
 import { SignInUserComponent } from './components/user/sign-in-user-component/sign-in-user.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClockComponent } from './widget/clockwidget/clock.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TooltipModule } from 'primeng/tooltip';
 import { CartComponent } from './components/cart/cart.component';
@@ -39,7 +38,6 @@ import {InfoComponent} from "./components/info/info.component";
     SignInUserComponent,
     SignUpUserComponent,
     CartComponent,
-    ClockComponent,
     ItemCategoryComponent,
     ProfileDataComponent,
     ItemsComponent,

@@ -1,7 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
-import {ItemsService} from "./components/items/items.service";
 import {ItemCategoryService} from "./components/items/item-category/item-category.service";
 import {ItemCategory} from "./components/items/item-category/item-category.model";
 
