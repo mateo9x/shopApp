@@ -90,4 +90,8 @@ export class ItemsDetailsComponent implements OnInit {
     this.router.navigate(['items/seller', this.item.sellerId]);
   }
 
+  formatCreateDate(createDate: string) {
+    return moment.utc(createDate).local().format('YYYY-MM-DD HH:mm');
+  }
+
 }

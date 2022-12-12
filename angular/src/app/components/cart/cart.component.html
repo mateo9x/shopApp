@@ -10,7 +10,7 @@
     </a>
     <span> Ilość dostępna: {{cartItem.itemAmountAvailable}}</span>
 
-    <input type="number" [(ngModel)]="cartItem.amountSelected" min="1" [max]="cartItem.itemAmountAvailable"/>
+    <input class="cart_input" type="number" [(ngModel)]="cartItem.amountSelected" min="1" [max]="cartItem.itemAmountAvailable"/>
     <button class="padding_10" type="submit" (click)="buyProduct(cartItem)"
             [disabled]="cartItem.amountSelected > cartItem.itemAmountAvailable">Kup teraz
     </button>
