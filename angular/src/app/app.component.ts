@@ -1,8 +1,8 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MessageService} from 'primeng/api';
 import {ItemCategoryService} from "./components/items/item-category/item-category.service";
 import {ItemCategory} from "./components/items/item-category/item-category.model";
+import {ToastService} from "./components/toasts/toast.service";
 
 @Component({
   selector: 'app-root',
@@ -16,8 +16,9 @@ export class AppComponent implements OnInit {
   isCartEmpty = false;
   searchQuery: any;
   itemCategories: ItemCategory[] = [];
+  navClosed = true;
 
-  constructor(private router: Router, private messageService: MessageService, private itemCategoryService: ItemCategoryService) {
+  constructor(private router: Router, private toastService: ToastService, private itemCategoryService: ItemCategoryService) {
   }
 
   ngOnInit() {
@@ -32,13 +33,14 @@ export class AppComponent implements OnInit {
   logOut() {
     sessionStorage.removeItem('id_token');
     this.isUserLogged = false;
-    this.messageService.add({key: 'success', severity: 'success', summary: 'Wylogowano pomyślnie!'});
+    this.toastService.createSuccessToast('Wylogowano pomyślnie!');
   }
 
   openNav() {
     const mySideNav = document.getElementById("mySidenav");
     if (mySideNav) {
       mySideNav.style.width = "250px";
+      this.navClosed = false;
     }
   }
 
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit {
     const mySideNav = document.getElementById("mySidenav");
     if (mySideNav) {
       mySideNav.style.width = "0";
+      this.navClosed = true;
     }
   }
 

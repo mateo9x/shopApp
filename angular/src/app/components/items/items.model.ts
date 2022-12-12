@@ -10,6 +10,7 @@ export class Item{
   sellerName: string;
   createDate: string;
   description?: string;
-  photoUrl?: string;
+  photoUrl: string;
+  amountSelected: number;
 
 }

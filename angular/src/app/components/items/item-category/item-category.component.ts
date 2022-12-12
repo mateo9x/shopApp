@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { ItemCategory } from './item-category.model';
 import { ItemCategoryService } from './item-category.service';
 
@@ -19,7 +18,7 @@ export class ItemCategoryComponent implements OnInit {
   itemChild: ItemCategory;
   id: number;
 
-  constructor(private itemService: ItemCategoryService, private router: Router, private messageService: MessageService) { }
+  constructor(private itemService: ItemCategoryService, private router: Router) { }
 
   ngOnInit() {
     this.itemService.findAllItemCategories().subscribe((response) => {

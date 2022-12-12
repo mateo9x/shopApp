@@ -71,12 +71,6 @@ public class ItemController {
         return itemService.findById(id);
     }
 
-    @GetMapping("/item/cart")
-    public List<ItemDTO> getCartItems() {
-        log.debug("REST request to get Cart for User: {}");
-        return itemService.findCartByUserId();
-    }
-
     @DeleteMapping("/item/{id}")
     public void deleteItem(@PathVariable Long id) {
         log.debug("REST request do delete Item: {}", id);

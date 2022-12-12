@@ -1,10 +1,11 @@
-import { Order } from '../../../order/order.model';
-import { OrderService } from '../../../order/order.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MessageService, ConfirmationService } from 'primeng/api';
-import { User } from 'src/app/components/user/user.model';
-import { UserService } from 'src/app/components/user/user.service';
+import {Order} from '../../../order/order.model';
+import {OrderService} from '../../../order/order.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ConfirmationService} from 'primeng/api';
+import {User} from 'src/app/components/user/user.model';
+import {UserService} from 'src/app/components/user/user.service';
+import {ToastService} from "../../../toasts/toast.service";
 
 @Component({
   selector: 'profile-orders',
@@ -18,8 +19,9 @@ export class ProfileOrdersComponent implements OnInit {
   loading: boolean;
   orders: Order[] = [];
 
-  constructor(private userService: UserService, private router: Router, private messageService: MessageService,
-    private orderService: OrderService, private confirmationService: ConfirmationService) { }
+  constructor(private userService: UserService, private router: Router, private toastService: ToastService,
+              private orderService: OrderService, private confirmationService: ConfirmationService) {
+  }
 
   ngOnInit() {
     this.userService.getUserLogged().subscribe((response) => {
@@ -48,7 +50,7 @@ export class ProfileOrdersComponent implements OnInit {
     const orderMaxExp = new Date(order.date);
     orderMaxExp.setDate(orderMaxExp.getDate() + 7);
     if (new Date() > orderMaxExp) {
-      this.messageService.add({ key: 'error', severity: 'error', summary: 'Termin zwrotu produktu minął' });
+      this.toastService.createErrorToast('Termin zwrotu produktu minął');
     } else {
       this.confirmationService.confirm({
         message: 'Czy na pewno chcesz zwrócić ten produkt?',
@@ -61,7 +63,7 @@ export class ProfileOrdersComponent implements OnInit {
 
   returnProduct(id: number, amountOfProductsToReturn: number) {
     this.orderService.returnProduct(id, amountOfProductsToReturn).subscribe((response) => {
-      this.messageService.add({ key: 'success', severity: 'success', summary: 'Produkt został zwrócony' });
+      this.toastService.createSuccessToast('Produkt został zwrócony');
       this.ngOnInit();
     });
   }

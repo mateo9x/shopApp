@@ -31,6 +31,9 @@ public class Cart implements Serializable {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    @Column(name = "amount_selected")
+    private Integer amountSelected;
+
     public Long getId() {
         return id;
     }
@@ -53,6 +56,14 @@ public class Cart implements Serializable {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public Integer getAmountSelected() {
+        return amountSelected;
+    }
+
+    public void setAmountSelected(Integer amountSelected) {
+        this.amountSelected = amountSelected;
     }
 
     @Override

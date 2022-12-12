@@ -13,8 +13,12 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  public addItemToCartForUser(id: any) {
-    return this.http.post<Item>(`${this.cartUrl}/item-add/${id}`, id);
+  public findCartForUserLogged(): Observable<Cart[]>{
+    return this.http.get<Cart[]>(`${this.cartUrl}/user`);
+  }
+
+  public addItemToCartForUser(id: any, amountSelected: number) {
+    return this.http.post<Item>(`${this.cartUrl}/item-add?id=${id}&amountSelected=${amountSelected}`, id);
   }
 
   public updateCartForUser(cart: Cart) {

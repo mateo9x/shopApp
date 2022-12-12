@@ -9,14 +9,7 @@ import com.mateo9x.shop.service.CartService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -29,10 +22,10 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/cart/item-add/{id}")
-    public CartDTO addItemToCart(@PathVariable Long id) {
-        log.debug("REST request to add Item to User cart: {}", id);
-        return cartService.addItemToCart(id);
+    @PostMapping("/cart/item-add")
+    public CartDTO addItemToCart(@RequestParam Long id, @RequestParam Integer amountSelected) {
+        log.debug("REST request to add Item: {} to cart", id);
+        return cartService.addItemToCart(id, amountSelected);
     }
 
     @PostMapping("/cart")
@@ -53,12 +46,6 @@ public class CartController {
         return cartService.findAll();
     }
 
-    @GetMapping("/cart/user/{id}")
-    public CartDTO getCartForUser(@PathVariable Long id) {
-        log.debug("REST request to get Cart: {}", id);
-        return cartService.findById(id);
-    }
-
     @DeleteMapping("/cart/{id}")
     public void deleteItemUserCart(@PathVariable Long id) {
         log.debug("REST request do delete Item from User Cart: {}", id);
@@ -69,6 +56,12 @@ public class CartController {
     public void deleteItemFromAllCarts(@PathVariable Long id) {
         log.debug("REST request do delete Item from all Carts: {}", id);
         cartService.deleteItemFromAllCarts(id);
+    }
+
+    @GetMapping("/cart/user")
+    public List<CartDTO> getCartItems() {
+        log.debug("REST request to get Cart for User");
+        return cartService.findCartByUserId();
     }
 
 }

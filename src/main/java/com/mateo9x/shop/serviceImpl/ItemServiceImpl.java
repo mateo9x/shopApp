@@ -74,18 +74,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> findCartByUserId() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
-        if (user.isPresent()) {
-            log.info("Request to find Cart for User: {}", user.get().getId());
-            return itemRepository.findByUserId(user.get().getId()).stream().map(itemMapper::toDTO)
-                    .collect(Collectors.toCollection(LinkedList::new));
-        }
-        return null;
-    }
-
-    @Override
     public ItemDTO save(ItemDTO itemDTO) {
         log.info("Request to save Item: {}", itemDTO);
         Item item = itemMapper.toEntity(itemDTO);

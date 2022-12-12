@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/components/user/user.model';
-import { UserService } from 'src/app/components/user/user.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from 'src/app/components/user/user.model';
+import {UserService} from 'src/app/components/user/user.service';
+import {ToastService} from "../../toasts/toast.service";
 
 @Component({
   selector: 'sign-up-user',
@@ -17,9 +16,11 @@ export class SignUpUserComponent implements OnInit {
   loading: boolean;
   users: User[];
 
-  constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
+  constructor(private userService: UserService, private router: Router, private toastService: ToastService) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   clear() {
     this.user.username = '';
@@ -34,24 +35,23 @@ export class SignUpUserComponent implements OnInit {
   }
 
   register() {
-      this.userService.saveUser(this.user).subscribe((response) => {
-        if (response !== null) {
-        this.messageService.add({ key: 'success', severity: 'success', summary: 'Utworzono użytkownika pomyślnie'});
+    this.userService.saveUser(this.user).subscribe((response) => {
+      if (response !== null) {
+        this.toastService.createSuccessToast('Utworzono użytkownika pomyślnie');
         this.userService.newUserWelcomeMail(this.user).subscribe((response) => {
           console.log('Wyslano maila', response);
         });
         this.router.navigate(['']);
       } else {
-        this.messageService.add({ key: 'error', severity: 'error', summary: 'Użytkownik o takim loginie/e-mail-u już istnieje!'});
+        this.toastService.createErrorToast('Użytkownik o takim loginie/e-mail-u już istnieje!');
       }
 
-
-      }, (error) => {
-        this.messageService.add({ key: 'error', severity: 'error', summary: 'Użytkownik nie został utworzony'});
-      });
+    }, (error) => {
+      this.toastService.createErrorToast('Użytkownik nie został utworzony');
+    });
   }
 
-   lowerCaseLogin(user: User) {
+  lowerCaseLogin(user: User) {
     if (user && user.username) {
       user.username = user.username.toLowerCase();
     }

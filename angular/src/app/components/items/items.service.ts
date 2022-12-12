@@ -13,10 +13,6 @@ export class ItemsService {
   constructor(private http: HttpClient) {
   }
 
-  public findAllItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.itemsUrl}`);
-  }
-
   public findItem(id: any): Observable<any> {
     return this.http.get<Item>(`${this.itemsUrl}/${id}`, id);
   }
@@ -32,10 +28,6 @@ export class ItemsService {
   public updateItem(item: Item) {
     return this.http.put<Item>(`${this.itemsUrl}`, item);
 
-  }
-
-  public findCartForUser(id: number): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.itemsUrl}/cart`);
   }
 
   public findAllItemsByCategory(id: any): Observable<Item[]> {

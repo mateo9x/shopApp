@@ -1,11 +1,13 @@
-import { DialogService } from 'primeng/dynamicdialog';
-import { MessageService } from 'primeng/api';
-import { CartService } from './../../cart/cart.service';
-import { Item } from '../items.model';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ItemsService } from '../items.service';
-import * as moment from 'moment';
+import {DialogService} from 'primeng/dynamicdialog';
+import {CartService} from '../../cart/cart.service';
+import {Item} from '../items.model';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ItemsService} from '../items.service';
+import {Cart} from "../../cart/cart.model";
+import {ItemCategoryService} from "../item-category/item-category.service";
+import {ToastService} from "../../toasts/toast.service";
+
 @Component({
   selector: 'items',
   templateUrl: './items.component.html',
@@ -14,13 +16,14 @@ import * as moment from 'moment';
 export class ItemsComponent implements OnInit {
 
   items: Item[] = [];
-  cols: any[];
-  noData = false;
   selectedItem: Item;
-  cartForAnonymousUser: Item[] = [];
+  cartForAnonymousUser: Cart[] = [];
+  title: string;
 
   constructor(private itemService: ItemsService, private router: Router, private cartService: CartService,
-    private messageService: MessageService, private dialogService: DialogService, private route: ActivatedRoute) { }
+              private toastService: ToastService, private dialogService: DialogService, private route: ActivatedRoute,
+              private itemCategoryService: ItemCategoryService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -32,88 +35,80 @@ export class ItemsComponent implements OnInit {
         this.loadData(3, params['query']);
       }
     });
-    this.cols = [
-      { field: 'brand', header: 'Marka' },
-      { field: 'model', header: 'Nazwa' },
-      { field: 'price', header: 'Cena' },
-      { field: 'createDate', header: 'Data wystawienia' },
-      { field: 'sellerName', header: 'Sprzedawca' },
-      { field: 'cartAdd', header: '' }
-    ];
   }
 
   loadData(option: number, param: any) {
     if (option === 1) {
-      this.itemService.findAllItemsByCategory(param).subscribe((respond) => {
-        if (respond.length > 0) {
-          respond.forEach((element) => {
-            element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
-          });
-          this.items = respond;
-          this.noData = false;
-        } else {
-          this.items = [];
-          this.noData = true;
-        }
+      this.itemService.findAllItemsByCategory(param).subscribe((response) => {
+        this.items = response;
+        this.itemCategoryService.findItemCategory(param).subscribe((response) => {
+          this.title = response.name;
+        });
       });
     } else if (option === 2) {
-      this.itemService.findAllItemsBySellerId(param).subscribe((respond) => {
-        if (respond.length > 0) {
-          respond.forEach((element) => {
-            element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
-          });
-          this.items = respond;
-          this.noData = false;
-        } else {
-          this.items = [];
-          this.noData = true;
-        }
+      this.itemService.findAllItemsBySellerId(param).subscribe((response) => {
+        this.items = response;
       });
     } else if (option === 3) {
-      this.itemService.findAllBySearchQuery(param).subscribe((respond) => {
-        if (respond.length > 0) {
-          respond.forEach((element) => {
-            element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
-          });
-          this.items = respond;
-          this.noData = false;
-        } else {
-          this.items = [];
-          this.noData = true;
-        }
+      this.itemService.findAllBySearchQuery(param).subscribe((response) => {
+        this.items = response;
       });
     }
   }
 
   addToCart(item: Item) {
-    if (sessionStorage.getItem('id_token') !== null) {
-      this.cartService.addItemToCartForUser(item.id).subscribe((response) => {
-        if (response !== null) {
-          this.messageService.add({ key: 'success', severity: 'success', summary: 'Dodano produkt do koszyka' });
-        } else {
-          this.messageService.add({ key: 'error', severity: 'error', summary: 'Produkt znajduje się już obecnie w Twoim koszyku' });
-        }
-      });
-    } else {
-      if (sessionStorage.getItem('cart') !== null) {
-        this.cartForAnonymousUser = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
-        if (this.cartForAnonymousUser.find((element) => element.id === item.id)) {
-          this.messageService.add({ key: 'error', severity: 'error', summary: 'Produkt znajduje się już obecnie w Twoim koszyku' });
-        } else {
-          this.cartForAnonymousUser.push(item);
-          sessionStorage.setItem('cart', JSON.stringify(this.cartForAnonymousUser));
-          this.messageService.add({ key: 'success', severity: 'success', summary: 'Dodano produkt do koszyka' });
-        }
+    if (item.amountSelected) {
+      if (sessionStorage.getItem('id_token') !== null) {
+        this.cartService.addItemToCartForUser(item.id, item.amountSelected).subscribe((response) => {
+          if (response) {
+            this.toastService.createSuccessToast('Dodano produkt do koszyka');
+          } else {
+            this.toastService.createErrorToast('Produkt znajduje się już obecnie w Twoim koszyk');
+          }
+        });
       } else {
-        this.cartForAnonymousUser.push(item);
-        sessionStorage.setItem('cart', JSON.stringify(this.cartForAnonymousUser));
-        this.messageService.add({ key: 'success', severity: 'success', summary: 'Dodano produkt do koszyka' });
+        if (sessionStorage.getItem('cart') !== null) {
+          this.cartForAnonymousUser = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
+          if (this.cartForAnonymousUser.find((element) => element.itemId === item.id)) {
+            this.toastService.createErrorToast('Produkt znajduje się już obecnie w Twoim koszyk');
+          } else {
+            this.cartForAnonymousUser.push(this.prepareCartModel(item));
+            sessionStorage.setItem('cart', JSON.stringify(this.cartForAnonymousUser));
+            this.toastService.createSuccessToast('Dodano produkt do koszyka');
+          }
+        } else {
+          this.cartForAnonymousUser.push(this.prepareCartModel(item));
+          sessionStorage.setItem('cart', JSON.stringify(this.cartForAnonymousUser));
+          this.toastService.createSuccessToast('Dodano produkt do koszyka');
+        }
       }
+    } else {
+      this.toastService.createErrorToast('Należy wybrać ilość przed dodaniem do koszyka');
     }
   }
 
   openItemDetail(item: Item) {
     this.router.navigate(['items-details', item.id]);
+  }
+
+  getItemFirstPhoto(photoUrl: string) {
+    if (photoUrl.includes(';')) {
+      return photoUrl.split(';')[0];
+    } else {
+      return photoUrl;
+    }
+  }
+
+  prepareCartModel(item: Item): Cart {
+    return {
+      itemId: item.id,
+      itemModel: item.model,
+      itemBrand: item.brand,
+      itemPhotoUrl: item.photoUrl,
+      itemPrice: item.price,
+      itemAmountAvailable: item.amountAvailable,
+      amountSelected: item.amountSelected
+    }
   }
 
 }
