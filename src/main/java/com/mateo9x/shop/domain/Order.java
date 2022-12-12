@@ -39,6 +39,9 @@ public class Order implements Serializable {
     @JoinColumn(name = "order_payment_id")
     private OrderPayment orderPayment;
 
+    @Column(name = "amount_bought")
+    private Integer amountBought;
+
     public Long getId() {
         return id;
     }
@@ -87,4 +90,11 @@ public class Order implements Serializable {
         this.orderPayment = orderPayment;
     }
 
+    public Integer getAmountBought() {
+        return amountBought;
+    }
+
+    public void setAmountBought(Integer amountBought) {
+        this.amountBought = amountBought;
+    }
 }

@@ -1,45 +1,55 @@
-<main class="container">
-<form #form novalidate>
-  <div class="left-column">
-    <h5>Podaj dane do wysyłki</h5>
-    <div class="input-data" >
-      <label for="firstname">Imię</label>
-      <input type="text" name="firstname"  [(ngModel)]="orderAddress.firstname"required />
+<p *ngIf="order.orderPaymentId" class="p-error" style="text-align: center">
+  To zamówienie zostało już wypełnione
+</p>
+<p *ngIf="noData" class="p-error" style="text-align: center">
+  Brak zamówienia o wskazanym id
+</p>
+<main class="container" style="margin-top:2%; max-width: 40%" *ngIf="!noData && !order.orderPaymentId">
+  <form #form novalidate>
+    <div>
+      <h5>Podaj dane do wysyłki</h5>
+      <div class="input-data">
+        <label for="firstname">Imię</label>
+        <input type="text" name="firstname" [(ngModel)]="orderAddress.firstname" required/>
+      </div>
+      <div class="input-data">
+        <label for="lastname">Nazwisko</label>
+        <input type="text" name="lastname" [(ngModel)]="orderAddress.lastname" required/>
+      </div>
+      <div class="input-data">
+        <label for="mail">Mail</label>
+        <input type="text" name="mail" [(ngModel)]="orderAddress.mail" required/>
+      </div>
+      <div class="input-data">
+        <label for="street">Ulica</label>
+        <input type="text" name="street" [(ngModel)]="orderAddress.street" required/>
+      </div>
+      <div class="input-data">
+        <label for="streetNumber">Nr domu</label>
+        <input type="text" name="streetNumber" [(ngModel)]="orderAddress.streetNumber" required/>
+      </div>
+      <div class="input-data">
+        <label for="city">Miasto</label>
+        <input type="text" name="city" [(ngModel)]="orderAddress.city" required/>
+      </div>
+      <div class="input-data">
+        <label for="phoneNumber">Telefon</label>
+        <input type="number" pattern="[0-9]{9}" name="phoneNumber" [(ngModel)]="orderAddress.phoneNumber" required/>
+      </div>
     </div>
-    <div class="input-data" >
-      <label for="lastname">Nazwisko</label>
-      <input type="text" name="lastname"  [(ngModel)]="orderAddress.lastname"required />
+    <div class="order-payment-container">
+      <h5>Sposób płatności</h5>
+        <p-dropdown name="orderPayment" [options]="orderPayments" [(ngModel)]="selectedOrderPayment"
+                    placeholder="Wybierz sposób płatności"
+                    optionLabel="type" appendTo="body"></p-dropdown>
+      </div>
+    <div class="submit">
+      <button (click)="formConfirm()" class="fadeIn fourth submit-button" style="margin-bottom:5%"
+              [disabled]="!form.valid && !selectedOrderPayment">Potwierdź dane
+      </button>
     </div>
-    <div class="input-data" >
-      <label for="mail">Mail</label>
-      <input type="text" name="mail"  [(ngModel)]="orderAddress.mail"required />
-    </div>
-    <div class="input-data" >
-      <label for="street">Ulica</label>
-      <input type="text" name="street"  [(ngModel)]="orderAddress.street"required />
-    </div>
-    <div class="input-data" >
-      <label for="streetNumber">Nr domu</label>
-      <input type="text" name="streetNumber"  [(ngModel)]="orderAddress.streetNumber"required />
-    </div>
-    <div class="input-data" >
-      <label for="city">Miasto</label>
-      <input type="text" name="city"  [(ngModel)]="orderAddress.city"required />
-    </div>
-    <div class="input-data" >
-      <label for="phoneNumber">Telefon</label>
-      <input type="number" pattern="[0-9]" name="phoneNumber"  [(ngModel)]="orderAddress.phoneNumber"required />
-    </div>
-  </div>
-</form>
-  <div class="right-column">
-    <h5>Sposób płatności</h5>
-      <p-dropdown [options]="orderPayments" [(ngModel)]="selectedOrderPayment" placeholder="Wybierz sposób płatności" optionLabel="type" appendTo="body" > </p-dropdown>
-  </div>
+  </form>
 </main>
-<div class="submit">
-  <button (click)="submitFormConfirm()" class="fadeIn fourth submit-button" style="margin-bottom:5%" [disabled]="!form.valid && selectedOrderPayment === undefined">Potwierdź</button>
-</div>
 
 <p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '20vw'}" acceptLabel="Tak"
-  rejectLabel="Nie" header="Potwierdź adres wysyłki" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+                 rejectLabel="Nie" header="Potwierdź adres wysyłki" icon="pi pi-exclamation-triangle"></p-confirmDialog>

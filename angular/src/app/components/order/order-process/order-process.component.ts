@@ -6,6 +6,8 @@ import {OrderService} from '../order.service';
 import {Order} from '../order.model';
 import {OrderAddress} from '../order.address.model';
 import {ToastService} from "../../toasts/toast.service";
+import {UserService} from "../../user/user.service";
+import {User} from "../../user/user.model";
 
 @Component({
   selector: 'order-process',
@@ -16,14 +18,13 @@ export class OrderProcessComponent implements OnInit {
 
   noData = false;
   orderId: any;
-  isUserLogged = false;
   order: Order = new Order();
   orderAddress: OrderAddress = new OrderAddress();
   orderPayments: OrderPayment[] = [];
   selectedOrderPayment: OrderPayment;
 
   constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private confirmationService: ConfirmationService,
-              private toastService: ToastService) {
+              private toastService: ToastService, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -32,13 +33,20 @@ export class OrderProcessComponent implements OnInit {
     });
     this.orderService.findOrderById(this.orderId).subscribe((response) => {
       this.order = response;
-    })
+      this.noData = false;
+      this.userService.findUser(response.userId).subscribe((userResponse) => {
+        this.fillStartingOrderAddressData(userResponse);
+      });
+    }, (error) => {
+      this.toastService.createErrorToast('Zamówienie nie istnieje!');
+      this.noData = true;
+    });
     this.orderService.findAllOrderPayments().subscribe((response) => {
       this.orderPayments = response;
     });
   }
 
-  submitFormConfirm() {
+  formConfirm() {
     this.confirmationService.confirm({
       message: 'Czy na pewno chcesz kontynuować?',
       accept: () => {
@@ -60,4 +68,12 @@ export class OrderProcessComponent implements OnInit {
     });
   }
 
+  fillStartingOrderAddressData(user: any) {
+    this.orderAddress.firstname = user.firstName;
+    this.orderAddress.lastname = user.lastName;
+    this.orderAddress.mail = user.mail;
+    this.orderAddress.street = user.street;
+    this.orderAddress.streetNumber = user.streetNumber;
+    this.orderAddress.city = user.city;
+  }
 }
