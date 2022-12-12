@@ -1,10 +1,11 @@
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { OrderPayment } from './../order.payment.model';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { OrderService } from '../order.service';
-import { Order } from '../order.model';
-import { OrderAddress } from '../order.address.model';
+import {ConfirmationService} from 'primeng/api';
+import {OrderPayment} from '../order.payment.model';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {OrderService} from '../order.service';
+import {Order} from '../order.model';
+import {OrderAddress} from '../order.address.model';
+import {ToastService} from "../../toasts/toast.service";
 
 @Component({
   selector: 'order-process',
@@ -22,7 +23,8 @@ export class OrderProcessComponent implements OnInit {
   selectedOrderPayment: OrderPayment;
 
   constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+              private toastService: ToastService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe((paramsId) => {
@@ -44,15 +46,16 @@ export class OrderProcessComponent implements OnInit {
       }
     });
   }
+
   submitForm() {
     this.order.orderPaymentId = this.selectedOrderPayment.id;
     this.orderService.saveOrderAddress(this.orderAddress).subscribe((response) => {
       this.order.orderAddressId = response.id;
       this.orderService.updateOrder(this.order).subscribe((response) => {
-        this.messageService.add({ key: 'success', severity: 'success', summary: 'Sposób dostawy został wybrany' });
+        this.toastService.createSuccessToast('Sposób dostawy został wybrany');
         this.router.navigate(['profile/orders']);
       }, (error) => {
-        this.messageService.add({ key: 'error', severity: 'error', summary: 'Nie udało się wybrać dostawy' });
+        this.toastService.createErrorToast('Nie udało się wybrać dostawy');
       });
     });
   }

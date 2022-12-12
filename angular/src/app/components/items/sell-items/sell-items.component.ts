@@ -1,14 +1,11 @@
-import { ItemCategoryService } from './../item-category/item-category.service';
-import { ItemCategory } from './../item-category/item-category.model';
-import { CartService } from '../../cart/cart.service';
-import { UserService } from 'src/app/components/user/user.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ItemsService } from '../items.service';
-import { Item } from '../items.model';
-import { OrderService } from '../../order/order.service';
-import { Order } from '../../order/order.model';
+import {ItemCategoryService} from '../item-category/item-category.service';
+import {ItemCategory} from '../item-category/item-category.model';
+import {UserService} from 'src/app/components/user/user.service';
+import {ConfirmationService} from 'primeng/api';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ItemsService} from '../items.service';
+import {Item} from '../items.model';
 
 @Component({
   selector: 'sell-items',
@@ -24,8 +21,8 @@ export class SellItemsComponent implements OnInit {
   childCategories: ItemCategory[] = [];
   categories: ItemCategory[] = [];
 
-  constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
-    private messageService: MessageService, private confirmationService: ConfirmationService, private itemCategoryService: ItemCategoryService) { }
+  constructor(private itemService: ItemsService, private router: Router, private userService: UserService, private confirmationService: ConfirmationService, private itemCategoryService: ItemCategoryService) {
+  }
 
   ngOnInit() {
     this.itemCategoryService.findAllItemCategories().subscribe((response) => {
@@ -54,6 +51,5 @@ export class SellItemsComponent implements OnInit {
   showSellerItems() {
     this.router.navigate(['items/seller', this.item.sellerId]);
   }
-
 
 }

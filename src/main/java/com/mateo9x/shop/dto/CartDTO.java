@@ -11,6 +11,8 @@ public class CartDTO implements Serializable {
     private String itemModel;
     private Double itemPrice;
 
+    private Integer amountSelected;
+
     public Long getId() {
         return id;
     }
@@ -57,6 +59,14 @@ public class CartDTO implements Serializable {
 
     public void setItemPrice(Double itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public Integer getAmountSelected() {
+        return amountSelected;
+    }
+
+    public void setAmountSelected(Integer amountSelected) {
+        this.amountSelected = amountSelected;
     }
 
     @Override

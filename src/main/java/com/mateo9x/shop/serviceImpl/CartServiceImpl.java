@@ -53,13 +53,6 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDTO findById(Long id) {
-        log.info("Request to find Cart: {}", id);
-        Optional<Cart> cart = cartRepository.findById(id);
-        return cart.map(cartMapper::toDTO).orElse(null);
-    }
-
-    @Override
     public CartDTO save(CartDTO cartDTO) {
         log.info("Request to save Cart: {}", cartDTO);
         Cart cart = cartMapper.toEntity(cartDTO);
@@ -68,7 +61,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDTO addItemToCart(Long id) {
+    public CartDTO addItemToCart(Long id, Integer amountSelected) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (user.isPresent()) {
@@ -78,11 +71,24 @@ public class CartServiceImpl implements CartService {
             if (!isInCartItem.isPresent()) {
                 cartDTO.setItemId(id);
                 cartDTO.setUserId(user.get().getId());
+                cartDTO.setAmountSelected(amountSelected);
                 Cart cart = cartMapper.toEntity(cartDTO);
                 cart = cartRepository.save(cart);
                 return cartMapper.toDTO(cart);
             }
             return null;
+        }
+        return null;
+    }
+
+    @Override
+    public List<CartDTO> findCartByUserId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
+        if (user.isPresent()) {
+            log.info("Request to find Cart for User: {}", user.get().getId());
+            return cartRepository.findByUserId(user.get().getId()).stream().map(cartMapper::toDTO)
+                    .collect(Collectors.toCollection(LinkedList::new));
         }
         return null;
     }

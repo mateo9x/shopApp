@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/components/user/user.model';
-import { UserService } from 'src/app/components/user/user.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from 'src/app/components/user/user.model';
+import {UserService} from 'src/app/components/user/user.service';
+import {ToastService} from "../../../toasts/toast.service";
 
 @Component({
   selector: 'profile-data',
@@ -17,7 +16,8 @@ export class ProfileDataComponent implements OnInit {
   loading: boolean;
   changePswdForm = false;
 
-  constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
+  constructor(private userService: UserService, private router: Router, private toastService: ToastService) {
+  }
 
   ngOnInit() {
     this.userService.getUserLogged().subscribe((response) => {
@@ -33,15 +33,13 @@ export class ProfileDataComponent implements OnInit {
 
   changePassword() {
     this.userService.updateUserPassword(this.user).subscribe((response) => {
-      if (response === true) {
-      this.messageService.add({ key: 'success', severity: 'success', summary: 'Hasło zaaktualizowane pomyślnie' });
-      this.router.navigate(['']);
+      if (response) {
+        this.toastService.createSuccessToast('Hasło zaaktualizowane pomyślnie');
+        this.router.navigate(['']);
       } else {
-        this.messageService.add({ key: 'error', severity: 'error', summary: 'Hasło nie może być takie same jak poprzednie' });
+        this.toastService.createErrorToast('Hasło nie może być takie same jak poprzednie');
       }
     });
   }
-
-
 
 }

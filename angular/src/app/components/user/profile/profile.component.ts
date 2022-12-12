@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { User } from 'src/app/components/user/user.model';
-import { UserService } from 'src/app/components/user/user.service';
+import {Component, OnInit} from '@angular/core';
+import {User} from 'src/app/components/user/user.model';
+import {UserService} from 'src/app/components/user/user.service';
 
 @Component({
   selector: 'profile',
@@ -12,7 +10,9 @@ import { UserService } from 'src/app/components/user/user.service';
 export class ProfileComponent implements OnInit {
 
   user: User = new User;
-  constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
     this.userService.getUserLogged().subscribe((response) => {
@@ -20,9 +20,5 @@ export class ProfileComponent implements OnInit {
     });
 
   }
-
-
-
-
 
 }

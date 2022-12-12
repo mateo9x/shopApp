@@ -1,38 +1,16 @@
-<div>
-  <p-table [columns]="cols" [value]="items" responsiveLayout="scroll" styleClass="p-datatable-striped"
-    selectionMode="single" [(selection)]="selectedItem">
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns">
-          {{col.header}}
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-item let-columns="columns">
+<div class="header_section_top" style="color:white; text-align: center">
+  {{title}}
+</div>
+<div *ngFor="let item of items">
+  <div class="item_row">
+    <img [src]="getItemFirstPhoto(item.photoUrl)">
+    {{item.brand}} {{item.model}}
+    <span> Ilość dostępna: {{item.amountAvailable}}</span>
 
-      <tr [pSelectableRow]="item" (dblclick)="openItemDetail(item)">
-
-        <td *ngFor="let col of columns">
-          <div *ngIf="col.field === 'cartAdd'">
-            <button pTooltip="Dodaj do koszyka" (click)="addToCart(item)"> <i
-                class="fa fa-cart-arrow-down"></i></button>
-          </div>
-          <div *ngIf="col.field === 'price'">
-            {{item[col.field]}} zł
-          </div>
-          <div *ngIf="col.field !== 'cartAdd' && col.field !== 'price'">
-            {{item[col.field]}}
-          </div>
-
-
-        </td>
-
-      </tr>
-
-    </ng-template>
-
-  </p-table>
-  <div *ngIf="noData === true" style="font-weight:bold;text-align:center;margin-top:1%">
-    BRAK DOSTĘPNYCH PRODUKTÓW
+    <input type="number" [(ngModel)]="item.amountSelected" min="1" [max]="item.amountAvailable"/>
+    <button class="padding_10" type="submit" (click)="addToCart(item)" [disabled]="item.amountSelected > item.amountAvailable">Dodaj do koszyka</button>
   </div>
+</div>
+<div *ngIf="items.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">
+  BRAK DOSTĘPNYCH PRODUKTÓW
 </div>

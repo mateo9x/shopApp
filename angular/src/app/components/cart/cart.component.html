@@ -1,38 +1,21 @@
-<div>
-  <p-table [columns]="cols" [value]="cartItems" responsiveLayout="scroll" styleClass="p-datatable-striped"
-    selectionMode="single" [(selection)]="selectedCartItem">
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns">
-          {{col.header}}
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-item let-columns="columns">
+<div class="header_section_top" style="color:white; text-align: center">
+  Twój koszyk
+</div>
+<div *ngFor="let cartItem of cartItems">
 
-      <tr [pSelectableRow]="item" (dblclick)="openItemDetail(item)">
+  <div class="item_row">
+    <img [src]="getItemFirstPhoto(cartItem.itemPhotoUrl)">
+    <a class="product-title" (click)="openItemDetail(cartItem.itemId)">
+      {{cartItem.itemBrand}} {{cartItem.itemModel}}
+    </a>
+    <span> Ilość dostępna: {{cartItem.itemAmountAvailable}}</span>
 
-        <td *ngFor="let col of columns">
-          <div *ngIf="col.field === 'deleteFromCart'">
-            <button pTooltip="Usuń z koszyka" > <i
-                class="fa fa-trash" (click)="deleteFromCart(item)"></i></button>
-          </div>
-          <div *ngIf="col.field === 'price'">
-            {{item[col.field]}} zł
-          </div>
-          <div *ngIf="col.field !== 'deleteFromCart' && col.field !== 'price'">
-            {{item[col.field]}}
-          </div>
-
-
-        </td>
-
-      </tr>
-
-    </ng-template>
-
-  </p-table>
-  <div *ngIf="noData === true" style="font-weight:bold;text-align:center;margin-top:1%">
-    BRAK PRODUKTÓW W KOSZYKU
+    <input type="number" [(ngModel)]="cartItem.amountSelected" min="1" [max]="cartItem.itemAmountAvailable"/>
+    <button class="padding_10" type="submit" (click)="buyProduct(cartItem)"
+            [disabled]="cartItem.amountSelected > cartItem.itemAmountAvailable">Kup Teraz
+    </button>
   </div>
+</div>
+<div *ngIf="cartItems.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">
+  BRAK DOSTĘPNYCH PRODUKTÓW W KOSZYKU
 </div>

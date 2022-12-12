@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ItemCategory } from './item-category.model';
+import {Item} from "../items.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class ItemCategoryService {
     return this.http.get<ItemCategory[]>(`${this.itemCategoryUrl}`);
   }
 
-  public findItemCategory(id: any) {
-    return this.http.get<ItemCategory>(`${this.itemCategoryUrl}/`, id);
+  public findItemCategory(id: any): Observable<ItemCategory> {
+    return this.http.get<ItemCategory>(`${this.itemCategoryUrl}/${id}`);
   }
 
   public deleteItemCategory(id: any) {

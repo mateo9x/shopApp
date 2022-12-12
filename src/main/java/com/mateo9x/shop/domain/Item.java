@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "items")
@@ -24,24 +26,30 @@ public class Item implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "brand")
+    @NotBlank
     private String brand;
     @Column(name = "model")
+    @NotBlank
     private String model;
     @JoinColumn(name = "price")
+    @NotNull
     private Double price;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "items_category_id")
     private ItemCategory itemCategory;
     @Column(name = "amount_available")
+    @NotNull
     private Integer amountAvailable;
     @Column(name = "create_date")
     private Date createDate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seller_id")
+    @NotNull
     private Seller seller;
     @Column(name = "description")
     private String description;
-    @Column(name = "photo")
+    @Column(name = "photos")
+    @NotBlank
     private String photoUrl;
 
     public Long getId() {

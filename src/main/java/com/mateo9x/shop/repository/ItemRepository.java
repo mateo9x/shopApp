@@ -14,9 +14,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     List<Item> findAllByItemCategoryId(Long id);
 
-    @Query(value = "select * from items it inner join carts ct on it.id = ct.item_id where ct.user_id = :userId", nativeQuery = true)
-    List<Item> findByUserId(@Param("userId") Long userId);
-
     @Query(value = "select * from items where seller_id = :sellerId", nativeQuery = true)
     List<Item> findBySellerId(@Param("sellerId") Long sellerId);
 

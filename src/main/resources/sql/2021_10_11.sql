@@ -42,7 +42,7 @@ create table items (
     create_date timestamp null,
     seller_id int null,
     description varchar null,
-    photo varchar null,
+    photos varchar null,
     CONSTRAINT items_pk PRIMARY KEY(id),
     FOREIGN KEY (items_category_id) REFERENCES items_category (id),
     FOREIGN KEY (seller_id) REFERENCES sellers (id)

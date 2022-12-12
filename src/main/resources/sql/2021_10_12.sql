@@ -2,6 +2,7 @@ create table carts (
     id serial not null,
     user_id int null,
     item_id int null,
+    amount_selected int not null,
     CONSTRAINT carts_pk PRIMARY KEY(id),
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (item_id) REFERENCES items (id)
