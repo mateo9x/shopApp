@@ -1,26 +1,21 @@
 package com.mateo9x.shop.controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import com.mateo9x.shop.dto.OrderDTO;
 import com.mateo9x.shop.service.OrderService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
+@AllArgsConstructor
 public class OrderController {
 
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
     private final OrderService orderService;
-
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
 
     @PostMapping("/orders")
     public OrderDTO createOrder(@Valid @RequestBody OrderDTO orderDTO) {
@@ -52,8 +47,8 @@ public class OrderController {
         return orderService.findById(id);
     }
 
-    @DeleteMapping("/orders/return/{id}")
-    public void returnOrder(@PathVariable Long id, @RequestParam Integer amountOfProductsToReturn) {
+    @DeleteMapping("/orders/return")
+    public void returnOrder(@RequestParam Long id, @RequestParam Integer amountOfProductsToReturn) {
         log.debug("REST request do delete Order: {}", id);
         orderService.returnProduct(id, amountOfProductsToReturn);
     }
