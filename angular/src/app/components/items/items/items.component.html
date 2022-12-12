@@ -11,7 +11,7 @@
 
     <input type="number" [(ngModel)]="item.amountSelected" min="1" [max]="item.amountAvailable"/>
     <button class="padding_10" type="submit" (click)="addToCart(item)"
-            [disabled]="item.amountSelected > item.amountAvailable">Dodaj do koszyka
+            [disabled]="item.amountSelected > item.amountAvailable || item.amountSelected < 1">Dodaj do koszyka
     </button>
   </div>
 </div>
