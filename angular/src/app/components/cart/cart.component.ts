@@ -52,8 +52,9 @@ export class CartComponent implements OnInit {
   }
 
   deleteFromCartConfirmDialog(cart: Cart) {
+    const productFullName = cart.itemBrand + ' ' + cart.itemModel;
     this.confirmationService.confirm({
-      message: 'Usunięcie produktu z koszyka powoduje usunięcie wszystkich sztuk w koszyku danego produktu. Czy usunąc produkt z koszyka?',
+      message: 'Usunięcie produktu ' + productFullName + ' z koszyka powoduje usunięcie wszystkich sztuk w koszyku danego produktu. Czy usunąc ' + cart.amountSelected + ' szt. produktu z koszyka?',
       accept: () => {
         this.deleteFromCart(cart);
       }
