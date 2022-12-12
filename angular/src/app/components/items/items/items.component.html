@@ -1,14 +1,18 @@
-<div class="header_section_top" style="color:white; text-align: center">
+<div class="header_section_top" style="color:white; text-align: center; float:none">
   {{title}}
 </div>
 <div *ngFor="let item of items">
   <div class="item_row">
     <img [src]="getItemFirstPhoto(item.photoUrl)">
-    {{item.brand}} {{item.model}}
+    <a class="product-title" (click)="openItemDetail(item.id)">
+      {{item.brand}} {{item.model}}
+    </a>
     <span> Ilość dostępna: {{item.amountAvailable}}</span>
 
-    <input type="number" [(ngModel)]="item.amountSelected" min="1" [max]="item.amountAvailable"/>
-    <button class="padding_10" type="submit" (click)="addToCart(item)" [disabled]="item.amountSelected > item.amountAvailable">Dodaj do koszyka</button>
+    <input class="items_input" type="number" [(ngModel)]="item.amountSelected" min="1" [max]="item.amountAvailable"/>
+    <button class="padding_10" type="submit" (click)="addToCart(item)"
+            [disabled]="item.amountSelected > item.amountAvailable || item.amountSelected < 1">Dodaj do koszyka
+    </button>
   </div>
 </div>
 <div *ngIf="items.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">

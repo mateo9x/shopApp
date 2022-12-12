@@ -19,7 +19,7 @@ export class UserService {
   }
 
   public findUser(id: any) {
-    return this.http.get<User>(`${this.baseUrl}/`, id);
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
   public deleteUser(id: any) {
@@ -72,6 +72,10 @@ export class UserService {
 
   public doesUserWithEmailExists(email: String): Observable<boolean> {
     return this.http.get<any>(`${this.baseUrl}/mail/${email}`);
+  }
+
+  public getUserLogin(userId: number): Observable<string> {
+    return this.http.get<any>(`${this.baseUrl}/user/${userId}/get-user-login`);
   }
 
 }

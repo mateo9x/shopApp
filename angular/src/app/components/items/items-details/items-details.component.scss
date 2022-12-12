@@ -2,7 +2,7 @@
   font-size:40px;
 }
 button {
-  background-color: #4cd2db;
+  background-color: #f26522;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -15,7 +15,7 @@ button {
 
 }
 button:hover {
-  background-color: #41ccd6;
+  background-color: #a63a06;
 }
 
 .container {
@@ -25,24 +25,20 @@ button:hover {
   display: flex;
 }
 
-
-
 img{
   width:80%;
-  height:100%;
+  height:auto;
 }
 
 .left-column {
-  width: 60%;
+  max-width: 60%;
   position: relative;
 }
 
 .right-column {
-  width: 40%;
+  max-width: 40%;
   margin-top: 60px;
 }
-
-
 
 .product-description {
   border-bottom: 1px solid #E1E8EE;
@@ -50,7 +46,7 @@ img{
 }
 .product-description span {
   font-size: 16px;
-  color: #358ED7;
+  color: #f26522;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
@@ -66,34 +62,41 @@ img{
   font-weight: 300;
   color: #86939E;
   line-height: 24px;
+  text-align: left;
+  margin-left: 0;
 }
 
 
 .product-price {
+  max-width: 50%;
   margin-top: 4%;
   display: flex;
-  align-items: center;
+  justify-content:flex-start;
+  flex-direction: column;
 }
 
 .product-price span {
   font-size: 26px;
   font-weight: 300;
   color: #43474D;
-  margin-right: 20px;
+}
+
+.product-price input, .product-price span {
+  margin-bottom: 2%;
 }
 
 .cart-btn {
   display: inline-block;
-  background-color: #7DC855;
+  background-color: #f26522;
   border-radius: 6px;
   font-size: 16px;
   color: #FFFFFF;
   text-decoration: none;
-  padding: 12px 30px;
+  padding: 6px 15px;
   transition: all .5s;
 }
 .cart-btn:hover {
-  background-color: #64af3d;
+  background-color: #a63a06;
 }
 .cart-btn:disabled {
   background-color: grey;
@@ -109,11 +112,23 @@ a:hover, a:active{
 }
 
 .sellerItems:hover{
-  color:#4cd2db !important;
+  color:#f26522 !important;
   text-decoration: underline !important;
 }
 
 .sold {
   color:red;
   font-style: oblique;
+}
+
+.items_details_input {
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

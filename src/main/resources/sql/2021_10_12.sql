@@ -30,6 +30,7 @@ create table orders (
     id serial not null,
     item_id int null,
     date timestamp null,
+    amount_bought int not null,
     user_id int not null,
     order_address_id int null,
     order_payment_id int null,

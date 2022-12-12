@@ -46,24 +46,25 @@ export class ProfileOrdersComponent implements OnInit {
     this.router.navigate(['order-process', id]);
   }
 
-  returnProductConfirm(order: Order) {
+  checkOrderReturnDate(order: Order) {
     const orderMaxExp = new Date(order.date);
     orderMaxExp.setDate(orderMaxExp.getDate() + 7);
-    if (new Date() > orderMaxExp) {
-      this.toastService.createErrorToast('Termin zwrotu produktu minął');
-    } else {
-      this.confirmationService.confirm({
-        message: 'Czy na pewno chcesz zwrócić ten produkt?',
-        accept: () => {
-          this.returnProduct(order.id, 1);
-        }
-      });
-    }
+    return new Date() > orderMaxExp;
+  }
+
+  returnProductConfirm(order: Order) {
+    const itemFullName = order.itemBrand + ' ' + order.itemModel;
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chcesz zwrócić produkt ' + itemFullName + ' ? Wykonanie zwrotu dotyczy wszystkich zakupionych sztuk produktu ('+ order.amountBought + ' szt.)',
+      accept: () => {
+        this.returnProduct(order.id, order.amountBought);
+      }
+    });
   }
 
   returnProduct(id: number, amountOfProductsToReturn: number) {
     this.orderService.returnProduct(id, amountOfProductsToReturn).subscribe((response) => {
-      this.toastService.createSuccessToast('Produkt został zwrócony');
+      this.toastService.createSuccessToast('Produkty został zwrócony');
       this.ngOnInit();
     });
   }

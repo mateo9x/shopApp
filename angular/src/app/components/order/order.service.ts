@@ -32,7 +32,7 @@ export class OrderService {
   }
 
   public returnProduct(id: number, amountOfProductsToReturn: number) {
-    return this.http.post<Order>(`${this.ordersUrl}/${id}?amountOfProductsToReturn=${amountOfProductsToReturn}`, id);
+    return this.http.delete<Order>(`${this.ordersUrl}/return?id=${id}&amountOfProductsToReturn=${amountOfProductsToReturn}`);
   }
 
   public createOrder(order: Order) {

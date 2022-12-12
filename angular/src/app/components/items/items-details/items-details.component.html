@@ -12,13 +12,15 @@
       <span>{{item.brand}}</span>
       <h1>{{item.model}}</h1>
       <p>{{item.description}}</p>
+      <p>Data dodania produktu: {{formatCreateDate(item.createDate)}}</p>
     </div>
 
-    <a class="sellerItems" (click)="showSellerItems()">Wyświetl wszystkie produkty sprzedającego <i>{{item.sellerName}}</i></a>
+    <a class="sellerItems" (click)="showSellerItems()">Wyświetl wszystkie produkty sprzedającego {{item.sellerName}}</a>
 
     <div class="product-price">
       <span>{{item.price}} zł</span>
-      <button (click)="buyConfirm()" class="cart-btn" [disabled]="productSold">Kup Teraz</button>
+      <input class="items_details_input" [(ngModel)]="item.amountSelected" placeholder="dostępne: {{item.amountAvailable}} szt." min="1" [max]="item.amountAvailable"/>
+      <button (click)="buyConfirm()" class="cart-btn" [disabled]="productSold" [disabled]="item.amountSelected > item.amountAvailable || item.amountSelected < 1">Kup Teraz</button>
     </div>
     <div *ngIf="productSold" class="sold">Produkt jest już niedostępny</div>
   </div>
