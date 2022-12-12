@@ -19,7 +19,7 @@ export class UserService {
   }
 
   public findUser(id: any) {
-    return this.http.get<User>(`${this.baseUrl}/`, id);
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
   public deleteUser(id: any) {
