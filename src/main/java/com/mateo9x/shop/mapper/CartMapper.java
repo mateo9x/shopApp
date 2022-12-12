@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 public interface CartMapper {
 
     CartMapper INSTANCE = Mappers.getMapper(CartMapper.class);
-    
+
     @Mapping(source = "userId", target = "user")
     @Mapping(source = "itemId", target = "item")
     Cart toEntity(CartDTO cartDTO);
@@ -21,8 +21,10 @@ public interface CartMapper {
     @Mapping(source="item.brand", target = "itemBrand")
     @Mapping(source="item.model", target = "itemModel")
     @Mapping(source="item.price", target = "itemPrice")
+    @Mapping(source="item.photoUrl", target = "itemPhotoUrl")
+    @Mapping(source="item.amountAvailable", target = "itemAmountAvailable")
     CartDTO toDTO(Cart cart);
-    
+
     default Cart fromId(Long id) {
         if (id == null) {
             return null;

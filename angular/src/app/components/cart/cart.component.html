@@ -11,8 +11,8 @@
     <span> Ilość dostępna: {{cartItem.itemAmountAvailable}}</span>
 
     <input class="cart_input" type="number" [(ngModel)]="cartItem.amountSelected" min="1" [max]="cartItem.itemAmountAvailable"/>
-    <button class="padding_10" type="submit" (click)="buyProduct(cartItem)"
-            [disabled]="cartItem.amountSelected > cartItem.itemAmountAvailable">Kup teraz
+    <button *ngIf="userLogged" class="padding_10" type="submit" (click)="buyProduct(cartItem)"
+            [disabled]="cartItem.amountSelected > cartItem.itemAmountAvailable || cartItem.amountSelected < 1">Kup teraz
     </button>
     <button class="padding_10" type="submit" (click)="deleteFromCartConfirmDialog(cartItem)">Usuń z koszyka
     </button>

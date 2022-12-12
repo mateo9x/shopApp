@@ -13,6 +13,9 @@ public class CartDTO implements Serializable {
 
     private Integer amountSelected;
 
+    private String itemPhotoUrl;
+    private Integer itemAmountAvailable;
+
     public Long getId() {
         return id;
     }
@@ -67,6 +70,22 @@ public class CartDTO implements Serializable {
 
     public void setAmountSelected(Integer amountSelected) {
         this.amountSelected = amountSelected;
+    }
+
+    public String getItemPhotoUrl() {
+        return itemPhotoUrl;
+    }
+
+    public void setItemPhotoUrl(String itemPhotoUrl) {
+        this.itemPhotoUrl = itemPhotoUrl;
+    }
+
+    public Integer getItemAmountAvailable() {
+        return itemAmountAvailable;
+    }
+
+    public void setItemAmountAvailable(Integer itemAmountAvailable) {
+        this.itemAmountAvailable = itemAmountAvailable;
     }
 
     @Override
