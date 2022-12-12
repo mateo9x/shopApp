@@ -53,33 +53,37 @@ export class ItemsDetailsComponent implements OnInit {
   }
 
   buyConfirm() {
-    this.confirmationService.confirm({
-      message: 'Czy na pewno chcesz zakupić ten produkt?',
-      accept: () => {
-        this.buyProduct();
-      }
-    });
+    if (this.item.amountSelected) {
+      this.confirmationService.confirm({
+        message: 'Czy na pewno chcesz zakupić ten produkt?',
+        accept: () => {
+          this.buyProduct();
+        }
+      });
+    } else {
+      this.toastService.createErrorToast('Należy wybrać ilość produktów!');
+    }
   }
 
   buyProduct() {
     this.order.date = new Date();
     this.order.itemId = this.item.id;
+    this.order.amountBought = this.item.amountSelected;
     this.orderService.createOrder(this.order).subscribe((response) => {
       if (response !== null) {
-        this.cartService.deleteItemFromAllCarts(this.itemId).subscribe((response) => {
-
+        this.cartService.deleteItemFromAllCarts(this.itemId).subscribe((itemRemoveResponse) => {
+          if (sessionStorage.getItem('cart') !== null) {
+            this.cartItems = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
+            this.cartItems.forEach((element, index) => {
+              if (element.id === this.item.id) {
+                delete this.cartItems[index];
+              }
+            });
+            sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
+          }
+          this.toastService.createSuccessToast('Produkt został zakupiony');
+          this.router.navigate(['order-process', response.id]);
         });
-        if (sessionStorage.getItem('cart') !== null) {
-          this.cartItems = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
-          this.cartItems.forEach((element, index) => {
-            if (element.id === this.item.id) {
-              delete this.cartItems[index];
-            }
-          });
-          sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
-        }
-        this.toastService.createSuccessToast('Produkt został zakupiony');
-        this.router.navigate(['order-process', response.id]);
       } else {
         this.toastService.createErrorToast('Musisz być zalogowany, żeby kupować produkty');
       }
