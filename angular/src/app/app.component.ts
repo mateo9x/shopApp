@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   isCartEmpty = false;
   searchQuery: any;
   itemCategories: ItemCategory[] = [];
+  navClosed = true;
 
   constructor(private router: Router, private messageService: MessageService, private itemCategoryService: ItemCategoryService) {
   }
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
     const mySideNav = document.getElementById("mySidenav");
     if (mySideNav) {
       mySideNav.style.width = "250px";
+      this.navClosed = false;
     }
   }
 
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit {
     const mySideNav = document.getElementById("mySidenav");
     if (mySideNav) {
       mySideNav.style.width = "0";
+      this.navClosed = true;
     }
   }
 

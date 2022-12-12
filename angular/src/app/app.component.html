@@ -21,7 +21,7 @@
             <a routerLink="" routerLinkActive="active" (click)="displayItemsFromCategory(itemCategory.id)"> {{itemCategory.name}} </a>
           </div>
         </div>
-        <span class="toggle_icon" (click)="openNav()"><img src="../assets/images/toggle-icon.png"></span>
+        <span class="toggle_icon" (click)="openNav()" *ngIf="navClosed"><img src="../assets/images/toggle-icon.png"></span>
         <div class="main">
           <!-- Another variation with a button -->
           <div class="input-group">
