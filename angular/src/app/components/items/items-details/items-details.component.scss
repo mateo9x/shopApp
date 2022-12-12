@@ -25,24 +25,20 @@ button:hover {
   display: flex;
 }
 
-
-
 img{
   width:80%;
   height:auto;
 }
 
 .left-column {
-  width: 60%;
+  max-width: 60%;
   position: relative;
 }
 
 .right-column {
-  width: 40%;
+  max-width: 40%;
   margin-top: 60px;
 }
-
-
 
 .product-description {
   border-bottom: 1px solid #E1E8EE;
@@ -66,6 +62,8 @@ img{
   font-weight: 300;
   color: #86939E;
   line-height: 24px;
+  text-align: left;
+  margin-left: 0;
 }
 
 

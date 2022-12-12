@@ -15,7 +15,7 @@
       <p>Data dodania produktu: {{formatCreateDate(item.createDate)}}</p>
     </div>
 
-    <a class="sellerItems" (click)="showSellerItems()">Wyświetl wszystkie produkty sprzedającego <i>{{item.sellerName}}</i></a>
+    <a class="sellerItems" (click)="showSellerItems()">Wyświetl wszystkie produkty sprzedającego {{item.sellerName}}</a>
 
     <div class="product-price">
       <span>{{item.price}} zł</span>
