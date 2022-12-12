@@ -12,10 +12,14 @@
 
     <input type="number" [(ngModel)]="cartItem.amountSelected" min="1" [max]="cartItem.itemAmountAvailable"/>
     <button class="padding_10" type="submit" (click)="buyProduct(cartItem)"
-            [disabled]="cartItem.amountSelected > cartItem.itemAmountAvailable">Kup Teraz
+            [disabled]="cartItem.amountSelected > cartItem.itemAmountAvailable">Kup teraz
+    </button>
+    <button class="padding_10" type="submit" (click)="deleteFromCartConfirmDialog(cartItem)">Usuń z koszyka
     </button>
   </div>
 </div>
 <div *ngIf="cartItems.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">
   BRAK DOSTĘPNYCH PRODUKTÓW W KOSZYKU
 </div>
+<p-confirmDialog acceptLabel="Tak"
+                 rejectLabel="Nie" header="Potwierdź usunięcie produktu z koszyka" icon="pi pi-exclamation-triangle"></p-confirmDialog>

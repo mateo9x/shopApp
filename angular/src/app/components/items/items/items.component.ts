@@ -7,7 +7,6 @@ import {ItemsService} from '../items.service';
 import {Cart} from "../../cart/cart.model";
 import {ItemCategoryService} from "../item-category/item-category.service";
 import {ToastService} from "../../toasts/toast.service";
-import {UserService} from "../../user/user.service";
 import {SellerService} from "../../sellers/seller.service";
 
 @Component({

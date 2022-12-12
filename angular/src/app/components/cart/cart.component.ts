@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {CartService} from './cart.service';
 import {Cart} from "./cart.model";
 import {ToastService} from "../toasts/toast.service";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'cart',
@@ -18,7 +19,8 @@ export class CartComponent implements OnInit {
   userLogged = false;
   userId: number;
 
-  constructor(private cartService: CartService, private router: Router, private toastService: ToastService, private userService: UserService) {
+  constructor(private cartService: CartService, private router: Router, private toastService: ToastService, private userService: UserService,
+              private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {
@@ -47,6 +49,15 @@ export class CartComponent implements OnInit {
         this.noData = true;
       }
     }
+  }
+
+  deleteFromCartConfirmDialog(cart: Cart) {
+    this.confirmationService.confirm({
+      message: 'Usunięcie produktu z koszyka powoduje usunięcie wszystkich sztuk w koszyku danego produktu. Czy usunąc produkt z koszyka?',
+      accept: () => {
+        this.deleteFromCart(cart);
+      }
+    });
   }
 
   deleteFromCart(cart: Cart) {
