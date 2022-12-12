@@ -29,10 +29,10 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@onlineshop.com");
         message.setTo(userDTO.getMail());
-        message.setSubject("Online Shop - Konto");
+        message.setSubject("Wszystko w sieci - rejestracja użytkownika");
         message.setText("Witaj " + user
-                + "!\n\nTwoje konto zostało pomyślnie utworzone w serwisie Online Shop.\n\nDziękujemy i zapraszamy do korzystania z aplikacji!"
-                + "\n\nOnline Shop\nul. Programistów 3\n40-400 Warszawa\nKRS: XXXXXXXXXX");
+                + "!\n\nTwoje konto zostało pomyślnie utworzone w serwisie Wszystko w sieci.\n\nDziękujemy i zapraszamy do korzystania z aplikacji!"
+                + "\n\nWszystko w sieci\nul. Programistów 3\n40-400 Warszawa\nKRS: XXXXXXXXXX");
         try {
             javaMailSender.send(message);
         } catch (Exception e) {
