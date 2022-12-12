@@ -6,8 +6,8 @@ import javax.validation.Valid;
 import com.mateo9x.shop.dto.UserDTO;
 import com.mateo9x.shop.service.UserService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
+@AllArgsConstructor
 public class UserController {
 
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/users")
     public UserDTO createUser(@Valid @RequestBody UserDTO userDTO) {
@@ -78,7 +75,7 @@ public class UserController {
 
     @PostMapping("/users/token-user")
     public UserDTO getUserByToken(@RequestBody @Valid UserDTO userDTO) {
-        log.debug("REST request to get User by token: {}");
+        log.debug("REST request to get User by token: {}", userDTO.getResetToken());
         return userService.findByResetToken(userDTO);
     }
 

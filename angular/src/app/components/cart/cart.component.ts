@@ -13,7 +13,6 @@ import {ToastService} from "../toasts/toast.service";
 })
 export class CartComponent implements OnInit {
 
-  cols: any[];
   cartItems: Cart[] = [];
   noData = true;
   userLogged = false;
@@ -30,16 +29,6 @@ export class CartComponent implements OnInit {
       }
       this.loadData();
     });
-
-    this.cols = [
-      {field: 'brand', header: 'Marka'},
-      {field: 'model', header: 'Nazwa'},
-      {field: 'price', header: 'Cena'},
-      {field: 'createDate', header: 'Data wystawienia'},
-      {field: 'sellerName', header: 'Sprzedawca'},
-      {field: 'amountSelected', header: 'Ilość'},
-      {field: 'deleteFromCart', header: ''}
-    ];
   }
 
   loadData() {
@@ -60,16 +49,14 @@ export class CartComponent implements OnInit {
     }
   }
 
-
-  deleteFromCart(item: Item) {
-    console.log(item);
+  deleteFromCart(cart: Cart) {
     if (this.userLogged) {
-      this.cartService.deleteItemFromCart(item.id).subscribe((response) => {
+      this.cartService.deleteItemFromCart(cart.itemId).subscribe((response) => {
         this.toastService.createSuccessToast('Produkt usunięty z koszyka');
         this.ngOnInit();
       });
     } else {
-      this.cartItems = this.cartItems.filter((element) => element.id !== item.id);
+      this.cartItems = this.cartItems.filter((element) => element.itemId !== cart.itemId);
       sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
       this.toastService.createSuccessToast('Produkt usunięty z koszyka');
       this.ngOnInit();

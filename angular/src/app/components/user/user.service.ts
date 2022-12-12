@@ -74,4 +74,8 @@ export class UserService {
     return this.http.get<any>(`${this.baseUrl}/mail/${email}`);
   }
 
+  public getUserLogin(userId: number): Observable<string> {
+    return this.http.get<any>(`${this.baseUrl}/user/${userId}/get-user-login`);
+  }
+
 }

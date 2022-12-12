@@ -1,6 +1,6 @@
 .item_row {
   height: 200px;
-  border: 1px solid #9B5C2E;
+  border-bottom: 1px solid #9B5C2E;
 }
 
 .fa {
@@ -35,4 +35,9 @@ button:hover {
 
 button:disabled,button[disabled=disabled]{
   background-color: grey ;
+}
+
+a:hover,a:active, a:focus, a:link, a:visited, a {
+  text-decoration: underline;
+  text-underline: #9B5C2E;
 }

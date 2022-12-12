@@ -7,6 +7,8 @@ import {ItemsService} from '../items.service';
 import {Cart} from "../../cart/cart.model";
 import {ItemCategoryService} from "../item-category/item-category.service";
 import {ToastService} from "../../toasts/toast.service";
+import {UserService} from "../../user/user.service";
+import {SellerService} from "../../sellers/seller.service";
 
 @Component({
   selector: 'items',
@@ -22,7 +24,7 @@ export class ItemsComponent implements OnInit {
 
   constructor(private itemService: ItemsService, private router: Router, private cartService: CartService,
               private toastService: ToastService, private dialogService: DialogService, private route: ActivatedRoute,
-              private itemCategoryService: ItemCategoryService) {
+              private itemCategoryService: ItemCategoryService, private sellerService: SellerService) {
   }
 
   ngOnInit() {
@@ -42,16 +44,20 @@ export class ItemsComponent implements OnInit {
       this.itemService.findAllItemsByCategory(param).subscribe((response) => {
         this.items = response;
         this.itemCategoryService.findItemCategory(param).subscribe((response) => {
-          this.title = response.name;
+          this.title = 'Produkty z kategorii: ' + response.name;
         });
       });
     } else if (option === 2) {
       this.itemService.findAllItemsBySellerId(param).subscribe((response) => {
         this.items = response;
+        this.sellerService.findSellerById(param).subscribe((response) => {
+          this.title = 'Produkty sprzedawcy: ' + response.name;
+        });
       });
     } else if (option === 3) {
       this.itemService.findAllBySearchQuery(param).subscribe((response) => {
         this.items = response;
+        this.title = 'Produkty znalezione po frazie: ' + param;
       });
     }
   }
@@ -87,8 +93,8 @@ export class ItemsComponent implements OnInit {
     }
   }
 
-  openItemDetail(item: Item) {
-    this.router.navigate(['items-details', item.id]);
+  openItemDetail(itemId: number) {
+    this.router.navigate(['items-details', itemId]);
   }
 
   getItemFirstPhoto(photoUrl: string) {
