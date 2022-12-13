@@ -18,6 +18,7 @@ User authenthicated has access to secured endpoints.
 - Returning items for 7 days since product buy
 - Finalizing item buy in profile component
 - Adding new items on auction
+- Notifying seller about "one" of his item been bought through email message
 
 ### Coming soon:
 - Better design of application
