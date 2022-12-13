@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "sellers")
@@ -21,6 +23,12 @@ public class Seller implements Serializable {
     private Long id;
     @Column(name = "name")
     private String name;
+
+    @Column(name = "mail")
+    @Email
+    @NotBlank
+    private String mail;
+
 
     public Long getId() {
         return id;
@@ -38,4 +46,11 @@ public class Seller implements Serializable {
         this.name = name;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 }

@@ -22,7 +22,7 @@ create table orders_address (
     street varchar(100) null,
     street_number varchar(100) null,
     city varchar(100) null,
-    phone_number int null,
+    phone_number varchar(100) null,
     CONSTRAINT orders_address_pk PRIMARY KEY(id)
 );
 

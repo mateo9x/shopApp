@@ -27,12 +27,12 @@ public class MailServiceImpl implements MailService {
             user = userDTO.getUsername();
         }
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@onlineshop.com");
+        message.setFrom("noreply@wszystkowsieci.pl");
         message.setTo(userDTO.getMail());
-        message.setSubject("Online Shop - Konto");
+        message.setSubject("Wszystko w sieci - rejestracja użytkownika");
         message.setText("Witaj " + user
-                + "!\n\nTwoje konto zostało pomyślnie utworzone w serwisie Online Shop.\n\nDziękujemy i zapraszamy do korzystania z aplikacji!"
-                + "\n\nOnline Shop\nul. Programistów 3\n40-400 Warszawa\nKRS: XXXXXXXXXX");
+                + "!\n\nTwoje konto zostało pomyślnie utworzone w serwisie Wszystko w sieci.\n\nDziękujemy i zapraszamy do korzystania z aplikacji!"
+                + "\n\nWszystko w sieci\nul. Programistów 3\n40-400 Warszawa\nKRS: XXXXXXXXXX");
         try {
             javaMailSender.send(message);
         } catch (Exception e) {
@@ -50,12 +50,27 @@ public class MailServiceImpl implements MailService {
             user = userDTO.getUsername();
         }
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@onlineshop.com");
+        message.setFrom("noreply@wszystkowsieci.pl");
         message.setTo(userDTO.getMail());
         message.setSubject("Online Shop - Konto");
         message.setText("Witaj " + user + "!\n\nPoniżej znajduje się link do zresetowania hasła:\n\n" + url);
         try {
             javaMailSender.send(message);
+        } catch (Exception e) {
+            log.error("Nie udało się wysłać maila resetującego hasła: {}", e.getMessage());
+        }
+    }
+
+    @Override
+    public void notifySellerAboutHisItemProductBuy(String message, String to) {
+        SimpleMailMessage spm = new SimpleMailMessage();
+        spm.setFrom("noreply@wszystkowsieci.pl");
+        spm.setTo(to);
+        spm.setSubject("Wszystko w sieci - zakupiono produkt");
+        spm.setText(message);
+        try {
+            javaMailSender.send(spm);
+            log.info("Wysłano maila do sprzedawcy: {} o zakupie jednego z jego produktów", to);
         } catch (Exception e) {
             log.error("Nie udało się wysłać maila resetującego hasła: {}", e.getMessage());
         }

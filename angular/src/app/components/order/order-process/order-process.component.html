@@ -34,7 +34,7 @@
       </div>
       <div class="input-data">
         <label for="phoneNumber">Telefon</label>
-        <input type="number" pattern="[0-9]{9}" name="phoneNumber" [(ngModel)]="orderAddress.phoneNumber" required/>
+        <input type="text" name="phoneNumber" [(ngModel)]="orderAddress.phoneNumber" required/>
       </div>
     </div>
     <div class="order-payment-container">
@@ -42,6 +42,8 @@
         <p-dropdown name="orderPayment" [options]="orderPayments" [(ngModel)]="selectedOrderPayment"
                     placeholder="Wybierz sposób płatności"
                     optionLabel="type" appendTo="body"></p-dropdown>
+
+      <h6>Łączna kwota do zapłaty: {{getTotalAmountToPay()}} zł</h6>
       </div>
     <div class="submit">
       <button (click)="formConfirm()" class="fadeIn fourth submit-button" style="margin-bottom:5%"

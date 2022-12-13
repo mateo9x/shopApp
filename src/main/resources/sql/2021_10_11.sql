@@ -29,6 +29,7 @@ create table items_category (
 create table sellers (
     id serial not null,
     name varchar(250) not null,
+    mail varchar(250) not null,
     CONSTRAINT sellers_pk PRIMARY KEY(id)
 );
 

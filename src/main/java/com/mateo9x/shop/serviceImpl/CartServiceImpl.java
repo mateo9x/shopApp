@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import com.mateo9x.shop.domain.Cart;
 import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.dto.CartDTO;
+import com.mateo9x.shop.dto.CartUpdateRequestDto;
 import com.mateo9x.shop.mapper.CartMapper;
 import com.mateo9x.shop.repository.CartRepository;
 import com.mateo9x.shop.repository.UserRepository;
@@ -41,9 +42,20 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void deleteItemFromAllCarts(Long id) {
-        log.info("Request to delete Item {} from all Carts", id);
-        cartRepository.deleteItemFromAllCarts(id);
+    public boolean updateItemAmountInCart(CartUpdateRequestDto cartUpdateRequestDto) {
+        log.info("Request to update Item: {} amount in Cart", cartUpdateRequestDto.getItemId());
+        Cart cart = cartRepository.findByItemId(cartUpdateRequestDto.getItemId()).orElse(null);
+        if (cart == null) {
+            return false;
+        }
+        if (cartUpdateRequestDto.getAmountAvailableAfterBuy().equals(0)) {
+            cartRepository.deleteById(cart.getId());
+        }
+        if (cartUpdateRequestDto.getAmountAvailableAfterBuy() > 0 && cart.getAmountSelected() > cartUpdateRequestDto.getAmountAvailableAfterBuy()) {
+            cart.setAmountSelected(cartUpdateRequestDto.getAmountAvailableAfterBuy());
+            cartRepository.save(cart);
+        }
+        return true;
     }
 
     @Override

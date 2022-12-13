@@ -59,7 +59,7 @@ export class OrderProcessComponent implements OnInit {
     this.order.orderPaymentId = this.selectedOrderPayment.id;
     this.orderService.saveOrderAddress(this.orderAddress).subscribe((response) => {
       this.order.orderAddressId = response.id;
-      this.orderService.updateOrder(this.order).subscribe((response) => {
+      this.orderService.finishOrderProcess(this.order).subscribe((response) => {
         this.toastService.createSuccessToast('Sposób dostawy został wybrany');
         this.router.navigate(['profile/orders']);
       }, (error) => {
@@ -75,5 +75,9 @@ export class OrderProcessComponent implements OnInit {
     this.orderAddress.street = user.street;
     this.orderAddress.streetNumber = user.streetNumber;
     this.orderAddress.city = user.city;
+  }
+
+  getTotalAmountToPay() {
+    return this.order.amountBought * this.order.itemPrice;
   }
 }

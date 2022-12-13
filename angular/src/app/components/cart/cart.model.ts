@@ -9,3 +9,13 @@ export class Cart {
   itemAmountAvailable: number;
   amountSelected: number;
 }
+
+export class CartUpdateRequest {
+  itemId: number;
+  amountAvailableAfterBuy: number;
+
+  constructor(itemId: number, amountAvailableAfterBuy: number) {
+    this.itemId = itemId;
+    this.amountAvailableAfterBuy = amountAvailableAfterBuy;
+  }
+}

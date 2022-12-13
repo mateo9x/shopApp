@@ -8,4 +8,6 @@ public interface MailService {
 
     void sendResetPasswordToken(UserDTO userDTO);
 
+    void notifySellerAboutHisItemProductBuy(String message, String to);
+
 }

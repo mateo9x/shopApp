@@ -39,7 +39,6 @@ export class SignUpUserComponent implements OnInit {
       if (response !== null) {
         this.toastService.createSuccessToast('Utworzono użytkownika pomyślnie');
         this.userService.newUserWelcomeMail(this.user).subscribe((response) => {
-          console.log('Wyslano maila', response);
         });
         this.router.navigate(['']);
       } else {

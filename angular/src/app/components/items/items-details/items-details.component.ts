@@ -9,6 +9,7 @@ import {OrderService} from '../../order/order.service';
 import {Order} from '../../order/order.model';
 import * as moment from "moment/moment";
 import {ToastService} from "../../toasts/toast.service";
+import {Cart, CartUpdateRequest} from "../../cart/cart.model";
 
 @Component({
   selector: 'items-details',
@@ -23,7 +24,7 @@ export class ItemsDetailsComponent implements OnInit {
   itemId: any;
   isUserLogged = false;
   order: Order = new Order();
-  cartItems: Item[] = [];
+  cartItems: Cart[] = [];
   productSold = false;
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
@@ -66,17 +67,22 @@ export class ItemsDetailsComponent implements OnInit {
   }
 
   buyProduct() {
+    const amountAvailableAfterBuy = this.item.amountAvailable - this.item.amountSelected;
     this.order.date = new Date();
     this.order.itemId = this.item.id;
     this.order.amountBought = this.item.amountSelected;
     this.orderService.createOrder(this.order).subscribe((response) => {
       if (response !== null) {
-        this.cartService.deleteItemFromAllCarts(this.itemId).subscribe((itemRemoveResponse) => {
+        this.cartService.updateItemAmountCartAfterBuy(this.prepareRequestModel(amountAvailableAfterBuy)).subscribe((itemAmountUpdated) => {
           if (sessionStorage.getItem('cart') !== null) {
             this.cartItems = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
             this.cartItems.forEach((element, index) => {
-              if (element.id === this.item.id) {
-                delete this.cartItems[index];
+              if (element.itemId === this.item.id) {
+                if (amountAvailableAfterBuy === 0) {
+                  delete this.cartItems[index];
+                } else if (amountAvailableAfterBuy > 0 && this.cartItems[index].amountSelected > amountAvailableAfterBuy) {
+                  this.cartItems[index].amountSelected = amountAvailableAfterBuy;
+                }
               }
             });
             sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
@@ -96,6 +102,10 @@ export class ItemsDetailsComponent implements OnInit {
 
   formatCreateDate(createDate: string) {
     return moment.utc(createDate).local().format('YYYY-MM-DD HH:mm');
+  }
+
+  prepareRequestModel(amountAvailableAfterBuy: number): CartUpdateRequest {
+    return new CartUpdateRequest(this.item.id, amountAvailableAfterBuy);
   }
 
 }

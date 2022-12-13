@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setUsername(user.getUsername().toLowerCase());
             user = userRepository.save(user);
+            mailService.newUserEmailMessage(userDTO);
             return userMapper.toDTO(user);
         }
     }

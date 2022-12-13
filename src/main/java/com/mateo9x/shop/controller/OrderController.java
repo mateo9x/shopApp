@@ -24,8 +24,8 @@ public class OrderController {
     }
 
     @PutMapping("/orders")
-    public OrderDTO updateOrder(@Valid @RequestBody OrderDTO orderDTO) {
-        log.debug("REST request to update Order: {}", orderDTO);
+    public OrderDTO finishOrderProcess(@Valid @RequestBody OrderDTO orderDTO) {
+        log.debug("REST request to finish process of Order: {}", orderDTO);
         return orderService.save(orderDTO);
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.mateo9x.shop.dto.CartDTO;
+import com.mateo9x.shop.dto.CartUpdateRequestDto;
 import com.mateo9x.shop.service.CartService;
 
 import org.slf4j.Logger;
@@ -52,10 +53,10 @@ public class CartController {
         cartService.deleteItemFromCart(id);
     }
 
-    @DeleteMapping("/cart/all/{id}")
-    public void deleteItemFromAllCarts(@PathVariable Long id) {
-        log.debug("REST request do delete Item from all Carts: {}", id);
-        cartService.deleteItemFromAllCarts(id);
+    @PutMapping("/cart/update-amount")
+    public Boolean updateItemAmountInCart(@RequestBody CartUpdateRequestDto cartUpdateRequestDto) {
+        log.debug("REST request to update Item: {} amount in user Cart", cartUpdateRequestDto.getItemId());
+        return cartService.updateItemAmountInCart(cartUpdateRequestDto);
     }
 
     @GetMapping("/cart/user")

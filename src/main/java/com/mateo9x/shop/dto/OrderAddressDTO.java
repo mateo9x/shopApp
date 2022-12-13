@@ -11,7 +11,7 @@ public class OrderAddressDTO implements Serializable {
     private String street;
     private String streetNumber;
     private String city;
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     public Long getId() {
         return id;
@@ -69,11 +69,11 @@ public class OrderAddressDTO implements Serializable {
         this.city = city;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

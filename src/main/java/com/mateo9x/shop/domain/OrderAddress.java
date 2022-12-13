@@ -32,7 +32,7 @@ public class OrderAddress implements Serializable {
     @Column(name = "city")
     private String city;
     @Column(name = "phone_number")
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     public Long getId() {
         return id;
@@ -90,11 +90,11 @@ public class OrderAddress implements Serializable {
         this.city = city;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

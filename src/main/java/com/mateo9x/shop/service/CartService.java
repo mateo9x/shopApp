@@ -3,6 +3,7 @@ package com.mateo9x.shop.service;
 import java.util.List;
 
 import com.mateo9x.shop.dto.CartDTO;
+import com.mateo9x.shop.dto.CartUpdateRequestDto;
 
 public interface CartService {
 
@@ -14,7 +15,7 @@ public interface CartService {
 
     void deleteItemFromCart(Long id);
 
-    void deleteItemFromAllCarts(Long id);
+    boolean updateItemAmountInCart(CartUpdateRequestDto cartUpdateRequestDto);
 
     List<CartDTO> findCartByUserId();
 
