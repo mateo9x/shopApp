@@ -1,4 +1,3 @@
-import {Item} from '../items/items.model';
 import {UserService} from '../user/user.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
@@ -15,7 +14,6 @@ import {ConfirmationService} from "primeng/api";
 export class CartComponent implements OnInit {
 
   cartItems: Cart[] = [];
-  noData = true;
   userLogged = false;
   userId: number;
 
@@ -41,12 +39,8 @@ export class CartComponent implements OnInit {
     } else {
       if (sessionStorage.getItem('cart') !== null) {
         this.cartItems = JSON.parse(sessionStorage.getItem('cart') as unknown as string);
-        // this.cartItems.forEach((element) => {
-        //   element.createDate = moment.utc(element.createDate).local().format('YYYY-MM-DD HH:mm');
-        // });
-        this.noData = false;
-      } else {
-        this.noData = true;
+        this.cartItems = this.cartItems.filter(cartItem => cartItem);
+        sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
       }
     }
   }
