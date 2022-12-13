@@ -2,10 +2,14 @@
 
   <div class="content">
     <div class="photo">
-      <img [src]="order.photoUrl">
+      <img [src]="getItemFirstPhoto(order.photoUrl)">
     </div>
     <div class="input-data">
       {{order.itemBrand}} {{order.itemModel}}
+
+      <div>
+        Zakupiona ilość: {{order.amountBought}} szt.
+      </div>
 
       <div class="date">
         Data zakupu: {{order.date | date: 'yyyy-MM-dd HH:mm'}}

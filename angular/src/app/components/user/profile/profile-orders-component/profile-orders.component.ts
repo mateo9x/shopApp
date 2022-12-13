@@ -15,7 +15,6 @@ import {ToastService} from "../../../toasts/toast.service";
 export class ProfileOrdersComponent implements OnInit {
 
   user: User = new User();
-  cols: any[];
   loading: boolean;
   orders: Order[] = [];
 
@@ -69,9 +68,11 @@ export class ProfileOrdersComponent implements OnInit {
     });
   }
 
-  // const ref = this.dialogService.open(ProfileOrderDialogComponent, {
-  //   header: 'Szczegóły produktu ' + item.brand + ' ' + item.model,
-  //   data: { item: Object.assign({}, item) },
-  //   width: '50%'
-  // });
+  getItemFirstPhoto(photoUrl: string) {
+    if (photoUrl.includes(';')) {
+      return photoUrl.split(';')[0];
+    } else {
+      return photoUrl;
+    }
+  }
 }
