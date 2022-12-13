@@ -76,4 +76,8 @@ export class OrderProcessComponent implements OnInit {
     this.orderAddress.streetNumber = user.streetNumber;
     this.orderAddress.city = user.city;
   }
+
+  getTotalAmountToPay() {
+    return this.order.amountBought * this.order.itemPrice;
+  }
 }

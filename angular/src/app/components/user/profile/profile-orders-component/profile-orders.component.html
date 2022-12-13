@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="price">
-      Cena: {{order.itemPrice}} zł
+      Cena: {{order.itemPrice}} zł / szt.
       <div class="return" *ngIf="order.paymentSelected === true">
         <button (click)="returnProductConfirm(order)" [disabled]="checkOrderReturnDate(order)"><i class="fa fa-trash"> </i></button>
         <div style="display:block">
