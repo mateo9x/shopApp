@@ -5,6 +5,7 @@ public class SellerDTO {
     private Long id;
     private String name;
 
+    private String mail;
     public Long getId() {
         return id;
     }
@@ -21,4 +22,11 @@ public class SellerDTO {
         this.name = name;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 }

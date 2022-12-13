@@ -16,6 +16,7 @@ import com.mateo9x.shop.repository.ItemRepository;
 import com.mateo9x.shop.repository.OrderRepository;
 import com.mateo9x.shop.repository.UserRepository;
 
+import com.mateo9x.shop.service.SellerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -35,6 +36,8 @@ public class OrderServiceImpl implements OrderService {
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
 
+    private final SellerService sellerService;
+
     @Override
     public OrderDTO save(OrderDTO orderDTO) {
         log.info("Request to save Order: {}", orderDTO);
@@ -47,6 +50,9 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setUserId(user.get().getId());
             Order order = orderMapper.toEntity(orderDTO);
             order = orderRepository.save(order);
+            if (orderDTO.getOrderPaymentId() != null) {
+                sellerService.notifySellerAboutItemBuy(orderDTO);
+            }
             return orderMapper.toDTO(order);
         }
         return null;

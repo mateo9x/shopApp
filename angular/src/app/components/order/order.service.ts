@@ -39,7 +39,7 @@ export class OrderService {
     return this.http.post<Order>(`${this.ordersUrl}`, order);
   }
 
-  public updateOrder(order: Order) {
+  public finishOrderProcess(order: Order) {
     return this.http.put<Order>(`${this.ordersUrl}`, order);
 
   }
