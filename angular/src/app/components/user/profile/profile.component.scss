@@ -1,7 +1,8 @@
 .top {
 text-align:center;
-margin:2% 0%;
+margin:2% 0;
 }
+
 button {
   background-color: #f26522;
   border: none;
@@ -14,10 +15,13 @@ button {
   margin: 4px 2px;
   cursor: pointer;
   transition: all .5s;
+  border-radius: 10px;
 }
+
 button:hover {
   background-color: #a63a06;
 }
+
 .profile-routing{
   height:100%;
 }
