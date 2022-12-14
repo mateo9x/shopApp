@@ -48,6 +48,9 @@ export class CartComponent implements OnInit {
   deleteFromCartConfirmDialog(cart: Cart) {
     const productFullName = cart.itemBrand + ' ' + cart.itemModel;
     this.confirmationService.confirm({
+      acceptLabel: 'TAK',
+      rejectLabel: 'NIE',
+      header: 'Potwierdź usunięcie produktu z koszyka',
       message: 'Usunięcie produktu ' + productFullName + ' z koszyka powoduje usunięcie wszystkich sztuk w koszyku danego produktu. Czy usunąc ' + cart.amountSelected + ' szt. produktu z koszyka?',
       accept: () => {
         this.deleteFromCart(cart);
@@ -71,6 +74,20 @@ export class CartComponent implements OnInit {
 
   openItemDetail(itemId: number) {
     this.router.navigate(['items-details', itemId]);
+  }
+
+  buyProductConfirmDialog(cart: Cart) {
+    const productFullName = cart.itemBrand + ' ' + cart.itemModel;
+    this.confirmationService.confirm({
+      acceptButtonStyleClass: 'red-button',
+      acceptLabel: 'TAK',
+      rejectLabel: 'NIE',
+      header: 'Potwierdź zakup produktu',
+      message: 'Czy na pewno chcesz zakupić: ' + productFullName + ' (' + cart.amountSelected + ' szt.) ?',
+      accept: () => {
+        this.buyProduct(cart);
+      }
+    });
   }
 
   buyProduct(cart: Cart) {

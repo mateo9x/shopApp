@@ -132,3 +132,14 @@ a:hover, a:active{
   border-radius: 0.25rem;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+::ng-deep {
+  .p-button {
+    border: 1px solid #f26522 !important;
+    background: #f26522 !important;
+  }
+  .p-button:enabled:hover {
+    border: 1px solid #a63a06 !important;
+    background: #a63a06 !important;
+  }
+}
