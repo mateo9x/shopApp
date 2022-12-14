@@ -97,7 +97,7 @@ export class ItemsComponent implements OnInit {
   }
 
   getItemFirstPhoto(photoUrl: string) {
-    if (photoUrl.includes(';')) {
+    if (photoUrl && photoUrl.includes(';')) {
       return photoUrl.split(';')[0];
     } else {
       return photoUrl;
