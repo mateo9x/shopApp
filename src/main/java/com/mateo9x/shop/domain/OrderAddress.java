@@ -33,6 +33,8 @@ public class OrderAddress implements Serializable {
     private String city;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name="postal_code")
+    private String postalCode;
 
     public Long getId() {
         return id;
@@ -98,4 +100,11 @@ public class OrderAddress implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 }

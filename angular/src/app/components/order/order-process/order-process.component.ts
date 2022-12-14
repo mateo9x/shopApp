@@ -8,6 +8,7 @@ import {OrderAddress} from '../order.address.model';
 import {ToastService} from "../../toasts/toast.service";
 import {UserService} from "../../user/user.service";
 import {User} from "../../user/user.model";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'order-process',
@@ -16,6 +17,7 @@ import {User} from "../../user/user.model";
 })
 export class OrderProcessComponent implements OnInit {
 
+  requiredForm: FormGroup;
   noData = false;
   orderId: any;
   order: Order = new Order();
@@ -24,7 +26,8 @@ export class OrderProcessComponent implements OnInit {
   selectedOrderPayment: OrderPayment;
 
   constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private confirmationService: ConfirmationService,
-              private toastService: ToastService, private userService: UserService) {
+              private toastService: ToastService, private userService: UserService, private fb: FormBuilder) {
+    this.myForm();
   }
 
   ngOnInit() {
@@ -43,6 +46,20 @@ export class OrderProcessComponent implements OnInit {
     });
     this.orderService.findAllOrderPayments().subscribe((response) => {
       this.orderPayments = response;
+    });
+  }
+
+  myForm() {
+    this.requiredForm = this.fb.group({
+      firstname: ['', Validators.required ],
+      lastname: ['', Validators.required ],
+      mail: ['', Validators.required ],
+      street: ['', Validators.required ],
+      streetNumber: ['', Validators.required ],
+      postalCode: ['', Validators.required ],
+      city: ['', Validators.required ],
+      phoneNumber: ['', Validators.required ],
+      orderPayment: ['', Validators.required ]
     });
   }
 

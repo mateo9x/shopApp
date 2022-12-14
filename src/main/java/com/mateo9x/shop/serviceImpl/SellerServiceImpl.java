@@ -1,19 +1,14 @@
 package com.mateo9x.shop.serviceImpl;
 
-import com.mateo9x.shop.domain.OrderPayment;
 import com.mateo9x.shop.domain.Seller;
-import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.dto.*;
 import com.mateo9x.shop.mapper.SellerMapper;
 import com.mateo9x.shop.repository.SellerRepository;
-import com.mateo9x.shop.repository.UserRepository;
 import com.mateo9x.shop.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-
-import static org.apache.commons.lang3.Validate.notBlank;
 
 @Service
 @AllArgsConstructor
@@ -64,7 +59,7 @@ public class SellerServiceImpl implements SellerService {
                 .append("\n")
                 .append(orderAddress)
                 .append("\n")
-                .append("W razie pytań skontaktuj się z nim danymi wskazanymi powyżej.")
+                .append("W razie problemów prosimy o kontakt z kupującym.")
                 .append("\n\n")
                 .append("Pozdrawiamy,")
                 .append("\n")
@@ -91,7 +86,7 @@ public class SellerServiceImpl implements SellerService {
                 .append("\n")
                 .append(orderAddressDTO.getStreet()).append(" ").append(orderAddressDTO.getStreetNumber())
                 .append("\n")
-                .append(orderAddressDTO.getCity())
+                .append(orderAddressDTO.getPostalCode()).append(", ").append(orderAddressDTO.getCity())
                 .append("\n")
                 .append(orderAddressDTO.getPhoneNumber());
         return sb.toString();

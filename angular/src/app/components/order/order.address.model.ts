@@ -7,4 +7,5 @@ export class OrderAddress {
   streetNumber: string;
   city: string;
   phoneNumber: string;
+  postalCode: string;
 }

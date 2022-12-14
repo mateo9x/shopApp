@@ -12,6 +12,7 @@ public class OrderAddressDTO implements Serializable {
     private String streetNumber;
     private String city;
     private String phoneNumber;
+    private String postalCode;
 
     public Long getId() {
         return id;
@@ -77,4 +78,11 @@ public class OrderAddressDTO implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 }
