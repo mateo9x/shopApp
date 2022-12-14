@@ -19,6 +19,7 @@ User authenthicated has access to secured endpoints.
 - Finalizing item buy in profile component
 - Adding new items on auction
 - Notifying seller about "one" of his item been bought through email message
+- Buying product straight from cart page when user is logged
 
 ### Coming soon:
 - Better design of application

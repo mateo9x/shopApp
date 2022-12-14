@@ -7,6 +7,7 @@ import com.mateo9x.shop.configuration.LoginCredentials;
 import com.mateo9x.shop.dto.UserDTO;
 import com.mateo9x.shop.service.AuthenthicationService;
 
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/")
+@AllArgsConstructor
 public class AuthenthicationController {
 
     private final Logger log = LoggerFactory.getLogger(AuthenthicationController.class);
-    private AuthenthicationService authenthicationService;
-
-    public AuthenthicationController(AuthenthicationService authenthicationService) {
-        this.authenthicationService = authenthicationService;
-    }
+    private final AuthenthicationService authenthicationService;
 
     @PostMapping("login")
     public Boolean signIn(@Valid @RequestBody LoginCredentials model) {
@@ -34,7 +32,7 @@ public class AuthenthicationController {
 
     @RequestMapping("logout")
     public void logOut(HttpServletRequest request, HttpServletResponse response) {
-        log.debug("REST request to logout User: {}");
+        log.debug("REST request to logout User");
         authenthicationService.logOut(request, response);
     }
 
@@ -43,5 +41,5 @@ public class AuthenthicationController {
         log.debug("REST request to check if User is logged");
         return authenthicationService.isUserLogged();
     }
-    
+
 }

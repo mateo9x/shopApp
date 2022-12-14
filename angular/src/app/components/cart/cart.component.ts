@@ -5,6 +5,8 @@ import {CartService} from './cart.service';
 import {Cart} from "./cart.model";
 import {ToastService} from "../toasts/toast.service";
 import {ConfirmationService} from "primeng/api";
+import {BuyProductRequest, BuyProductService} from "../items/buy.service";
+import {Item} from "../items/items.model";
 
 @Component({
   selector: 'cart',
@@ -18,7 +20,7 @@ export class CartComponent implements OnInit {
   userId: number;
 
   constructor(private cartService: CartService, private router: Router, private toastService: ToastService, private userService: UserService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService, private buyProductService: BuyProductService) {
   }
 
   ngOnInit() {
@@ -48,6 +50,9 @@ export class CartComponent implements OnInit {
   deleteFromCartConfirmDialog(cart: Cart) {
     const productFullName = cart.itemBrand + ' ' + cart.itemModel;
     this.confirmationService.confirm({
+      acceptLabel: 'TAK',
+      rejectLabel: 'NIE',
+      header: 'Potwierdź usunięcie produktu z koszyka',
       message: 'Usunięcie produktu ' + productFullName + ' z koszyka powoduje usunięcie wszystkich sztuk w koszyku danego produktu. Czy usunąc ' + cart.amountSelected + ' szt. produktu z koszyka?',
       accept: () => {
         this.deleteFromCart(cart);
@@ -73,8 +78,22 @@ export class CartComponent implements OnInit {
     this.router.navigate(['items-details', itemId]);
   }
 
-  buyProduct(cart: Cart) {
+  buyProductConfirmDialog(cart: Cart) {
+    const productFullName = cart.itemBrand + ' ' + cart.itemModel;
+    this.confirmationService.confirm({
+      acceptButtonStyleClass: 'red-button',
+      acceptLabel: 'TAK',
+      rejectLabel: 'NIE',
+      header: 'Potwierdź zakup produktu',
+      message: 'Czy na pewno chcesz zakupić: ' + productFullName + ' (' + cart.amountSelected + ' szt.) ?',
+      accept: () => {
+        this.buyProduct(cart);
+      }
+    });
+  }
 
+  buyProduct(cart: Cart) {
+    this.buyProductService.buyProduct(this.prepareBuyProductRequest(cart));
   }
 
   getItemFirstPhoto(photoUrl: string) {
@@ -83,6 +102,14 @@ export class CartComponent implements OnInit {
     } else {
       return photoUrl;
     }
+  }
+
+  prepareBuyProductRequest(cart: Cart): BuyProductRequest {
+    return {
+      itemId: cart.itemId,
+      itemAmountSelected: cart.amountSelected,
+      itemAmountAvailable: cart.itemAmountAvailable
+    };
   }
 
 }

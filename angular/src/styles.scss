@@ -13,21 +13,7 @@
   }
 }
 
-.custom-toast .ui-toast {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  background-color: #FFD07B !important;
-}
-
-// adjusts font, color and other elements of the toast window if needed
-.custom-toast .ui-toast-message-content {
-  font-family: 'Courier New', Courier, monospace;
-  background-color: #FFD07B !important;
-}
 .ui-datatable * {
-  border : 0px !important;
+  border : 0 !important;
 }
 
