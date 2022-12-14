@@ -94,8 +94,6 @@ button:focus {
 ul,
 li,
 ol {
-    margin: 0px;
-    padding: 0px;
     list-style: none;
 }
 
@@ -112,8 +110,7 @@ a {
     outline: none !important;
 }
 
-a,
-.btn {
+a, .btn {
     text-decoration: none !important;
     outline: none !important;
     -webkit-transition: all .3s ease-in-out;
@@ -130,10 +127,6 @@ img {
 
  :focus {
     outline: 0;
-}
-
-.paddind_bottom_0 {
-    padding-bottom: 0 !important;
 }
 
 .btn-custom {
@@ -184,15 +177,8 @@ button {
 
 .layout_padding {
     padding-top: 90px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
-
-.padding_0 {
-    padding: 0px;
-}
-
-
-/* banner bg main start */
 
 .banner_bg_main {
     width: 100%;
@@ -203,30 +189,18 @@ button {
     background-repeat: no-repeat;
 }
 
-
-/* banner bg main end */
-
-
-/* header top section start */
-
 .header_section_top {
     width: 100%;
     float: left;
     background-color: #2b2a29;
     clip-path: polygon(0 0, 100% 0, 96% 100%, 3% 100%);
     height: auto;
-    padding: 10px 0px;
-}
-
-.custom_menu {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
+    padding: 10px 0;
 }
 
 .custom_menu ul {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     display: inline-block;
 }
 
@@ -234,7 +208,7 @@ button {
     float: left;
     font-size: 16px;
     color: #f1f1f1;
-    padding: 6px 10px 0px 10px;
+    padding: 6px 10px 0 10px;
 }
 
 .custom_menu li a {
@@ -245,12 +219,6 @@ button {
     color: #f26522;
 }
 
-
-/* header top section end */
-
-
-/* logo section start */
-
 .logo_section {
     width: 100%;
     float: left;
@@ -260,14 +228,8 @@ button {
     width: 100%;
     float: left;
     text-align: center;
-    padding: 30px 0px;
+    padding: 30px 0;
 }
-
-
-/* logo section end */
-
-
-/* header section start */
 
 .header_section {
     width: 100%;
@@ -277,9 +239,6 @@ button {
 .containt_main {
     display: flex;
 }
-
-
-/* opennav bar start */
 
 .sidenav {
     height: 100%;
@@ -363,21 +322,12 @@ button {
     box-shadow: none;
 }
 
-
-/* opennav bar end */
-
-
-/* Styles for wrapping the search box start */
-
 .main {
     flex: 1;
-    margin: 0px 30px;
+    margin: 0 30px;
     display: inline-block;
     order: 2;
 }
-
-
-/* Bootstrap 4 text input with search icon */
 
 .has-search .form-control {
     padding-left: 2.375rem;
@@ -395,9 +345,6 @@ button {
     color: #aaa;
 }
 
-
-/* Styles for wrapping the search box end */
-
 .login_menu {
     display: flex;
     text-align: right;
@@ -405,8 +352,8 @@ button {
 }
 
 .login_menu ul {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 .login_menu li {
@@ -430,17 +377,6 @@ button {
     padding-left: 10px;
 }
 
-
-/* flage css start */
-
-.lang_box {
-    display: flex;
-    float: right;
-    background: #fff;
-    border-radius: 5px;
-    margin-right: 20px;
-}
-
 .nav-link {
     display: block;
     padding: .4rem 1rem;
@@ -450,15 +386,6 @@ a:hover {
     color: #f26522;
     text-decoration: underline;
 }
-
-
-/* flage css end */
-
-
-/* header section end */
-
-
-/* banner section start */
 
 .banner_section {
     width: 100%;
@@ -475,37 +402,13 @@ a:hover {
     font-weight: bold;
 }
 
-.buynow_bt {
-    width: 170px;
-    margin: 0 auto;
-    padding-top: 30px;
-}
-
-.buynow_bt a {
-    width: 100%;
-    float: left;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #252525;
-    text-align: center;
-    padding: 10px 0px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.buynow_bt a:hover {
-    background-color: #f26522;
-    color: #ffffff;
-}
-
 #my_slider a.carousel-control-next {
-    right: 0px;
+    right: 0;
     top: 40px;
 }
 
 #my_slider a.carousel-control-prev {
-    left: 0px;
+    left: 0;
     top: 40px;
 }
 
@@ -527,105 +430,10 @@ a:hover {
     color: #fff;
 }
 
-
-/* banner section end */
-
-
-/* fashion section start */
-
 .router_section {
     width: 100%;
     float: left;
     padding-bottom: 150px;
-}
-
-.fashion_taital {
-    width: 100%;
-    font-size: 40px;
-    color: #30302e;
-    text-align: center;
-    font-weight: bold;
-}
-
-.fashion_section_2 {
-    width: 100%;
-    margin-top: 30px;
-}
-
-.box_main {
-    width: 100%;
-    background-color: #ffffff;
-    height: auto;
-    padding: 20px;
-    box-shadow: 0px 0 30px 10px #f0f0f0;
-    margin-bottom: 20px;
-}
-
-.shirt_text {
-    width: 100%;
-    font-size: 20px;
-    color: #30302e;
-    text-align: center;
-    font-weight: bold;
-    padding-bottom: 5px;
-}
-
-.price_text {
-    width: 100%;
-    font-size: 16px;
-    color: #f26522;
-    text-align: center;
-    margin: 0px;
-}
-
-.tshirt_img {
-    width: 100%;
-    text-align: center;
-    margin: 50px 0px;
-    min-height: 370px;
-}
-
-.btn_main {
-    width: 100%;
-    display: flex;
-}
-
-.buy_bt {
-    float: left;
-    width: 100%;
-}
-
-.buy_bt a {
-    width: 100%;
-    font-size: 16px;
-    color: #f26522;
-    background-color: transparent;
-    text-align: right;
-    font-weight: bold;
-}
-
-.buy_bt a:hover {
-    background-color: transparent;
-    color: #262626;
-}
-
-.seemore_bt {
-    width: 100%;
-    float: right;
-    text-align: right;
-}
-
-.seemore_bt a {
-    width: 100%;
-    font-size: 16px;
-    color: #262626;
-    background-color: transparent;
-    text-align: right;
-}
-
-.seemore_bt a:hover {
-    background-color: transparent;
-    color: #f26522;
 }
 
 #main_slider a.carousel-control-next {
@@ -654,103 +462,6 @@ a:hover {
 #main_slider .carousel-control-prev:hover {
     color: #fff;
     background-color: #f26522;
-}
-
-
-/* fashion section end */
-
-
-/* electronic section start */
-
-.electronic_img {
-    width: 100%;
-    text-align: center;
-    margin: 50px 0px;
-    min-height: 293px;
-}
-
-#electronic_main_slider a.carousel-control-next {
-    right: 615px;
-    top: 105%;
-}
-
-#electronic_main_slider a.carousel-control-prev {
-    left: 615px;
-    top: 105%;
-}
-
-#electronic_main_slider .carousel-control-next,
-#electronic_main_slider .carousel-control-prev {
-    width: 55px;
-    height: 55px;
-    background-color: #30302e;
-    opacity: 1;
-    font-size: 30px;
-    color: #ffffff;
-}
-
-#electronic_main_slider .carousel-control-next:focus,
-#electronic_main_slider .carousel-control-next:hover,
-#electronic_main_slider .carousel-control-prev:focus,
-#electronic_main_slider .carousel-control-prev:hover {
-    color: #fff;
-    background-color: #f26522;
-}
-
-
-/* electronic section end */
-
-
-/* jewellery section start */
-
-.jewellery_section {
-    width: 100%;
-    float: left;
-    padding-bottom: 50px;
-}
-
-.jewellery_img {
-    width: 100%;
-    text-align: center;
-    margin: 50px 0px;
-    min-height: 293px;
-}
-
-#jewellery_main_slider a.carousel-control-next {
-    right: 615px;
-    top: 75%;
-}
-
-#jewellery_main_slider a.carousel-control-prev {
-    left: 615px;
-    top: 75%;
-}
-
-#jewellery_main_slider .carousel-control-next,
-#jewellery_main_slider .carousel-control-prev {
-    width: 55px;
-    height: 55px;
-    background-color: #30302e;
-    opacity: 1;
-    font-size: 30px;
-    color: #ffffff;
-}
-
-#jewellery_main_slider .carousel-control-next:focus,
-#jewellery_main_slider .carousel-control-next:hover,
-#jewellery_main_slider .carousel-control-prev:focus,
-#jewellery_main_slider .carousel-control-prev:hover {
-    color: #fff;
-    background-color: #f26522;
-}
-
-
-/* loader bar css start */
-
-.loader_main {
-    width: 100%;
-    text-align: center;
-    margin-top: 140px;
 }
 
 .loader {
@@ -785,129 +496,6 @@ a:hover {
     }
 }
 
-
-/* loader bar css end */
-
-
-/* jewellery section end */
-
-
-/* footer section start */
-
-
-/* footer section start */
-
-.footer_section {
-    width: 100%;
-    float: left;
-    background-color: #252525;
-    height: auto;
-}
-
-.footer_logo {
-    width: 100%;
-    text-align: center;
-}
-
-.input_bt {
-    width: 60%;
-    margin: 0 auto;
-    text-align: center;
-    display: flex;
-    border-bottom: 1px solid #ffffff !important;
-}
-
-.mail_bt {
-    width: 100%;
-    float: left;
-    font-size: 18px;
-    color: #fff;
-    background-color: transparent;
-    padding: 5px 0px 5px 0px;
-    height: 60px;
-    border: 0px;
-}
-
-input.mail_bt::placeholder {
-    color: #fff;
-}
-
-.subscribe_bt {
-    width: 30%;
-    float: right;
-    font-size: 16px;
-    color: #f26522;
-    background-color: transparent;
-    padding: 20px 0px 5px 0px;
-    border-radius: 30px;
-    border: 0px;
-    text-transform: uppercase;
-    text-align: right;
-}
-
-.subscribe_bt a {
-    color: #f26522;
-}
-
-.subscribe_bt a:hover {
-    color: #ffffff;
-}
-
-.footer_menu {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.footer_menu ul {
-    margin: 0px;
-    padding: 0px;
-    display: inline-block;
-}
-
-.footer_menu li {
-    float: left;
-    font-size: 16px;
-    color: #f1f1f1;
-    padding: 20px 10px 0px 10px;
-}
-
-.footer_menu li a {
-    color: #f1f1f1;
-}
-
-.footer_menu li a:hover {
-    color: #f26522;
-}
-
-.location_main {
-    width: 100%;
-    margin: 0 auto;
-    padding-top: 30px;
-    text-align: center;
-}
-
-.location_main {
-    float: left;
-    font-size: 16px;
-    color: #ffffff;
-    padding: 30px 30px 30px 30px;
-}
-
-.location_main a {
-    color: #ffffff;
-}
-
-.location_main a:hover {
-    color: #f26522;
-}
-
-
-/* footer section end */
-
-
-/* copyright section start */
-
 .copyright_section {
     width: 100%;
     float: left;
@@ -921,7 +509,7 @@ input.mail_bt::placeholder {
     color: #ffffff;
     text-align: center;
     font-size: 16px;
-    margin: 20px 0px;
+    margin: 20px 0;
 }
 
 .copyright_text a {
@@ -931,10 +519,3 @@ input.mail_bt::placeholder {
 .copyright_text a:hover {
     color: #f26522;
 }
-
-.margin_top90 {
-    margin-top: 90px;
-}
-
-
-/* copyright section end */

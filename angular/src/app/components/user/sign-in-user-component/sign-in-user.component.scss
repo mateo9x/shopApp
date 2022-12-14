@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
-/* BASIC */
-
-
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
@@ -25,10 +22,6 @@ h2 {
   color: #cccccc;
 }
 
-
-
-/* STRUCTURE */
-
 .wrapper {
   display: flex;
   align-items: center;
@@ -47,7 +40,6 @@ h2 {
   width: 90%;
   max-width: 450px;
   position: relative;
-  padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
@@ -62,22 +54,10 @@ h2 {
   border-radius: 0 0 10px 10px;
 }
 
-
-
-/* TABS */
-
-h2.inactive {
-  color: #cccccc;
-}
-
 h2.active {
   color: #0d0d0d;
   margin-bottom:10%;
 }
-
-
-
-/* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
   background-color: #f26522;
@@ -115,7 +95,6 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 
 input[type=text],[type=password] {
   background-color: #f6f6f6;
-  border: none;
   color: #0d0d0d;
   padding: 15px 32px;
   text-align: center;
@@ -139,13 +118,10 @@ input[type=text],[type=password]:focus {
   border-bottom: 2px solid #f26522;
 }
 
-input[type=text],[type=password]:placeholder {
+input[type=text],[type=password]::placeholder {
   color: #cccccc;
 }
 
-/* ANIMATIONS */
-
-/* Simple CSS3 Fade-in-down Animation */
 .fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
@@ -181,7 +157,6 @@ input[type=text],[type=password]:placeholder {
   }
 }
 
-/* Simple CSS3 Fade-in Animation */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -245,10 +220,6 @@ input[type=text],[type=password]:placeholder {
 .underlineHover:hover:after{
   width: 100%;
 }
-
-
-
-/* OTHERS */
 
 *:focus {
     outline: none;

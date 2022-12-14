@@ -36,20 +36,7 @@ input[type="password"] {
   font-size: 15px;
   transition: 0.2s ease;
   text-align:left;
-  margin-right:0%;
-}
-
-button.social-signin {
-  margin-bottom: 20px;
-  width: 220px;
-  height: 36px;
-  border: none;
-  border-radius: 2px;
-  color: #FFF;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  transition: 0.2s ease;
-  cursor: pointer;
+  margin-right:0;
 }
 
 .required-field-alert{
@@ -76,15 +63,6 @@ button:disabled,button[disabled=disabled]{
 
 .submit-button:hover {
   background-color: #a63a06;
-}
-
-.toast-success{
-  color:green;
-  background-color:grey;
-}
-.toast-error{
-  color:red;
-  background-color:grey;
 }
 
 .buttons {

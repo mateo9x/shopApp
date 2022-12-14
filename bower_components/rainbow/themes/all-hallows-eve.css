@@ -9,12 +9,10 @@
 pre {
     background: #000;
     word-wrap: break-word;
-    margin: 0px;
-    padding: 0px;
     padding: 10px;
     color: #fff;
     font-size: 14px;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
 }
 
 pre, code {

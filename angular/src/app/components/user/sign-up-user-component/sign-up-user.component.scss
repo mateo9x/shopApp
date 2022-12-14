@@ -44,19 +44,6 @@ input[type="password"] {
   text-align:left;
 }
 
-button.social-signin {
-  margin-bottom: 20px;
-  width: 220px;
-  height: 36px;
-  border: none;
-  border-radius: 2px;
-  color: #FFF;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-
 .required-field-alert{
   color:red;
 }
@@ -82,15 +69,6 @@ button:disabled,button[disabled=disabled]{
 
 .submit-button:hover {
   background-color: #a63a06;
-}
-
-.toast-success{
-  color:green;
-  background-color:grey;
-}
-.toast-error{
-  color:red;
-  background-color:grey;
 }
 
 .buttons {

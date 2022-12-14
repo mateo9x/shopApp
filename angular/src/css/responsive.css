@@ -5,7 +5,7 @@
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .header-search {
-        padding: 15px 0px;
+        padding: 15px 0;
     }
 }
 
@@ -20,23 +20,23 @@
         padding-bottom: 5px;
     }
     .mg {
-        margin: 0px 0px;
+        margin: 0 0;
     }
     .menu-area-main {
         height: 256px;
         overflow-y: auto;
     }
     .megamenu>.row [class*="col-"] {
-        padding: 0px;
+        padding: 0;
     }
     .menu-area-main .megamenu .men-cat {
-        padding: 0px 15px;
+        padding: 0 15px;
     }
     .menu-area-main .megamenu .women-cat {
-        padding: 0px 15px;
+        padding: 0 15px;
     }
     .menu-area-main .megamenu .el-cat {
-        padding: 0px 15px;
+        padding: 0 15px;
     }
     .mean-container .mean-nav ul li a.mean-expand {
         height: 19px;
@@ -46,11 +46,11 @@
     }
     .cart-box {
         display: inline-block;
-        margin: 0px 30px;
+        margin: 0 30px;
     }
     .wish-box {
         float: none;
-        margin: 0px 30px;
+        margin: 0 30px;
         display: inline-block;
     }
     .menu-add {
@@ -60,7 +60,7 @@
         display: none;
     }
     .mean-container .mean-nav ul li ol {
-        padding: 0px;
+        padding: 0;
     }
     .mean-container .mean-nav ul li a {
         padding: 10px 20px;
@@ -74,10 +74,10 @@
         width: 100%;
     }
     .header-search {
-        padding: 15px 0px;
+        padding: 15px 0;
     }
     #collapseFilter.d-md-block {
-        padding: 30px 0px;
+        padding: 30px 0;
     }
 }
 
@@ -89,16 +89,16 @@
         padding-bottom: 5px;
     }
     .megamenu>.row [class*="col-"] {
-        padding: 0px;
+        padding: 0;
     }
     .menu-area-main .megamenu .men-cat {
-        padding: 0px 15px;
+        padding: 0 15px;
     }
     .menu-area-main .megamenu .women-cat {
-        padding: 0px 15px;
+        padding: 0 15px;
     }
     .menu-area-main .megamenu .el-cat {
-        padding: 0px 15px;
+        padding: 0 15px;
     }
     .mean-container .mean-nav ul li a {
         padding: 1em 4%;
@@ -109,7 +109,7 @@
         padding: 1em 5%;
     }
     .mean-container .sub-full.megamenu-categories ol li a {
-        padding: 5px 0px;
+        padding: 5px 0;
         text-transform: capitalize;
         width: 100%;
     }
@@ -132,7 +132,7 @@
         background-size: 100% 100%;
     }
     .tshirt_img {
-        margin: 20px 0px;
+        margin: 20px 0;
         min-height: 360px;
     }
     #main_slider a.carousel-control-next {
@@ -144,7 +144,7 @@
         top: 110%;
     }
     .electronic_img {
-        margin: 20px 0px;
+        margin: 20px 0;
         min-height: 280px;
     }
     #electronic_main_slider a.carousel-control-next {
@@ -156,7 +156,7 @@
         top: 110%;
     }
     .jewellery_img {
-        margin: 20px 0px;
+        margin: 20px 0;
         min-height: 0;
     }
     #jewellery_main_slider a.carousel-control-prev {
@@ -180,7 +180,7 @@
         display: none;
     }
     .tshirt_img {
-        margin: 20px 0px;
+        margin: 20px 0;
         min-height: 320px;
     }
     .banner_taital {
@@ -195,7 +195,7 @@
         top: 110%;
     }
     .electronic_img {
-        margin: 20px 0px;
+        margin: 20px 0;
         min-height: 190px;
     }
     #electronic_main_slider a.carousel-control-next {
@@ -207,7 +207,7 @@
         top: 110%;
     }
     .jewellery_img {
-        margin: 20px 0px;
+        margin: 20px 0;
         min-height: 0;
     }
     #jewellery_main_slider a.carousel-control-prev {
@@ -240,7 +240,7 @@
         order: 2;
     }
     .main {
-        margin: 0px 0px 0px 0px;
+        margin: 0 0 0px 0px;
     }
     .main {
         margin: 0px 0px;
