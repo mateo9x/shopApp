@@ -50,12 +50,12 @@ public class SellerServiceImpl implements SellerService {
     private String prepareMessage(String userFullname, String itemFullName, Integer amountOfItems, String orderPaymentName, String orderAddress) {
         StringBuilder sb = new StringBuilder();
         sb.append("Dzień dobry !\n\n")
-                .append("Użytkownik ").append(userFullname).append(" zakupił w portalu \"Wszystko w sieci\" Twój produkt: ")
+                .append("Użytkownik ").append(userFullname).append(" zakupił(a) w portalu \"Wszystko w sieci\" Twój produkt: ")
                 .append(itemFullName).append(" w ilości: ").append(amountOfItems).append(" szt.")
+                .append("\n\n")
+                .append("Sposób dostawy: ").append(orderPaymentName)
                 .append("\n")
-                .append("Wybrał sposób dostawy: ").append(orderPaymentName)
-                .append("\n")
-                .append("Wysyłka na adres:")
+                .append("Adres do wysyłki:")
                 .append("\n")
                 .append(orderAddress)
                 .append("\n")

@@ -73,3 +73,14 @@ span {
   color:red;
   font-size:12px;
 }
+
+@media(max-width: 600px) {
+  .form {
+    min-width: 80%;
+    margin: auto;
+  }
+  .input-data {
+    max-width: 80%;
+    min-width: 80%;
+  }
+}
