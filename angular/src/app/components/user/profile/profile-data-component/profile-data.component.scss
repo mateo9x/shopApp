@@ -10,8 +10,9 @@
 }
 
 .input-data{
+  max-height: 100px;
   max-width:45%;
-  margin:auto;
+  margin: auto auto 20px;
   display: grid;
   grid-template-columns: auto;
   grid-gap: 20px;
