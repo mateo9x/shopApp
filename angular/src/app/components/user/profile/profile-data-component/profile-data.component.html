@@ -1,17 +1,15 @@
-<div id="login-box" #loginbox>
-
-  <div >
-    <div class="input-data" style="padding-top:1%">
+<div>
+  <div class="input-data" style="padding-top:1%">
     <label for="username">Użytkownik</label>
-    <input type="text" name="username" [(ngModel)]="user.username" [disabled]="user !== null" />
+    <input type="text" name="username" [(ngModel)]="user.username" [disabled]="user !== null"/>
   </div>
   <div class="input-data">
     <label for="firstName">Imię</label>
-    <input type="text" name="firstName" [(ngModel)]="user.firstName" [disabled]="user !== null" />
+    <input type="text" name="firstName" [(ngModel)]="user.firstName" [disabled]="user !== null"/>
   </div>
   <div class="input-data">
     <label for="lastName">Nazwisko</label>
-    <input type="text" name="lastName" [(ngModel)]="user.lastName" [disabled]="user !== null" />
+    <input type="text" name="lastName" [(ngModel)]="user.lastName" [disabled]="user !== null"/>
   </div>
   <div class="input-data">
     <label for="email">Adres e-mail</label>
@@ -19,7 +17,7 @@
   </div>
   <div class="input-data" *ngIf="changePswdForm !== true">
     <label for="username">Hasło</label>
-    <input type="password" name="password" placeholder="ukryte" [disabled]="user !== null" />
+    <input type="password" name="password" placeholder="ukryte" [disabled]="user !== null"/>
     <button class="submit-button" (click)="newPassword()">Zmień hasło</button>
   </div>
   <div class="input-data" *ngIf="changePswdForm === true">
@@ -27,27 +25,24 @@
     <input type="password" name="passwordNew" [(ngModel)]="user.password" placeholder="Nowe hasło"/>
   </div>
   <div class="input-data" *ngIf="changePswdForm === true">
-  <label for="passwordNew2">Potwierdź nowe hasło</label>
+    <label for="passwordNew2">Potwierdź nowe hasło</label>
     <input type="password" name="passwordNew2" [(ngModel)]="user.password2" placeholder="Potwierdź hasło"/>
-
+  </div>
+  <div class="input-data" *ngIf="changePswdForm === true">
+    <button class="submit-button" style="margin-bottom:5%" (click)="changePassword()"
+            [disabled]="user.password !== user.password2">Zmień hasło
+    </button>
   </div>
   <div class="input-data">
     <label for="street">Ulica</label>
-    <input type="text" name="street" [(ngModel)]="user.street" [disabled]="user !== null" />
+    <input type="text" name="street" [(ngModel)]="user.street" [disabled]="user !== null"/>
   </div>
   <div class="input-data">
     <label for="streetNumber">Nr domu</label>
-    <input type="text" name="streetNumber" [(ngModel)]="user.streetNumber" [disabled]="user !== null" />
+    <input type="text" name="streetNumber" [(ngModel)]="user.streetNumber" [disabled]="user !== null"/>
   </div>
   <div class="input-data">
     <label for="city">Miasto</label>
-    <input type="text" name="city" [(ngModel)]="user.city" [disabled]="user !== null" />
+    <input type="text" name="city" [(ngModel)]="user.city" [disabled]="user !== null"/>
   </div>
-  <div class="input-data" *ngIf="changePswdForm === true" >
-    <div></div>
-    <button class="submit-button" style="margin-bottom:5%" (click)="changePassword()" [disabled]="user.password !== user.password2">Zmień hasło</button>
-    <div></div>
-  </div>
-</div>
-
 </div>
