@@ -108,4 +108,12 @@ export class ItemsDetailsComponent implements OnInit {
     return new CartUpdateRequest(this.item.id, amountAvailableAfterBuy);
   }
 
+  getItemFirstPhoto(photoUrl: string) {
+    if (photoUrl && photoUrl.includes(';')) {
+      return photoUrl.split(';')[0];
+    } else {
+      return photoUrl;
+    }
+  }
+
 }
