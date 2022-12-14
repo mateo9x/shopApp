@@ -2,11 +2,9 @@ package com.mateo9x.shop.serviceImpl;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.mateo9x.shop.domain.Item;
-import com.mateo9x.shop.domain.User;
 import com.mateo9x.shop.dto.ItemDTO;
 import com.mateo9x.shop.mapper.ItemMapper;
 import com.mateo9x.shop.repository.ItemRepository;
@@ -15,8 +13,6 @@ import com.mateo9x.shop.service.ItemService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service

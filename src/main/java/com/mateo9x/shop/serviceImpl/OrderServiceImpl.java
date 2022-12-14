@@ -42,12 +42,16 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO save(OrderDTO orderDTO) {
         log.info("Request to save Order: {}", orderDTO);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
-        if (user.isPresent()) {
-            Item item = itemRepository.findById(orderDTO.getItemId()).get();
+        Optional<User> userOptional = userRepository.findByUsername(auth.getPrincipal().toString());
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            Item item = itemRepository.findById(orderDTO.getItemId()).orElse(null);
+            if (item == null) {
+                return null;
+            }
             item.setAmountAvailable(item.getAmountAvailable() - orderDTO.getAmountBought());
             itemRepository.save(item);
-            orderDTO.setUserId(user.get().getId());
+            orderDTO.setUserId(user.getId());
             Order order = orderMapper.toEntity(orderDTO);
             order = orderRepository.save(order);
             if (orderDTO.getOrderPaymentId() != null) {

@@ -22,11 +22,7 @@ public class AppController {
     public SqlVersion getSqlVersion() {
         log.debug("REST request to get sql version");
         SqlVersion sqlVersion = sqlVersionRepository.findFirstBy();
-        if (sqlVersion != null) {
-            return sqlVersion;
-        } else {
-            return null;
-        }
+        return sqlVersion;
     }
 
 }

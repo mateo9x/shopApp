@@ -1,7 +1,5 @@
 package com.mateo9x.shop.serviceImpl;
 
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,9 +44,12 @@ public class AuthenthicationServiceImpl implements AuthenthicationService {
     @Override
     public UserDTO isUserLogged() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
+        User user = userRepository.findByUsername(auth.getPrincipal().toString()).orElse(null);
+        if (user == null) {
+            return null;
+        }
         if (auth.isAuthenticated() && auth.getPrincipal() != "anonymousUser") {
-            return userMapper.toDTO(user.get());
+            return userMapper.toDTO(user);
         }
         return null;
     }

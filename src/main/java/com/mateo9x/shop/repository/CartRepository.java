@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.mateo9x.shop.domain.Cart;
 
-import com.mateo9x.shop.domain.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
