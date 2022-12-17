@@ -1,7 +1,7 @@
 package com.mateo9x.shop.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ItemDTO implements Serializable {
@@ -13,7 +13,7 @@ public class ItemDTO implements Serializable {
     private Long itemCategoryId;
     private String itemCategoryName;
     private Integer amountAvailable;
-    private Date createDate;
+    private LocalDateTime createDate;
     private Long sellerId;
     private String sellerName;
     private String description;
@@ -78,11 +78,11 @@ public class ItemDTO implements Serializable {
 
 
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 

@@ -1,5 +1,6 @@
 package com.mateo9x.shop.serviceImpl;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -80,7 +81,7 @@ public class ItemServiceImpl implements ItemService {
             } else {
                 itemDTO.setPhotoUrl("-");
             }
-            itemDTO.setCreateDate(new Date());
+            itemDTO.setCreateDate(LocalDateTime.now());
         }
         Item item = itemMapper.toEntity(itemDTO);
         item = itemRepository.save(item);

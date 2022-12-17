@@ -41,7 +41,6 @@ export class ItemsDetailsComponent implements OnInit {
       if (response.amountAvailable.length === 0) {
         this.productSold = true;
       }
-      response.createDate = moment.utc(response.createDate).local().format('YYYY-MM-DD HH:mm');
       this.item = response;
     });
     this.userService.isUserLogged().subscribe((response) => {
@@ -73,7 +72,7 @@ export class ItemsDetailsComponent implements OnInit {
   }
 
   formatCreateDate(createDate: string) {
-    return moment.utc(createDate).local().format('YYYY-MM-DD HH:mm');
+    return moment.utc(createDate).format('YYYY-MM-DD HH:mm');
   }
 
   getItemMainPhoto(item: Item) {
