@@ -11,12 +11,10 @@ public interface CartService {
 
     CartDTO addItemToCart(Long id, Integer amountSelected);
 
-    List<CartDTO> findAll();
-
     void deleteItemFromCart(Long id);
 
     boolean updateItemAmountInCart(CartUpdateRequestDto cartUpdateRequestDto);
 
-    List<CartDTO> findCartByUserId();
+    List<CartDTO> findCartItemsByUserLogged();
 
 }

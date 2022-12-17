@@ -1,6 +1,7 @@
 package com.mateo9x.shop.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,9 +24,6 @@ public class ItemCategory implements Serializable {
     private Long id;
     @Column(name = "name")
     private String name;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "item_category_parent")
-    private ItemCategory itemCategoryParent;
 
     public Long getId() {
         return id;
@@ -42,13 +40,4 @@ public class ItemCategory implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    public ItemCategory getItemCategoryParent() {
-        return itemCategoryParent;
-    }
-
-    public void setItemCategoryParent(ItemCategory itemCategoryParent) {
-        this.itemCategoryParent = itemCategoryParent;
-    }
-
 }

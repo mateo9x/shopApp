@@ -8,6 +8,7 @@ import {Order} from '../../order/order.model';
 import * as moment from "moment/moment";
 import {ToastService} from "../../toasts/toast.service";
 import {BuyProductRequest, BuyProductService} from "../buy.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'items-details',
@@ -26,7 +27,7 @@ export class ItemsDetailsComponent implements OnInit {
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
               private toastService: ToastService, private confirmationService: ConfirmationService, private route: ActivatedRoute,
-              private buyProductService: BuyProductService) {
+              private buyProductService: BuyProductService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -75,12 +76,12 @@ export class ItemsDetailsComponent implements OnInit {
     return moment.utc(createDate).local().format('YYYY-MM-DD HH:mm');
   }
 
-  getItemFirstPhoto(photoUrl: string) {
-    if (photoUrl && photoUrl.includes(';')) {
-      return photoUrl.split(';')[0];
-    } else {
-      return photoUrl;
+  getItemMainPhoto(item: Item) {
+    if (item.photoFiles) {
+      const image = 'data:image/jpeg;base64,' + item.photoFiles[0];
+      return  this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
+    return '';
   }
 
   prepareBuyProductRequest(item: Item): BuyProductRequest {

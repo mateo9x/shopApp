@@ -12,5 +12,6 @@ export class Item{
   description?: string;
   photoUrl: string;
   amountSelected: number;
+  photoFiles: any[];
 
 }

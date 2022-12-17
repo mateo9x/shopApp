@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {ItemMapper.class, UserMapper.class})
+@Mapper(componentModel = "spring", uses = {ItemMapper.class, UserMapper.class, SellerMapper.class})
 public interface CartMapper {
 
     CartMapper INSTANCE = Mappers.getMapper(CartMapper.class);
@@ -23,6 +23,7 @@ public interface CartMapper {
     @Mapping(source="item.price", target = "itemPrice")
     @Mapping(source="item.photoUrl", target = "itemPhotoUrl")
     @Mapping(source="item.amountAvailable", target = "itemAmountAvailable")
+    @Mapping(source = "item.seller.id", target = "itemSellerId")
     CartDTO toDTO(Cart cart);
 
     default Cart fromId(Long id) {

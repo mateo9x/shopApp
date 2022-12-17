@@ -131,5 +131,4 @@ public class Item implements Serializable {
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
-
 }

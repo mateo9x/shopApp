@@ -8,6 +8,7 @@ import {Cart} from "../../cart/cart.model";
 import {ItemCategoryService} from "../item-category/item-category.service";
 import {ToastService} from "../../toasts/toast.service";
 import {SellerService} from "../../sellers/seller.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'items',
@@ -23,7 +24,8 @@ export class ItemsComponent implements OnInit {
 
   constructor(private itemService: ItemsService, private router: Router, private cartService: CartService,
               private toastService: ToastService, private dialogService: DialogService, private route: ActivatedRoute,
-              private itemCategoryService: ItemCategoryService, private sellerService: SellerService) {
+              private itemCategoryService: ItemCategoryService, private sellerService: SellerService,
+              private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -96,12 +98,12 @@ export class ItemsComponent implements OnInit {
     this.router.navigate(['items-details', itemId]);
   }
 
-  getItemFirstPhoto(photoUrl: string) {
-    if (photoUrl && photoUrl.includes(';')) {
-      return photoUrl.split(';')[0];
-    } else {
-      return photoUrl;
+  getItemMainPhoto(item: Item) {
+    if (item.photoFiles) {
+      const image = 'data:image/jpeg;base64,' + item.photoFiles[0];
+      return  this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
+    return '';
   }
 
   prepareCartModel(item: Item): Cart {
@@ -112,7 +114,8 @@ export class ItemsComponent implements OnInit {
       itemPhotoUrl: item.photoUrl,
       itemPrice: item.price,
       itemAmountAvailable: item.amountAvailable,
-      amountSelected: item.amountSelected
+      amountSelected: item.amountSelected,
+      itemPhotoFiles: item.photoFiles
     }
   }
 

@@ -1,8 +1,8 @@
-.input{
+.input {
   width:50%;
   margin:auto;
-
 }
+
 .cart-btn {
   display: inline-block;
   background-color: #f26522;
@@ -13,30 +13,64 @@
   padding: 10px 20px;
   transition: all .5s;
 }
+
 .cart-btn:hover {
   background-color: #a63a06;
 }
-.submit{
+
+.cart-btn:disabled,.cart-btn[disabled=disabled] {
+  background-color: grey ;
+}
+
+.submit {
   text-align:center;
   margin:3% 0;
 }
-.input-data{
+
+.input-data {
   display:grid;
-  grid-template-columns: 35% 41%;
+  grid-template-columns: 1fr 2fr;
   margin-bottom:10px;
 }
-input{
-  text-align:right;
-  padding:1%;
+
+label {
+  text-align: left;
+  margin-left: 50%;
+  margin-bottom: 20px;
+}
+
+input {
+  margin-bottom: 20px;
+  padding: 4px;
+  width: 200px;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid #AAA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.2s ease;
+  text-align:left;
+  margin-right:0;
 }
 
 ::ng-deep {
   .p-button {
     border: 1px solid #f26522 !important;
     background: #f26522 !important;
+    border-radius: 10px !important;
   }
-  .p-button:enabled:hover {
+  .p-button:hover {
     border: 1px solid #a63a06 !important;
     background: #a63a06 !important;
+  }
+  .p-fileupload, .p-fileupload-content, .p-fileupload-buttonbar {
+    border: none !important;
+    background: none !important;
+  }
+  .p-dropdown {
+    border: none !important;
+    border-bottom: 1px solid #AAA !important;
+    width: 200px !important;
   }
 }

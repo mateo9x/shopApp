@@ -30,6 +30,7 @@ import { OrderProcessComponent } from './components/order/order-process/order-pr
 import { ProfileDataComponent } from './components/user/profile/profile-data-component/profile-data.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import {InfoComponent} from "./components/info/info.component";
+import {FileUploadModule} from "primeng/fileupload";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {InfoComponent} from "./components/info/info.component";
     FormsModule,
     DynamicDialogModule,
     ConfirmDialogModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    FileUploadModule
 
   ],
   providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, AnonymousUserGuard, DialogService, ConfirmationService],

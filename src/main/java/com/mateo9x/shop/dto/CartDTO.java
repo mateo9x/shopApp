@@ -1,6 +1,7 @@
 package com.mateo9x.shop.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CartDTO implements Serializable {
 
@@ -15,6 +16,8 @@ public class CartDTO implements Serializable {
 
     private String itemPhotoUrl;
     private Integer itemAmountAvailable;
+    private List<byte[]> itemPhotoFiles;
+    private Long itemSellerId;
 
     public Long getId() {
         return id;
@@ -86,6 +89,22 @@ public class CartDTO implements Serializable {
 
     public void setItemAmountAvailable(Integer itemAmountAvailable) {
         this.itemAmountAvailable = itemAmountAvailable;
+    }
+
+    public List<byte[]> getItemPhotoFiles() {
+        return itemPhotoFiles;
+    }
+
+    public void setItemPhotoFiles(List<byte[]> itemPhotoFiles) {
+        this.itemPhotoFiles = itemPhotoFiles;
+    }
+
+    public Long getItemSellerId() {
+        return itemSellerId;
+    }
+
+    public void setItemSellerId(Long itemSellerId) {
+        this.itemSellerId = itemSellerId;
     }
 
     @Override

@@ -1,1 +1,1 @@
-insert into items_category (name, item_category_parent) values ('Telefony', 1), ('Telewizory', 1), ('Komputery', 1), ('Układy Wydechowe', 2), ('Karoseria', 2), ('Odżywki białkowe', 4);
+insert into items_category (name) values ('Telefony'), ('Telewizory'), ('Komputery'), ('Układy Wydechowe'), ('Karoseria'), ('Odżywki białkowe');

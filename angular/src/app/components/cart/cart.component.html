@@ -4,7 +4,7 @@
 <div *ngIf="cartItems && cartItems.length > 0">
   <div *ngFor="let cartItem of cartItems">
     <div class="item_row">
-      <img [src]="getItemFirstPhoto(cartItem.itemPhotoUrl)">
+      <img [src]="getItemMainPhoto(cartItem)">
       <a class="product-title" (click)="openItemDetail(cartItem.itemId)">
         {{cartItem.itemBrand}} {{cartItem.itemModel}}
       </a>
