@@ -2,6 +2,7 @@ package com.mateo9x.shop.serviceImpl;
 
 import com.mateo9x.shop.service.OrderService;
 
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setUserId(user.getId());
             Order order = orderMapper.toEntity(orderDTO);
             order = orderRepository.save(order);
+            order.setDate(LocalDateTime.now());
             if (orderDTO.getOrderPaymentId() != null) {
                 sellerService.notifySellerAboutItemBuy(orderDTO);
             }

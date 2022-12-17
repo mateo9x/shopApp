@@ -19,7 +19,6 @@ export class BuyProductService {
     let cartItems: Cart[] = [];
     let order: Order = new Order();
     const amountAvailableAfterBuy = request.itemAmountAvailable - request.itemAmountSelected;
-    order.date = new Date();
     order.itemId = request.itemId;
     order.amountBought = request.itemAmountSelected;
     this.orderService.createOrder(order).subscribe((response) => {

@@ -1,7 +1,7 @@
 package com.mateo9x.shop.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +28,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "item_id")
     private Item item;
     @Column(name = "date")
-    private Date date;
+    private LocalDateTime date;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
@@ -58,11 +58,11 @@ public class Order implements Serializable {
         this.item = item;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
