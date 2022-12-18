@@ -85,6 +85,7 @@ export class SellItemsComponent implements OnInit {
           this.itemService.saveItem(this.item, this.photos).subscribe((response) => {
             if (response) {
               this.toastService.createSuccessToast('Dodano produkt do sprzedaży !');
+              this.router.navigate(['items-details', response.id]);
             } else {
               this.toastService.createErrorToast('Wystąpił błąd przy dodawaniu produktu na sprzedaż');
             }

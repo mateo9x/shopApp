@@ -19,7 +19,7 @@ public class PhotoServiceImpl {
            File image = new File(PATH_TO_PHOTOS_FOLDER + folderName + "\\" + fileName);
             return Files.readAllBytes(image.toPath());
         } catch (Exception e) {
-            log.error("Can't parse file path to MultipartFile !");
+            log.error("Can't parse file path to byte[] !");
             return null;
         }
     }
