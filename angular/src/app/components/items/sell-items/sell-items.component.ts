@@ -78,7 +78,6 @@ export class SellItemsComponent implements OnInit {
       this.item.itemCategoryId = this.selectedCategory.id;
       this.itemService.doesItemAlreadyExists(this.item).subscribe((itemExistsResponse) => {
         const itemExists = itemExistsResponse as boolean;
-        console.log(itemExists);
         if (itemExists) {
           this.toastService.createErrorToast('Taki produkt jest juz wystawiony przez Ciebie na sprzedaż !');
         } else {

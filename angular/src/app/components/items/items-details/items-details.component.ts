@@ -24,6 +24,7 @@ export class ItemsDetailsComponent implements OnInit {
   isUserLogged = false;
   order: Order = new Order();
   productSold = false;
+  carouselPhotos: any[] = [];
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
               private toastService: ToastService, private confirmationService: ConfirmationService, private route: ActivatedRoute,
@@ -42,6 +43,11 @@ export class ItemsDetailsComponent implements OnInit {
         this.productSold = true;
       }
       this.item = response;
+      let id = 1;
+      this.item.photoFiles.forEach((photo) => {
+        this.carouselPhotos.push({id: id, src: this.getItemPhoto(photo)});
+        id++;
+      });
     });
     this.userService.isUserLogged().subscribe((response) => {
       if (response !== null) {
@@ -75,10 +81,10 @@ export class ItemsDetailsComponent implements OnInit {
     return moment.utc(createDate).format('YYYY-MM-DD HH:mm');
   }
 
-  getItemMainPhoto(item: Item) {
-    if (item.photoFiles) {
-      const image = 'data:image/jpeg;base64,' + item.photoFiles[0];
-      return  this.sanitizer.bypassSecurityTrustResourceUrl(image);
+  getItemPhoto(photo: any) {
+    if (photo) {
+      const image = 'data:image/jpeg;base64,' + photo;
+      return this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
     return '';
   }

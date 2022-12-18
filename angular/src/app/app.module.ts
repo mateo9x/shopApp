@@ -31,6 +31,7 @@ import { ProfileDataComponent } from './components/user/profile/profile-data-com
 import { ProfileComponent } from './components/user/profile/profile.component';
 import {InfoComponent} from "./components/info/info.component";
 import {FileUploadModule} from "primeng/fileupload";
+import {CarouselModule} from "primeng/carousel";
 
 @NgModule({
   declarations: [
@@ -65,8 +66,8 @@ import {FileUploadModule} from "primeng/fileupload";
     DynamicDialogModule,
     ConfirmDialogModule,
     ProfileRoutingModule,
-    FileUploadModule
-
+    FileUploadModule,
+    CarouselModule
   ],
   providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, LoginGuard, AnonymousUserGuard, DialogService, ConfirmationService],
   bootstrap: [AppComponent],
