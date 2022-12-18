@@ -41,9 +41,18 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> findAllBySellerId(Long id) {
-        log.info("Request to find all Items by seller {}: ", id);
+    public List<ItemDTO> findAllBySellerIdActive(Long id) {
+        log.info("Request to find all Items active by seller {}: ", id);
         List<ItemDTO> itemDTOS = itemRepository.findBySellerId(id).stream().filter(dto -> dto.getAmountAvailable() > 0).map(itemMapper::toDTO)
+                .collect(Collectors.toCollection(LinkedList::new));
+        itemDTOS.forEach(this::fillPhotosForItem);
+        return itemDTOS;
+    }
+
+    @Override
+    public List<ItemDTO> findAllBySellerIdSold(Long id) {
+        log.info("Request to find all Items sold by seller {}: ", id);
+        List<ItemDTO> itemDTOS = itemRepository.findBySellerId(id).stream().filter(dto -> dto.getAmountAvailable() < 1).map(itemMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
         itemDTOS.forEach(this::fillPhotosForItem);
         return itemDTOS;

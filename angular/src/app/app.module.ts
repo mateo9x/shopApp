@@ -32,6 +32,8 @@ import { ProfileComponent } from './components/user/profile/profile.component';
 import {InfoComponent} from "./components/info/info.component";
 import {FileUploadModule} from "primeng/fileupload";
 import {CarouselModule} from "primeng/carousel";
+import {SoldItemsComponent} from "./components/items/sold-items/sold-items.component";
+import {SellingItemsComponent} from "./components/items/selling-items/selling-items.component";
 
 @NgModule({
   declarations: [
@@ -48,8 +50,9 @@ import {CarouselModule} from "primeng/carousel";
     ProfileOrdersComponent,
     ProfileComponent,
     SellItemsComponent,
-    InfoComponent
-
+    InfoComponent,
+    SellingItemsComponent,
+    SoldItemsComponent
   ],
   imports: [
     BrowserModule,

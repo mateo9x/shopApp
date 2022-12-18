@@ -1,0 +1,12 @@
+<div *ngFor="let item of items">
+  <div class="item_row">
+    <img [src]="getItemMainPhoto(item)">
+    <div class="product-title">
+      {{item.brand}} {{item.model}}
+    </div>
+    <span> Ilość dostępna: {{item.amountAvailable}}</span>
+  </div>
+</div>
+<div *ngIf="items.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">
+  BRAK PRODUKTÓW SPRZEDANYCH
+</div>

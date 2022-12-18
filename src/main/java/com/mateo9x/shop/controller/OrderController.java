@@ -26,7 +26,7 @@ public class OrderController {
     @PutMapping("/orders")
     public OrderDTO finishOrderProcess(@Valid @RequestBody OrderDTO orderDTO) {
         log.debug("REST request to finish process of Order: {}", orderDTO);
-        return orderService.save(orderDTO);
+        return orderService.finishOrderProcess(orderDTO);
     }
 
     @GetMapping("/orders")

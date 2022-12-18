@@ -3,6 +3,8 @@
   <button routerLink="data" routerLinkActive="active">Profil</button>
   <button routerLink="orders" routerLinkActive="active">Historia zakupów</button>
   <button routerLink="sell-items" routerLinkActive="active">Sprzedaj przedmiot</button>
+  <button *ngIf="sellerId" routerLink="selling-items/{{sellerId}}" routerLinkActive="active">Przedmioty sprzedawane</button>
+  <button *ngIf="sellerId" routerLink="sold-items/{{sellerId}}" routerLinkActive="active">Przedmioty sprzedane</button>
 </div>
 <div class="profile-routing">
   <router-outlet></router-outlet>
