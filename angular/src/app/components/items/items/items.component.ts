@@ -21,6 +21,11 @@ export class ItemsComponent implements OnInit {
   selectedItem: Item;
   cartForAnonymousUser: Cart[] = [];
   title: string;
+  sortOptions = [{name: 'Cena rosnąco', value: 'price_asc'},
+    {name: 'Cena malejąco', value: 'price_desc'},
+    {name: 'Najnowsze', value: 'latest'},
+    {name: 'Najstarsze', value: 'oldest'}];
+  selectedSortOption: any;
 
   constructor(private itemService: ItemsService, private router: Router, private cartService: CartService,
               private toastService: ToastService, private dialogService: DialogService, private route: ActivatedRoute,
@@ -101,9 +106,23 @@ export class ItemsComponent implements OnInit {
   getItemMainPhoto(item: Item) {
     if (item.photoFiles) {
       const image = 'data:image/jpeg;base64,' + item.photoFiles[0];
-      return  this.sanitizer.bypassSecurityTrustResourceUrl(image);
+      return this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
     return '';
+  }
+
+  sortItems(sortOptionValue: string) {
+    if (this.items) {
+      if (sortOptionValue === 'price_asc') {
+        this.items = this.items.sort((a, b) => a.price - b.price);
+      } else if (sortOptionValue === 'price_desc') {
+        this.items = this.items.sort((a, b) => b.price - a.price);
+      } else if (sortOptionValue === 'latest') {
+        this.items = this.items.sort((a, b) => b.createDate.localeCompare(a.createDate));
+      } else if (sortOptionValue === 'oldest') {
+        this.items = this.items.sort((a, b) => a.createDate.localeCompare(b.createDate));
+      }
+    }
   }
 
   prepareCartModel(item: Item): Cart {

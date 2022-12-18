@@ -1,18 +1,37 @@
-<div class="header_section_top" style="color:white; text-align: center; float:none">
-  {{title}}
+<div class="header_section_top bar-grid">
+  <span>{{title}}</span>
 </div>
-<div *ngFor="let item of items">
+<div class="sort-container">
+  <p-dropdown [options]="sortOptions" placeholder="Sortowanie" optionLabel="name"
+              appendTo="body" [(ngModel)]="selectedSortOption" (onChange)="sortItems(selectedSortOption.value)">
+  </p-dropdown>
+</div>
+<div *ngFor="let item of items; let i = index" class="item-wrapper">
   <div class="item_row">
-    <img [src]="getItemMainPhoto(item)">
-    <a class="product-title" (click)="openItemDetail(item.id)">
-      {{item.brand}} {{item.model}}
-    </a>
-    <span> Ilość dostępna: {{item.amountAvailable}}</span>
-
-    <input class="items_input" type="number" [(ngModel)]="item.amountSelected" min="1" [max]="item.amountAvailable"/>
-    <button class="padding_10" type="submit" (click)="addToCart(item)"
-            [disabled]="item.amountSelected > item.amountAvailable || item.amountSelected < 1">Dodaj do koszyka
-    </button>
+    <div class="first-column">
+      <img [src]="getItemMainPhoto(item)">
+    </div>
+    <div class="second-column">
+      <h6 class="product-title" (click)="openItemDetail(item.id)">
+        {{item.brand}} {{item.model}}
+      </h6>
+    </div>
+    <div class="third-column">
+      <div class="third-column-first-row">
+        Data dodania: {{item.createDate | date: 'YYYY-MM-dd HH:mm'}}
+      </div>
+      <div class="third-column-second-row">
+        <span> Ilość dostępna: {{item.amountAvailable}}</span>
+        Cena: {{item.price}} zł
+      </div>
+    </div>
+    <div class="fourth-column">
+      <input class="items_input" type="number" [(ngModel)]="item.amountSelected" min="1" placeholder="Ilość"
+             [max]="item.amountAvailable"/>
+      <button type="submit" (click)="addToCart(item)"
+              [disabled]="item.amountSelected > item.amountAvailable || item.amountSelected < 1">Dodaj do koszyka
+      </button>
+    </div>
   </div>
 </div>
 <div *ngIf="items.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">

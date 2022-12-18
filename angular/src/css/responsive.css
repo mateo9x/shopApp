@@ -227,9 +227,6 @@
     .banner_bg_main {
         background-size: 100% 100%;
     }
-    .header_section_top {
-        display: none;
-    }
     .containt_main {
         display: flex;
         flex-wrap: wrap;
@@ -355,9 +352,6 @@
 @media (max-width: 575px) {
     .banner_bg_main {
         background-size: cover;
-    }
-    .header_section_top {
-        display: none;
     }
     .containt_main {
         display: flex;
