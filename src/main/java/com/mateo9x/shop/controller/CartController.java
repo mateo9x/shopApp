@@ -8,15 +8,14 @@ import com.mateo9x.shop.dto.CartDTO;
 import com.mateo9x.shop.dto.CartUpdateRequestDto;
 import com.mateo9x.shop.service.CartService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class CartController {
 
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
     private final CartService cartService;
 
     public CartController(CartService cartService) {
