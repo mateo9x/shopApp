@@ -26,7 +26,7 @@ public class OrderController {
     @PutMapping("/orders")
     public OrderDTO finishOrderProcess(@Valid @RequestBody OrderDTO orderDTO) {
         log.debug("REST request to finish process of Order: {}", orderDTO);
-        return orderService.save(orderDTO);
+        return orderService.finishOrderProcess(orderDTO);
     }
 
     @GetMapping("/orders")
@@ -39,6 +39,12 @@ public class OrderController {
     public List<OrderDTO> getAllOrdersForUser(@PathVariable Long id) {
         log.debug("REST request to get all Orders for user: {}", id);
         return orderService.findAllByUserId();
+    }
+
+    @GetMapping("/orders/{id}")
+    public OrderDTO getOrderById(@PathVariable Long id) {
+        log.debug("REST request to get Order by id: {}", id);
+        return orderService.findById(id);
     }
 
     @DeleteMapping("/orders/return")

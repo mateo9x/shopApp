@@ -76,15 +76,18 @@ export class SellItemsComponent implements OnInit {
     if (seller) {
       this.item.sellerId = seller.id;
       this.item.itemCategoryId = this.selectedCategory.id;
+      if (this.photos.length > 0) {
+        this.item.photoUrl = this.photos.map(photo => photo.name).join(';');
+      }
       this.itemService.doesItemAlreadyExists(this.item).subscribe((itemExistsResponse) => {
         const itemExists = itemExistsResponse as boolean;
-        console.log(itemExists);
         if (itemExists) {
           this.toastService.createErrorToast('Taki produkt jest juz wystawiony przez Ciebie na sprzedaż !');
         } else {
           this.itemService.saveItem(this.item, this.photos).subscribe((response) => {
             if (response) {
               this.toastService.createSuccessToast('Dodano produkt do sprzedaży !');
+              this.router.navigate(['items-details', response.id]);
             } else {
               this.toastService.createErrorToast('Wystąpił błąd przy dodawaniu produktu na sprzedaż');
             }

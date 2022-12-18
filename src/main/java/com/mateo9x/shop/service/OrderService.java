@@ -8,10 +8,14 @@ public interface OrderService {
 
     OrderDTO save(OrderDTO orderDTO);
 
+    OrderDTO finishOrderProcess(OrderDTO orderDTO);
+
     List<OrderDTO> findAll();
 
     List<OrderDTO> findAllByUserId();
 
     void returnProduct(Long orderId, Integer amountOfProductsToReturn);
+
+    OrderDTO findById(Long id);
 
 }

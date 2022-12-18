@@ -4,15 +4,16 @@ import { Order } from './order.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {APP_BASE_URL} from "../../app.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  private ordersUrl = 'http://localhost:8080/api/orders';
-  private ordersAddressUrl = 'http://localhost:8080/api/orders-address';
-  private ordersPaymentUrl = 'http://localhost:8080/api/orders-payment';
+  private ordersUrl = APP_BASE_URL + '/api/orders';
+  private ordersAddressUrl = APP_BASE_URL + '/api/orders-address';
+  private ordersPaymentUrl = APP_BASE_URL + '/api/orders-payment';
 
 
   constructor(private http: HttpClient) {

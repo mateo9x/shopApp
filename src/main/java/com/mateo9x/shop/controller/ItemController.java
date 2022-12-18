@@ -40,10 +40,16 @@ public class ItemController {
         return itemService.findAllFromCategory(id);
     }
 
-    @GetMapping("/item/seller/{id}")
-    public List<ItemDTO> getAllItemsBySellerId(@PathVariable Long id) {
-        log.debug("REST request to get all Item for seller: {}", id);
-        return itemService.findAllBySellerId(id);
+    @GetMapping("/item/seller/active/{id}")
+    public List<ItemDTO> getAllItemsBySellerIdActive(@PathVariable Long id) {
+        log.debug("REST request to get all Item active for seller: {}", id);
+        return itemService.findAllBySellerIdActive(id);
+    }
+
+    @GetMapping("/item/seller/sold/{id}")
+    public List<ItemDTO> getAllItemsBySellerIdSold(@PathVariable Long id) {
+        log.debug("REST request to get all Item sold for seller: {}", id);
+        return itemService.findAllBySellerIdSold(id);
     }
 
     @GetMapping("/item/query/{query}")

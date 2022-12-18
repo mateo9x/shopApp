@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {Seller} from "./seller.model";
+import {APP_BASE_URL} from "../../app.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SellerService {
 
-  private sellersUrl = 'http://localhost:8080/api/sellers';
+  private sellersUrl = APP_BASE_URL + '/api/sellers';
 
   constructor(private http: HttpClient) {
   }

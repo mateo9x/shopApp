@@ -2,13 +2,14 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Item} from './items.model';
+import {APP_BASE_URL} from "../../app.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemsService {
 
-  private itemsUrl = 'http://localhost:8080/api/item';
+  private itemsUrl = APP_BASE_URL + '/api/item';
 
   constructor(private http: HttpClient) {
   }
@@ -30,8 +31,12 @@ export class ItemsService {
     return this.http.get<Item[]>(`${this.itemsUrl}/category/${id}`);
   }
 
-  public findAllItemsBySellerId(id: any): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.itemsUrl}/seller/${id}`);
+  public findAllItemsBySellerIdActive(id: any): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.itemsUrl}/seller/active/${id}`);
+  }
+
+  public findAllItemsBySellerIdSold(id: any): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.itemsUrl}/seller/sold/${id}`);
   }
 
   public findAllBySearchQuery(query: any): Observable<Item[]> {

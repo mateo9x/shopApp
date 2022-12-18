@@ -29,7 +29,7 @@
 
 .input-data {
   display:grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
   margin-bottom:10px;
 }
 
@@ -39,7 +39,7 @@ label {
   margin-bottom: 20px;
 }
 
-input {
+input, textarea {
   margin-bottom: 20px;
   padding: 4px;
   width: 200px;
@@ -73,4 +73,18 @@ input {
     border-bottom: 1px solid #AAA !important;
     width: 200px !important;
   }
+}
+
+@media(max-width: 600px) {
+  .input {
+    width: 100%;
+  }
+  label {
+    margin-left: 10px;
+  }
+  .input-data {
+    text-align: left;
+    grid-template-columns: 1fr 2fr;
+  }
+
 }

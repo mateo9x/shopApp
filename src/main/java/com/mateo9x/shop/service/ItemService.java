@@ -11,7 +11,9 @@ public interface ItemService {
 
     List<ItemDTO> findAllFromCategory(Long id);
 
-    List<ItemDTO> findAllBySellerId(Long id);
+    List<ItemDTO> findAllBySellerIdActive(Long id);
+
+    List<ItemDTO> findAllBySellerIdSold(Long id);
 
     List<ItemDTO> findAllByQuery(String query);
 

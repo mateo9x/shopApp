@@ -49,7 +49,7 @@ export class ItemsComponent implements OnInit {
         });
       });
     } else if (option === 2) {
-      this.itemService.findAllItemsBySellerId(param).subscribe((response) => {
+      this.itemService.findAllItemsBySellerIdActive(param).subscribe((response) => {
         this.items = response;
         this.sellerService.findSellerById(param).subscribe((response) => {
           this.title = 'Produkty sprzedawcy: ' + response.name;

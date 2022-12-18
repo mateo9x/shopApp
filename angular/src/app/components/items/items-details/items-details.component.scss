@@ -25,14 +25,17 @@ button:hover {
   display: flex;
 }
 
-img{
-  width:80%;
+img {
+  width:100%;
   height:auto;
+  border-radius: 10px;
 }
 
 .left-column {
   max-width: 60%;
-  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
 }
 
 .right-column {
@@ -141,5 +144,29 @@ a:hover, a:active{
   .p-button:enabled:hover {
     border: 1px solid #a63a06 !important;
     background: #a63a06 !important;
+  }
+}
+
+@media(max-width: 600px) {
+  .container {
+    display: block;
+  }
+
+  .left-column {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .right-column {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .product-price {
+    width: 100%;
+    max-width: 100%;
   }
 }

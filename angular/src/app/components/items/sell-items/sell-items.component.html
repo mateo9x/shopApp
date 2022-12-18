@@ -25,10 +25,11 @@
     </div>
     <div class="input-data">
       <label>Opis</label>
-      <input type="text" name="description" formControlName="description" [(ngModel)]="item.description"/>
+      <textarea type="text" name="description" formControlName="description" [(ngModel)]="item.description" style="min-height: 100px">
+      </textarea>
     </div>
     <div style="text-align: center;margin:auto;width:50%;border:none">
-      <p-fileUpload name="myfile[]" [auto]="true" (onSelect)="uploadFile($event)" (onRemove)="deleteFile($event)"
+      <p-fileUpload [auto]="true" (onSelect)="uploadFile($event)" (onRemove)="deleteFile($event)"
                     [multiple]="true" chooseLabel="Wybierz pliki" [fileLimit]="fileAmountLimit"></p-fileUpload>
     </div>
   </div>
