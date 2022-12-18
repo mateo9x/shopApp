@@ -2,60 +2,44 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
+import {APP_BASE_URL} from "../../app.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8080/api/users';
-  private authenthicationUrl = 'http://localhost:8080';
-  private mailSenderUrl = 'http://localhost:8080/api/mail';
+  private userUrl = APP_BASE_URL + '/api/users';
+  private mailSenderUrl = APP_BASE_URL + '/api/mail';
 
   constructor(private http: HttpClient) { }
 
-  public findAllUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}`);
-  }
-
   public findUser(id: any) {
-    return this.http.get<User>(`${this.baseUrl}/${id}`);
-  }
-
-  public deleteUser(id: any) {
-    return this.http.delete<User>(`${this.baseUrl}/`, id);
+    return this.http.get<User>(`${this.userUrl}/${id}`);
   }
 
   public saveUser(user: User) {
-    return this.http.post<User>(`${this.baseUrl}`, user);
-  }
-
-  public updateUser(user: User) {
-    return this.http.put<User>(`${this.baseUrl}`, user);
+    return this.http.post<User>(`${this.userUrl}`, user);
   }
 
   public updateUserPassword(user: User) {
-    return this.http.put<boolean>(`${this.baseUrl}/password`, user);
+    return this.http.put<boolean>(`${this.userUrl}/password`, user);
   }
 
   public updateUserPasswordByToken(user: User) {
-    return this.http.put<boolean>(`${this.baseUrl}/password/token`, user);
+    return this.http.put<boolean>(`${this.userUrl}/password/token`, user);
   }
 
   public signinUser(user: any) {
-    return this.http.post<any>(`${this.authenthicationUrl}/login`, user);
-  }
-
-  public logoutUser(request: any, response: any) {
-    return this.http.request<any>(`${this.authenthicationUrl}/logout`, request, response);
+    return this.http.post<any>(`${APP_BASE_URL}/login`, user);
   }
 
   public isUserLogged() {
-    return this.http.get<User>(`${this.authenthicationUrl}/is-user-logged`);
+    return this.http.get<User>(`${APP_BASE_URL}/is-user-logged`);
   }
 
   public getUserLogged(): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/logged`);
+    return this.http.get<User>(`${this.userUrl}/logged`);
   }
 
   public newUserWelcomeMail(user: User) {
@@ -63,19 +47,15 @@ export class UserService {
   }
 
   public resetPassword(mail: String) {
-    return this.http.get<any>(`${this.baseUrl}/resetPassword/${mail}`);
+    return this.http.get<any>(`${this.userUrl}/resetPassword/${mail}`);
   }
 
   public getByUserToken(user: User) {
-    return this.http.post<User>(`${this.baseUrl}/token-user`, user);
+    return this.http.post<User>(`${this.userUrl}/token-user`, user);
   }
 
   public doesUserWithEmailExists(email: String): Observable<boolean> {
-    return this.http.get<any>(`${this.baseUrl}/mail/${email}`);
-  }
-
-  public getUserLogin(userId: number): Observable<string> {
-    return this.http.get<any>(`${this.baseUrl}/user/${userId}/get-user-login`);
+    return this.http.get<any>(`${this.userUrl}/mail/${email}`);
   }
 
 }

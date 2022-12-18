@@ -1,6 +1,5 @@
 package com.mateo9x.shop.controller;
 
-import java.util.List;
 import javax.validation.Valid;
 
 import com.mateo9x.shop.dto.UserDTO;
@@ -8,7 +7,6 @@ import com.mateo9x.shop.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,12 +53,6 @@ public class UserController {
         return userService.updateUserPasswordFromToken(userDTO);
     }
 
-    @GetMapping("/users")
-    public List<UserDTO> getAllUsers() {
-        log.debug("REST request to get all Users");
-        return userService.findAll();
-    }
-
     @GetMapping("/users/{id}")
     public UserDTO getUser(@PathVariable Long id) {
         log.debug("REST request to get User: {}", id);
@@ -78,13 +70,6 @@ public class UserController {
         log.debug("REST request to get User by token: {}", userDTO.getResetToken());
         return userService.findByResetToken(userDTO);
     }
-
-    @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        log.debug("REST request do delete User: {}", id);
-        userService.deleteUser(id);
-    }
-
 
     @GetMapping("/users/logged")
     public UserDTO getUserLoggedUsername() {
