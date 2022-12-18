@@ -20,6 +20,8 @@ User authenthicated has access to secured endpoints.
 - Adding new items on auction
 - Notifying seller about "one" of his item been bought through email message
 - Buying product straight from cart page when user is logged
+- Verify what products seller already sold
+- Verify what products seller is selling now
 
 ### Coming soon:
 - Better design of application
