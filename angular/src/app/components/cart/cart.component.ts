@@ -97,8 +97,8 @@ export class CartComponent implements OnInit {
   }
 
   getItemMainPhoto(cart: Cart) {
-    if (cart.itemPhotoFiles) {
-      const image = 'data:image/jpeg;base64,' + cart.itemPhotoFiles[0];
+    if (cart.itemPhotoFile) {
+      const image = 'data:image/jpeg;base64,' + cart.itemPhotoFile;
       return  this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
     return '';

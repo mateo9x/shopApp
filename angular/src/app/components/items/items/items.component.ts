@@ -115,7 +115,7 @@ export class ItemsComponent implements OnInit {
       itemPrice: item.price,
       itemAmountAvailable: item.amountAvailable,
       amountSelected: item.amountSelected,
-      itemPhotoFiles: item.photoFiles
+      itemPhotoFile: item.photoFiles[0]
     }
   }
 

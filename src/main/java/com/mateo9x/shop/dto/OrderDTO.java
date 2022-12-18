@@ -17,9 +17,10 @@ public class OrderDTO implements Serializable {
     private Long orderPaymentId;
     private String orderPaymentType;
     private String sellerName;
+    private Long sellerId;
     private String photoUrl;
-
     private Integer amountBought;
+    private byte[] photo;
 
     public Long getId() {
         return id;
@@ -131,6 +132,22 @@ public class OrderDTO implements Serializable {
 
     public void setAmountBought(Integer amountBought) {
         this.amountBought = amountBought;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public Long getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
     }
 
     @Override

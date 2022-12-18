@@ -23,6 +23,7 @@ public interface OrderMapper {
     @Mapping(source = "item.model", target = "itemModel")
     @Mapping(source = "item.price", target = "itemPrice")
     @Mapping(source = "item.seller.name", target = "sellerName")
+    @Mapping(source = "item.seller.id", target = "sellerId")
     @Mapping(source = "item.photoUrl", target = "photoUrl")
     @Mapping(source = "item.id", target = "itemId")
     @Mapping(source = "user.id", target = "userId")

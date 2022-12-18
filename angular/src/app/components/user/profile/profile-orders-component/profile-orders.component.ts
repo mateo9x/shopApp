@@ -6,6 +6,7 @@ import {ConfirmationService} from 'primeng/api';
 import {User} from 'src/app/components/user/user.model';
 import {UserService} from 'src/app/components/user/user.service';
 import {ToastService} from "../../../toasts/toast.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'profile-orders',
@@ -19,7 +20,8 @@ export class ProfileOrdersComponent implements OnInit {
   orders: Order[] = [];
 
   constructor(private userService: UserService, private router: Router, private toastService: ToastService,
-              private orderService: OrderService, private confirmationService: ConfirmationService) {
+              private orderService: OrderService, private confirmationService: ConfirmationService,
+              private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -54,7 +56,7 @@ export class ProfileOrdersComponent implements OnInit {
   returnProductConfirm(order: Order) {
     const itemFullName = order.itemBrand + ' ' + order.itemModel;
     this.confirmationService.confirm({
-      message: 'Czy na pewno chcesz zwrócić produkt ' + itemFullName + ' ? Wykonanie zwrotu dotyczy wszystkich zakupionych sztuk produktu ('+ order.amountBought + ' szt.)',
+      message: 'Czy na pewno chcesz zwrócić produkt ' + itemFullName + ' ? Wykonanie zwrotu dotyczy wszystkich zakupionych sztuk produktu (' + order.amountBought + ' szt.)',
       accept: () => {
         this.returnProduct(order.id, order.amountBought);
       }
@@ -68,11 +70,11 @@ export class ProfileOrdersComponent implements OnInit {
     });
   }
 
-  getItemFirstPhoto(photoUrl: string) {
-    if (photoUrl.includes(';')) {
-      return photoUrl.split(';')[0];
-    } else {
-      return photoUrl;
+  getItemMainPhoto(order: Order) {
+    if (order.photo) {
+      const image = 'data:image/jpeg;base64,' + order.photo;
+      return this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
+    return '';
   }
 }

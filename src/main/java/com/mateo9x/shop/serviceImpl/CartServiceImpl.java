@@ -1,6 +1,5 @@
 package com.mateo9x.shop.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,9 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 
 @Service
 @Slf4j
@@ -100,19 +96,17 @@ public class CartServiceImpl implements CartService {
         }
         log.info("Request to find Cart for User: {}", user.getId());
         List<CartDTO> cartDTOItems = cartRepository.findByUserId(user.getId()).stream().map(cartMapper::toDTO).collect(Collectors.toList());
-        cartDTOItems.forEach(this::fillPhotosForCartDTO);
+        cartDTOItems.forEach(this::fillPhotoForCartDTO);
         return cartDTOItems;
     }
 
-    private void fillPhotosForCartDTO(CartDTO cartDTO) {
+    private void fillPhotoForCartDTO(CartDTO cartDTO) {
         if (!cartDTO.getItemPhotoUrl().equals("-")) {
             if (cartDTO.getItemPhotoUrl().contains(";")) {
-                List<byte[]> photos = new ArrayList<>();
-                List<String> fileNames = asList(cartDTO.getItemPhotoUrl().split(";"));
-                fileNames.forEach(fileName -> photos.add(photoService.getPhotoFromResourceFolder(cartDTO.getItemSellerId().toString(), fileName)));
-                cartDTO.setItemPhotoFiles(photos);
+                String firstPhotoFileName = cartDTO.getItemPhotoUrl().split(";")[0];
+                cartDTO.setItemPhotoFile((photoService.getPhotoFromResourceFolder(cartDTO.getItemSellerId().toString(), firstPhotoFileName)));
             } else {
-                cartDTO.setItemPhotoFiles(singletonList(photoService.getPhotoFromResourceFolder(cartDTO.getItemSellerId().toString(), cartDTO.getItemPhotoUrl())));
+                cartDTO.setItemPhotoFile(photoService.getPhotoFromResourceFolder(cartDTO.getItemSellerId().toString(), cartDTO.getItemPhotoUrl()));
             }
         }
     }
