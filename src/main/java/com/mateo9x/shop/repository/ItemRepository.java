@@ -1,6 +1,7 @@
 package com.mateo9x.shop.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.mateo9x.shop.domain.Item;
 
@@ -19,5 +20,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "select * from items where brand ilike %:query% or model ilike %:query%", nativeQuery = true)
     List<Item> findByBrandLikeOrModelLike(@Param("query") String query);
+
+    @Query(value = "select * from items where brand = :brand and model = :model and price = :price and seller_id = :sellerId and items_category_id = :itemsCategoryId and amount_available > 0;", nativeQuery = true)
+    Optional<Item> doesItemAlreadyExists(@Param("brand") String brand, @Param("model") String model, @Param("price") Double price, @Param("sellerId") Long sellerId, @Param("itemsCategoryId") Long itemsCategoryId);
 
 }

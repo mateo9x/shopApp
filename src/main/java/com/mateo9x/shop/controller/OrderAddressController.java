@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,12 +31,6 @@ public class OrderAddressController {
     @PostMapping("/orders-address")
     public OrderAddressDTO createOrder(@Valid @RequestBody OrderAddressDTO orderDTO) {
         log.debug("REST request to save OrderAddress: {}", orderDTO);
-        return orderService.save(orderDTO);
-    }
-
-    @PutMapping("/orders-address")
-    public OrderAddressDTO updateOrder(@Valid @RequestBody OrderAddressDTO orderDTO) {
-        log.debug("REST request to update OrderAddress: {}", orderDTO);
         return orderService.save(orderDTO);
     }
 

@@ -18,17 +18,8 @@ export class OrderService {
   constructor(private http: HttpClient) {
   }
 
-  public findAllOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.ordersUrl}`);
-  }
-
-
   public findAllOrderPayments(): Observable<OrderPayment[]> {
     return this.http.get<OrderPayment[]>(`${this.ordersPaymentUrl}`);
-  }
-
-  public findOrder(id: any): Observable<any> {
-    return this.http.get<Order>(`${this.ordersUrl}/${id}`, id);
   }
 
   public returnProduct(id: number, amountOfProductsToReturn: number) {
@@ -54,11 +45,6 @@ export class OrderService {
 
   public saveOrderAddress(orderAdd: OrderAddress) {
     return this.http.post<OrderAddress>(`${this.ordersAddressUrl}`, orderAdd);
-  }
-
-  public updateOrderAddress(orderAdd: OrderAddress) {
-    return this.http.put<OrderAddress>(`${this.ordersAddressUrl}`, orderAdd);
-
   }
 
 }

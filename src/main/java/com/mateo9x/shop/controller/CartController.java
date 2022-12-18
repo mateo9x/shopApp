@@ -41,12 +41,6 @@ public class CartController {
         return cartService.save(cartDTO);
     }
 
-    @GetMapping("/cart")
-    public List<CartDTO> getAllCarts() {
-        log.debug("REST request to get all Carts");
-        return cartService.findAll();
-    }
-
     @DeleteMapping("/cart/{id}")
     public void deleteItemUserCart(@PathVariable Long id) {
         log.debug("REST request do delete Item from User Cart: {}", id);
@@ -60,9 +54,9 @@ public class CartController {
     }
 
     @GetMapping("/cart/user")
-    public List<CartDTO> getCartItems() {
+    public List<CartDTO> getCartItemsByUserLogged() {
         log.debug("REST request to get Cart for User");
-        return cartService.findCartByUserId();
+        return cartService.findCartItemsByUserLogged();
     }
 
 }

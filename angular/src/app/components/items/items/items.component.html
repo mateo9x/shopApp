@@ -3,7 +3,7 @@
 </div>
 <div *ngFor="let item of items">
   <div class="item_row">
-    <img [src]="getItemFirstPhoto(item.photoUrl)">
+    <img [src]="getItemMainPhoto(item)">
     <a class="product-title" (click)="openItemDetail(item.id)">
       {{item.brand}} {{item.model}}
     </a>

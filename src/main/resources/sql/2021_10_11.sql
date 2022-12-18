@@ -21,9 +21,7 @@ ALTER TABLE users_roles ADD FOREIGN KEY (user_id) REFERENCES users (id);
 create table items_category (
     id serial not null,
     name varchar(250) not null,
-    item_category_parent int null,
-    CONSTRAINT items_category_pk PRIMARY KEY(id),
-    FOREIGN KEY (item_category_parent) REFERENCES items_category (id)
+    CONSTRAINT items_category_pk PRIMARY KEY(id)
 );
 
 create table sellers (

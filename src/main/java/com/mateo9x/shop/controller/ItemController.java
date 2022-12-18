@@ -1,22 +1,16 @@
 package com.mateo9x.shop.controller;
 
+import java.io.IOException;
 import java.util.List;
 
-import javax.validation.Valid;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mateo9x.shop.dto.ItemDTO;
 import com.mateo9x.shop.service.ItemService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
@@ -30,21 +24,14 @@ public class ItemController {
     }
 
     @PostMapping("/item")
-    public ItemDTO createItem(@Valid @RequestBody ItemDTO itemDTO) {
-        log.debug("REST request to save Item: {}", itemDTO);
-        return itemService.save(itemDTO);
-    }
-
-    @PutMapping("/item")
-    public ItemDTO updateItem(@Valid @RequestBody ItemDTO userDTO) {
-        log.debug("REST request to update Item: {}", userDTO);
-        return itemService.save(userDTO);
-    }
-
-    @GetMapping("/item")
-    public List<ItemDTO> getAllItems() {
-        log.debug("REST request to get all Item");
-        return itemService.findAll();
+    public ItemDTO createItem(@RequestPart(name = "item") String itemString, @RequestPart("photos") List<MultipartFile> photos) {
+        try {
+            ItemDTO item = new ObjectMapper().readValue(itemString, ItemDTO.class);
+            log.debug("REST request to save Item: {}", item);
+            return itemService.save(item, photos);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/item/category/{id}")
@@ -71,10 +58,10 @@ public class ItemController {
         return itemService.findById(id);
     }
 
-    @DeleteMapping("/item/{id}")
-    public void deleteItem(@PathVariable Long id) {
-        log.debug("REST request do delete Item: {}", id);
-        itemService.deleteItem(id);
+    @GetMapping("item/exists")
+    public Boolean doesItemAlreadyExists(ItemDTO itemDTO) {
+        log.debug("REST request to check if Item Already Exists: {}", itemDTO);
+        return itemService.doesItemAlreadyExists(itemDTO);
     }
 
 }

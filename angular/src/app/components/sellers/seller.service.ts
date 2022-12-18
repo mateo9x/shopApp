@@ -17,4 +17,12 @@ export class SellerService {
     return this.http.get<Seller>(`${this.sellersUrl}/${id}`, id);
   }
 
+  public findSellerByUserLogged(): Observable<Seller> {
+    return this.http.get<Seller>(`${this.sellersUrl}/user-logged`);
+  }
+
+  public saveNewSeller(): Observable<Seller> {
+    return this.http.post<Seller>(`${this.sellersUrl}`, null);
+  }
+
 }

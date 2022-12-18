@@ -12,8 +12,6 @@ public interface OrderService {
 
     List<OrderDTO> findAllByUserId();
 
-    OrderDTO findById(Long id);
-
     void returnProduct(Long orderId, Integer amountOfProductsToReturn);
 
 }

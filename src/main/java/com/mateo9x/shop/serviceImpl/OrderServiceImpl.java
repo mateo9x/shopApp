@@ -2,6 +2,7 @@ package com.mateo9x.shop.serviceImpl;
 
 import com.mateo9x.shop.service.OrderService;
 
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
-
+    private final PhotoServiceImpl photoService;
     private final SellerService sellerService;
 
     @Override
@@ -54,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setUserId(user.getId());
             Order order = orderMapper.toEntity(orderDTO);
             order = orderRepository.save(order);
+            order.setDate(LocalDateTime.now());
             if (orderDTO.getOrderPaymentId() != null) {
                 sellerService.notifySellerAboutItemBuy(orderDTO);
             }
@@ -65,8 +67,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDTO> findAll() {
         log.info("Request to find all Orders: ");
-        return orderRepository.findAll().stream().map(orderMapper::toDTO)
+        List<OrderDTO> orderDTOS = orderRepository.findAll().stream().map(orderMapper::toDTO)
                 .collect(Collectors.toCollection(LinkedList::new));
+        orderDTOS.forEach(this::fillPhotoForOrderDTO);
+        return orderDTOS;
     }
 
     @Override
@@ -75,17 +79,12 @@ public class OrderServiceImpl implements OrderService {
         Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
         if (user.isPresent()) {
             log.info("Request to find all Orders by user: {} ", user.get().getId());
-            return orderRepository.findByUserId(user.get().getId()).stream().map(orderMapper::toDTO)
+            List<OrderDTO> orderDTOS = orderRepository.findByUserId(user.get().getId()).stream().map(orderMapper::toDTO)
                     .collect(Collectors.toCollection(LinkedList::new));
+            orderDTOS.forEach(this::fillPhotoForOrderDTO);
+            return orderDTOS;
         }
         return null;
-    }
-
-    @Override
-    public OrderDTO findById(Long id) {
-        log.info("Request to find Order by id: {}", id);
-        Order order = orderRepository.getById(id);
-        return orderMapper.toDTO(order);
     }
 
     @Override
@@ -96,5 +95,16 @@ public class OrderServiceImpl implements OrderService {
         item.setAmountAvailable(item.getAmountAvailable() + amountOfProductsToReturn);
         itemRepository.save(item);
         orderRepository.delete(order);
+    }
+
+    private void fillPhotoForOrderDTO(OrderDTO orderDTO) {
+        if (!orderDTO.getPhotoUrl().equals("-")) {
+            if (orderDTO.getPhotoUrl().contains(";")) {
+                String firstPhotoFileName = orderDTO.getPhotoUrl().split(";")[0];
+                orderDTO.setPhoto((photoService.getPhotoFromResourceFolder(orderDTO.getSellerId().toString(), firstPhotoFileName)));
+            } else {
+                orderDTO.setPhoto(photoService.getPhotoFromResourceFolder(orderDTO.getSellerId().toString(), orderDTO.getPhotoUrl()));
+            }
+        }
     }
 }

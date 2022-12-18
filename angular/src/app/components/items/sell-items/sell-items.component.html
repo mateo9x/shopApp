@@ -1,44 +1,41 @@
-<div class="container">
+<form [formGroup]="requiredForm">
   <div class="input">
     <div class="input-data" style="padding-top:1%">
-      <label for="brand">Marka</label>
-      <input type="text" name="brand" [(ngModel)]="item.brand" />
+      <label>Marka</label>
+      <input type="text" name="brand" formControlName="brand" [(ngModel)]="item.brand"/>
     </div>
-    <div class="input-data" >
-      <label for="model">Model</label>
-      <input type="text" name="model" [(ngModel)]="item.model" />
+    <div class="input-data">
+      <label>Model</label>
+      <input type="text" name="model" formControlName="model" [(ngModel)]="item.model"/>
     </div>
-    <div class="input-data" >
-      <label for="selectedCategoryParent">Kategoria nadrzędna</label>
-      <p-dropdown [options]="parentCategories" placeholder="Wybierz kategorię nadrzędną" optionLabel="name"
-        appendTo="body" [(ngModel)]="selectedCategoryParent" (onChange)="findChildCategory(selectedCategoryParent)">
-      </p-dropdown>
-    </div>
-    <div class="input-data" >
-      <label for="selectedCategoryChild">Kategoria podrzędną</label>
-      <p-dropdown [options]="childCategories" placeholder="Wybierz kategorię podrzędną" optionLabel="name"
-        appendTo="body" [(ngModel)]="selectedCategoryChild" [disabled]="selectedCategoryParent === undefined">
+    <div class="input-data">
+      <label>Kategoria</label>
+      <p-dropdown [options]="categories" placeholder="Wybierz kategorię" optionLabel="name"
+                  appendTo="body" formControlName="selectedCategory" [(ngModel)]="selectedCategory">
       </p-dropdown>
     </div>
 
-    <div class="input-data" >
-      <label for="price">Cena</label>
-      <input type="text" name="price" placeholder="zł" [(ngModel)]="item.price" />
+    <div class="input-data">
+      <label>Cena</label>
+      <input type="number" name="price" placeholder="zł" formControlName="price" min="1" [(ngModel)]="item.price"/>
     </div>
-    <div class="input-data" >
-      <label for="amount">Ilość</label>
-      <input type="number" name="amount" placeholder="szt" [(ngModel)]="item.amountAvailable" />
+    <div class="input-data">
+      <label>Ilość</label>
+      <input type="number" name="amount" placeholder="szt" formControlName="amountAvailable" min="1" max="1000" [(ngModel)]="item.amountAvailable"/>
     </div>
-    <div class="input-data" >
-      <label for="description">Opis</label>
-      <input type="text" name="description" [(ngModel)]="item.description" />
+    <div class="input-data">
+      <label>Opis</label>
+      <input type="text" name="description" formControlName="description" [(ngModel)]="item.description"/>
     </div>
-
+    <div style="text-align: center;margin:auto;width:50%;border:none">
+      <p-fileUpload name="myfile[]" [auto]="true" (onSelect)="uploadFile($event)" (onRemove)="deleteFile($event)"
+                    [multiple]="true" chooseLabel="Wybierz pliki" [fileLimit]="fileAmountLimit"></p-fileUpload>
+    </div>
   </div>
   <div class="submit">
-    <button (click)="addProductConfirm()" class="cart-btn">Wystaw Przedmiot</button>
+    <button (click)="addProductConfirm()" class="cart-btn" [disabled]="requiredForm.status === 'INVALID' || photos.length === 0 || photos.length > fileAmountLimit">Wystaw Przedmiot</button>
   </div>
-</div>
+</form>
 
 <p-confirmDialog acceptLabel="Tak" rejectLabel="Nie" header="Wystawienie przedmiotu" icon="pi pi-exclamation-triangle">
 </p-confirmDialog>

@@ -8,6 +8,7 @@ export class Cart {
   itemPhotoUrl: string;
   itemAmountAvailable: number;
   amountSelected: number;
+  itemPhotoFile: any;
 }
 
 export class CartUpdateRequest {

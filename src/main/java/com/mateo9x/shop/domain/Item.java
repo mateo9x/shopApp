@@ -1,7 +1,7 @@
 package com.mateo9x.shop.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +41,7 @@ public class Item implements Serializable {
     @NotNull
     private Integer amountAvailable;
     @Column(name = "create_date")
-    private Date createDate;
+    private LocalDateTime createDate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seller_id")
     @NotNull
@@ -108,11 +108,11 @@ public class Item implements Serializable {
         this.seller = seller;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -131,5 +131,4 @@ public class Item implements Serializable {
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
-
 }

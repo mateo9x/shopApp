@@ -7,4 +7,8 @@ public interface SellerService {
     SellerDTO getSellerById(Long id);
 
     void notifySellerAboutItemBuy(OrderDTO orderDTO);
+
+    SellerDTO getSellerIfUserLoggedHasSellerAccount();
+
+    SellerDTO createSellerAccount();
 }

@@ -16,4 +16,5 @@ export class Order {
   sellerName: string;
   photoUrl: string;
   amountBought: number;
+  photo: any;
 }

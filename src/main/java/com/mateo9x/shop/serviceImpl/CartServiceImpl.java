@@ -1,6 +1,5 @@
 package com.mateo9x.shop.serviceImpl;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,6 +27,7 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final CartMapper cartMapper;
     private final UserRepository userRepository;
+    private final PhotoServiceImpl photoService;
 
     @Override
     public void deleteItemFromCart(Long id) {
@@ -56,12 +56,6 @@ public class CartServiceImpl implements CartService {
             cartRepository.save(cart);
         }
         return true;
-    }
-
-    @Override
-    public List<CartDTO> findAll() {
-        log.info("Request to find all Carts: ");
-        return cartRepository.findAll().stream().map(cartMapper::toDTO).collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
@@ -94,14 +88,26 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartDTO> findCartByUserId() {
+    public List<CartDTO> findCartItemsByUserLogged() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Optional<User> user = userRepository.findByUsername(auth.getPrincipal().toString());
-        if (user.isPresent()) {
-            log.info("Request to find Cart for User: {}", user.get().getId());
-            return cartRepository.findByUserId(user.get().getId()).stream().map(cartMapper::toDTO)
-                    .collect(Collectors.toCollection(LinkedList::new));
+        User user = userRepository.findByUsername(auth.getPrincipal().toString()).orElse(null);
+        if (user == null) {
+            return null;
         }
-        return null;
+        log.info("Request to find Cart for User: {}", user.getId());
+        List<CartDTO> cartDTOItems = cartRepository.findByUserId(user.getId()).stream().map(cartMapper::toDTO).collect(Collectors.toList());
+        cartDTOItems.forEach(this::fillPhotoForCartDTO);
+        return cartDTOItems;
+    }
+
+    private void fillPhotoForCartDTO(CartDTO cartDTO) {
+        if (!cartDTO.getItemPhotoUrl().equals("-")) {
+            if (cartDTO.getItemPhotoUrl().contains(";")) {
+                String firstPhotoFileName = cartDTO.getItemPhotoUrl().split(";")[0];
+                cartDTO.setItemPhotoFile((photoService.getPhotoFromResourceFolder(cartDTO.getItemSellerId().toString(), firstPhotoFileName)));
+            } else {
+                cartDTO.setItemPhotoFile(photoService.getPhotoFromResourceFolder(cartDTO.getItemSellerId().toString(), cartDTO.getItemPhotoUrl()));
+            }
+        }
     }
 }

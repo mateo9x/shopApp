@@ -6,7 +6,7 @@ import {Cart} from "./cart.model";
 import {ToastService} from "../toasts/toast.service";
 import {ConfirmationService} from "primeng/api";
 import {BuyProductRequest, BuyProductService} from "../items/buy.service";
-import {Item} from "../items/items.model";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'cart',
@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
   userId: number;
 
   constructor(private cartService: CartService, private router: Router, private toastService: ToastService, private userService: UserService,
-              private confirmationService: ConfirmationService, private buyProductService: BuyProductService) {
+              private confirmationService: ConfirmationService, private buyProductService: BuyProductService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
 
   loadData() {
     if (this.userLogged) {
-      this.cartService.findCartForUserLogged().subscribe((response) => {
+      this.cartService.findCartItemsForUserLogged().subscribe((response) => {
         this.cartItems = response;
       });
     } else {
@@ -96,12 +96,12 @@ export class CartComponent implements OnInit {
     this.buyProductService.buyProduct(this.prepareBuyProductRequest(cart));
   }
 
-  getItemFirstPhoto(photoUrl: string) {
-    if (photoUrl && photoUrl.includes(';')) {
-      return photoUrl.split(';')[0];
-    } else {
-      return photoUrl;
+  getItemMainPhoto(cart: Cart) {
+    if (cart.itemPhotoFile) {
+      const image = 'data:image/jpeg;base64,' + cart.itemPhotoFile;
+      return  this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
+    return '';
   }
 
   prepareBuyProductRequest(cart: Cart): BuyProductRequest {

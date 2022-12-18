@@ -47,6 +47,32 @@ public class SellerServiceImpl implements SellerService {
         mailService.notifySellerAboutHisItemProductBuy(message, seller.getMail());
     }
 
+    @Override
+    public SellerDTO getSellerIfUserLoggedHasSellerAccount() {
+        UserDTO userDTO = userService.getUsernameLogged();
+        if (userDTO == null) {
+            return null;
+        }
+        Seller seller = sellerRepository.findSellerByMail(userDTO.getMail()).orElse(null);
+        if (seller == null) {
+            return null;
+        }
+        return sellerMapper.toDTO(seller);
+    }
+
+    @Override
+    public SellerDTO createSellerAccount() {
+        UserDTO userDTO = userService.getUsernameLogged();
+        if (userDTO == null) {
+            return null;
+        }
+        Seller seller = new Seller();
+        seller.setMail(userDTO.getMail());
+        seller.setName(userDTO.getUsername());
+        seller = sellerRepository.save(seller);
+        return sellerMapper.toDTO(seller);
+    }
+
     private String prepareMessage(String userFullname, String itemFullName, Integer amountOfItems, String orderPaymentName, String orderAddress) {
         StringBuilder sb = new StringBuilder();
         sb.append("Dzień dobry !\n\n")

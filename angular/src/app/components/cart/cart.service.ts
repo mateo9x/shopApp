@@ -13,7 +13,7 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  public findCartForUserLogged(): Observable<Cart[]>{
+  public findCartItemsForUserLogged(): Observable<Cart[]>{
     return this.http.get<Cart[]>(`${this.cartUrl}/user`);
   }
 

@@ -1,8 +1,10 @@
 package com.mateo9x.shop.serviceImpl;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import com.mateo9x.shop.domain.ItemCategory;
 import com.mateo9x.shop.dto.ItemCategoryDTO;
 import com.mateo9x.shop.mapper.ItemCategoryMapper;
@@ -31,7 +33,9 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     @Override
     public List<ItemCategoryDTO> findAll() {
         log.info("Request to find all ItemCategories: ");
-        return itemCategoryRepository.findAll().stream().map(itemCategoryMapper::toDTO)
+        return itemCategoryRepository.findAll().stream()
+                .map(itemCategoryMapper::toDTO)
+                .sorted(Comparator.comparing(ItemCategoryDTO::getName))
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
