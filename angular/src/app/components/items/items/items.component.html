@@ -1,6 +1,9 @@
 <div class="header_section_top" style="color:white; text-align: center; float:none">
   {{title}}
 </div>
+<p-dropdown [options]="sortOptions" placeholder="Wybierz sortowanie" optionLabel="name"
+            appendTo="body" [(ngModel)]="selectedSortOption" (onChange)="sortItems(selectedSortOption.value)">
+</p-dropdown>
 <div *ngFor="let item of items">
   <div class="item_row">
     <img [src]="getItemMainPhoto(item)">
@@ -8,6 +11,8 @@
       {{item.brand}} {{item.model}}
     </a>
     <span> Ilość dostępna: {{item.amountAvailable}}</span>
+    Cena: {{item.price}}
+    Data dodania: {{item.createDate}}
 
     <input class="items_input" type="number" [(ngModel)]="item.amountSelected" min="1" [max]="item.amountAvailable"/>
     <button class="padding_10" type="submit" (click)="addToCart(item)"
