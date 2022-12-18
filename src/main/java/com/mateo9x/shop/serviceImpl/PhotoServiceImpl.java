@@ -24,7 +24,7 @@ public class PhotoServiceImpl {
         }
     }
 
-    public String saveMultipartFileInResourceFolder(String folderName, MultipartFile multipartFile) {
+    public void saveMultipartFileInResourceFolder(String folderName, MultipartFile multipartFile) {
         try {
             String fileName = multipartFile.getResource().getFilename();
             File file = new File(PATH_TO_PHOTOS_FOLDER + folderName + "\\" + fileName);
@@ -32,10 +32,8 @@ public class PhotoServiceImpl {
                 file.mkdirs();
             }
             multipartFile.transferTo(file);
-            return fileName;
         } catch (IOException e) {
             log.error(e.getMessage(), e);
-            return null;
         }
     }
 }

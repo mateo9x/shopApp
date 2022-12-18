@@ -76,6 +76,9 @@ export class SellItemsComponent implements OnInit {
     if (seller) {
       this.item.sellerId = seller.id;
       this.item.itemCategoryId = this.selectedCategory.id;
+      if (this.photos.length > 0) {
+        this.item.photoUrl = this.photos.map(photo => photo.name).join(';');
+      }
       this.itemService.doesItemAlreadyExists(this.item).subscribe((itemExistsResponse) => {
         const itemExists = itemExistsResponse as boolean;
         if (itemExists) {

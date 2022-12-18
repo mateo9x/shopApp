@@ -104,9 +104,9 @@ public class CartServiceImpl implements CartService {
         if (!cartDTO.getItemPhotoUrl().equals("-")) {
             if (cartDTO.getItemPhotoUrl().contains(";")) {
                 String firstPhotoFileName = cartDTO.getItemPhotoUrl().split(";")[0];
-                cartDTO.setItemPhotoFile((photoService.getPhotoFromResourceFolder(cartDTO.getItemSellerId().toString(), firstPhotoFileName)));
+                cartDTO.setItemPhotoFile((photoService.getPhotoFromResourceFolder(cartDTO.getItemId().toString(), firstPhotoFileName)));
             } else {
-                cartDTO.setItemPhotoFile(photoService.getPhotoFromResourceFolder(cartDTO.getItemSellerId().toString(), cartDTO.getItemPhotoUrl()));
+                cartDTO.setItemPhotoFile(photoService.getPhotoFromResourceFolder(cartDTO.getItemId().toString(), cartDTO.getItemPhotoUrl()));
             }
         }
     }

@@ -13,7 +13,6 @@ import com.mateo9x.shop.service.ItemService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +20,6 @@ import javax.transaction.Transactional;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
-import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 @Service
 @Slf4j
@@ -72,19 +70,13 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDTO save(ItemDTO itemDTO, List<MultipartFile> photos) {
         log.info("Request to save Item: {}", itemDTO);
-        if (CollectionUtils.isNotEmpty(photos)) {
-            List<String> photosUrl = new ArrayList<>();
-            photos.forEach(photo -> photosUrl.add(photoService.saveMultipartFileInResourceFolder(itemDTO.getSellerId().toString(), photo)));
-            List<String> photosUrlFiltered = filterNullValuesFromPhotosUrlList(photosUrl);
-            if (isNotEmpty(photosUrlFiltered)) {
-                itemDTO.setPhotoUrl(StringUtils.join(photosUrlFiltered, ";"));
-            } else {
-                itemDTO.setPhotoUrl("-");
-            }
-            itemDTO.setCreateDate(LocalDateTime.now());
-        }
+        itemDTO.setCreateDate(LocalDateTime.now());
         Item item = itemMapper.toEntity(itemDTO);
         item = itemRepository.save(item);
+        if (CollectionUtils.isNotEmpty(photos)) {
+            Long itemId = item.getId();
+            photos.forEach(photo -> photoService.saveMultipartFileInResourceFolder(itemId.toString(), photo));
+        }
         return itemMapper.toDTO(item);
     }
 
@@ -94,19 +86,15 @@ public class ItemServiceImpl implements ItemService {
         return item.isPresent();
     }
 
-    private List<String> filterNullValuesFromPhotosUrlList(List<String> photosUrl) {
-        return photosUrl.stream().filter(Objects::nonNull).collect(Collectors.toList());
-    }
-
     private void fillPhotosForItem(ItemDTO itemDTO) {
         if (!itemDTO.getPhotoUrl().equals("-")) {
             if (itemDTO.getPhotoUrl().contains(";")) {
                 List<String> fileNames = asList(itemDTO.getPhotoUrl().split(";"));
                 List<byte[]> photoFiles = new ArrayList<>();
-                fileNames.forEach(fileName -> photoFiles.add(photoService.getPhotoFromResourceFolder(itemDTO.getSellerId().toString(), fileName)));
+                fileNames.forEach(fileName -> photoFiles.add(photoService.getPhotoFromResourceFolder(itemDTO.getId().toString(), fileName)));
                 itemDTO.setPhotoFiles(photoFiles);
             } else {
-                itemDTO.setPhotoFiles(singletonList(photoService.getPhotoFromResourceFolder(itemDTO.getSellerId().toString(), itemDTO.getPhotoUrl())));
+                itemDTO.setPhotoFiles(singletonList(photoService.getPhotoFromResourceFolder(itemDTO.getId().toString(), itemDTO.getPhotoUrl())));
             }
         }
     }

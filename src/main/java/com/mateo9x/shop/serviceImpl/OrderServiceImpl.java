@@ -97,13 +97,22 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.delete(order);
     }
 
+    @Override
+    public OrderDTO findById(Long id) {
+        Order order = orderRepository.findById(id).orElse(null);
+        if (order == null) {
+            return null;
+        }
+        return orderMapper.toDTO(order);
+    }
+
     private void fillPhotoForOrderDTO(OrderDTO orderDTO) {
         if (!orderDTO.getPhotoUrl().equals("-")) {
             if (orderDTO.getPhotoUrl().contains(";")) {
                 String firstPhotoFileName = orderDTO.getPhotoUrl().split(";")[0];
-                orderDTO.setPhoto((photoService.getPhotoFromResourceFolder(orderDTO.getSellerId().toString(), firstPhotoFileName)));
+                orderDTO.setPhoto((photoService.getPhotoFromResourceFolder(orderDTO.getItemId().toString(), firstPhotoFileName)));
             } else {
-                orderDTO.setPhoto(photoService.getPhotoFromResourceFolder(orderDTO.getSellerId().toString(), orderDTO.getPhotoUrl()));
+                orderDTO.setPhoto(photoService.getPhotoFromResourceFolder(orderDTO.getItemId().toString(), orderDTO.getPhotoUrl()));
             }
         }
     }

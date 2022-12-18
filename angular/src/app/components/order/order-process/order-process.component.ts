@@ -7,7 +7,6 @@ import {Order} from '../order.model';
 import {OrderAddress} from '../order.address.model';
 import {ToastService} from "../../toasts/toast.service";
 import {UserService} from "../../user/user.service";
-import {User} from "../../user/user.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({

@@ -14,4 +14,6 @@ public interface OrderService {
 
     void returnProduct(Long orderId, Integer amountOfProductsToReturn);
 
+    OrderDTO findById(Long id);
+
 }

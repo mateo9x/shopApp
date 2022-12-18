@@ -41,6 +41,12 @@ public class OrderController {
         return orderService.findAllByUserId();
     }
 
+    @GetMapping("/orders/{id}")
+    public OrderDTO getOrderById(@PathVariable Long id) {
+        log.debug("REST request to get Order by id: {}", id);
+        return orderService.findById(id);
+    }
+
     @DeleteMapping("/orders/return")
     public void returnOrder(@RequestParam Long id, @RequestParam Integer amountOfProductsToReturn) {
         log.debug("REST request do delete Order: {}", id);
