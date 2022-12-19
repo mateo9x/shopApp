@@ -18,6 +18,9 @@ export class CartComponent implements OnInit {
   cartItems: Cart[] = [];
   userLogged = false;
   userId: number;
+  sortOptions = [{name: 'Cena rosnąco', value: 'price_asc'},
+    {name: 'Cena malejąco', value: 'price_desc'}];
+  selectedSortOption: any;
 
   constructor(private cartService: CartService, private router: Router, private toastService: ToastService, private userService: UserService,
               private confirmationService: ConfirmationService, private buyProductService: BuyProductService, private sanitizer: DomSanitizer) {
@@ -99,9 +102,19 @@ export class CartComponent implements OnInit {
   getItemMainPhoto(cart: Cart) {
     if (cart.itemPhotoFile) {
       const image = 'data:image/jpeg;base64,' + cart.itemPhotoFile;
-      return  this.sanitizer.bypassSecurityTrustResourceUrl(image);
+      return this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
     return '';
+  }
+
+  sortItems(sortOptionValue: string) {
+    if (this.cartItems) {
+      if (sortOptionValue === 'price_asc') {
+        this.cartItems = this.cartItems.sort((a, b) => a.itemPrice - b.itemPrice);
+      } else if (sortOptionValue === 'price_desc') {
+        this.cartItems = this.cartItems.sort((a, b) => b.itemPrice - a.itemPrice);
+      }
+    }
   }
 
   prepareBuyProductRequest(cart: Cart): BuyProductRequest {
