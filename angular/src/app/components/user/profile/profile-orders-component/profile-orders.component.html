@@ -1,43 +1,46 @@
-<div class="item" *ngFor="let order of orders">
-
-  <div class="content">
-    <div class="photo">
+<div *ngFor="let order of orders" class="item-wrapper">
+  <div class="item_row">
+    <div class="first-column">
       <img [src]="getItemMainPhoto(order)">
     </div>
-    <div class="input-data">
-      {{order.itemBrand}} {{order.itemModel}}
-
-      <div>
-        Zakupiona ilość: {{order.amountBought}} szt.
+    <div class="second-column">
+      <h6 class="product-title">
+        {{order.itemBrand}} {{order.itemModel}}
+      </h6>
+    </div>
+    <div class="third-column">
+      <div class="third-column-first-row">
+        <span> Zakupiona ilość: {{order.amountBought}} szt.</span>
       </div>
-
-      <div class="date">
-        Data zakupu: {{order.date | date: 'yyyy-MM-dd HH:mm'}}
-      </div>
-      <div class="seller">
-        Sprzedający {{order.sellerName}}
-      </div>
-      <div class="input-data" *ngIf="order.paymentSelected === true">
-        Sposób płatności: {{order.orderPaymentType}}
-      </div>
-      <div class="input-data" *ngIf="order.paymentSelected === false">
-        Sposób płatności: <button (click)="paymentContinue(order.id)">Dokończ płatność</button>
+      <div class="third-column-second-row">
+        <span>Data zakupu: {{order.date | date: 'yyyy-MM-dd HH:mm'}}</span>
       </div>
     </div>
-    <div class="price">
-      Cena: {{order.itemPrice}} zł / szt.
-      <div class="return" *ngIf="order.paymentSelected === true">
-        <button (click)="returnProductConfirm(order)" [disabled]="checkOrderReturnDate(order)"><i class="fa fa-trash"> </i></button>
-        <div style="display:block">
-          <div>
-        Zwrot zakupu możliwy do:
+    <div class="fourth-column">
+      <div class="fourth-column-first-row">
+        <span>Sprzedający {{order.sellerName}}</span>
       </div>
-       {{order.returnMaxDate | date: 'yyyy-MM-dd HH:mm'}}
+      <div class="fourth-column-second-row">
+        <div *ngIf="order.paymentSelected === true">
+          Sposób płatności: {{order.orderPaymentType}}
+        </div>
+        <div *ngIf="order.paymentSelected === false">
+          Sposób płatności:
+          <button id="finish-process" (click)="paymentContinue(order.id)">Dokończ płatność</button>
+        </div>
       </div>
+    </div>
+    <div class="fifth-column">
+      <div>
+        Cena: {{order.itemPrice}} zł / szt.
+      </div>
+      <div *ngIf="order.paymentSelected === true">
+        <button (click)="returnProductConfirm(order)" [disabled]="checkOrderReturnDate(order)" pTooltip="Zwrot produktu możliwy do:
+          {{order.returnMaxDate | date: 'yyyy-MM-dd HH:mm'}}"><i
+          class="fa fa-trash"> </i></button>
       </div>
     </div>
   </div>
-
 </div>
 
 <h5 *ngIf="orders.length === 0" style="text-align: center">
@@ -45,4 +48,4 @@
 </h5>
 
 <p-confirmDialog acceptLabel="Tak" rejectLabel="Nie" header="Potwierdź zwrot produktu"
-  icon="pi pi-exclamation-triangle"></p-confirmDialog>
+                 icon="pi pi-exclamation-triangle"></p-confirmDialog>
