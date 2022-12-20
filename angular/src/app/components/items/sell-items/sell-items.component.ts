@@ -65,9 +65,12 @@ export class SellItemsComponent implements OnInit {
 
   addProductConfirm() {
     this.confirmationService.confirm({
+      key: 'sell',
+      header: 'Wystawienie przedmiotu',
       message: 'Czy na pewno chcesz wystawić ten produkt na sprzedaż?',
       accept: () => {
         this.findSellerAndAddProduct();
+        this.confirmationService.close();
       }
     });
   }
@@ -99,17 +102,30 @@ export class SellItemsComponent implements OnInit {
     }
   }
 
-  findSellerAndAddProduct()
-    :
-    void {
+  findSellerAndAddProduct() : void {
     this.sellerService.findSellerByUserLogged().subscribe((sellerResponse) => {
       if (sellerResponse === null) {
-        this.sellerService.saveNewSeller().subscribe((newSellerResponse) => {
-          this.addProduct(newSellerResponse);
-        });
+        this.createSellerAccountConfirm();
       } else {
         this.addProduct(sellerResponse);
       }
+    });
+  }
+
+  createSellerAccountConfirm() {
+    this.confirmationService.confirm({
+      key: 'seller',
+      header: 'Konto sprzedawcy',
+      message: 'Nie posiadasz konta sprzedawcy. Czy założyć konto i wystawić produkt na sprzedaż ?',
+      accept: () => {
+        this.createSellerAccountAndSellProduct();
+      }
+    });
+  }
+
+  createSellerAccountAndSellProduct() {
+    this.sellerService.saveNewSeller().subscribe((newSellerResponse) => {
+      this.addProduct(newSellerResponse);
     });
   }
 
