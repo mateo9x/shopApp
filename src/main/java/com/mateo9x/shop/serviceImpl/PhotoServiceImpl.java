@@ -2,6 +2,7 @@ package com.mateo9x.shop.serviceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -16,11 +17,16 @@ public class PhotoServiceImpl {
 
     public byte[] getPhotoFromResourceFolder(String folderName, String fileName) {
         try {
-           File image = new File(PATH_TO_PHOTOS_FOLDER + folderName + "\\" + fileName);
+            File image = new File(PATH_TO_PHOTOS_FOLDER + folderName + "\\" + fileName);
             return Files.readAllBytes(image.toPath());
         } catch (Exception e) {
-            log.error("Can't parse file path to byte[] !");
-            return null;
+            try {
+                File imageNotFound = ResourceUtils.getFile("classpath:404_photo.png");
+                return Files.readAllBytes(imageNotFound.toPath());
+            } catch (IOException ex) {
+                log.error("Can't parse file path to byte[] !");
+                return null;
+            }
         }
     }
 

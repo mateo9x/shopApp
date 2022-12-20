@@ -106,5 +106,6 @@ public class ItemServiceImpl implements ItemService {
                 itemDTO.setPhotoFiles(singletonList(photoService.getPhotoFromResourceFolder(itemDTO.getId().toString(), itemDTO.getPhotoUrl())));
             }
         }
+        itemDTO.setPhotoFiles(itemDTO.getPhotoFiles().stream().filter(Objects::nonNull).collect(Collectors.toList()));
     }
 }
