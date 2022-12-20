@@ -24,8 +24,7 @@ User authenthicated has access to secured endpoints.
 - Verify what products seller is selling now
 
 ### Coming soon:
-- Better design of application
-- And... more !
+- Paypal integration
 
 ## Technologies
 * Java 11
