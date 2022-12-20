@@ -6,7 +6,7 @@ import com.mateo9x.shop.dto.ItemCategoryDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses= {})
+@Mapper(componentModel = "spring")
 public interface ItemCategoryMapper {
 
     ItemCategoryMapper INSTANCE = Mappers.getMapper(ItemCategoryMapper.class);

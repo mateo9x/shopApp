@@ -1,10 +1,24 @@
-<div *ngFor="let item of items">
+<div *ngFor="let item of items" class="item-wrapper">
   <div class="item_row">
-    <img [src]="getItemMainPhoto(item)">
-    <a class="product-title" (click)="openItemDetail(item.id)">
-      {{item.brand}} {{item.model}}
-    </a>
-    <span> Ilość dostępna: {{item.amountAvailable}}</span>
+    <div class="first-column">
+      <img [src]="getItemMainPhoto(item)">
+    </div>
+    <div class="second-column">
+      <h6 class="product-title" (click)="openItemDetail(item.id)">
+        {{item.brand}} {{item.model}}
+      </h6>
+    </div>
+    <div class="third-column">
+      <div class="third-column-first-row">
+        Data dodania: {{item.createDate | date: 'YYYY-MM-dd HH:mm'}}
+      </div>
+      <div class="third-column-second-row">
+        <span> Ilość dostępna: {{item.amountAvailable}}</span>
+      </div>
+    </div>
+    <div class="fourth-column">
+        <span> Cena: {{item.price}} zł</span>
+    </div>
   </div>
 </div>
 <div *ngIf="items.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">

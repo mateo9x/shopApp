@@ -1,26 +1,40 @@
-<div class="header_section_top" style="color:white; text-align: center; float:none">
-  Twój koszyk
+<div class="header_section_top bar-grid">
+  <span>Twój koszyk</span>
 </div>
-<div *ngIf="cartItems && cartItems.length > 0">
-  <div *ngFor="let cartItem of cartItems">
-    <div class="item_row">
+<div class="sort-container">
+  <p-dropdown [options]="sortOptions" placeholder="Sortowanie" optionLabel="name"
+              appendTo="body" [(ngModel)]="selectedSortOption" (onChange)="sortItems(selectedSortOption.value)">
+  </p-dropdown>
+</div>
+<div *ngFor="let cartItem of cartItems" class="item-wrapper">
+  <div class="item_row">
+    <div class="first-column">
       <img [src]="getItemMainPhoto(cartItem)">
-      <a class="product-title" (click)="openItemDetail(cartItem.itemId)">
+    </div>
+    <div class="second-column">
+      <h6 class="product-title" (click)="openItemDetail(cartItem.itemId)">
         {{cartItem.itemBrand}} {{cartItem.itemModel}}
-      </a>
-      <span> Ilość dostępna: {{cartItem.itemAmountAvailable}}</span>
-
-      <input class="cart_input" type="number" [(ngModel)]="cartItem.amountSelected" min="1"
+      </h6>
+    </div>
+    <div class="third-column">
+      <div class="third-column-first-row">
+        <span> Ilość dostępna: {{cartItem.itemAmountAvailable}}</span>
+      </div>
+      <div class="third-column-second-row">
+        Cena: {{cartItem.itemPrice}} zł
+      </div>
+    </div>
+    <div class="fourth-column">
+      <input class="items_input" [(ngModel)]="cartItem.amountSelected" min="1"
              [max]="cartItem.itemAmountAvailable"/>
-      <button *ngIf="userLogged" class="padding_10" type="submit" (click)="buyProductConfirmDialog(cartItem)"
-              [disabled]="cartItem.amountSelected > cartItem.itemAmountAvailable || cartItem.amountSelected < 1">Kup teraz
+      <button *ngIf="userLogged" type="submit" (click)="buyProductConfirmDialog(cartItem)"
+              [disabled]="cartItem.amountSelected > cartItem.itemAmountAvailable || cartItem.amountSelected < 1">Kup
+        teraz
       </button>
-      <button class="padding_10" type="submit" (click)="deleteFromCartConfirmDialog(cartItem)">Usuń z koszyka
-      </button>
+      <button type="submit" (click)="deleteFromCartConfirmDialog(cartItem)">Usuń z koszyka</button>
     </div>
   </div>
 </div>
-
 <div *ngIf="cartItems.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">
   BRAK DOSTĘPNYCH PRODUKTÓW W KOSZYKU
 </div>

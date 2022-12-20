@@ -32,5 +32,4 @@ export class SoldItemsComponent implements OnInit {
     return '';
   }
 
-
 }

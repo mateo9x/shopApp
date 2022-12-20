@@ -6,7 +6,7 @@
               appendTo="body" [(ngModel)]="selectedSortOption" (onChange)="sortItems(selectedSortOption.value)">
   </p-dropdown>
 </div>
-<div *ngFor="let item of items; let i = index" class="item-wrapper">
+<div *ngFor="let item of items" class="item-wrapper">
   <div class="item_row">
     <div class="first-column">
       <img [src]="getItemMainPhoto(item)">

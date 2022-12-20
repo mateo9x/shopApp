@@ -6,7 +6,7 @@ import com.mateo9x.shop.dto.OrderPaymentDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring")
 public interface OrderPaymentMapper {
 
     OrderPaymentMapper INSTANCE = Mappers.getMapper(OrderPaymentMapper.class);

@@ -74,7 +74,7 @@ public class CartServiceImpl implements CartService {
             log.info("Request to save Item to User's cart: {}", user.get().getId());
             CartDTO cartDTO = new CartDTO();
             Optional<Cart> isInCartItem = cartRepository.findByItemId(id);
-            if (!isInCartItem.isPresent()) {
+            if (isInCartItem.isEmpty()) {
                 cartDTO.setItemId(id);
                 cartDTO.setUserId(user.get().getId());
                 cartDTO.setAmountSelected(amountSelected);
