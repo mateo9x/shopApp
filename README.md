@@ -30,8 +30,7 @@ User authenthicated has access to secured endpoints.
 * Java 11
 * Spring Boot
 * Angular
-* MySQL
-* MongoDB
+* Postgres
 * JWT Authorization
 * Spring Security
 * Hibernate
@@ -48,7 +47,7 @@ Angular:
 
 Spring:  
 
-> Unzip images and paste them where do you prefer.  
+> Unzip Images.rar and paste them where do you prefer.  
 >   
 > Then set all the properties:  
 >   
