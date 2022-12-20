@@ -1,6 +1,10 @@
 <form [formGroup]="requiredForm">
   <div class="input">
-    <div class="input-data" style="padding-top:1%">
+    <div class="input-upload">
+      <p-fileUpload [auto]="true" (onSelect)="uploadFile($event)" (onRemove)="deleteFile($event)"
+                    [multiple]="true" chooseLabel="Wybierz pliki" [fileLimit]="fileAmountLimit"></p-fileUpload>
+    </div>
+    <div class="input-data">
       <label>Marka</label>
       <input type="text" name="brand" formControlName="brand" [(ngModel)]="item.brand"/>
     </div>
@@ -14,27 +18,27 @@
                   appendTo="body" formControlName="selectedCategory" [(ngModel)]="selectedCategory">
       </p-dropdown>
     </div>
-
     <div class="input-data">
       <label>Cena</label>
       <input type="number" name="price" placeholder="zł" formControlName="price" min="1" [(ngModel)]="item.price"/>
     </div>
     <div class="input-data">
       <label>Ilość</label>
-      <input type="number" name="amount" placeholder="szt" formControlName="amountAvailable" min="1" max="1000" [(ngModel)]="item.amountAvailable"/>
+      <input type="number" name="amount" placeholder="szt" formControlName="amountAvailable" min="1" max="1000"
+             [(ngModel)]="item.amountAvailable"/>
     </div>
     <div class="input-data">
       <label>Opis</label>
-      <textarea type="text" name="description" formControlName="description" [(ngModel)]="item.description" style="min-height: 100px">
+      <textarea type="text" name="description" formControlName="description" [(ngModel)]="item.description"
+                style="min-height: 100px">
       </textarea>
-    </div>
-    <div style="text-align: center;margin:auto;width:50%;border:none">
-      <p-fileUpload [auto]="true" (onSelect)="uploadFile($event)" (onRemove)="deleteFile($event)"
-                    [multiple]="true" chooseLabel="Wybierz pliki" [fileLimit]="fileAmountLimit"></p-fileUpload>
     </div>
   </div>
   <div class="submit">
-    <button (click)="addProductConfirm()" class="cart-btn" [disabled]="requiredForm.status === 'INVALID' || photos.length === 0 || photos.length > fileAmountLimit">Wystaw Przedmiot</button>
+    <button (click)="addProductConfirm()" class="cart-btn"
+            [disabled]="requiredForm.status === 'INVALID' || photos.length === 0 || photos.length > fileAmountLimit">
+      Wystaw Przedmiot
+    </button>
   </div>
 </form>
 
