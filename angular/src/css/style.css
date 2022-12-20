@@ -300,10 +300,9 @@ button {
 .dropright,
 .dropup {
   position: relative;
-  margin: 0 auto;
   text-align: center;
   display: inline-block;
-  margin-left: 30px;
+  margin: 0 auto 0 30px;
   order: 2;
 }
 
@@ -466,12 +465,10 @@ a:hover {
 }
 
 .loader {
-  border: 16px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 16px solid #414744;
-  border-right: 16px solid #f26522;
-  border-bottom: 16px solid #414744;
-  border-left: 16px solid #f26522;
+  border: 16px solid #414744;
+  border-right-color: #f26522;
+  border-left-color: #f26522;
   width: 120px;
   height: 120px;
   -webkit-animation: spin 2s linear infinite;
