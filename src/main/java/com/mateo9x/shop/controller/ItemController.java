@@ -7,21 +7,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mateo9x.shop.dto.ItemDTO;
 import com.mateo9x.shop.service.ItemService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
+@AllArgsConstructor
 public class ItemController {
 
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
     private final ItemService itemService;
-
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
-    }
 
     @PostMapping("/item")
     public ItemDTO createItem(@RequestPart(name = "item") String itemString, @RequestPart("photos") List<MultipartFile> photos) {

@@ -20,7 +20,8 @@ export class ItemsService {
 
   public saveItem(item: Item, photos: any[]) {
     var fd = new FormData();
-    fd.append('item', JSON.stringify(item));
+    fd.append('item', new Blob([JSON.stringify(item)], {
+      type: "application/json;charset=utf-8"}));
     photos.forEach((photo) => {
       fd.append('photos', photo);
     });
