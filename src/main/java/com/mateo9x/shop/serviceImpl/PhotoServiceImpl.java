@@ -1,5 +1,7 @@
 package com.mateo9x.shop.serviceImpl;
 
+import com.mateo9x.shop.configuration.AdditionalAppProperties;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -11,13 +13,14 @@ import java.nio.file.Files;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class PhotoServiceImpl {
 
-    public static final String PATH_TO_PHOTOS_FOLDER = "C:\\Users\\Mateusz\\Images\\Shop-App\\";
+    private final AdditionalAppProperties appProperties;
 
     public byte[] getPhotoFromResourceFolder(String folderName, String fileName) {
         try {
-            File image = new File(PATH_TO_PHOTOS_FOLDER + folderName + "\\" + fileName);
+            File image = new File(appProperties.getPhotoPathUrl() + folderName + "\\" + fileName);
             return Files.readAllBytes(image.toPath());
         } catch (Exception e) {
             try {
@@ -33,7 +36,7 @@ public class PhotoServiceImpl {
     public void saveMultipartFileInResourceFolder(String folderName, MultipartFile multipartFile) {
         try {
             String fileName = multipartFile.getResource().getFilename();
-            File file = new File(PATH_TO_PHOTOS_FOLDER + folderName + "\\" + fileName);
+            File file = new File(appProperties.getPhotoPathUrl() + folderName + "\\" + fileName);
             if (!file.exists()) {
                 file.mkdirs();
             }

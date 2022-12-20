@@ -17,4 +17,8 @@ public class AdditionalAppProperties {
     @NotNull
     @Value("${shop-app.frontend.url}")
     private String frontendUrl;
+
+    @NotNull
+    @Value("${shop-app.photo.path.url}")
+    private String photoPathUrl;
 }
