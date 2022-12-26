@@ -23,8 +23,9 @@ User authenthicated has access to secured endpoints.
 - Verify what products seller already sold
 - Verify what products seller is selling now
 
-### Coming soon:
+### TODO:
 - Paypal integration
+- Tracking statuses with delivery companies
 
 ## Technologies
 * Java 11
