@@ -18,4 +18,6 @@ public interface OrderService {
 
     OrderDTO findById(Long id);
 
+    List<OrderDTO> findAllBySellerId(Long id);
+
 }

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ItemsService} from '../items.service';
-import {Item} from '../items.model';
 import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Order} from "../../order/order.model";
+import {OrderService} from "../../order/order.service";
 
 @Component({
   selector: 'sold-items',
@@ -11,23 +11,23 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class SoldItemsComponent implements OnInit {
 
-  items: Item[] = [];
+  orders: Order[] = [];
 
-  constructor(private itemService: ItemsService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
+  constructor(private orderService: OrderService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(param => {
-      this.itemService.findAllItemsBySellerIdSold(param.id).subscribe((response) => {
-        this.items = response;
+      this.orderService.findOrdersForSeller(param.id).subscribe((response) => {
+        this.orders = response;
       });
     });
   }
 
-  getItemMainPhoto(item: Item) {
-    if (item.photoFiles) {
-      const image = 'data:image/jpeg;base64,' + item.photoFiles[0];
-      return  this.sanitizer.bypassSecurityTrustResourceUrl(image);
+  getItemMainPhoto(order: Order) {
+    if (order.photo) {
+      const image = 'data:image/jpeg;base64,' + order.photo
+      return this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
     return '';
   }

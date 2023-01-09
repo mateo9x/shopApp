@@ -43,12 +43,6 @@ public class ItemController {
         return itemService.findAllBySellerIdActive(id);
     }
 
-    @GetMapping("/item/seller/sold/{id}")
-    public List<ItemDTO> getAllItemsBySellerIdSold(@PathVariable Long id) {
-        log.debug("REST request to get all Item sold for seller: {}", id);
-        return itemService.findAllBySellerIdSold(id);
-    }
-
     @GetMapping("/item/query/{query}")
     public List<ItemDTO> getAllItemsByQuery(@PathVariable String query) {
         log.debug("REST request to get all Item by query: {}", query);

@@ -48,4 +48,8 @@ export class OrderService {
     return this.http.post<OrderAddress>(`${this.ordersAddressUrl}`, orderAdd);
   }
 
+  public findOrdersForSeller(sellerId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.ordersUrl}/seller/${sellerId}`);
+  }
+
 }

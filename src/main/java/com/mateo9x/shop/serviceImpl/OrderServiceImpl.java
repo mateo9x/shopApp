@@ -88,6 +88,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderDTO> findAllBySellerId(Long id) {
+        log.info("Request to find all Orders by seller id: {} ", id);
+        List<OrderDTO> orderDTOS = orderRepository.findBySellerId(id).stream().map(orderMapper::toDTO)
+                .collect(Collectors.toCollection(LinkedList::new));
+        orderDTOS.forEach(this::fillPhotoForOrderDTO);
+        return orderDTOS;
+    }
+
+    @Override
     public void returnProduct(Long orderId, Integer amountOfProductsToReturn) {
         log.info("Request to return Product: {}", orderId);
         Order order = orderRepository.getById(orderId);

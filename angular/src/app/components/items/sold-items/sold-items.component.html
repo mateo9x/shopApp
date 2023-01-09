@@ -1,23 +1,23 @@
-<div *ngFor="let item of items" class="item-wrapper">
+<div *ngFor="let order of orders" class="item-wrapper">
   <div class="item_row">
     <div class="first-column">
-      <img [src]="getItemMainPhoto(item)">
+      <img [src]="getItemMainPhoto(order)">
     </div>
     <div class="second-column">
       <h6 class="product-title">
-        {{item.brand}} {{item.model}}
+        {{order.itemBrand}} {{order.itemModel}}
       </h6>
     </div>
     <div class="third-column">
       <div class="third-column-first-row">
-        Data dodania: {{item.createDate | date: 'YYYY-MM-dd HH:mm'}}
+        Data sprzedania: {{order.date | date: 'YYYY-MM-dd HH:mm'}}
       </div>
       <div class="third-column-second-row">
-        <span> Cena: {{item.price}} zł</span>
+        <span> Cena: {{order.itemPrice}} zł</span>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="items.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">
+<div *ngIf="orders.length === 0" style="font-weight:bold;text-align:center;margin-top:1%">
   BRAK PRODUKTÓW SPRZEDANYCH
 </div>
