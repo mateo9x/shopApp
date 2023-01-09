@@ -9,6 +9,7 @@ import * as moment from "moment/moment";
 import {ToastService} from "../../toasts/toast.service";
 import {BuyProductRequest, BuyProductService} from "../buy.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {User} from "../../user/user.model";
 
 @Component({
   selector: 'items-details',
@@ -25,6 +26,7 @@ export class ItemsDetailsComponent implements OnInit {
   order: Order = new Order();
   productSold = false;
   carouselPhotos: any[] = [];
+  user: User;
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
               private toastService: ToastService, private confirmationService: ConfirmationService, private route: ActivatedRoute,
@@ -52,18 +54,23 @@ export class ItemsDetailsComponent implements OnInit {
     this.userService.isUserLogged().subscribe((response) => {
       if (response !== null) {
         this.isUserLogged = true;
+        this.user = response;
       }
     })
   }
 
   buyConfirm() {
     if (this.item.amountSelected) {
-      this.confirmationService.confirm({
-        message: 'Czy na pewno chcesz zakupić ten produkt?',
-        accept: () => {
-          this.buyProduct();
-        }
-      });
+      if (this.isUserAlsoSellerOfProduct()) {
+        this.toastService.createErrorToast('Nie możesz zakupić własnego produktu !');
+      } else {
+        this.confirmationService.confirm({
+          message: 'Czy na pewno chcesz zakupić ten produkt?',
+          accept: () => {
+            this.buyProduct();
+          }
+        });
+      }
     } else {
       this.toastService.createErrorToast('Należy wybrać ilość produktów!');
     }
@@ -87,6 +94,10 @@ export class ItemsDetailsComponent implements OnInit {
       return this.sanitizer.bypassSecurityTrustResourceUrl(image);
     }
     return '';
+  }
+
+  isUserAlsoSellerOfProduct() {
+    return this.item.sellerName === this.user.username;
   }
 
   prepareBuyProductRequest(item: Item): BuyProductRequest {

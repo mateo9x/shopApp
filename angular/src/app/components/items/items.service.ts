@@ -36,10 +36,6 @@ export class ItemsService {
     return this.http.get<Item[]>(`${this.itemsUrl}/seller/active/${id}`);
   }
 
-  public findAllItemsBySellerIdSold(id: any): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.itemsUrl}/seller/sold/${id}`);
-  }
-
   public findAllBySearchQuery(query: any): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.itemsUrl}/query/${query}`);
   }

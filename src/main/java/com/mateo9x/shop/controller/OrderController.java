@@ -53,4 +53,10 @@ public class OrderController {
         orderService.returnProduct(id, amountOfProductsToReturn);
     }
 
+    @GetMapping("/orders/seller/{id}")
+    public List<OrderDTO> getAllOrdersForSeller(@PathVariable Long id) {
+        log.debug("REST request to get all Orders for seller: {}", id);
+        return orderService.findAllBySellerId(id);
+    }
+
 }

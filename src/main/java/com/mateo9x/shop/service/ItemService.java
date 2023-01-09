@@ -13,8 +13,6 @@ public interface ItemService {
 
     List<ItemDTO> findAllBySellerIdActive(Long id);
 
-    List<ItemDTO> findAllBySellerIdSold(Long id);
-
     List<ItemDTO> findAllByQuery(String query);
 
     ItemDTO findById(Long id);
