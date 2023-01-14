@@ -34,6 +34,7 @@ import {FileUploadModule} from "primeng/fileupload";
 import {CarouselModule} from "primeng/carousel";
 import {SoldItemsComponent} from "./components/items/sold-items/sold-items.component";
 import {SellingItemsComponent} from "./components/items/selling-items/selling-items.component";
+import {PageNotFoundComponent} from "./components/handlers/page-not-found/page-not-found.component";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {SellingItemsComponent} from "./components/items/selling-items/selling-it
     SellItemsComponent,
     InfoComponent,
     SellingItemsComponent,
-    SoldItemsComponent
+    SoldItemsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
