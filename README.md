@@ -48,9 +48,7 @@ Angular:
 
 Spring:  
 
-> Unzip Images.rar and paste them where do you prefer.  
->   
-> Then set all the properties:  
+> Set all the properties:  
 >   
 > ${DATABASE_URL},  
 > ${DATABASE_USER},  
@@ -58,7 +56,9 @@ Spring:
 > ${GMAIL_USER},  
 > ${GMAIL_PASSWORD},  
 > ${FRONT_APPLICATION_URL},  
-> ${PHOTO_PATH_URL},  
+> ${PHOTO_PATH_URL}
+>
+> Unzip Images.rar and paste them in ${PHOTO_PATH_URL}.  
 >   
 > Then simply run:  
 > ./mvnw spring-boot:run
