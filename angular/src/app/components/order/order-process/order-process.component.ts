@@ -7,7 +7,7 @@ import {Order} from '../order.model';
 import {OrderAddress} from '../order.address.model';
 import {ToastService} from "../../toasts/toast.service";
 import {UserService} from "../../user/user.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'order-process',
@@ -16,7 +16,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class OrderProcessComponent implements OnInit {
 
-  requiredForm: FormGroup;
+  requiredForm: UntypedFormGroup;
   noData = false;
   orderId: any;
   order: Order = new Order();
@@ -25,7 +25,7 @@ export class OrderProcessComponent implements OnInit {
   selectedOrderPayment: OrderPayment;
 
   constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private confirmationService: ConfirmationService,
-              private toastService: ToastService, private userService: UserService, private fb: FormBuilder) {
+              private toastService: ToastService, private userService: UserService, private fb: UntypedFormBuilder) {
     this.myForm();
   }
 

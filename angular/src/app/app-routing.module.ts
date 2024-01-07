@@ -16,7 +16,6 @@ import {PageNotFoundComponent} from "./components/handlers/page-not-found/page-n
 
 const routes: Routes = [
   { path: '', component: InfoComponent },
-  { path: '**', component: PageNotFoundComponent },
   { path: 'sign-in-user', component: SignInUserComponent, canActivate: [AnonymousUserGuard] },
   { path: 'sign-up-user', component: SignUpUserComponent, canActivate: [AnonymousUserGuard] },
   { path: 'cart', component: CartComponent },
@@ -28,6 +27,7 @@ const routes: Routes = [
   { path: 'items-details/:id',  component: ItemsDetailsComponent },
   { path: 'order-process/:id',  component: OrderProcessComponent, canActivate: [LoginGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard], loadChildren: () => import('./components/user/profile/profile-routing.module').then(m => m.ProfileRoutingModule)},
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
