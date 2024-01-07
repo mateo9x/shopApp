@@ -9,7 +9,7 @@ import {Item} from '../items.model';
 import {SellerService} from "../../sellers/seller.service";
 import {Seller} from "../../sellers/seller.model";
 import {ToastService} from "../../toasts/toast.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'sell-items',
@@ -23,11 +23,11 @@ export class SellItemsComponent implements OnInit {
   categories: ItemCategory[] = [];
   photos: File[] = [];
   fileAmountLimit = 5;
-  requiredForm: FormGroup;
+  requiredForm: UntypedFormGroup;
 
   constructor(private itemService: ItemsService, private router: Router, private userService: UserService,
               private confirmationService: ConfirmationService, private itemCategoryService: ItemCategoryService,
-              private sellerService: SellerService, private toastService: ToastService, private fb: FormBuilder) {
+              private sellerService: SellerService, private toastService: ToastService, private fb: UntypedFormBuilder) {
     this.myForm();
   }
 
